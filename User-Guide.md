@@ -1,12 +1,22 @@
-#About
+# About
 This is a user guide on how to use this product
 
-#Quick Start
-1. **Download the product file**
-2. **Adding in new tasks** to add in new task, we would simply do the following command..
-3. **Display all task in order of dates** command...
+Pixelist is a simple yet powerful to-do list to help better manage your daily tasks. It relies heavily on keyboard inputs. Users can add tasks with priorities, due dates, etc., and view the tasks, ultimately clear their task lists.
 
-# Features 
+# Getting Started
+## Installation
 
-###Adding in task
-this would allow you to be able to add in new tasks and see them when u display the list of to do 
+## Basic tasks maniputaions
+### Add a task
+Input in the command bar: `add <task name> <due dates> <priority> <recurring?>` to add a task into the list.
+### Update a task
+Input in the cmmmand bar: `update <s/n> <area to edit> <content to update>` to update a task's property specified by `<area to edit>` to `<content to update>`
+### Delete a task
+Input in the command bar: `delete <s/n>` to delete a task
+
+## View tasks 
+### Sort by priority
+### Sort by due dates
+
+# For Power Users
+## Power Search
