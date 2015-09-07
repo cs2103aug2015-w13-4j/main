@@ -23,3 +23,9 @@ Users are able to view the tasks according to their preference as seen below
 # For Power Users - Extra feature 
 This would allow users to be able to search for specific tasks and their information(deadlines)
 ## Power Search
+
+# Cheatsheet
+Command | Description
+`add <task name> <due dates> <priority> <recurring?>` | add new task
+`update <s/n> <area to edit> <content to update>` | update/edit of current task
+`delete <s/n>` | delete task
