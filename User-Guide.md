@@ -26,6 +26,7 @@ This would allow users to be able to search for specific tasks and their informa
 
 # Cheatsheet
 Command | Description
+--------| ------------
 `add <task name> <due dates> <priority> <recurring?>` | add new task
 `update <s/n> <area to edit> <content to update>` | update/edit of current task
 `delete <s/n>` | delete task
