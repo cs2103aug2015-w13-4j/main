@@ -7,16 +7,16 @@ Pixelist is a simple yet powerful to-do list to help better manage your daily ta
 ## Installation
 
 ## Basic tasks maniputaions
-### Add a task
-Input in the command bar: `add <task name> <due dates> <priority> <recurring?>` to add a task into the list.
-### Update a task
-Input in the cmmmand bar: `update <s/n> <area to edit> <content to update>` to update a task's property specified by `<area to edit>` to `<content to update>`
+### Add a new task. 
+User input in the command bar: `add <task name> <due dates> <priority> <recurring?>` to add a task into the list.
+### Update/edit a task
+User input in the cmmmand bar: `update <s/n> <area to edit> <content to update>` to update a task's property specified by `<area to edit>` to `<content to update>`
 ### Delete a task
-Input in the command bar: `delete <s/n>` to delete a task
+User input in the command bar: `delete <s/n>` to delete a task
 
 ## View tasks 
 ### Sort by priority
 ### Sort by due dates
 
-# For Power Users
+# For Power Users - Extra feature 
 ## Power Search
