@@ -1,10 +1,26 @@
-# About
-This is a user guide on how to use this product
+# ABOUT THIS GUIDE
 
-Pixelist is a simple yet powerful to-do list to help better manage your daily tasks. It relies heavily on keyboard inputs. Users can add tasks with priorities, due dates, etc., and view the tasks, ultimately clear their task lists.
+## Purpose
+
+This guide provides comprehensive guidelines and step-by-step instructions 
+in utilising PIXEList, the powerful to-do list.
+
+## Who should read this guide
+
+This guide is intended for end-users of PIXEList. 
+
+# ABOUT PIXEList
+
+Pixelist is a simple yet powerful to-do list to help better manage your daily tasks. 
+It relies heavily on keyboard inputs and is aimed at users who prefers keyboard over mouse. 
+Users can add, remove or clear tasks upon completion easily and quickly with this to-do list.
+Deadlines can be set for tasks along with the priority level for each task.
 
 # Getting Started
 ## Installation
+This program requires at least Java Platform, Standard Edition Development Kit(JDK 6) 
+and a 32bit operating system. Upon downloading, extract the files from the ZIP file and 
+run the .jar file.
 
 ## Basic tasks manipulations
 ### Add a new task. 
