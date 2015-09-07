@@ -15,6 +15,7 @@ User input in the cmmmand bar: `update <s/n> <area to edit> <content to update>`
 User input in the command bar: `delete <s/n>` to delete a task
 
 ## View tasks 
+Users are able to view the tasks according to their preference as seen below
 ### Sort by priority
 ### Sort by due dates
 
