@@ -38,6 +38,7 @@ Users are able to view the tasks according to their preference as seen below
 # For Power Users - Extra feature 
 This would allow users to be able to search for specific tasks and their information(deadlines)
 ### Power Search
+User do searches by add keywords to command "list|ls", existing tasks with the given keyword or keywords will be shown in the result window
 
 # Cheatsheet
 Command | Description
