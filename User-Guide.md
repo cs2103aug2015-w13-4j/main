@@ -53,8 +53,9 @@ Command | Description
 `prio <s/n> <date to update>` | update priority of existing task
 `desc <s/n> <date to update>` | update description of existing task
 `delete|d <s/n>` | delete task
-`delete|d <keyword>` | delete task with the keyword
+`delete|d <keyword>` | delete tasks with the keyword
 `delete|d <keyword1> <keyword2> ...` | delete tasks with the keyword
+`deleteall` | delete all tasks
 `list|ls ` | list all existing tasks
 `list|ls <keyword>` | list search results based on the keyword
 `list|ls <keyword1> <keyword2> ...` | list search results based on the combination of keywords
