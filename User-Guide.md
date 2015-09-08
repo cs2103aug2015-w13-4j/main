@@ -27,21 +27,21 @@ run the .jar file.
 User input in the command bar: `add|a` and what ever information they want to add a task into the list, for example `add hello_world` adds a task named "hello_world", with its date, time, priority and description unset.
 
 #### Update/edit a task
-User input in the command bar: `name <s/n> <name to update>` to update a task's name.
-User input in the command bar: `date <s/n> <date to update>` to update a task's date.
-User input in the command bar: `time <s/n> <name to update>` to update a task's time.
-User input in the command bar: `prio <s/n> <priority to update>` to update a task's priority.
-User input in the command bar: `desc <s/n> <description to update>` to update a task's description.
+User input in the command bar: `name <s/n> <name to update>` to update a task's name.\n
+User input in the command bar: `date <s/n> <date to update>` to update a task's date.\n
+User input in the command bar: `time <s/n> <name to update>` to update a task's time.\n
+User input in the command bar: `prio <s/n> <priority to update>` to update a task's priority.\n
+User input in the command bar: `desc <s/n> <description to update>` to update a task's description.\n
 
 #### Delete a task
-Normal delete: User input in the command bar: `delete|d <s/n>` to delete a task
+Normal delete: User input in the command bar: `delete|d <s/n>` to delete a task.\n
 Delete plus: User input in the command bar: `delete|d` followed by keyword or combination of keywords to delete all tasks with the given keyword(s).
 
 ### View tasks 
 Tasks are shown in all tasks window in the order of time and priority by default.
-User input in the command bar `list|ls time` to view tasks in the order of date and time in the result window.
-User input in the command bar `list|ls prio` to view tasks in the order of priority (high to low) in the result window.
-User input in the command bar `list|ls week` to view tasks due in the result window.
+User input in the command bar `list|ls time` to view tasks in the order of date and time in the result window.\n
+User input in the command bar `list|ls prio` to view tasks in the order of priority (high to low) in the result window.\n
+User input in the command bar `list|ls week` to view tasks due in the result window.\n
 
 # For Power Users - Extra feature 
 This would allow users to be able to search for specific tasks and their information(deadlines)
