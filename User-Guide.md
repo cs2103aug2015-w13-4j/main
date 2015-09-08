@@ -44,6 +44,7 @@ Delete plus: User input in the command bar: `delete|d` followed by keyword or co
 
 ### View tasks 
 Tasks are shown in all tasks window in the order of time and priority by default.
+
 User input in the command bar `list|ls time` to view tasks in the order of date and time in the result window.
 
 User input in the command bar `list|ls prio` to view tasks in the order of priority (high to low) in the result window.
@@ -53,7 +54,7 @@ User input in the command bar `list|ls week` to view tasks due in the result win
 # For Power Users - Extra feature 
 This would allow users to be able to search for specific tasks and their information(deadlines)
 ### Power Search
-User do searches by add keywords to command "list|ls", existing tasks with the given keyword or keywords will be shown in the result window
+User do searches by add keywords to command `list|ls`, existing tasks with the given keyword or keywords will be shown in the result window
 
 # Cheatsheet
 Command | Description
