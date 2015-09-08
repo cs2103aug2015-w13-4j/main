@@ -42,6 +42,23 @@ This would allow users to be able to search for specific tasks and their informa
 # Cheatsheet
 Command | Description
 --------| ------------
-`add <task name> <due dates> <priority> <recurring?>` | add new task
-`update <s/n> <area to edit> <content to update>` | update/edit of current task
-`delete <s/n>` | delete task
+`add|a <task name>` | add new task by name
+`add|a <task name> <Task date>` | add new task by name and date
+`add|a <task name> <Task date> <Task time>` | add new task by name, date and time
+`add|a <task name> <Task date> <task time> <priority>` | add new task by name, date, time and priority
+`add|a <task name> <Task date> <Task time> <priority> <description>` | add new task with all the details 
+`name <s/n> <name to update>` | update name of existing task
+`date <s/n> <date to update>` | update date of existing task
+`time <s/n> <time to update>` | update time of existing task
+`prio <s/n> <date to update>` | update priority of existing task
+`desc <s/n> <date to update>` | update description of existing task
+`delete|d <s/n>` | delete task
+`delete|d <keyword>` | delete task with the keyword
+`delete|d <keyword1> <keyword2> ...` | delete tasks with the keyword
+`list|ls ` | list all existing tasks
+`list|ls <keyword>` | list search results based on the keyword
+`list|ls <keyword1> <keyword2> ...` | list search results based on the combination of keywords
+`man <s/n>` | show all the information about a task, including description
+`man` | show all valid commands
+`undo` | undo the last operation
+`quit|q` | quit PIXEList
