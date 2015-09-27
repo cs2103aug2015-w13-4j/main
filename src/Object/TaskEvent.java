@@ -1,3 +1,5 @@
+package Object;
+
 public class TaskEvent {
 	
 	public String myName;
