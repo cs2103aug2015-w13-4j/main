@@ -11,11 +11,11 @@ public class Display {
 	private static final String NOT_FOUND = "operation not found\n";
 	
 	//for the whole list
-	private ArrayList<TaskEvent> defaultView(){
+	public ArrayList<TaskEvent> defaultView(){
 		return null;
 		
 	}
-	private String operation(Command_Type op, String content){
+	public static  String operation(Command_Type op, String content){
 		switch(op){
 		case ADD_TASK:
 			return String.format(ADD, content);
