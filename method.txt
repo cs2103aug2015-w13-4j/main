@@ -1,5 +1,49 @@
 Parser 
+//for getting the whole input and processing it
++ ProcessInput(String) : CommandElements 
+add format for arraylist 
+[0]: description
+[1]:date
+[2]:priority
+[3]:recurring
+
+edit format for arraylist
+[0]:id
+[1]:field
+[2]:context
 
 Logic
+START class
++ New() -> changeDirectory
++ Old() -> load() -> default()
++ EditDirectory() -> changeDirectory() -> operation(changed) 
+
+OPERATION class
++ Input(String) : String(output to display) -> ProcessInput(String) 
++ checkCommand(CommandType) : int 
++ performCommand(int) : boolean(done or not) -> add/edit..
+
+DISPLAY class
++ operation(CommandType) : String(output) 
+//should should sort by duedate then priority
++ default () : String -> viewAll() 
 
 Storage
+global: idCount, 
++ Load() : ArrayList<TaskEvent> 
++ changeDirectory(String) : boolean
++ add(ArrayList<String>) : TaskEvent
++ edit(ArrayList<String>) : TaskEvent
+
+Utilities 
+CONSTANT class
++enum CommandType{add...}
+
+TASKEVENT class
+as per current with id
+
+COMMANDELEMENTS class
+-CommandType
+-ArrayList<String>
+
+
