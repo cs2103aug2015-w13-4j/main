@@ -1,4 +1,4 @@
-package controller;
+package logic;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Object.TaskEvent;
 
-public class Controller {
+public class Logic {
 	private static Scanner scanner = new Scanner(System.in);
 	public static void welcome(){
 		File file = new File(getFileName());
