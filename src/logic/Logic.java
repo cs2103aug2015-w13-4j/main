@@ -8,9 +8,10 @@ import Object.TaskEvent;
 
 public class Logic {
 	private static Scanner scanner = new Scanner(System.in);
+	@SuppressWarnings("unused")
 	public static void welcome(){
 		File file = new File(getFileName());
-		ArrayList<TaskEvent> tasks = readFile(file);
+		ArrayList<TaskEvent> tasks ;//= readFile(file);
 	}
 	public static String getFileName(){
 		System.out.println("Welcome to Pixelist. Enter your file name");
@@ -18,7 +19,7 @@ public class Logic {
 		return file;
 	}
 	public static void command(){
-		int command = getCommandType();
+		int command = 1;// getCommandType();
 		if(command == 0){
 			add();
 		} else if(command == 1){
@@ -29,13 +30,12 @@ public class Logic {
 		}
 	}
 	public static void add(){
-		TaskEvent newTask = getContext();
 		
 		
 		defaultView();
 	}
 	public static void display(){
-		String word = getWord();
+		String word = "all";//= getWord();
 		//all
 		if(word =="all"){
 			defaultView();
