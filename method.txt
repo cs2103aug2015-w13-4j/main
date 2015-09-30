@@ -13,7 +13,7 @@ edit format for arraylist
 [2]:context
 
 Logic
-START class
+LAUNCH class
 + New() -> changeDirectory
 + Old() -> load() -> default()
 + EditDirectory() -> changeDirectory() -> operation(changed) 
