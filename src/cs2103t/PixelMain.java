@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import cs2103t.TaskEvent;
-
 public class PixelMain {
 
 	public static ArrayList<TaskEvent> myEvents = new ArrayList<TaskEvent>();

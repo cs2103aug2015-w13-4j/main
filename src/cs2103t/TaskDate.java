@@ -1,8 +1,6 @@
 package cs2103t;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class TaskDate {
 	
