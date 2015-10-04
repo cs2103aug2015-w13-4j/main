@@ -1,6 +1,6 @@
-package database;
+package src.database;
 
-import utilities;
+import src.utilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,25 +9,33 @@ import java.util.ArrayList;
 public class Storage {
 	protected String savingDirectory;
 	private ArrayList<TaskEvent> bufferTaskList;
+	private FileManager fileManager;
+	private int taskIDCounter;
 
-	public Storage() {
-		// savingDirectory = (get dir from utitlites)
-		// TODO
-	}
-
-	public Storage(String directory) {
-		// replace savingDirectory
-		// updateDirectory(directory);
-		// TODO
+	public Storage(String savingDirectory) {
+		savingDirectory = savingDirectory;
+		fileManager = new FileManager(savingDirectory);
+		taskIDCounter = fileManager.getTaskIDCounter();
+		try {
+			bufferTaskList = fileManager.load();
+		} catch (IOException ioe) {
+			;
+		}
 	}
 
 	public ArrayList<TaskEvent> load() {
-		// TODO
-		return null;
+		return bufferTaskList;
 	}
 
-	public boolean addTask(String name) {
-		// TODO
+	public boolean addTask(String description, TaskDate date, String priority, boolean recurring) {
+		Task task = new Task(taskIDCounter++, description, date, priority, recurring);
+		String taskInfo = task.toString();
+		try {
+			fileManager.append(taskInfo);
+		} catch (Exception e) {
+			return false;
+		}
+		bufferTaskList.add(task);
 		return true;
 	}
 
@@ -60,5 +68,6 @@ public class Storage {
 		// TODO
 		return true;
 	}
+
 }
 
