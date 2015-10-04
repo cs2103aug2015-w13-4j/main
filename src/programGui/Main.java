@@ -26,6 +26,10 @@ public class Main extends Application{
     private static final String MSG_CONFIRM = "Yes";
     private static final String MSG_DENY = "No";
     
+    //Button Names
+    private static final String BUTTON_EXIT = "exit";
+    private static final String BUTTON_OPEN = "open";
+    
     Stage window;
     Button button;
     Button confirmBtn;
