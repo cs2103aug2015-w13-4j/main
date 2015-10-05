@@ -1,14 +1,15 @@
 package logic;
 
 import java.util.ArrayList;
-
 import utilities.CommandElements;
 import utilities.Command_Type;
+import parser.ProcessInput;
 
 public class Operation {
 	private String processOperation(String input){
 		//get the commandElements from parser
 		CommandElements processed = ProcessInput(input);
+		
 		
 		Display.operation(processed.getCommand(), processed.getContent().get(0));
 	}
@@ -18,6 +19,7 @@ public class Operation {
 			//should call storage method
 			return true;
 		case EDIT_TASK:
+			
 			return true;
 		}
 		return false;
