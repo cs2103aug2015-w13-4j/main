@@ -74,7 +74,7 @@ public class Main extends Application{
             instrInput.getText();
             //Pass to parser.
                
-            root.setLeft(leftMenu);
+            root.setLeft(createVBox());
             root.setTop(button);
             root.setRight(confirmBtn);
             root.setBottom(instrInput);
@@ -92,11 +92,13 @@ public class Main extends Application{
         }
     }
     
-    protected void createVBox () {
+    protected VBox createVBox () {
         VBox leftMenu = new VBox();
         Button button1 = new Button("File");
         Button button2 = new Button("Edit");
         Button button3 = new Button("View");
         leftMenu.getChildren().addAll(button1,button2,button3);
+        
+        return leftMenu;
     }
 }
