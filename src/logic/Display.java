@@ -6,22 +6,25 @@ import utilities.TaskEvent;
 
 public class Display {
 	
-	private static final String ADD = "%s has been added sucessfully\n";
-	private static final String EDIT ="%s has been edited sucessfully\n";
-	private static final String NOT_FOUND = "operation not found\n";
+	private static final String MESSAGE_ADD = "%s has been added sucessfully";
+	private static final String MESSAGE_EDIT ="%s has been edited sucessfully";
+	private static final String MESSAGE_ERROR = "%s could not be performed";
 	
 	//for the whole list
 	public ArrayList<TaskEvent> defaultView(){
 		return null;
 		
 	}
-	public static  String operation(Command_Type op, String content){
+	public  String operation(Command_Type op, String content){
 		switch(op){
 		case ADD_TASK:
-			return String.format(ADD, content);
+			return String.format(MESSAGE_ADD, content);
 		case EDIT_TASK:
-			return String.format(EDIT, content);
+			return String.format(MESSAGE_EDIT, content);
 		}
-		return NOT_FOUND;
+		return "";
+	}
+	public String error(String input){
+		return String.format(MESSAGE_ERROR, input);
 	}
 }
