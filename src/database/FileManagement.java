@@ -1,6 +1,6 @@
-package src.database;
+package database;
 
-import src.utilities.*;
+import utilities.*;
 
 import java.io.*;
 import java.util.*;

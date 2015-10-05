@@ -1,6 +1,7 @@
-package src.database;
+package database;
 
-import src.utilities;
+import utilities.TaskEvent;
+import utilities.TaskDate;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class Storage {
 	}
 
 	public boolean addTask(String description, TaskDate date, String priority, boolean recurring) {
-		Task task = new Task(taskIDCounter++, description, date, priority, recurring);
+		TaskEvent task = new TaskEvent(taskIDCounter++, description, date, priority, recurring);
 		String taskInfo = task.toString();
 		try {
 			fileManager.append(taskInfo);
