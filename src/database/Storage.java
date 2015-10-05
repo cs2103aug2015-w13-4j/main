@@ -24,7 +24,11 @@ public class Storage {
 	}
 
 	public ArrayList<TaskEvent> load() {
-		return bufferTaskList;
+		try {
+			return bufferTaskList;
+		} catch (Exception e) {
+			;
+		}
 	}
 
 	public boolean addTask(String description, TaskDate date, String priority, boolean recurring) {
