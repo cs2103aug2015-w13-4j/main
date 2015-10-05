@@ -1,15 +1,16 @@
 package logic;
 
+import database.Storage;
+
 public class Launch {
-	private void newFile(){
+	Storage loading;
+	public void newFile(){
+		loading = new Storage("");
+	}
+	public void loadFile(String directory){
+		loading = new Storage(directory);
+	}
+	public void changeDirectory(String oldDirectory, String newDirectory){
 		
 	}
-	private void loadFile(){
-		
-	}
-	private void changeDirectory(){
-		
-	}
-	
-	
 }
