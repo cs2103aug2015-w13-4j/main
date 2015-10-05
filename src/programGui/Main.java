@@ -48,13 +48,7 @@ public class Main extends Application{
             Scene scene = new Scene(root,450,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
-            VBox leftMenu = new VBox();
-            Button button1 = new Button("File");
-            Button button2 = new Button("Edit");
-            Button button3 = new Button("View");
-            leftMenu.getChildren().addAll(button1,button2,button3);
-            
-            
+             
             window.setOnCloseRequest(e->  {
             e.consume();    
             exitProgram(); 
@@ -66,7 +60,7 @@ public class Main extends Application{
             button = new Button();
             button.setText("Exit");
             button.setOnAction(e -> AlertBox.display(TITLE_WARNING, WARNING_EXIT));
-            confirmBtn = new Button("Exite");
+            confirmBtn = new Button("Exit");
             confirmBtn.setOnAction(e-> exitProgram() );
             
             TextField instrInput = new TextField();
