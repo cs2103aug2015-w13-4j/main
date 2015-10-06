@@ -10,7 +10,9 @@ public class Display {
 	private static final String MESSAGE_ADD = "%s has been added sucessfully";
 	private static final String MESSAGE_EDIT ="%s has been edited sucessfully";
 	private static final String MESSAGE_ERROR = "%s could not be performed";
-	
+	public Display(){
+		
+	}
 	
 	//for the whole list
 	public ArrayList<TaskEvent> defaultView(){
