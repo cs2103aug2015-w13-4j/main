@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Object.TaskEvent;
+import utilities.TaskEvent;
 
 public class Logic {
 	private static Scanner scanner = new Scanner(System.in);
