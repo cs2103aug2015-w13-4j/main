@@ -13,17 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -61,13 +57,10 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
             window = primaryStage;
             
-            Label label = new Label("All task view");
             BorderPane root = new BorderPane();
-
             Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
-             
             window.setOnCloseRequest(e->  {
             e.consume();    
             exitProgram(); 
@@ -76,9 +69,7 @@ public class Main extends Application{
             window.setTitle("PIXEList");
             window.setScene(scene);
             window.show();
-            button = new Button();
-            button.setText("Exit");
-            button.setOnAction(e -> AlertBox.display(TITLE_WARNING, WARNING_EXIT));
+            
             confirmBtn = new Button("Exit");
             confirmBtn.setOnAction(e-> exitProgram() );
             
@@ -93,7 +84,6 @@ public class Main extends Application{
             });
 
                
-            
             //Id Column
             TableColumn<TaskEvent,Integer> idColumn = new TableColumn<>("Task ID");
             idColumn.setMinWidth(50);
@@ -119,13 +109,13 @@ public class Main extends Application{
             dateColumn.setMinWidth(100);
             dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
             
-            
-            
+            //Setting up of task view     
             eventTable = new TableView<>();
             eventTable.setItems(getTasks());
             eventTable.getColumns().addAll(idColumn,nameColumn,descColumn,priorityColumn,dateColumn);
             eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             
+            //Setting up of Border Pane
             root.setCenter(eventTable);
             root.setTop(confirmBtn);
             root.setBottom(instrInput);
@@ -155,7 +145,7 @@ public class Main extends Application{
     public void passToLogic(String input) {
         Operation op = new Operation();
         
-       // String output = op.processOperation(input); 
+        String output = op.processOperation(input); 
         AlertBox.display(TITLE_ALERT, input);
         
         }
