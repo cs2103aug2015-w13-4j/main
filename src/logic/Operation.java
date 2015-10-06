@@ -9,7 +9,7 @@ import utilities.TaskDate;
 import parser.ProcessInput;
 
 public class Operation {
-	private String processOperation(String input){
+	public String processOperation(String input){
 		//get the commandElements from parser
 		Display message;
 		CommandElements processed = ProcessInput(input);
