@@ -64,7 +64,7 @@ public class Main extends Application{
             Label label = new Label("All task view");
             BorderPane root = new BorderPane();
 
-            Scene scene = new Scene(root,450,600);
+            Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
              
@@ -104,14 +104,26 @@ public class Main extends Application{
             nameColumn.setMinWidth(200);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
             
+            //Task Description Column
+            TableColumn<TaskEvent,String> descColumn = new TableColumn<>("Task Desc");
+            descColumn.setMinWidth(250);
+            descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            
             //Priority Column
             TableColumn<TaskEvent,Integer> priorityColumn = new TableColumn<>("Task Priority");
             priorityColumn.setMinWidth(50);
             priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
             
+            //Date Column
+            TableColumn<TaskEvent, TaskDate> dateColumn = new TableColumn<>("Task Date");
+            dateColumn.setMinWidth(100);
+            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+            
+            
+            
             eventTable = new TableView<>();
             eventTable.setItems(getTasks());
-            eventTable.getColumns().addAll(idColumn,nameColumn,priorityColumn);
+            eventTable.getColumns().addAll(idColumn,nameColumn,descColumn,priorityColumn,dateColumn);
             eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             
             root.setCenter(eventTable);
@@ -132,11 +144,11 @@ public class Main extends Application{
     public ObservableList<TaskEvent> getTasks() {
         Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> taskList = display.defaultView();
+       /* ArrayList<TaskEvent> taskList = display.defaultView();
         for(TaskEvent t : taskList) {
         tasks.add(t);
-        } 
-        //tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
+        } */
+        tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
         return tasks;
     }
     
@@ -148,10 +160,4 @@ public class Main extends Application{
         AlertBox.display(TITLE_ALERT, output);
         
         }
-    
-    public void handleEnterPressed(KeyEvent e) {
-        if(e.getCode() == KeyCode.ENTER) {
-            passToLogic(e.getText());
-        }
-    }
 }
