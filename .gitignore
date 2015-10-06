@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io/api/java
 
 ### Java ###
-# *.class
+*.class
 
 # Package Files #
 *.jar
