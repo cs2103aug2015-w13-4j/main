@@ -27,7 +27,7 @@ public class Operation {
 		Storage action;
 		switch(command){
 		case ADD_TASK:
-			action.addTask(content.getDescription(), content.getDate(),content.getPriority());
+			action.addTask(content.getDescription(), content.getDate(),content.getPriority().toString());
 
 			//action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
 			return true;
