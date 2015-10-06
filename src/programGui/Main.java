@@ -96,6 +96,7 @@ public class Main extends Application{
             eventTable = new TableView<>();
             eventTable.setItems(getTasks());
             eventTable.getColumns().addAll(idColumn,nameColumn,priorityColumn);
+            eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             
             root.setCenter(eventTable);
             root.setTop(confirmBtn);
