@@ -21,7 +21,7 @@ public class AlertBox {
         Stage window = new Stage();
         
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("title");
+        window.setTitle(title);
         window.setMinWidth(100);
         
         Label label = new Label();

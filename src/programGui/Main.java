@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import utilities.TaskDate;
 import utilities.TaskEvent;
-
 import logic.Operation;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,6 +29,7 @@ public class Main extends Application{
 
     //Titles
     private static final String TITLE_WARNING = "Warning ";
+    private static final String TITLE_ALERT = "Alert";
     
     //Warning Message
     private static final String WARNING_EXIT = "Are you sure you want to exit?";
@@ -41,6 +42,9 @@ public class Main extends Application{
     //Button Names
     private static final String BUTTON_EXIT = "exit";
     private static final String BUTTON_OPEN = "open";
+    
+    //Clearing TextField
+    private static final String CLEAR_FIELD = "";
     
     Stage window;
     Button button;
@@ -79,8 +83,14 @@ public class Main extends Application{
             
             TextField instrInput = new TextField();
             instrInput.setPromptText("instr ; taskname ; date ; priority");
-            instrInput.getText();
-            //Pass to parser.
+            instrInput.setOnKeyPressed(e-> { 
+                if(e.getCode().equals(KeyCode.ENTER)) {
+                    String input = instrInput.getText();
+                    instrInput.setText(CLEAR_FIELD);
+                    passToLogic(input);
+                }
+            });
+
                
             
             //Id Column
@@ -120,17 +130,29 @@ public class Main extends Application{
     
     public ObservableList<TaskEvent> getTasks() {
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> taskList = defaultDisplay();
+       /* ArrayList<TaskEvent> taskList = defaultDisplay();
         for(TaskEvent t : taskList) {
         tasks.add(t);
+        } */
         tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
-        }
         return tasks;
     }
     
     public void passToLogic(String input) {
-        String output = processOperation(input);
         
+        /*Operation op = new Operation();
         
+        String output = op.processOperation(input);
+        AlertBox.display(TITLE_ALERT, output); */
+        if(input.equals("add")) {
+            AlertBox.display(TITLE_ALERT, input);
+        }
+        System.out.print("Hi");
+        }
+    
+    public void handleEnterPressed(KeyEvent e) {
+        if(e.getCode() == KeyCode.ENTER) {
+            passToLogic(e.getText());
+        }
     }
-    }
+}
