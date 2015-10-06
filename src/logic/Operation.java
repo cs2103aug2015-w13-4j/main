@@ -11,8 +11,7 @@ public class Operation {
 	public String processOperation(String input){
 		//get the commandElements from parser
 		Display message = new Display();
-		CommandParser parser = new CommandParser();
-		CommandElements processed = parser.ProcessInput(input);
+		CommandElements processed= CommandParser.ProcessInput(input);
 		
 		if(performCommand(processed.getType(),processed)){
 			return message.operation(processed.getType(), processed.getDescription());	
@@ -59,6 +58,8 @@ public class Operation {
 			return content.getDescription();
 		case PRIORITY:
 			return content.getPriority().toString();
+		case NAME:
+			return "";
 		}
 		return "";
 		
