@@ -9,7 +9,12 @@ class FileManager {
 
 	public FileManager(String directory) throws NullPointerException {
 		file = new File(directory);
-		if (directory.equals(Storage.CONFIG_PATH) && !file.exists()) {
+		try {
+			file.createNewFile();
+		} catch (Exception e) {
+			System.out.println("directory: " + directory + "file not created");
+		}
+		if (directory.equals(Storage.CONFIG_PATH)) {
 			writeFirstLine(SAVE_DIRECTORY);
 		} else {
 			writeFirstLine("0");

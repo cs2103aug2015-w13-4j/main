@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-	protected static final String CONFIG_PATH = ".config";
+	protected static final String CONFIG_PATH = "config.txt";
 	protected static final String TOKEN = "&&";
 
 	private FileManager configFile;
@@ -25,6 +25,7 @@ public class Storage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//System.out.print("savingPath: " + savingPath);
 		savingFile = new FileManager(savingPath);
 		try {
 			taskIDCounter = savingFile.getTaskIDCounter();
