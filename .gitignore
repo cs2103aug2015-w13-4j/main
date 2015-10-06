@@ -1,8 +1,4 @@
 # Created by https://www.gitignore.io/api/java
-
-### Java ###
-*.class
-
 # Package Files #
 *.jar
 *.war
@@ -13,3 +9,5 @@ hs_err_pid*
 
 # editor buffer
 *.swp
+
+*.class

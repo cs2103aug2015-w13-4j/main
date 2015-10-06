@@ -4,9 +4,9 @@ public class TaskEvent {
 
     protected int taskID;
     protected String taskName;
+    protected TaskDate date;
     protected int priority;
     protected String description;
-    protected TaskDate date;
 
     public TaskEvent(int taskID, String name, TaskDate date, int prio, String des) {
         this.taskID = taskID;
@@ -16,7 +16,15 @@ public class TaskEvent {
         this.description = des;
     }
 
-    public int getTaskID() {
+    public TaskEvent(String[] split) {
+		taskID = Integer.parseInt(split[0]);
+		taskName = split[1];
+		date = split[2];
+		priority = Integer.parseInt(split[3]);
+		description = split[4];
+	}
+
+	public int getTaskID() {
 		return taskID;
     }
 
