@@ -25,9 +25,14 @@ public class Operation {
 		Storage action;
 		switch(command){
 		case ADD_TASK:
+<<<<<<< HEAD
 			TaskDate date = content.getDate();
 			
 			action.addTask(content.get(0), date, content.get(2), content.get(3));
+=======
+			action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
+			//action.addTask(content.get(0), content.get(1), content.get(2), content.get(3));
+>>>>>>> origin/master
 			return true;
 		case EDIT_TASK:
 			
