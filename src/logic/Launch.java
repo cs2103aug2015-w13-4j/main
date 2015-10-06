@@ -7,7 +7,7 @@ public class Launch {
 	public void newFile(){
 		loading = new Storage();
 	}
-	public void loadFile(String directory){
+	public void loadFile(){
 		loading = new Storage();
 	}
 	public void changeDirectory(String oldDirectory, String newDirectory){
