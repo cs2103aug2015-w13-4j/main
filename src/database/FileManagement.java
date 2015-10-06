@@ -18,7 +18,7 @@ class FileManager {
 		ArrayList<String> list = new ArrayList<String>();
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
 			if (!br.ready()) {
-				return list;
+				return null;
 			}
 			taskIDCounter = Integer.parseInt(br.readLine());
 			String taskInfo = "";
@@ -36,6 +36,12 @@ class FileManager {
 		out.write(string);
 		out.write(LINE_BREAK);
 		out.close();
+	}
+
+	void delete(int taskID) throws Exception {
+		RandomAccessFile raf = new RandomAccessFile(file, "rw");
+		for (int i = 0; i < number
+
 	}
 
 	int getTaskIDCounter() {

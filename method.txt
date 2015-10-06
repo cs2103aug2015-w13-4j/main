@@ -2,7 +2,7 @@ Parser
 //for getting the whole input and processing it
 + ProcessInput(String) : CommandElements 
 add format for arraylist 
-[0]: description
+[0]:description
 [1]:date
 [2]:priority
 [3]:recurring
@@ -29,18 +29,23 @@ DISPLAY class
 + default () : String -> viewAll() 
 
 Storage
-global: idCount, 
-+ Load() : ArrayList<TaskEvent> 
-+ changeDirectory(String) : boolean
-+ add(ArrayList<String>) : TaskEvent
-+ edit(ArrayList<String>) : TaskEvent
++ load(): ArrayList<String>
+	returns an array of strings, each containing all the info of one task. string has this format:”<id><token><name><token><date><token><priority><token><description>”. <token> is set to be “&&” (subject to change later).
++ add(ArrayList<String> taskInfo): boolean
+	pass in taskInfo as ArrayList<String> using TaskEvent’s toArrayList().
++ edit(int taskID, ArrayList<String> newTaskInfo): boolean
+	pass in taskID to identify; newTaskInfo using TaskEvent’s toArrayList(). newTaskInfo needs to be changed to be different from the old taskInfo associated with that taskID before passed in.
++ delete(int taskID): boolean
 
 Utilities 
 CONSTANT class
 +enum CommandType{add...}
 
 TASKEVENT class
-as per current with id
++ toString(): String
+	return a string representation of the task
++ toArrayList(): ArrayList<String>
+	return an array of strings, each containing the partial info about the task. from [0] to [4]: taskID, name, date, priority, description.
 
 COMMANDELEMENTS class
 -CommandType

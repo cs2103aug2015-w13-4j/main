@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Storage {
 	protected String savingDirectory;
-	private ArrayList<String> bufferTaskList;
+	private ArrayList<String> taskListBuffer;
 	private FileManager fileManager;
 	private int taskIDCounter;
 
@@ -19,16 +19,12 @@ public class Storage {
 
 		}
 		taskIDCounter = fileManager.getTaskIDCounter();
-		try {
-			bufferTaskList = fileManager.load();
-		} catch (Exception e) {
-
-		}
+		loadToBuffer();
 	}
 
 	public ArrayList<String> load() {
 		try {
-			return bufferTaskList;
+			return taskListBuffer;
 		} catch (Exception e) {
 
 		}
@@ -44,17 +40,27 @@ public class Storage {
 		} catch (Exception e) {
 			return false;
 		}
-		bufferTaskList.add(taskInfoWithID);
+		taskListBuffer.add(taskInfoWithID);
 		return true;
 	}
 
-	public boolean editTask(Integer taskID, String editField, String editContent) {
-		// TODO
+	public boolean editTask(Integer taskID, String prevTask, String currTask) {
+		try {
+			fileManager.replace(taskID, prevTask, currTask);
+		} catch (Exception e) {
+			return false;
+		}
+		loadToBuffer();
 		return true;
 	}
 
 	public boolean delete(Integer taskID) {
-		// TODO
+		try {
+			fileManager.delete(taskID);
+		} catch (Exception e) {
+			return false;
+		}
+		loadToBuffer();
 		return true;
 	}
 
@@ -71,6 +77,14 @@ public class Storage {
 	public boolean redo() {
 		// TODO
 		return true;
+	}
+
+	private void loadToBuffer() {
+		try {
+			taskListBuffer = fileManager.load();
+		} catch (Exception e) {
+
+		}
 	}
 
 }
