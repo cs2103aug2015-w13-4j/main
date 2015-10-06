@@ -1,5 +1,6 @@
 package programGui;
 
+import utilities.TaskDate;
 import utilities.TaskEvent;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -9,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -43,6 +46,7 @@ public class Main extends Application{
         launch(args);
     }
    
+    @SuppressWarnings("unchecked")
     @Override
     public void start(Stage primaryStage) throws Exception {
             window = primaryStage;
@@ -74,8 +78,26 @@ public class Main extends Application{
             //Pass to parser.
                
             
-            //Table
-            TableColumn<TaskEvent,>
+            //Id Column
+            TableColumn<TaskEvent,Integer> idColumn = new TableColumn<>("Task ID");
+            idColumn.setMinWidth(50);
+            idColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
+            
+            //Task Name Column
+            TableColumn<TaskEvent,String> nameColumn = new TableColumn<>("Task Name");
+            nameColumn.setMinWidth(200);
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
+            
+            //Priority Column
+            TableColumn<TaskEvent,Integer> priorityColumn = new TableColumn<>("Task Priority");
+            priorityColumn.setMinWidth(50);
+            priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
+            
+            eventTable = new TableView<>();
+            eventTable.setItems(getTasks());
+            eventTable.getColumns().addAll(idColumn,nameColumn,priorityColumn);
+            
+            root.setCenter(eventTable);
             root.setTop(confirmBtn);
             root.setBottom(instrInput);
             
@@ -102,11 +124,10 @@ public class Main extends Application{
         return leftMenu;
     }
     
-    public ObservableList<TaskEvent> getProduct() {
+    public ObservableList<TaskEvent> getTasks() {
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-        tasks.get();
+        tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
         
         return tasks;
     }
     }
-}
