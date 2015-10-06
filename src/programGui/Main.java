@@ -1,11 +1,15 @@
 package programGui;
 
+import utilities.TaskEvent;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +37,7 @@ public class Main extends Application{
     Stage window;
     Button button;
     Button confirmBtn;
+    TableView<TaskEvent> eventTable;
     
     public static void main(String[] args) {
         launch(args);
@@ -68,9 +73,10 @@ public class Main extends Application{
             instrInput.getText();
             //Pass to parser.
                
-            root.setLeft(createVBox());
-            root.setTop(button);
-            root.setRight(confirmBtn);
+            
+            //Table
+            TableColumn<TaskEvent,>
+            root.setTop(confirmBtn);
             root.setBottom(instrInput);
             
 
@@ -94,5 +100,13 @@ public class Main extends Application{
         leftMenu.getChildren().addAll(button1,button2,button3);
         
         return leftMenu;
+    }
+    
+    public ObservableList<TaskEvent> getProduct() {
+        ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
+        tasks.get();
+        
+        return tasks;
+    }
     }
 }
