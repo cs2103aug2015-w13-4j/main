@@ -18,16 +18,16 @@ public class Storage {
 	private ArrayList<TaskEvent> taskEventListBuf;
 
 	public Storage() {
-		configFile = new FileManager(CONFIG_PATH);
 		try {
+			configFile = new FileManager(CONFIG_PATH);
 			savingPath = configFile.getSavingPath();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//System.out.print("savingPath: " + savingPath);
-		savingFile = new FileManager(savingPath);
 		try {
+			savingFile = new FileManager(savingPath);
 			taskIDCounter = savingFile.getTaskIDCounter();
 		} catch (NumberFormatException | IOException e) {
 			// TODO Auto-generated catch block
@@ -48,13 +48,14 @@ public class Storage {
 						+ "date:" + dateStr + TOKEN
 						+ "priority:" + prioStr + TOKEN
 						+ "description:" + des;
-		int taskID = taskIDCounter++;
 		try {
-			savingFile.addTask(taskID, taskInfo);
+			savingFile.setTaskIDCounter(++taskIDCounter);
+			System.out.println("taskIDCounter: " + taskIDCounter);
+			savingFile.addTask(taskIDCounter, taskInfo);
 		} catch (Exception e) {
 			return false;
 		}
-		taskEventListBuf.add(new TaskEvent(taskID, name, date, prio, des));
+		taskEventListBuf.add(new TaskEvent(taskIDCounter, name, date, prio, des));
 		return true;
 	}
 
