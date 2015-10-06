@@ -1,19 +1,17 @@
 package logic;
 
-import java.util.ArrayList;
-
 import database.Storage;
 import utilities.CommandElements;
+import utilities.Command_Priority;
 import utilities.Command_Type;
 import utilities.TaskDate;
 import parser.CommandParser;
-import parser.ProcessInput;
 
 public class Operation {
 	public String processOperation(String input){
 		//get the commandElements from parser
-		Display message;
-		CommandParser parser;
+		Display message = new Display();
+		CommandParser parser = new CommandParser();
 		CommandElements processed = parser.ProcessInput(input);
 		
 		if(performCommand(processed.getType(),processed)){
@@ -24,10 +22,11 @@ public class Operation {
 		}
 	}
 	private boolean performCommand(Command_Type command,CommandElements content){
-		Storage action;
+		Storage action = new Storage();
 		switch(command){
 		case ADD_TASK:
-			action.addTask(content.getName(), content.getDate(),content.getPriority().toString(),content.getDescription());
+			
+			action.addTask(content.getDescription(), content.getDate(),getPriority(content.getPriority()),content.getDescription());
 
 			//action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
 			return true;
@@ -36,6 +35,20 @@ public class Operation {
 			return true;
 		}
 		return false;
+	}
+	private int getPriority(Command_Priority priority){
+		switch(priority){
+		case HIGH:
+			return 1;
+		case MEDIUM:
+			return 2;
+		case LOW:
+			return 3;
+		}
+		return 0;
+		
+		
+		
 	}
 	private String getEditContent(CommandElements content){
 		switch(content.getField()){
@@ -47,6 +60,7 @@ public class Operation {
 		case PRIORITY:
 			return content.getPriority().toString();
 		}
+		return "";
 		
 	}
 }
