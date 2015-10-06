@@ -60,11 +60,42 @@ class FileManager {
 		} catch (IOException ioe) {
 			throw ioe;
 		}
-		
 	}
 
 	public void editTask(int taskID, String field, String newContent) throws Exception {
-
+		ArrayList<String> temp = new ArrayList<String>();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			if (!br.ready()) {
+				return;
+			} else {
+				String line = br.readLine();
+				while ((line = br.readLine()) != null) {
+					if (!line.startsWith(String.valueOf(taskID))) {
+						temp.add(line);
+					} else {
+						int start = line.indexOf(field);
+						int end = line.indexOf(Storage.TOKEN, start);
+						String front = line.substring(0, start);
+						String mid = field + ":" + newContent;
+						String tail = line.substring(end, line.length());
+						temp.add(front+mid+tail);
+					}
+				}
+				try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+					raf.setLength(0);
+				} catch (IOException ioe) {
+					;
+				}
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+					for (String str: temp) {
+						bw.write(str);
+						bw.newLine();
+					}
+				} catch (IOException ioe) {
+					;
+				}
+			}
+		}
 	}
 
 	public void deleteTask(int taskID) throws Exception {

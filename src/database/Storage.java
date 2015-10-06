@@ -40,17 +40,16 @@ public class Storage {
 		return taskEventListBuf;
 	}
 
-	public boolean addTask(int taskID, String name, TaskDate date, int prio, String des) {
-		String idStr = String.valueOf(taskID);
+	public boolean addTask(String name, TaskDate date, int prio, String des) {
 		String dateStr = date.toString();
 		String prioStr = String.valueOf(prio);
-		String taskInfo = idStr + TOKEN
-						+ name + TOKEN
-						+ date + TOKEN
-						+ prioStr + TOKEN
-						+ des;
+		String taskInfo = "name:" + name + TOKEN
+						+ "date:" + dateStr + TOKEN
+						+ "priority:" + prioStr + TOKEN
+						+ "description:" + des;
+		int taskID = taskIDCounter++;
 		try {
-			savingFile.addTask(taskIDCounter++, taskInfo);
+			savingFile.addTask(taskID, taskInfo);
 		} catch (Exception e) {
 			return false;
 		}
@@ -83,7 +82,10 @@ public class Storage {
 	private boolean loadToBuffer() {
 		try {
 			ArrayList<String> strings = savingFile.loadTasks();
-			taskEventListBuf =;
+			for (String str: strings) {
+				TaskEvent task = new TaskEvent(str.split(TOKEN));
+				taskEventListBuf.add(task);
+			}
 		} catch (Exception e) {
 			return false;
 		}
