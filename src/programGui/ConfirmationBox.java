@@ -23,8 +23,8 @@ public class ConfirmationBox {
         Stage window = new Stage();
         
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("title");
-        window.setMinWidth(200);
+        window.setTitle(title);
+        window.setMinWidth(250);
         
         Label label = new Label();
         label.setText(message);

@@ -153,11 +153,10 @@ public class Main extends Application{
     }
     
     public void passToLogic(String input) {
-        
         Operation op = new Operation();
         
-        String output = op.processOperation(input); 
-        AlertBox.display(TITLE_ALERT, output);
+       // String output = op.processOperation(input); 
+        AlertBox.display(TITLE_ALERT, input);
         
         }
 }
