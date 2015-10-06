@@ -27,17 +27,26 @@ public class Operation {
 		Storage action;
 		switch(command){
 		case ADD_TASK:
-			action.addTask(content.getDescription(), content.getDate(),content.getPriority().toString());
+			action.addTask(content.getName(), content.getDate(),content.getPriority().toString(),content.getDescription());
 
 			//action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
 			return true;
-		case EDIT_TASK:
-			//get the prev taskEvent
-			//replace the repective field
-			//edit
-			action.editTask(content.getID(),content.getField(),content);
+		case EDIT_TASK:		
+			action.editTask(content.getID(),content.getField().toString(),getEditContent(content));
 			return true;
 		}
 		return false;
+	}
+	private String getEditContent(CommandElements content){
+		switch(content.getField()){
+		case DATE:
+			TaskDate date = content.getDate();
+			return date.toString();
+		case DESCRIPTION:
+			return content.getDescription();
+		case PRIORITY:
+			return content.getPriority().toString();
+		}
+		
 	}
 }
