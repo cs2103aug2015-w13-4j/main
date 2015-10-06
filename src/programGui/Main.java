@@ -1,7 +1,12 @@
 package programGui;
 
+import java.util.ArrayList;
+
 import utilities.TaskDate;
 import utilities.TaskEvent;
+
+import logic.Operation;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,8 +107,6 @@ public class Main extends Application{
             root.setTop(confirmBtn);
             root.setBottom(instrInput);
             
-
-
         } 
  
     private void exitProgram() {
@@ -115,20 +118,19 @@ public class Main extends Application{
         }
     }
     
-    protected VBox createVBox () {
-        VBox leftMenu = new VBox();
-        Button button1 = new Button("File");
-        Button button2 = new Button("Edit");
-        Button button3 = new Button("View");
-        leftMenu.getChildren().addAll(button1,button2,button3);
-        
-        return leftMenu;
-    }
-    
     public ObservableList<TaskEvent> getTasks() {
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
+        ArrayList<TaskEvent> taskList = defaultDisplay();
+        for(TaskEvent t : taskList) {
+        tasks.add(t);
         tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
-        
+        }
         return tasks;
+    }
+    
+    public void passToLogic(String input) {
+        String output = processOperation(input);
+        
+        
     }
     }
