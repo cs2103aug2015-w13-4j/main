@@ -50,4 +50,3 @@ class FileManager {
 		this.directory = directory;
 	}
 }
-
