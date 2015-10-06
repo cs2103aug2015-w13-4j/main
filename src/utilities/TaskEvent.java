@@ -15,31 +15,31 @@ public class TaskEvent {
         this.priority = prio;
         this.description = des;
     }
-    
+
     public int getTaskID() {
-    	return taskID;
+		return taskID;
     }
-    
+
     public String getTaskName() {
-    	return taskName;
+		return taskName;
     }
-    
+
     public int getPriority() {
-    	return priority;
+		return priority;
     }
-    
+
     public TaskDate getDate() {
-    	return date;
+		return date;
     }
-    
+
     @Override
     public String toString() {
-    	String str = "";
-    	str += "taskID:" + taskID;
-    	str += "taskName:" + taskName;
-    	str += "priority:" + priority;
-    	str += "description:" + description;
-    	str += "date:" + date.toString();
-    	return str;
+		String str = "";
+		str += "taskID:" + taskID;
+		str += "taskName:" + taskName;
+		str += "priority:" + priority;
+		str += "description:" + description;
+		str += "date:" + date.toString();
+		return str;
     }
 }

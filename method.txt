@@ -29,12 +29,12 @@ DISPLAY class
 + default () : String -> viewAll() 
 
 Storage
-+ load(): ArrayList<String>
-	returns an array of strings, each containing all the info of one task. string has this format:”<id><token><name><token><date><token><priority><token><description>”. <token> is set to be “&&” (subject to change later).
-+ add(ArrayList<String> taskInfo): boolean
-	pass in taskInfo as ArrayList<String> using TaskEvent’s toArrayList().
-+ edit(int taskID, ArrayList<String> newTaskInfo): boolean
-	pass in taskID to identify; newTaskInfo using TaskEvent’s toArrayList(). newTaskInfo needs to be changed to be different from the old taskInfo associated with that taskID before passed in.
++ load(): ArrayList<TaskEvent>
+	returns an array of TaskEvents
++ add(int taskID, String name, TaskDate date, int prio, String des): boolean
+	pass in taskInfo to add task
++ edit(int taskID, String field, String newContent): boolean
+	pass in taskID to identify; field to indicate which info to change; newContent to replace old content.
 + delete(int taskID): boolean
 
 Utilities 
@@ -44,8 +44,6 @@ CONSTANT class
 TASKEVENT class
 + toString(): String
 	return a string representation of the task
-+ toArrayList(): ArrayList<String>
-	return an array of strings, each containing the partial info about the task. from [0] to [4]: taskID, name, date, priority, description.
 
 COMMANDELEMENTS class
 -CommandType
