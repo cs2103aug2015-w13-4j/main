@@ -1,18 +1,16 @@
 package database;
 
-import utilities.*;
-
 import java.io.*;
 import java.util.*;
 
 class FileManager {
-	private static final String LINE_BREAK = System.lineSepartor();
+	private static final String LINE_BREAK = System.lineSeparator();
 	private String directory;
 	private File file;
 	private int taskIDCounter;
 
 	FileManager(String directory) throws IOException {
-		this.directory = directory;
+		this.setDirectory(directory);
 		file = new File(directory);
 	}
 
@@ -28,7 +26,7 @@ class FileManager {
 				list.add(taskInfo);
 			}
 		} catch (IOException ioe) {
-			throw new LoadFromFileException(ioe);
+			;
 		}
 		return list;
 	}
@@ -37,10 +35,19 @@ class FileManager {
 		BufferedWriter out = new BufferedWriter(new FileWriter(file));
 		out.write(string);
 		out.write(LINE_BREAK);
+		out.close();
 	}
 
 	int getTaskIDCounter() {
 		return taskIDCounter;
+	}
+
+	public String getDirectory() {
+		return directory;
+	}
+
+	public void setDirectory(String directory) {
+		this.directory = directory;
 	}
 }
 

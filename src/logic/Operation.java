@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import database.Storage;
 import utilities.CommandElements;
 import utilities.Command_Type;
+import utilities.TaskDate;
 import parser.ProcessInput;
 
 public class Operation {
@@ -24,8 +25,8 @@ public class Operation {
 		Storage action;
 		switch(command){
 		case ADD_TASK:
-			TaskDate date = content.get(1);
-			action.addTask(content.get(0), content.get(1), content.get(2), content.get(3));
+			action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
+			//action.addTask(content.get(0), content.get(1), content.get(2), content.get(3));
 			return true;
 		case EDIT_TASK:
 			

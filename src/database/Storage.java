@@ -3,44 +3,48 @@ package database;
 import utilities.TaskEvent;
 import utilities.TaskDate;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
 	protected String savingDirectory;
-	private ArrayList<TaskEvent> bufferTaskList;
+	private ArrayList<String> bufferTaskList;
 	private FileManager fileManager;
 	private int taskIDCounter;
 
 	public Storage(String savingDirectory) {
-		savingDirectory = savingDirectory;
-		fileManager = new FileManager(savingDirectory);
+		this.savingDirectory = savingDirectory;
+		try {
+			fileManager = new FileManager(savingDirectory);
+		} catch (Exception e) {
+
+		}
 		taskIDCounter = fileManager.getTaskIDCounter();
 		try {
 			bufferTaskList = fileManager.load();
-		} catch (IOException ioe) {
-			;
+		} catch (Exception e) {
+
 		}
 	}
 
-	public ArrayList<TaskEvent> load() {
+	public ArrayList<String> load() {
 		try {
 			return bufferTaskList;
 		} catch (Exception e) {
 			;
 		}
+		return null;
 	}
 
-	public boolean addTask(String description, TaskDate date, String priority, boolean recurring) {
-		TaskEvent task = new TaskEvent(taskIDCounter++, description, date, priority, recurring);
-		String taskInfo = task.toString();
+	public boolean addTask(String taskInfo) {
+		String taskInfoWithID = "";
 		try {
-			fileManager.append(taskInfo);
+			int id = taskIDCounter++;
+			taskInfoWithID = "" + id + taskInfo;
+			fileManager.append(taskInfoWithID);
 		} catch (Exception e) {
 			return false;
 		}
-		bufferTaskList.add(task);
+		bufferTaskList.add(taskInfoWithID);
 		return true;
 	}
 
@@ -65,11 +69,6 @@ public class Storage {
 	}
 
 	public boolean redo() {
-		// TODO
-		return true;
-	}
-
-	private boolean saveTask() {
 		// TODO
 		return true;
 	}
