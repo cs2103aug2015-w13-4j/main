@@ -43,6 +43,9 @@ public class Main extends Application{
     //Clearing TextField
     private static final String CLEAR_FIELD = "";
     
+    //Prompt Text
+    private static final String PROMPT_TEXT = "instr ; taskname ; date ; priority ; task description";
+   
     Stage window;
     Button button;
     Button confirmBtn;
@@ -74,11 +77,12 @@ public class Main extends Application{
             confirmBtn.setOnAction(e-> exitProgram() );
             
             TextField instrInput = new TextField();
-            instrInput.setPromptText("instr ; taskname ; date ; priority");
+            instrInput.setPromptText(PROMPT_TEXT);
             instrInput.setOnKeyPressed(e-> { 
                 if(e.getCode().equals(KeyCode.ENTER)) {
                     String input = instrInput.getText();
                     instrInput.setText(CLEAR_FIELD);
+                    //instrInput.setPromptText(PROMPT_TEXT);
                     passToLogic(input);
                 }
             });
