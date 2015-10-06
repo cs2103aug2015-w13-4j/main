@@ -44,6 +44,9 @@ public class TaskDate {
 	public int getDay() {
 		return myDay;
 	}
+	public String toString(){
+		return myDay + "/" + myMonth +"/" + myYear;
+	}
 	
 	public String printDate() {
 		if (myDay < 10 && myMonth < 10) {
