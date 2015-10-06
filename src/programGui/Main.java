@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import utilities.TaskDate;
 import utilities.TaskEvent;
+import logic.Display;
 import logic.Operation;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -129,25 +130,23 @@ public class Main extends Application{
     }
     
     public ObservableList<TaskEvent> getTasks() {
+        Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-       /* ArrayList<TaskEvent> taskList = defaultDisplay();
+        ArrayList<TaskEvent> taskList = display.defaultView();
         for(TaskEvent t : taskList) {
         tasks.add(t);
-        } */
-        tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
+        } 
+        //tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
         return tasks;
     }
     
     public void passToLogic(String input) {
         
-        /*Operation op = new Operation();
+        Operation op = new Operation();
         
-        String output = op.processOperation(input);
-        AlertBox.display(TITLE_ALERT, output); */
-        if(input.equals("add")) {
-            AlertBox.display(TITLE_ALERT, input);
-        }
-        System.out.print("Hi");
+        String output = op.processOperation(input); 
+        AlertBox.display(TITLE_ALERT, output);
+        
         }
     
     public void handleEnterPressed(KeyEvent e) {
