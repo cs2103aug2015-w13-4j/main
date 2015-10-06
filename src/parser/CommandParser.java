@@ -12,6 +12,9 @@ import utilities.CommandElements;
 import utilities.TaskDate;
 
 public class CommandParser {
+	public CommandParser(){
+		
+	}
 
 	public CommandElements ProcessInput(String command) {
 		Command_Type type;
