@@ -6,32 +6,33 @@ public class CommandElements {
 	private TaskDate date;	
 	private Command_Priority priority;
 	private Command_Field field;
-	private int object;
+	private int id;
 	
+	//adding task
 	public CommandElements(Command_Type cmd, String des, TaskDate dt, Command_Priority prio){
 		this.type = cmd;
 		this.date = dt;
 		this.description = des;
 		this.priority = prio;
 	}
-	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, String des){
+	//edit des field
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, String des){
 		this.type = cmd;
-		this.object = o;
+		this.id = id;
 		this.field = fld;
 		this.description = des;
 	}
-	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
+	//edit date field
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, TaskDate dt){
 		this.type = cmd;
-		this.object = o;
+		this.id = id;
 		this.field = fld;
 		this.date = dt;
 	}
-	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
+	//edit priority field
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, Command_Priority prio){
 		this.type = cmd;
-		this.object = o;
+		this.id = id;
 		this.field = fld;
 		this.priority = prio;
 	}
@@ -40,8 +41,8 @@ public class CommandElements {
 		return type;
 	}
 	
-	public int getObject() {
-		return object;
+	public int getID() {
+		return id;
 	}
 	
 	public String getDescription(){

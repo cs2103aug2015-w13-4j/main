@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 class FileManager {
-	private static final String LINE_BREAK = System.lineSeparator();
 	private static final String SAVE_DIRECTORY = "database.txt";
 	private File file;
 
@@ -15,7 +14,6 @@ class FileManager {
 		} else {
 			writeFirstLine("0");
 		}
-		
 	}
 
 	public String getSavingPath() throws IOException {
@@ -56,8 +54,13 @@ class FileManager {
 		return array;
 	}
 
-	public void addTask(String taskInfo) throws Exception {
-
+	public void addTask(int taskID, String taskInfo) throws IOException {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+			bw.write(String.valueOf(taskID) + Storage.TOKEN + taskInfo);
+		} catch (IOException ioe) {
+			throw ioe;
+		}
+		
 	}
 
 	public void editTask(int taskID, String field, String newContent) throws Exception {
@@ -69,6 +72,11 @@ class FileManager {
 	}
 	
 	private void writeFirstLine(String str) {
+		
+	}
+
+	public void setSavingDirectory(String dir) {
+		// TODO Auto-generated method stub
 		
 	}
 }

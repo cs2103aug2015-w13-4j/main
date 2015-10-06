@@ -31,6 +31,14 @@ public class TaskEvent {
     public TaskDate getDate() {
 		return date;
     }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public int getPriorirty() {
+        return priority;
+    }
 
     @Override
     public String toString() {
