@@ -30,7 +30,7 @@ public class Storage {
 		try {
 			return bufferTaskList;
 		} catch (Exception e) {
-			;
+
 		}
 		return null;
 	}
