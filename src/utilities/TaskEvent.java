@@ -35,11 +35,11 @@ public class TaskEvent {
     @Override
     public String toString() {
 		String str = "";
-		str += "taskID:" + taskID;
-		str += "taskName:" + taskName;
-		str += "priority:" + priority;
-		str += "description:" + description;
-		str += "date:" + date.toString();
+		str += ":taskID:" + taskID;
+		str += ":taskName:" + taskName;
+		str += ":priority:" + priority;
+		str += ":description:" + description;
+		str += ":date:" + date.toString();
 		return str;
     }
 }

@@ -3,88 +3,91 @@ package database;
 import utilities.TaskEvent;
 import utilities.TaskDate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-	protected String savingDirectory;
-	private ArrayList<String> taskListBuffer;
-	private FileManager fileManager;
+	protected static final String CONFIG_PATH = ".config";
+	protected static final String TOKEN = "&&";
+
+	private FileManager configFile;
+	private FileManager savingFile;
+	private String savingPath; // get from config file
 	private int taskIDCounter;
 
-	public Storage(String savingDirectory) {
-		this.savingDirectory = savingDirectory;
-		try {
-			fileManager = new FileManager(savingDirectory);
-		} catch (Exception e) {
+	private ArrayList<TaskEvent> taskEventListBuf;
 
+	public Storage() {
+		configFile = new FileManager(CONFIG_PATH);
+		try {
+			savingPath = configFile.getSavingPath();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		taskIDCounter = fileManager.getTaskIDCounter();
+		savingFile = new FileManager(savingPath);
+		try {
+			taskIDCounter = savingFile.getTaskIDCounter();
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		taskEventListBuf = new ArrayList<TaskEvent>();
+	}
+
+	public ArrayList<TaskEvent> load() {
 		loadToBuffer();
+		return taskEventListBuf;
 	}
 
-	public ArrayList<String> load() {
+	public boolean addTask(int taskID, String name, TaskDate date, int prio, String des) {
+		String idStr = String.valueOf(taskID);
+		String dateStr = date.toString();
+		String prioStr = String.valueOf(prio);
+		String taskInfo = idStr + TOKEN
+						+ name + TOKEN
+						+ date + TOKEN
+						+ prioStr + TOKEN
+						+ des;
 		try {
-			return taskListBuffer;
-		} catch (Exception e) {
-
-		}
-		return null;
-	}
-
-	public boolean addTask(String taskInfo) {
-		String taskInfoWithID = "";
-		try {
-			int id = taskIDCounter++;
-			taskInfoWithID = "" + id + taskInfo;
-			fileManager.append(taskInfoWithID);
+			savingFile.addTask(taskIDCounter++, taskInfo);
 		} catch (Exception e) {
 			return false;
 		}
-		taskListBuffer.add(taskInfoWithID);
+		taskEventListBuf.add(new TaskEvent(taskID, name, date, prio, des));
 		return true;
 	}
 
-	public boolean editTask(Integer taskID, String prevTask, String currTask) {
+	public boolean editTask(int taskID, String field, String newContent) {
 		try {
-			fileManager.replace(taskID, prevTask, currTask);
+			savingFile.editTask(taskID, field, newContent);
 		} catch (Exception e) {
 			return false;
 		}
-		loadToBuffer();
-		return true;
+		return loadToBuffer();
 	}
 
 	public boolean delete(Integer taskID) {
 		try {
-			fileManager.delete(taskID);
+			savingFile.deleteTask(taskID);
 		} catch (Exception e) {
 			return false;
 		}
-		loadToBuffer();
-		return true;
+		return loadToBuffer();
 	}
 
-	public boolean undo() {
-		// TODO
-		return true;
+	public void setSavingDirectory(String dir) {
+		configFile.setSavingDirectory(dir);
 	}
 
-	public boolean undo(int times) {
-		//TODO
-		return true;
-	}
-
-	public boolean redo() {
-		// TODO
-		return true;
-	}
-
-	private void loadToBuffer() {
+	private boolean loadToBuffer() {
 		try {
-			taskListBuffer = fileManager.load();
+			ArrayList<String> strings = savingFile.loadTasks();
+			taskEventListBuf =;
 		} catch (Exception e) {
-
+			return false;
 		}
+		return true;
 	}
 
 }

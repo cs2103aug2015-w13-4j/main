@@ -5,54 +5,70 @@ import java.util.*;
 
 class FileManager {
 	private static final String LINE_BREAK = System.lineSeparator();
-	private String directory;
+	private static final String SAVE_DIRECTORY = "database.txt";
 	private File file;
-	private int taskIDCounter;
 
-	FileManager(String directory) throws IOException {
-		this.setDirectory(directory);
+	public FileManager(String directory) throws NullPointerException {
 		file = new File(directory);
+		if (directory.equals(Storage.CONFIG_PATH) && !file.exists()) {
+			writeFirstLine(SAVE_DIRECTORY);
+		} else {
+			writeFirstLine("0");
+		}
+		
 	}
 
-	ArrayList<String> load() throws IOException {
-		ArrayList<String> list = new ArrayList<String>();
-		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+	public String getSavingPath() throws IOException {
+		return getFirstLine();
+	}
+
+	public int getTaskIDCounter() throws IOException, NumberFormatException {
+		return Integer.parseInt(getFirstLine());
+	}
+
+	private String getFirstLine() throws IOException {
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			if (!br.ready()) {
-				return null;
-			}
-			taskIDCounter = Integer.parseInt(br.readLine());
-			String taskInfo = "";
-			while ((taskInfo = br.readLine()) != null) {
-				list.add(taskInfo);
+				return "";
+			} else {
+				String line = br.readLine();
+				return line;
 			}
 		} catch (IOException ioe) {
-			;
+			throw ioe;
 		}
-		return list;
 	}
 
-	void append(String string) throws IOException {
-		BufferedWriter out = new BufferedWriter(new FileWriter(file));
-		out.write(string);
-		out.write(LINE_BREAK);
-		out.close();
+	public ArrayList<String> loadTasks() throws IOException {
+		ArrayList<String> array = new ArrayList<String>();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			if (!br.ready()) {
+				return null;
+			} else {
+				String line = br.readLine(); // eat the first line
+				while ((line = br.readLine()) != null) {
+					array.add(line);
+				}
+			}
+		} catch (IOException ioe) {
+			throw ioe;
+		}
+		return array;
 	}
 
-	void delete(int taskID) throws Exception {
-		RandomAccessFile raf = new RandomAccessFile(file, "rw");
-		for (int i = 0; i < number
+	public void addTask(String taskInfo) throws Exception {
 
 	}
 
-	int getTaskIDCounter() {
-		return taskIDCounter;
+	public void editTask(int taskID, String field, String newContent) throws Exception {
+
 	}
 
-	public String getDirectory() {
-		return directory;
-	}
+	public void deleteTask(int taskID) throws Exception {
 
-	public void setDirectory(String directory) {
-		this.directory = directory;
+	}
+	
+	private void writeFirstLine(String str) {
+		
 	}
 }
