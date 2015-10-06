@@ -35,7 +35,7 @@ public class Operation {
 			//get the prev taskEvent
 			//replace the repective field
 			//edit
-			action.editTask(content.getObject(), prevTask, currTask)
+			action.editTask(content.getID(),content.getField(),content);
 			return true;
 		}
 		return false;
