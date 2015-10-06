@@ -15,11 +15,18 @@ public class TaskDate {
 		myDay = day;
 	}
 	
+	public TaskDate(String date) {
+		String[] split = date.split("/");
+		myDay = Integer.parseInt(split[0]);
+		myMonth = Integer.parseInt(split[1]);
+		myDay = Integer.parseInt(split[2]);
+	}
+	
 	public TaskDate() {
 		myYear = 0;
 		myMonth = 0;
 		myDay = 0;
-	}
+	}	
 	
 	public void setYear(int year) {
 		myYear = year;
