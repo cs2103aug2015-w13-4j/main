@@ -146,7 +146,7 @@ public class Main extends Application{
         Operation op = new Operation();
         
         String output = op.processOperation(input); 
-        AlertBox.display(TITLE_ALERT, input);
+        AlertBox.display(TITLE_ALERT, output);
         
         }
 }
