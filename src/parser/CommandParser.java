@@ -1,7 +1,5 @@
 package parser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,39 +10,43 @@ import utilities.CommandElements;
 import utilities.TaskDate;
 
 public class CommandParser {
-	public CommandParser(){
-		
-	}
 
-	public CommandElements ProcessInput(String command) {
+	public static CommandElements ProcessInput(String command) {
 		Command_Type type;
+		String name;
 		String description;
 		TaskDate date;
 		Command_Priority priority;
 		Command_Field field;
 		int object;
-		ArrayList<String> parts = split(command);
-		if (parts.get(0).equals("add")) {
+		String parts[] = command.split(" ");
+		if (parts[0].equals("add")) {
 			type = Command_Type.ADD_TASK;
-			description = parts.get(1);
-			date = dateDecoder(parts.get(2));
-			priority = PriorityDecoder(parts.get(3));
-			return new CommandElements(type, description, date, priority);
-		} else if (parts.get(0).equals("edit")) {
+			name = parts[1];
+			date = dateDecoder(parts[2]);
+			priority = PriorityDecoder(parts[3]);
+			description = parts[4];
+			return new CommandElements(type, name, date, priority, description);
+			//return null;
+		} else if (parts[0].equals("edit")) {
 			type = Command_Type.EDIT_TASK;
-			object = Integer.parseInt(parts.get(1));
-			if (parts.get(2).equals("name")) {
-				field = Command_Field.DESCRIPTION;
-				description = parts.get(3);
-				return new CommandElements(type, object, field, description);
-			} else if (parts.get(2).equals("date")) {
+			object = Integer.parseInt(parts[1]);
+			if (parts[2].equals("name")) {
+				field = Command_Field.NAME;
+				name = parts[3];
+				return new CommandElements(type, object, field, name);
+			} else if (parts[2].equals("date")) {
 				field = Command_Field.DATE;
-				date = dateDecoder(parts.get(3));
+				date = dateDecoder(parts[3]);
 				return new CommandElements(type, object, field, date);
-			} else if (parts.get(2).equals("priority")) {
+			} else if (parts[2].equals("priority")) {
 				field = Command_Field.PRIORITY;
-				priority = PriorityDecoder(parts.get(3));
+				priority = PriorityDecoder(parts[3]);
 				return new CommandElements(type, object, field, priority);
+			} else if (parts[2].equals("description")) {
+				field = Command_Field.DESCRIPTION;
+				description = parts[3];
+				return new CommandElements(type, object, field, description);
 			} else {
 				return null;
 			}
@@ -53,7 +55,7 @@ public class CommandParser {
 		}
 	}
 
-	private Command_Priority PriorityDecoder(String part) {
+	public static Command_Priority PriorityDecoder(String part) {
 		Command_Priority priority;
 		if (part.equals("high")) {
 			priority = Command_Priority.HIGH;
@@ -65,13 +67,7 @@ public class CommandParser {
 		return priority;
 	}
 	
-	private ArrayList<String> split(String command) {
-		String parts[] = command.split(" ");
-		ArrayList<String> commandParts = (ArrayList<String>) Arrays.asList(parts);
-		return commandParts;
-	}
-	
-	private static int[] getCurrentDate() {
+	public static int[] getCurrentDate() {
 		Date date = new Date(); // your date
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(date);
@@ -82,7 +78,7 @@ public class CommandParser {
 	    return currentDate;
 	}
 	
-	private static TaskDate dateDecoder(String dateStr) {
+	public static TaskDate dateDecoder(String dateStr) {
 		int year, month, day;
 		int thisDate[] = new int[3];
 		thisDate = getCurrentDate();
@@ -141,7 +137,7 @@ public class CommandParser {
 		return new TaskDate(0, 0, 0);
 	}
 	
-	private static int checkDate(int year, int month, int day) {
+	public static int checkDate(int year, int month, int day) {
 		int thisDate[] = getCurrentDate();
 		if (year*10000+month*100+day < thisDate[0]*10000+thisDate[1]*100+thisDate[2]) {
 			
