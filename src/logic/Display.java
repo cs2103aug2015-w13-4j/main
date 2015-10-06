@@ -15,10 +15,9 @@ public class Display {
 	//for the whole list
 	public ArrayList<TaskEvent> defaultView(){
 		Storage store = new Storage();
-		return null;
-		
+		return store.load();
 	}
-	public  String operation(Command_Type op, String content){
+	public String operation(Command_Type op, String content){
 		switch(op){
 		case ADD_TASK:
 			return String.format(MESSAGE_ADD, content);
