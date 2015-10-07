@@ -20,7 +20,7 @@ public class Operation {
 		CommandElements processed= CommandParser.ProcessInput(input);
 		
 		if(performCommand(processed.getType(),processed)){
-			return message.operation(processed.getType(), processed.getDescription());	
+			return message.operation(processed.getType(), processed.getName());	
 		}
 		else{
 			return message.error(input);
