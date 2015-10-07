@@ -1,6 +1,7 @@
 package logic;
 
 import database.Storage;
+import logic.Launch;
 
 public class Launch {
 	static Storage storage;

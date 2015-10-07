@@ -16,7 +16,7 @@ public class Display {
 	
 	//for the whole list
 	public ArrayList<TaskEvent> defaultView(){
-		Storage store = new Storage();
+		Storage store = Launch.getStorage();
 		return store.load();
 	}
 	public String operation(Command_Type op, String content){
