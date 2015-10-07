@@ -37,7 +37,8 @@ public class Storage {
 	}
 
 	public ArrayList<TaskEvent> load() {
-		loadToBuffer();
+		//loadToBuffer();
+		System.out.println("size "+taskEventListBuf);
 		return taskEventListBuf;
 	}
 

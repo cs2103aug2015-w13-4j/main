@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 3
 1&&name:task_name&&date:10/10/2015&&priority:1&&description:task_name
@@ -5,8 +6,16 @@
 3&&name:testing&&date:10/10/2015&&priority:1&&description:testing
 =======
 4
+=======
+6
+>>>>>>> Stashed changes
 1&&name:task_name&&date:10/10/2015&&priority:1&&description:task_name
 2&&name:newTask_added&&date:10/10/2015&&priority:1&&description:newTask_added
 3&&name:added_new_task&&date:11/10/2015&&priority:1&&description:added_new_task
 4&&name:addinnng_task&&date:12/10/2015&&priority:1&&description:addinnng_task
+<<<<<<< Updated upstream
 >>>>>>> origin/master
+=======
+5&&name:newTaskADDED&&date:13/10/2015&&priority:1&&description:newTaskADDED
+6&&name:newTaskADd&&date:14/10/2015&&priority:1&&description:newTaskADd
+>>>>>>> Stashed changes
