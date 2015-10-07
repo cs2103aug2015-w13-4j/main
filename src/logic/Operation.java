@@ -6,11 +6,13 @@ import utilities.Command_Priority;
 import utilities.Command_Type;
 import utilities.TaskDate;
 import parser.CommandParser;
+import logic.Launch;
 
 public class Operation {
+
 	public String processOperation(String input){
 		//get the commandElements from parser
-		Display message = new Display();
+		Display message = Launch.getDisplay();
 		CommandElements processed= CommandParser.ProcessInput(input);
 		
 		if(performCommand(processed.getType(),processed)){
@@ -21,7 +23,7 @@ public class Operation {
 		}
 	}
 	private boolean performCommand(Command_Type command,CommandElements content){
-		Storage action = new Storage();
+		Storage action = Launch.getStorage();
 		switch(command){
 		case ADD_TASK:
 			
