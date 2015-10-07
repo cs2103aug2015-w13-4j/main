@@ -11,6 +11,7 @@ import logic.Launch;
 public class Operation {
 
 	public String processOperation(String input){
+		Launch.createObjects();
 		//get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed= CommandParser.ProcessInput(input);
