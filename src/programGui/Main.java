@@ -101,7 +101,7 @@ public class Main extends Application{
             
             //Task Name Column
             TableColumn<TaskEvent,String> nameColumn = new TableColumn<>("Task Name");
-            nameColumn.setMinWidth(200);
+            nameColumn.setMinWidth(150);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
             
             //Task Description Column
@@ -127,7 +127,7 @@ public class Main extends Application{
             
             //Setting up of Border Pane
             root.setCenter(eventTable);
-            root.setTop(confirmBtn);
+            //root.setTop(confirmBtn);
             root.setBottom(instrInput);
             
         } 
