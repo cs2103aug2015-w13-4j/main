@@ -139,11 +139,12 @@ public class Main extends Application{
     public ObservableList<TaskEvent> getTasks() {
         Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-       /* ArrayList<TaskEvent> taskList = display.defaultView();
+        ArrayList<TaskEvent> taskList = display.defaultView();
+        System.out.print(taskList.size());
         for(TaskEvent t : taskList) {
         tasks.add(t);
-        } */
-        tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
+        } 
+        //tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
         return tasks;
     }
     
