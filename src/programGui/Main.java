@@ -101,7 +101,7 @@ public class Main extends Application{
             
             //Task Name Column
             TableColumn<TaskEvent,String> nameColumn = new TableColumn<>("Task Name");
-            nameColumn.setMinWidth(200);
+            nameColumn.setMinWidth(150);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
             
             //Task Description Column
@@ -127,7 +127,7 @@ public class Main extends Application{
             
             //Setting up of Border Pane
             root.setCenter(eventTable);
-            root.setTop(confirmBtn);
+            //root.setTop(confirmBtn);
             root.setBottom(instrInput);
             
         } 
@@ -145,7 +145,7 @@ public class Main extends Application{
         Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> taskList = display.defaultView();
-        System.out.print(taskList.size());
+        System.out.print("Task Size: " + taskList.size() + "\n");
         for(TaskEvent t : taskList) {
         tasks.add(t);
         } 
