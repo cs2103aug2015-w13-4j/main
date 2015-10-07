@@ -19,7 +19,7 @@ public class TaskDate {
 		String[] split = date.split("/");
 		myDay = Integer.parseInt(split[0]);
 		myMonth = Integer.parseInt(split[1]);
-		myDay = Integer.parseInt(split[2]);
+		myYear = Integer.parseInt(split[2]);
 	}
 	
 	public TaskDate() {
