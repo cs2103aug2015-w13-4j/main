@@ -37,8 +37,9 @@ public class Storage {
 	}
 
 	public ArrayList<TaskEvent> load() {
-		//loadToBuffer();
-		System.out.println("size "+taskEventListBuf);
+		System.out.println("load is called");
+		reloadBuffer();
+		System.out.println("size " + taskEventListBuf);
 		return taskEventListBuf;
 	}
 
@@ -66,7 +67,7 @@ public class Storage {
 		} catch (Exception e) {
 			return false;
 		}
-		return loadToBuffer();
+		return reloadBuffer();
 	}
 
 	public boolean delete(Integer taskID) {
@@ -75,20 +76,34 @@ public class Storage {
 		} catch (Exception e) {
 			return false;
 		}
-		return loadToBuffer();
+		return reloadBuffer();
 	}
 
 	public void setSavingDirectory(String dir) {
 		configFile.setSavingDirectory(dir);
 	}
 
-	private boolean loadToBuffer() {
+	private boolean reloadBuffer() {
 		try {
+			taskEventListBuf = new ArrayList<TaskEvent>();
 			ArrayList<String> strings = savingFile.loadTasks();
-			for (String str: strings) {
-				TaskEvent task = new TaskEvent(str.split(TOKEN));
+			System.out.println("loaded from savingFile: " + strings);
+			for (String taskStr: strings) {
+				String[] fieldAndContent = taskStr.split(Storage.TOKEN);
+				String[] justContent = new String[5];
+				justContent[0] = fieldAndContent[0];
+				for (int i = 1; i < 5; i++) {
+					String content = (fieldAndContent[i].split(":"))[1];
+					justContent[i] = content;
+				}
+				for (int i = 0; i < 5; i++) {
+					System.out.println("   " + i + "   " + justContent[i]);
+				}
+				TaskEvent task = new TaskEvent(justContent);
 				taskEventListBuf.add(task);
+				//System.out.println("   str: " + str);
 			}
+			System.out.println("after creating taskevents: " + taskEventListBuf);
 		} catch (Exception e) {
 			return false;
 		}
