@@ -52,6 +52,7 @@ public class Main extends Application{
     Button button;
     Button confirmBtn;
     TableView<TaskEvent> eventTable;
+    Launch launch;
     
     public static void main(String[] args) {
         launch(args);
@@ -66,8 +67,8 @@ public class Main extends Application{
             Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
-            Launch logic = new Launch();
-            logic.loadFile();
+            launch = new Launch();
+            launch.loadFile();
         
             window.setOnCloseRequest(e->  {
             e.consume();    
@@ -153,9 +154,8 @@ public class Main extends Application{
     }
     
     public void passToLogic(String input) {
-        Operation op = new Operation();
         
-        String output = op.processOperation(input); 
+        String output = launch.command(input); 
         AlertBox.display(TITLE_ALERT, output);
         
         }    
