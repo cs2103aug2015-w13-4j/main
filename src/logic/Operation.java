@@ -31,7 +31,7 @@ public class Operation {
 		switch(command){
 		case ADD_TASK:
 			
-			action.addTask(content.getDescription(), content.getDate(),getPriority(content.getPriority()),content.getDescription());
+			action.addTask(content.getName(), content.getDate(),getPriority(content.getPriority()),content.getDescription());
 
 			//action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
 			return true;
