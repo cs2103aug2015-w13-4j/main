@@ -7,6 +7,7 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import logic.Display;
 import logic.Operation;
+import logic.Launch;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,6 +66,9 @@ public class Main extends Application{
             Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
+            Launch logic = new Launch();
+            logic.loadFile();
+        
             window.setOnCloseRequest(e->  {
             e.consume();    
             exitProgram(); 
