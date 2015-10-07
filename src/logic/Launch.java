@@ -6,7 +6,7 @@ public class Launch {
 	static Storage storage;
 	static Display display;
 	
-	private void createObjects(){
+	public static void createObjects(){
 		storage = new Storage();
 		display = new Display();
 	}
