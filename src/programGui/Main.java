@@ -145,7 +145,7 @@ public class Main extends Application{
         Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> taskList = display.defaultView();
-        System.out.print(taskList.size());
+        System.out.print("Task Size: " + taskList.size() + "\n");
         for(TaskEvent t : taskList) {
         tasks.add(t);
         } 
