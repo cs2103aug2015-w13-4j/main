@@ -105,7 +105,7 @@ public class Main extends Application{
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
             
             //Task Description Column
-            TableColumn<TaskEvent,String> descColumn = new TableColumn<>("Task Desc");
+            TableColumn<TaskEvent,String> descColumn = new TableColumn<>("Task Description");
             descColumn.setMinWidth(250);
             descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             
