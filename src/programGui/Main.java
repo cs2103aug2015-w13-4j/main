@@ -88,15 +88,15 @@ public class Main extends Application{
                 if(e.getCode().equals(KeyCode.ENTER)) {
                     String input = instrInput.getText();
                     instrInput.setText(CLEAR_FIELD);
-                    //instrInput.setPromptText(PROMPT_TEXT);
                     passToLogic(input);
+                    eventTable.setItems(getTasks());
                 }
             });
 
                
             //Id Column
-            TableColumn<TaskEvent,Integer> idColumn = new TableColumn<>("Task ID");
-            idColumn.setMinWidth(50);
+            TableColumn<TaskEvent,Integer> idColumn = new TableColumn<>("ID");
+            idColumn.setMinWidth(5);
             idColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
             
             //Task Name Column
@@ -110,12 +110,12 @@ public class Main extends Application{
             descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
             
             //Priority Column
-            TableColumn<TaskEvent,Integer> priorityColumn = new TableColumn<>("Task Priority");
-            priorityColumn.setMinWidth(50);
+            TableColumn<TaskEvent,Integer> priorityColumn = new TableColumn<>("Priority");
+            priorityColumn.setMinWidth(20);
             priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
             
             //Date Column
-            TableColumn<TaskEvent, TaskDate> dateColumn = new TableColumn<>("Task Date");
+            TableColumn<TaskEvent, TaskDate> dateColumn = new TableColumn<>("Date");
             dateColumn.setMinWidth(100);
             dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
             
@@ -149,7 +149,7 @@ public class Main extends Application{
         for(TaskEvent t : taskList) {
         tasks.add(t);
         } 
-        //tasks.add(new TaskEvent(1,"test", new TaskDate() , 2 , "test" ));
+        //tasks.add(new TaskEvent(1,"test", new TaskDate(2015,10,10) , 2 , "test" ));
         return tasks;
     }
     
