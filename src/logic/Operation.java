@@ -31,13 +31,19 @@ public class Operation {
 		switch(command){
 		case ADD_TASK:
 			
-			action.addTask(content.getName(), content.getDate(),getPriority(content.getPriority()),content.getDescription());
+			action.addTask(content.getName(), content.getStartDate(),getPriority(content.getPriority()));
 
 			//action.addTask(content.get(0)+ content.get(1)+content.get(2)+content.get(3));
 			return true;
 		case EDIT_TASK:		
 			action.editTask(content.getID(),content.getField().toString(),getEditContent(content));
 			return true;
+		case DELETE_TASK:
+			
+		case FINISH_TASK:
+		case SEARCH_TASK:
+		case UNDO:
+		case DIRECTORY:
 		}
 		return false;
 	}
@@ -56,16 +62,20 @@ public class Operation {
 		
 	}
 	private String getEditContent(CommandElements content){
+		//		NAME, START_DATE, END_DATE, PRIORITY
+
 		switch(content.getField()){
-		case DATE:
-			TaskDate date = content.getDate();
-			return date.toString();
-		case DESCRIPTION:
-			return content.getDescription();
+		case NAME:
+			return content.getName();
+		case START_DATE :
+			TaskDate startDate = content.getStartDate();
+			return startDate.toString();
+		case END_DATE:
+			TaskDate endDate = content.getEndDate();
+			return endDate.toString();
 		case PRIORITY:
 			return content.getPriority().toString();
-		case NAME:
-			return "";
+		
 		}
 		return "";
 		
