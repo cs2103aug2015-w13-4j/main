@@ -3,63 +3,90 @@ package utilities;
 public class CommandElements {
 	private Command_Type type;
 	private String name;
-	private String description;
-	private TaskDate date;	
+	private TaskDate date1;	
+	private TaskDate date2;
 	private Command_Priority priority;
 	private Command_Field field;
-	private int id;
+	private int object;
 	
-	public CommandElements(Command_Type cmd, String nm, TaskDate dt, Command_Priority prio, String des){
+	public CommandElements(Command_Type cmd, String nm, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
-		this.date = dt;
-		this.description = des;
 		this.priority = prio;
 	}
 	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, String str){
+	public CommandElements(Command_Type cmd, String nm, TaskDate dt, Command_Priority prio){
 		this.type = cmd;
-		this.id = o;
+		this.name = nm;
+		this.date2 = dt;
+		this.priority = prio;
+	}
+	
+	public CommandElements(Command_Type cmd, String nm, TaskDate dt1, TaskDate dt2, Command_Priority prio){
+		this.type = cmd;
+		this.name = nm;
+		this.date1 = dt1;
+		this.date2 = dt2;
+		this.priority = prio;
+	}
+	
+	public CommandElements(Command_Type cmd, int o, Command_Field fld, String nm){
+		this.type = cmd;
+		this.object = o;
 		this.field = fld;
-		if (field == Command_Field.DESCRIPTION) {
-			this.description = str;
-		} else {
-			this.name = str;
-		}
+		this.name = nm;
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
 		this.type = cmd;
-		this.id = o;
+		this.object = o;
 		this.field = fld;
-		this.date = dt;
+		if (field == Command_Field.START_DATE) {
+			this.date1 = dt;
+		} else {
+			this.date2 = dt;
+		}
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
 		this.type = cmd;
-		this.id = o;
+		this.object = o;
 		this.field = fld;
 		this.priority = prio;
 	}
 	
+	public CommandElements(Command_Type cmd, int o) {
+		this.type = cmd;
+		this.object = o;
+	}
+	
+	public CommandElements(Command_Type cmd) {
+		this.type = cmd;
+	}
+	
+	public CommandElements(Command_Type cmd, String directory) {
+		this.type = cmd;
+		this.name = directory;
+	}
+
 	public Command_Type getType(){
 		return type;
 	}
 	
-	public int getID() {
-		return id;
-	}
-	
-	public String getDescription(){
-		return description;
+	public int getObject() {
+		return object;
 	}
 	
 	public String getName(){
 		return name;
 	}
 	
-	public TaskDate getDate() {
-		return date;
+	public TaskDate getStartDate() {
+		return date1;
+	}
+	
+	public TaskDate getEndDate() {
+		return date2;
 	}
 	
 	public Command_Priority getPriority() {
