@@ -7,21 +7,22 @@ public class CommandElements {
 	private TaskDate date2;
 	private Command_Priority priority;
 	private Command_Field field;
-	private int object;
-	
+	private int ID;
+	/*ADD*/
+	//normal task
 	public CommandElements(Command_Type cmd, String nm, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
 		this.priority = prio;
 	}
-	
+	//deadline
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
 		this.date2 = dt;
 		this.priority = prio;
 	}
-	
+	//event 
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt1, TaskDate dt2, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
@@ -30,16 +31,18 @@ public class CommandElements {
 		this.priority = prio;
 	}
 	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, String nm){
+	/*EDIT*/
+	//name
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, String nm){
 		this.type = cmd;
-		this.object = o;
+		this.ID = id;
 		this.field = fld;
 		this.name = nm;
 	}
-	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
+	//date
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, TaskDate dt){
 		this.type = cmd;
-		this.object = o;
+		this.ID = id;
 		this.field = fld;
 		if (field == Command_Field.START_DATE) {
 			this.date1 = dt;
@@ -47,34 +50,38 @@ public class CommandElements {
 			this.date2 = dt;
 		}
 	}
-	
-	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
+	//priority
+	public CommandElements(Command_Type cmd, int id, Command_Field fld, Command_Priority prio){
 		this.type = cmd;
-		this.object = o;
+		this.ID = id;
 		this.field = fld;
 		this.priority = prio;
 	}
 	
-	public CommandElements(Command_Type cmd, int o) {
+	/*DELETE*/
+	public CommandElements(Command_Type cmd, int id) {
 		this.type = cmd;
-		this.object = o;
+		this.ID = id;
 	}
 	
+	/*UNDO*/
 	public CommandElements(Command_Type cmd) {
 		this.type = cmd;
 	}
 	
+	/*DIRECTORY*/
 	public CommandElements(Command_Type cmd, String directory) {
 		this.type = cmd;
 		this.name = directory;
 	}
-
+	
+	/*GET methods*/
 	public Command_Type getType(){
 		return type;
 	}
 	
-	public int getObject() {
-		return object;
+	public int getID() {
+		return ID;
 	}
 	
 	public String getName(){
