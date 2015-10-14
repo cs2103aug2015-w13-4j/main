@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.*;
 
+import static java.util.logging.Level.WARNING;
+
 public class Storage {
 	protected static final String CONFIG_PATH = "config.txt";
 	protected static final String TOKEN = "&&";
@@ -28,7 +30,7 @@ public class Storage {
 			configFile = new FileManager(CONFIG_PATH);
 			savingPath = configFile.getSavingPath();
 		} catch (IOException e) {
-			logger.log(Level.WARNING, "error at getting config info", e);
+			logger.log(WARNING, "error at getting config info", e);
 		}
 		logger.log(Level.INFO, "end of getting config info, starting getting backup file");
 		//System.out.print("savingPath: " + savingPath);
@@ -36,9 +38,9 @@ public class Storage {
 			savingFile = new FileManager(savingPath);
 			taskIDCounter = savingFile.getTaskIDCounter();
 		} catch (NumberFormatException nfe) {
-			logger.log(Level.WARNING, "task ID format incorrect, check file", nfe);
-		} catch (IOException e) {
-			logger.log(Level.WARNING, "error at reading backup file", e);
+			logger.log(WARNING, "task ID format incorrect, check file", nfe);
+		} catch (IOException ioe) {
+			logger.log(WARNING, "error at reading backup file", ioe);
 		}
 		taskEventListBuf = new ArrayList<TaskEvent>();
 	}
@@ -51,7 +53,7 @@ public class Storage {
 	public boolean addTask(String name, TaskDate date, int prio, String des) {
 		assert Validation.isValidString(name);
 		assert Validation.isValidInteger(prio);
-		assert Validation.isValidInteger(des);
+		assert Validation.isValidString(des);
 
 		String dateStr = date.toString();
 		String prioStr = String.valueOf(prio);
@@ -73,7 +75,7 @@ public class Storage {
 	}
 
 	public boolean editTask(int taskID, String field, String newContent) {
-		assert Validation.isValidString(taskID);
+		assert Validation.isValidInteger(taskID);
 		assert Validation.isValidTaskField(field);
 		assert Validation.isValidString(newContent);
 		try {

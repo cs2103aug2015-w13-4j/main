@@ -1,19 +1,20 @@
-class Validation {
-    static boolean isValidString(String string) {
+package utilities;
+public class Validation {
+    public static boolean isValidString(String string) {
         if (string == null) {
             return false;
         }
         return true;
     }
 
-    static boolean isValidInteger(Integer i) {
+    public static boolean isValidInteger(Integer i) {
         if (i < 0) {
             return false;
         }
         return true;
     }
 
-    static boolean isValidTaskField(String field) {
+    public static boolean isValidTaskField(String field) {
         if (field.equalsIgnoreCase("name") ||
             field.equalsIgnoreCase("date") ||
             field.equalsIgnoreCase("priority")) {
