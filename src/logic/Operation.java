@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import database.Storage;
 import utilities.CommandElements;
 import utilities.Command_Priority;
@@ -10,20 +13,26 @@ import logic.Launch;
 
 public class Operation {
 
+	private static Logger logger;
 	public Operation() {
+		logger = Logger.getLogger("Operation");
 	}
 
 	/*
 	 * Main method to process the user input
 	 */
 	public String processOperation(String input) {
+		logger.log(Level.INFO, "input recieved");
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = CommandParser.ProcessInput(input);
-
+		logger.log(Level.INFO, "input processed");
 		try {
+			logger.log(Level.INFO, "performing command");
+				
 			performCommand(processed.getType(), processed);
 		} catch (Exception e) {
+			logger.log(Level.INFO, "invalid input");
 			return message.error(input);
 		}
 		return message.operation(processed.getType(), processed.getName());
@@ -44,22 +53,33 @@ public class Operation {
 		boolean isSuccessful;
 		switch (command) {
 		case ADD_TASK:
+			logger.log(Level.INFO, "command is add");			
 			isSuccessful = action.addTask(content.getName(), content.getStartDate(), 1,
 					getPriority(content.getPriority()));
 			return isSuccessful;
 		case EDIT_TASK:
+			logger.log(Level.INFO, "command is edit");
 			isSuccessful = action.editTask(content.getID(), content.getField().toString(), getEditContent(content));
 			return isSuccessful;
 		case DELETE_TASK:
+			logger.log(Level.INFO, "command is delete");
 
 		case FINISH_TASK:
+			logger.log(Level.INFO, "command is completed");
+
 
 		case SEARCH_TASK:
+			logger.log(Level.INFO, "command is search");
+
 			isSuccessful = search.searchWord(action.load(), content.getName());
 			return isSuccessful;
 		case UNDO:
+			logger.log(Level.INFO, "command is undo");
 
 		case DIRECTORY:
+			logger.log(Level.INFO, "command is change directory");
+		default:
+			//throw exception
 		}
 		return false;
 	}
@@ -87,16 +107,23 @@ public class Operation {
 	 * For the edit command. Get the field which user want to edit
 	 */
 	private String getEditContent(CommandElements content) {
+		logger.log(Level.INFO, "finding edit command");
+		
 		switch (content.getField()) {
 		case NAME:
+			logger.log(Level.INFO, "edit name");
 			return content.getName();
 		case START_DATE:
+			logger.log(Level.INFO, "edit start date");
+			
 			TaskDate startDate = content.getStartDate();
 			return startDate.toString();
 		case END_DATE:
+			logger.log(Level.INFO, "edit end date");
 			TaskDate endDate = content.getEndDate();
 			return endDate.toString();
 		case PRIORITY:
+			logger.log(Level.INFO, "edit priority");
 			return content.getPriority().toString();
 		}
 		return "";
