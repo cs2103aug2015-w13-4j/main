@@ -7,34 +7,42 @@ import logic.Launch;
 import utilities.TaskEvent;
 
 public class Launch {
-	static Storage storage;
-	static Display display;
-	static Operation op;
-	static Search search;
-	static ArrayList<TaskEvent> tasks;
+	private static Storage storage;
+	private static Display display;
+	private static Operation op;
+	private static Search search;
+	private static ArrayList<TaskEvent> tasks;
+	private static Launch launch;
+	
 	private static void createObjects(){
 		storage = new Storage();
 		display = new Display();
 		op = new Operation();
 		search = new Search();
 		tasks = storage.load();
+		launch = new Launch();
+		
 	}
-	public void newFile(){
-		createObjects();
-	}
-	public void loadFile(){
-		createObjects();
-	}
-	
-	/*getting obejcts*/
+
+	/*getting objects*/
 	public static Storage getStorage(){
 		return storage;
+	}
+	public Operation getOperation(){
+		return op;
 	}
 	public static  Display getDisplay(){
 		return display;
 	}
 	public static Search getSearch(){
 		return search;
+	}
+	public static Launch getInstance(){
+		
+		if(launch == null){
+			createObjects();
+		}	
+		return launch;
 	}
 	
 	/*UI main task view*/
