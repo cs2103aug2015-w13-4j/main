@@ -10,60 +10,69 @@ import logic.Launch;
 
 public class Operation {
 
-	public Operation(){
+	public Operation() {
 	}
+
 	/*
 	 * Main method to process the user input
 	 */
-	public String processOperation(String input){
-		//get the commandElements from parser
+	public String processOperation(String input) {
+		// get the commandElements from parser
 		Display message = Launch.getDisplay();
-		
-		CommandElements processed= CommandParser.ProcessInput(input);
-		
-		if(performCommand(processed.getType(),processed)){
-			return message.operation(processed.getType(), processed.getName());	
-		} else{
+		CommandElements processed = CommandParser.ProcessInput(input);
+
+		try {
+			performCommand(processed.getType(), processed);
+		} catch (Exception e) {
 			return message.error(input);
 		}
+		return message.operation(processed.getType(), processed.getName());
+	
+
 	}
+
 	/**
 	 * perform the command
+	 * 
 	 * @param command
 	 * @param content
 	 * @return
 	 */
-	private boolean performCommand(Command_Type command,CommandElements content){
+	private boolean performCommand(Command_Type command, CommandElements content) {
 		Storage action = Launch.getStorage();
 		Search search = Launch.getSearch();
 		boolean isSuccessful;
-		switch(command){
+		switch (command) {
 		case ADD_TASK:
-			isSuccessful = action.addTask(content.getName(), content.getStartDate(),1,getPriority(content.getPriority()));
+			isSuccessful = action.addTask(content.getName(), content.getStartDate(), 1,
+					getPriority(content.getPriority()));
 			return isSuccessful;
-		case EDIT_TASK:		
-			isSuccessful = action.editTask(content.getID(),content.getField().toString(),getEditContent(content));
+		case EDIT_TASK:
+			isSuccessful = action.editTask(content.getID(), content.getField().toString(), getEditContent(content));
 			return isSuccessful;
 		case DELETE_TASK:
-			
+
 		case FINISH_TASK:
-		
+
 		case SEARCH_TASK:
-			isSuccessful = search.searchWord(action.load(),content.getName());
+			isSuccessful = search.searchWord(action.load(), content.getName());
 			return isSuccessful;
 		case UNDO:
-		
+
 		case DIRECTORY:
 		}
 		return false;
 	}
+
 	/**
 	 * Converting Command_Priority to String
-	 * @param priority is the Command_Priority user input
+	 * 
+	 * @param priority
+	 *            is the Command_Priority user input
 	 * @return String equality of Command_Priority
 	 */
-	private String getPriority(Command_Priority priority){
-		switch(priority){
+	private String getPriority(Command_Priority priority) {
+		switch (priority) {
 		case HIGH:
 			return "high";
 		case MEDIUM:
@@ -71,16 +80,17 @@ public class Operation {
 		case LOW:
 			return "low";
 		}
-		return "";	
+		return "";
 	}
+
 	/*
 	 * For the edit command. Get the field which user want to edit
 	 */
-	private String getEditContent(CommandElements content){
-		switch(content.getField()){
+	private String getEditContent(CommandElements content) {
+		switch (content.getField()) {
 		case NAME:
 			return content.getName();
-		case START_DATE :
+		case START_DATE:
 			TaskDate startDate = content.getStartDate();
 			return startDate.toString();
 		case END_DATE:
