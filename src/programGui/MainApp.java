@@ -31,6 +31,7 @@ public class MainApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+	    assert primaryStage != null;
 		this.primaryStage = primaryStage;
 		initRoot();
 		initTaskView();
@@ -41,8 +42,7 @@ public class MainApp extends Application{
 		try { 
 		        FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(MainApp.class.getResource("Root.fxml"));
-				//Parent root = FXMLLoader.load(getClass().getResource("Root.fxml"));						
-				rootLayout = loader.load();
+				rootLayout = (BorderPane) loader.load();
 				primaryStage.setScene(new Scene(rootLayout,850,600));
 				primaryStage.setTitle(PROGRAM_TITLE);
 				primaryStage.show();
@@ -53,9 +53,8 @@ public class MainApp extends Application{
 	
 	private void initTaskView() throws IOException {
 		try { 
-		    FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("TaskDisplay.fxml"));
-			taskDisplay = loader.load();
+		    FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("TaskDisplay.fxml"));
+			taskDisplay = (VBox) loader.load();
 			rootLayout.setCenter(taskDisplay);
 			
 		} catch (IOException E) {
@@ -67,7 +66,7 @@ public class MainApp extends Application{
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("InputView.fxml"));
-			inputView = loader.load();
+			inputView = (VBox) loader.load();
 			rootLayout.setBottom(inputView);
 		} catch (IOException E) {
 			System.out.print("Error initialising input view");

@@ -19,5 +19,15 @@ public class RootController {
     
 
     //Constructors
-    
+    public RootController() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Root.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        
+        try {
+            loader.load();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

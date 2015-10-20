@@ -28,25 +28,27 @@ public class Task extends HBox{
     
     public Task(TaskEvent task) {
         loadFxml();
-        initFxmlFields(1,task.getTaskName(),task.getDate().toString());
+        initFxmlFields(1,task.getTaskName(),task.getStartDate().toString());
     }
     
     public Task() {
         loadFxml();
-        initFxmlFields(1,"haha","lol");
+        initFxmlFields(1,"h","l");
     }
     
     public void initFxmlFields (int idx, String taskName , String date ) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.date.setText(date);
-
     }
+    
     private void loadFxml() {
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/programGui/Task.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Task.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
             loader.load();
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
