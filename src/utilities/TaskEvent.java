@@ -1,19 +1,22 @@
 package utilities;
 
 public class TaskEvent {
-
+	
     protected int taskID;
     protected String taskName;
-    protected TaskDate date;
-    protected int priority;
-    protected String description;
-
-    public TaskEvent(int taskID, String name, TaskDate date, int prio, String des) {
+    protected TaskDate startDate;
+    protected TaskDate endDate;
+    protected String priority;
+  //startDate & endDate - events
+  //endDate - deadlines
+  //no date - floating
+    
+    public TaskEvent(int taskID, String name, TaskDate startDate, TaskDate endDate, String prio) {
         this.taskID = taskID;
         this.taskName = name;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.priority = prio;
-        this.description = des;
     }
 
     public TaskEvent(String[] split) {
@@ -27,25 +30,17 @@ public class TaskEvent {
 	public int getTaskID() {
 		return taskID;
     }
-
     public String getTaskName() {
 		return taskName;
     }
-
-    public int getPriority() {
+    public TaskDate getStartDate() {
+		return startDate;
+    }
+    public TaskDate getEndDate(){
+    	return endDate;
+    }
+    public String getPriority() {
 		return priority;
-    }
-
-    public TaskDate getDate() {
-		return date;
-    }
-    
-    public String getDescription() {
-        return description;
-    }
-    
-    public int getPriorirty() {
-        return priority;
     }
 
     @Override
@@ -53,9 +48,17 @@ public class TaskEvent {
 		String str = "";
 		str += ":taskID:" + taskID;
 		str += ":taskName:" + taskName;
-		str += ":priority:" + priority;
-		str += ":description:" + description;
-		str += ":date:" + date.toString();
+		str += ":priority:" + priority;	
+		if(endDate.equals("") && startDate.equals("")){
+			//floating
+			//str += ":date:" + startDate.toString();
+		}else if(startDate.equals("")){ 
+			//deadlines
+			str+=":date:" + endDate.toString();
+		} else{
+			//events
+			str+=":date:" + startDate.toString() + "to" + endDate.toString();
+		}
 		return str;
     }
 }
