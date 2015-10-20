@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -40,7 +42,7 @@ public class Main extends Application{
     private static final String CLEAR_FIELD = "";
     
     //Prompt Text
-    private static final String PROMPT_TEXT = "instr ; taskname ; date ; priority ; task description";
+    private static final String PROMPT_TEXT = "Enter format: taskname ; date ; priority ; task description";
    
     //Program Title
     private static final String PROGRAM_TITLE = "PIXEList";
@@ -64,16 +66,17 @@ public class Main extends Application{
     Button confirmBtn;
     TableView<TaskEvent> eventTable;
     Launch launch;
+    Label feedbackLabel;
+    String input;
     
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         launch(args);
-    }
+    } */
    
     @SuppressWarnings("unchecked")
     @Override
     public void start(Stage primaryStage) throws Exception {
             window = primaryStage;
-            
             BorderPane root = new BorderPane();
             Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -97,12 +100,20 @@ public class Main extends Application{
             instrInput.setPromptText(PROMPT_TEXT);
             instrInput.setOnKeyPressed(e-> { 
                 if(e.getCode().equals(KeyCode.ENTER)) {
-                    String input = instrInput.getText();
+                    input = instrInput.getText();
                     instrInput.setText(CLEAR_FIELD);
                     passToLogic(input);
                     eventTable.setItems(getTasks());
                 }
             });
+            
+            feedbackLabel = new Label();
+            feedbackLabel.setOpacity(20);
+            feedbackLabel.setText("Do CS2010 has been marked as completed. Task shifted to archives.");
+            
+            
+            VBox vbox = new VBox(10);
+            vbox.getChildren().addAll(feedbackLabel,instrInput);
 
                
             //Id Column
@@ -139,7 +150,7 @@ public class Main extends Application{
             //Setting up of Border Pane
             root.setCenter(eventTable);
             //root.setTop(confirmBtn);
-            root.setBottom(instrInput);
+            root.setBottom(vbox);
             
         } 
  
@@ -155,12 +166,14 @@ public class Main extends Application{
     public ObservableList<TaskEvent> getTasks() {
         Display display = new Display();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> taskList = display.defaultView();
+       /* ArrayList<TaskEvent> taskList = display.defaultView();
         
         for(TaskEvent t : taskList) {
         	tasks.add(t);
-        } 
-
+        } */
+        tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),1,"Complete progress report"));
+        //tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),1,"Complete problem set 4."));
+        tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),1,"Complete developer guide"));
         return tasks;
     }
     
@@ -170,7 +183,8 @@ public class Main extends Application{
      * 			is what the user has entered in the text field.
      */  
     public void passToLogic(String input) {      
-        String output = launch.command(input); 
-        AlertBox.display(TITLE_ALERT, output);
+        String output = launch.command(input);
+        //feedbackLabel.setText(launch.command(input));
+        //AlertBox.display(TITLE_ALERT, output);
         }    
 }

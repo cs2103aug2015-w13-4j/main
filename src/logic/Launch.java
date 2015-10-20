@@ -7,34 +7,50 @@ import logic.Launch;
 import utilities.TaskEvent;
 
 public class Launch {
-	static Storage storage;
-	static Display display;
-	static Operation op;
+	private static Storage storage;
+	private static Display display;
+	private static Operation op;
+	private static Search search;
+	private static ArrayList<TaskEvent> tasks;
+	private static Launch launch;
 	
-	public static void createObjects(){
+	private static void createObjects(){
 		storage = new Storage();
 		display = new Display();
 		op = new Operation();
-	}
-	public void newFile(){
-		createObjects();
+		search = new Search();
+		tasks = storage.load();
+		launch = new Launch();
 		
 	}
-	public void loadFile(){
-		createObjects();
-	}
-	public void changeDirectory(String oldDirectory, String newDirectory){
-		
-	}
+
+	/*getting objects*/
 	public static Storage getStorage(){
 		return storage;
+	}
+	public Operation getOperation(){
+		return op;
 	}
 	public static  Display getDisplay(){
 		return display;
 	}
-	public ArrayList<TaskEvent> updateView(){
-		return display.defaultView();
+	public static Search getSearch(){
+		return search;
 	}
+	public static Launch getInstance(){
+		
+		if(launch == null){
+			createObjects();
+		}	
+		return launch;
+	}
+	
+	/*UI main task view*/
+	public ArrayList<TaskEvent> updateView(){
+		tasks = display.taskView();
+		return tasks;
+	}
+	/*main method UI calls*/
 	public String command(String input){
 		return op.processOperation(input);
 	}
