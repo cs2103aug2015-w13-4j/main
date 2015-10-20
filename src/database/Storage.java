@@ -53,29 +53,27 @@ public class Storage {
 	public boolean addTask(
 			String name, TaskDate startDate, TaskDate endDate, String prio) {
 
-		String dateStr = "start:" + startDate.toString() + TOKEN
-				+ "end:" + endDate.toString();
-		
+		String dateStr = "startDate:" + startDate.toString() + TOKEN
+				+ "endDate:" + endDate.toString();
+		//name:n&&startDate:d1&&endDate:d2&&priority:1
 		String taskInfo = "name:" + name + TOKEN
-				+ "date:" + dateStr + TOKEN
-				+ "priority:" + TaskEvent.priorityToIntString(prio) + TOKEN;
+				+ dateStr + TOKEN
+				+ "priority:" + TaskEvent.priorityToIntString(prio);
 		try {
 			savingFile.setTaskIDCounter(++taskIDCounter);
+			//1$$name:n&&start:d1&&end:d2&&priority:1
 			savingFile.addTask(taskIDCounter, taskInfo);
 		} catch (Exception e) {
 			return false;
 		}
 		taskEventListBuf.add(new TaskEvent(taskIDCounter, name, startDate, endDate, prio));
-		for (TaskEvent task: taskEventListBuf) {
+		/*for (TaskEvent task: taskEventListBuf) {
 			System.out.println("task: " + task.toString());
-		}
+		}*/
 		return true;
 	}
 
 	public boolean editTask(int taskID, String field, String newContent) {
-		assert Validation.isValidInteger(taskID);
-		assert Validation.isValidTaskField(field);
-		assert Validation.isValidString(newContent);
 		try {
 			savingFile.editTask(taskID, field, newContent);
 		} catch (Exception e) {
@@ -97,8 +95,13 @@ public class Storage {
 	public void setSavingDirectory(String dir) {
 		configFile.setSavingDirectory(dir);
 	}
+	
+	public void clearSavingFile() {
+		savingFile.clearFile();
+	}
 
 	private boolean reloadBuffer() {
+		//1$$name:n&&start:d1&&end:d2&&priority:1
 		try {
 			taskEventListBuf = new ArrayList<TaskEvent>();
 			ArrayList<String> strings = savingFile.loadTasks();
