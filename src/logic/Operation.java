@@ -52,7 +52,7 @@ public class Operation {
 		switch (command) {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
-			isSuccessful = action.addTask(content.getName(), content.getStartDate(), 1, getPriority(content.getPriority()));
+			isSuccessful = action.addTask(content.getName(), content.getEndDate(), 1, getPriority(content.getPriority()));
 			return isSuccessful;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
