@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import logic.Launch;
-
+import programGui.TaskDisplayController;
 public class InputViewController {
     
     @FXML
@@ -15,9 +15,11 @@ public class InputViewController {
     private Label feedBack;
     
     public void handleKeyPress(KeyEvent event) {
+        TaskDisplayController taskDisplay = new TaskDisplayController();
         if(event.getCode() == KeyCode.ENTER) {
-            handleUserInput();
+           // handleUserInput();
             userInput.setText("");
+            taskDisplay.updateTaskDisplay();
         }
     }
     

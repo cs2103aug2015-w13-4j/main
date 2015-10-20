@@ -1,11 +1,14 @@
 package programGui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import utilities.TaskDate;
 import utilities.TaskEvent;
+
+
 public class Task extends HBox{
 
     @FXML
@@ -24,13 +27,29 @@ public class Task extends HBox{
     
     
     public Task(TaskEvent task) {
-        initFxmlFields(task.getTaskID(),task.getTaskName(),task.getDate().toString());
+        loadFxml();
+        initFxmlFields(1,task.getTaskName(),task.getDate().toString());
     }
     
-    public void initFxmlFields (int index, String taskName , String date ) {
-        this.index.setText(index + STRING_EMPTY);
+    public Task() {
+        loadFxml();
+        initFxmlFields(1,"haha","lol");
+    }
+    
+    public void initFxmlFields (int idx, String taskName , String date ) {
+        this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.date.setText(date);
- 
+
+    }
+    private void loadFxml() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/programGui/Task.fxml"));
+            loader.load();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+    

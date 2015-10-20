@@ -27,10 +27,9 @@ public class Operation {
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = CommandParser.ProcessInput(input);
-		logger.log(Level.INFO, "input processed");
+		logger.log(Level.INFO, "input processed" + processed.getType());
 		if (performCommand(processed.getType(), processed)) {
-			logger.log(Level.INFO, "performing command");
-
+			logger.log(Level.INFO, "performing command" + processed.getType());
 			return message.operation(processed.getType(), processed.getName());
 		} else {
 			logger.log(Level.INFO, "invalid input");
@@ -52,11 +51,13 @@ public class Operation {
 		switch (command) {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
-			isSuccessful = action.addTask(content.getName(), content.getEndDate(), 1, getPriority(content.getPriority()));
+			isSuccessful = action.addTask(content.getName(), content.getStartDate(),content.getEndDate(), getPriority(content.getPriority()));
 			return isSuccessful;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
+			System.out.println("here");
 			isSuccessful = action.editTask(content.getID(), content.getField().toString(), getEditContent(content));
+			logger.log(Level.INFO, "success is " + isSuccessful);
 			return isSuccessful;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
