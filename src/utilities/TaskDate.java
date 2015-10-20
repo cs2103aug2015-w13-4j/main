@@ -54,6 +54,9 @@ public class TaskDate {
 		return myDay;
 	}
 	public String toString(){
+		if(myYear==-1){
+			return "";
+		}
 		return myDay + "/" + myMonth +"/" + myYear;
 	}
 	
