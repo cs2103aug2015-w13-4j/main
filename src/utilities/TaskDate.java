@@ -8,11 +8,6 @@ public class TaskDate {
 	//static int myYear;
 	int myYear, myDay, myMonth;
 
-	public TaskDate() {
-		myYear = 0;
-		myMonth = 0;
-		myDay = 0;
-	}
 	// constructor 
 	public TaskDate(int year, int month, int day) {
 		myYear = year;
@@ -32,10 +27,7 @@ public class TaskDate {
 		myMonth = Integer.parseInt(split[1]);
 		myYear = Integer.parseInt(split[2]);
 	}
-<<<<<<< HEAD
 
-=======
-	
 	//no date
 	//represent null
 	public TaskDate() {
@@ -44,7 +36,6 @@ public class TaskDate {
 		myDay = -1;
 	}	
 	
->>>>>>> origin/master
 	public void setYear(int year) {
 		myYear = year;
 	}
