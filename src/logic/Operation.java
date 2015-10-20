@@ -14,6 +14,7 @@ import logic.Launch;
 public class Operation {
 
 	private static Logger logger;
+
 	public Operation() {
 		logger = Logger.getLogger("Operation");
 	}
@@ -27,17 +28,14 @@ public class Operation {
 		Display message = Launch.getDisplay();
 		CommandElements processed = CommandParser.ProcessInput(input);
 		logger.log(Level.INFO, "input processed");
-		try {
+		if (performCommand(processed.getType(), processed)) {
 			logger.log(Level.INFO, "performing command");
-				
-			performCommand(processed.getType(), processed);
-		} catch (Exception e) {
+
+			return message.operation(processed.getType(), processed.getName());
+		} else {
 			logger.log(Level.INFO, "invalid input");
 			return message.error(input);
 		}
-		return message.operation(processed.getType(), processed.getName());
-	
-
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class Operation {
 		boolean isSuccessful;
 		switch (command) {
 		case ADD_TASK:
-			logger.log(Level.INFO, "command is add");			
+			logger.log(Level.INFO, "command is add");
 			isSuccessful = action.addTask(content.getName(), content.getStartDate(), 1,
 					getPriority(content.getPriority()));
 			return isSuccessful;
@@ -67,7 +65,6 @@ public class Operation {
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
 
-
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
 
@@ -79,7 +76,7 @@ public class Operation {
 		case DIRECTORY:
 			logger.log(Level.INFO, "command is change directory");
 		default:
-			//throw exception
+			// throw exception
 		}
 		return false;
 	}
@@ -108,14 +105,14 @@ public class Operation {
 	 */
 	private String getEditContent(CommandElements content) {
 		logger.log(Level.INFO, "finding edit command");
-		
+
 		switch (content.getField()) {
 		case NAME:
 			logger.log(Level.INFO, "edit name");
 			return content.getName();
 		case START_DATE:
 			logger.log(Level.INFO, "edit start date");
-			
+
 			TaskDate startDate = content.getStartDate();
 			return startDate.toString();
 		case END_DATE:
