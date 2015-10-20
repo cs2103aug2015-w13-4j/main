@@ -49,10 +49,10 @@ public class TaskEvent {
 		str += ":taskID:" + taskID;
 		str += ":taskName:" + taskName;
 		str += ":priority:" + priority;	
-		if(endDate.equals("") && startDate.equals("")){
+		if(endDate.getYear()==0 && startDate.getYear()==0){
 			//floating
 			//str += ":date:" + startDate.toString();
-		}else if(startDate.equals("")){ 
+		}else if(startDate.getYear() == 0){ 
 			//deadlines
 			str+=":date:" + endDate.toString();
 		} else{
