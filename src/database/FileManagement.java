@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
+import utilities.Exceptions.TaskIDNotExistException;
+
 
 class FileManager {
 	private static final String SAVE_DIRECTORY = "user_tasks.txt";
@@ -72,7 +74,15 @@ class FileManager {
 		bw.newLine();
 		bw.flush();
 	}
-
+	/**
+	 * This methods edits the task info that stores as text on the disk. Note that only
+	 * int and Strings are passed, which means that you have to convert a TaskDate to
+	 * String before calling this method. 
+	 * @param taskID
+	 * @param field use TaskEvent.fieldToString() to convert
+	 * @param newContent convert date before pass
+	 * @throws Exception
+	 */
 	public void editTask(int taskID, String field, String newContent) throws Exception {
 		ArrayList<String> temp = new ArrayList<String>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -80,8 +90,12 @@ class FileManager {
 				return;
 			} else {
 				String line = br.readLine();
+				if (Integer.parseInt(line) < taskID) {
+					throw new TaskIDNotExistException("You don't have that many tasks!");
+				}
+				temp.add(line);
 				while ((line = br.readLine()) != null) {
-					if (!line.startsWith(String.valueOf(taskID))) {
+					if (!startsWith(line, String.valueOf(taskID))) {
 						temp.add(line);
 					} else {
 						int start = line.indexOf(field);
@@ -109,6 +123,14 @@ class FileManager {
 		} catch (IOException ioe) {
 			;
 		}
+	}
+
+	private boolean startsWith(String line, String start) {
+		int till = line.indexOf(Storage.TOKEN);
+		if (till != -1 && line.substring(0, till).equals(start)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void deleteTask(int taskID) throws Exception {

@@ -16,7 +16,7 @@ public class FileManagementTest {
 
 	private BufferedReader br;
 	
-	@Test
+	//@Test
 	public void testAddTask() throws Exception {
 		FileManager fm = new FileManager(directory);
 		fm.clearFile();
@@ -26,7 +26,7 @@ public class FileManagementTest {
 		assertEquals("1&&name:name1&&date:date1&&priority:priority1&&description:des1", str);
 	}
 
-	@Test
+	//@Test
 	public void testEditTask() throws Exception {
 		FileManager fm = new FileManager(directory);
 		fm.clearFile();
@@ -39,7 +39,7 @@ public class FileManagementTest {
 		assertEquals("3&&name:name3&&date:date123&&priority:priority3&&description:des3",br.readLine());
 	}
 
-	@Test
+	//@Test
 	public void testDeleteTask() throws Exception {
 		FileManager fm = new FileManager(directory);
 		fm.clearFile();
