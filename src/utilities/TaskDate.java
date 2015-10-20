@@ -3,58 +3,63 @@ package utilities;
 import java.util.ArrayList;
 
 public class TaskDate {
-	
+
 	String myDate;
 	//static int myYear;
 	int myYear, myDay, myMonth;
-	
+
+	public TaskDate() {
+		myYear = 0;
+		myMonth = 0;
+		myDay = 0;
+	}
 	// constructor 
 	public TaskDate(int year, int month, int day) {
 		myYear = year;
 		myMonth = month;
 		myDay = day;
 	}
-	
+
 	public TaskDate(String date) {
+		if (date == "") {
+			myYear = 0;
+			myMonth = 0;
+			myDay = 0;
+			return;
+		}
 		String[] split = date.split("/");
 		myDay = Integer.parseInt(split[0]);
 		myMonth = Integer.parseInt(split[1]);
 		myYear = Integer.parseInt(split[2]);
 	}
-	
-	public TaskDate() {
-		myYear = 0;
-		myMonth = 0;
-		myDay = 0;
-	}	
-	
+
 	public void setYear(int year) {
 		myYear = year;
 	}
-	
+
 	public void setMonth(int month) {
 		myMonth = month;
 	}
-	
+
 	public void setDay(int day) {
 		myDay = day;
 	}
-	
+
 	public int getYear() {
 		return myYear;
 	}
-	
+
 	public int getMonth() {
 		return myMonth;
 	}
-	
+
 	public int getDay() {
 		return myDay;
 	}
 	public String toString(){
 		return myDay + "/" + myMonth +"/" + myYear;
 	}
-	
+
 	public String printDate() {
 		if (myDay < 10 && myMonth < 10) {
 			return "0" + Integer.toString(myDay) + "/" + "0" + Integer.toString(myMonth) + "/" + Integer.toString(myYear);
@@ -66,7 +71,7 @@ public class TaskDate {
 			return Integer.toString(myDay) + "/" + Integer.toString(myMonth) + "/" + Integer.toString(myYear);
 		}
 	}
-	
+
 	public ArrayList<String> getMultipleDate() {
 		ArrayList<String> date_formats = new ArrayList<String>();
 		String format_1 = String.valueOf(myDay)+String.valueOf(myMonth)+String.valueOf(myYear);
@@ -111,7 +116,7 @@ public class TaskDate {
 		date_formats.add(format_20);
 		return date_formats;
 	}
-	
+
 	private String formatChange(String date) {
 		if (date.length() == 2) {
 			return date;

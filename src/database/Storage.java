@@ -50,24 +50,22 @@ public class Storage {
 		return taskEventListBuf;
 	}
 
-	public boolean addTask(String name, TaskDate date, int prio, String des) {
-		assert Validation.isValidString(name);
-		assert Validation.isValidInteger(prio);
-		assert Validation.isValidString(des);
+	public boolean addTask(
+			String name, TaskDate startDate, TaskDate endDate, String prio) {
 
-		String dateStr = date.toString();
-		String prioStr = String.valueOf(prio);
+		String dateStr = "start:" + startDate.toString() + TOKEN
+				+ "end:" + endDate.toString();
+		
 		String taskInfo = "name:" + name + TOKEN
-						+ "date:" + dateStr + TOKEN
-						+ "priority:" + prioStr + TOKEN
-						+ "description:" + des;
+				+ "date:" + dateStr + TOKEN
+				+ "priority:" + TaskEvent.priorityToIntString(prio) + TOKEN;
 		try {
 			savingFile.setTaskIDCounter(++taskIDCounter);
 			savingFile.addTask(taskIDCounter, taskInfo);
 		} catch (Exception e) {
 			return false;
 		}
-		taskEventListBuf.add(new TaskEvent(taskIDCounter, name, date, prio, des));
+		taskEventListBuf.add(new TaskEvent(taskIDCounter, name, startDate, endDate, prio));
 		for (TaskEvent task: taskEventListBuf) {
 			System.out.println("task: " + task.toString());
 		}
