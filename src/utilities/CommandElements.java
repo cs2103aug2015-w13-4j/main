@@ -3,8 +3,8 @@ package utilities;
 public class CommandElements {
 	private Command_Type type;
 	private String name;
-	private TaskDate date1;	
-	private TaskDate date2;
+	private TaskDate date1;	//start date
+	private TaskDate date2; //end date
 	private Command_Priority priority;
 	private Command_Field field;
 	private int ID;
@@ -13,12 +13,15 @@ public class CommandElements {
 	public CommandElements(Command_Type cmd, String nm, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
+		this.date1 = new TaskDate();
+		this.date2 = new TaskDate();
 		this.priority = prio;
 	}
 	//deadline
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt, Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
+		this.date1 = new TaskDate();
 		this.date2 = dt;
 		this.priority = prio;
 	}

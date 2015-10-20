@@ -32,7 +32,19 @@ public class TaskDate {
 		myMonth = Integer.parseInt(split[1]);
 		myYear = Integer.parseInt(split[2]);
 	}
+<<<<<<< HEAD
 
+=======
+	
+	//no date
+	//represent null
+	public TaskDate() {
+		myYear = -1;
+		myMonth = -1;
+		myDay = -1;
+	}	
+	
+>>>>>>> origin/master
 	public void setYear(int year) {
 		myYear = year;
 	}
@@ -57,6 +69,9 @@ public class TaskDate {
 		return myDay;
 	}
 	public String toString(){
+		if(myYear==-1){
+			return "";
+		}
 		return myDay + "/" + myMonth +"/" + myYear;
 	}
 
