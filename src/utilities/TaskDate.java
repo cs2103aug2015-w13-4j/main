@@ -22,7 +22,8 @@ public class TaskDate {
 		myYear = Integer.parseInt(split[2]);
 	}
 	
-	//no date - null
+	//no date
+	//represent null
 	public TaskDate() {
 		myYear = -1;
 		myMonth = -1;
