@@ -35,11 +35,21 @@ public class testingOperation {
 	 */
 	@Test
 	public void testEdit(){
-		String input = "edit 2 name new_name";
+		String input = "edit 2 end_date 9/10/2015";
 		String actual = operation.processOperation(input);
 		String expected = "this_is_a_task has been editied sucessfully";
 		assertEquals(expected,actual);
 	}
 	
+	/**
+	 * delete
+	 *//*
+	@Test
+	public void testDelete(){
+		String input "delete 2";
+		String actual = operation.processOperation(input);
+		String expected = "this_is_a_task has been deleted sucessfully";
+		assertEquals(expected,actual);
+	}*/
 
 }
