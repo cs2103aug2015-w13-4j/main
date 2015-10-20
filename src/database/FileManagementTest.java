@@ -39,4 +39,15 @@ public class FileManagementTest {
 		assertEquals("3&&name:name3&&date:date123&&priority:priority3&&description:des3",br.readLine());
 	}
 
+	@Test
+	public void testDeleteTask() throws Exception {
+		FileManager fm = new FileManager(directory);
+		fm.clearFile();
+		fm.addTask(1, task1);
+		fm.addTask(2, task2);
+		fm.deleteTask(1);
+		br = new BufferedReader(new FileReader(new File(directory)));
+		String str = br.readLine();
+		assertEquals("2&&"+task2, str);
+	}
 }
