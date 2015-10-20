@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import utilities.Command_Type;
 
-public class DisplayTest {
+public class testingDisplay {
 	Display display = new Display();
-	
+
 	@Test
 	/**
 	 * testing to see if there is a correct output when command exist
@@ -24,7 +24,7 @@ public class DisplayTest {
 	 * testing to see if the feddback is correct when error method is called
 	 */
 	public void testError(){
-		
+
 		String actual = display.error("invalid operation");
 		String expected = "invalid operation could not be performed";
 		assertEquals(expected,actual);
