@@ -22,10 +22,11 @@ public class TaskDate {
 		myYear = Integer.parseInt(split[2]);
 	}
 	
+	//no date - null
 	public TaskDate() {
-		myYear = 0;
-		myMonth = 0;
-		myDay = 0;
+		myYear = -1;
+		myMonth = -1;
+		myDay = -1;
 	}	
 	
 	public void setYear(int year) {
