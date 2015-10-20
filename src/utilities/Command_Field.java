@@ -1,5 +1,5 @@
 package utilities;
 
 public enum Command_Field{
-		DATE, DESCRIPTION, PRIORITY,NAME;
+		NAME, START_DATE, END_DATE, PRIORITY
 	};

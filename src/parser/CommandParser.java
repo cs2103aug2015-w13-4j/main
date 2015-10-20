@@ -1,7 +1,5 @@
 package parser;
 
-import java.util.Calendar;
-import java.util.Date;
 
 import utilities.Command_Field;
 import utilities.Command_Priority;
@@ -14,159 +12,53 @@ public class CommandParser {
 	public static CommandElements ProcessInput(String command) {
 		Command_Type type;
 		String name;
-		String description;
 		TaskDate date;
 		Command_Priority priority;
 		Command_Field field;
 		int object;
 		String parts[] = command.split(" ");
-		if (parts[0].equals("add")) {
-			type = Command_Type.ADD_TASK;
+		type = CommandSplitter.findType(command);
+		if (type == Command_Type.ADD_TASK) {
 			name = parts[1];
-			date = dateDecoder(parts[2]);
-			priority = PriorityDecoder(parts[3]);
-			description = parts[4];
-			return new CommandElements(type, name, date, priority, description);
-			//return null;
-		} else if (parts[0].equals("edit")) {
-			type = Command_Type.EDIT_TASK;
+			date = DateParser.dateDecoder(parts[2]);
+			priority = PriorityParser.PriorityDecoder(parts[3]);
+			return new CommandElements(type, name, date, priority);
+		} else if (type == Command_Type.EDIT_TASK) {
 			object = Integer.parseInt(parts[1]);
 			if (parts[2].equals("name")) {
 				field = Command_Field.NAME;
 				name = parts[3];
 				return new CommandElements(type, object, field, name);
-			} else if (parts[2].equals("date")) {
-				field = Command_Field.DATE;
-				date = dateDecoder(parts[3]);
+			} else if (parts[2].equals("start_date")) {
+				field = Command_Field.START_DATE;
+				date = DateParser.dateDecoder(parts[3]);
+				return new CommandElements(type, object, field, date);
+			} else if (parts[2].equals("end_date")) {
+				field = Command_Field.END_DATE;
+				date = DateParser.dateDecoder(parts[3]);
 				return new CommandElements(type, object, field, date);
 			} else if (parts[2].equals("priority")) {
 				field = Command_Field.PRIORITY;
-				priority = PriorityDecoder(parts[3]);
+				priority = PriorityParser.PriorityDecoder(parts[3]);
 				return new CommandElements(type, object, field, priority);
-			} else if (parts[2].equals("description")) {
-				field = Command_Field.DESCRIPTION;
-				description = parts[3];
-				return new CommandElements(type, object, field, description);
 			} else {
 				return null;
 			}
+		} else if (type == Command_Type.DELETE_TASK) {
+			object = Integer.parseInt(parts[1]);
+			return new CommandElements(type, object);
+		} else if (type == Command_Type.FINISH_TASK) {
+			object = Integer.parseInt(parts[1]);
+			return new CommandElements(type, object);
+		} else if (type == Command_Type.UNDO) {
+			return new CommandElements(type);
+		} else if (type == Command_Type.DIRECTORY) {
+			name = parts[1];
+			return new CommandElements(type, name);
 		} else {
 			return null;
 		}
 	}
+	
 
-	public static Command_Priority PriorityDecoder(String part) {
-		Command_Priority priority;
-		if (part.equals("high")) {
-			priority = Command_Priority.HIGH;
-		} else if (part.equals("medium")) {
-			priority = Command_Priority.MEDIUM;
-		} else {
-			priority = Command_Priority.LOW;
-		}
-		return priority;
-	}
-	
-	public static int[] getCurrentDate() {
-		Date date = new Date(); // your date
-	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(date);
-	    int thisYear = cal.get(Calendar.YEAR);
-	    int thisMonth = cal.get(Calendar.MONTH) + 1;
-	    int thisDay = cal.get(Calendar.DAY_OF_MONTH);
-	    int currentDate[] = {thisYear, thisMonth, thisDay};
-	    return currentDate;
-	}
-	
-	public static TaskDate dateDecoder(String dateStr) {
-		int year, month, day;
-		int thisDate[] = new int[3];
-		thisDate = getCurrentDate();
-		
-		// support format 03/09/2015
-		if (dateStr.length() == 10) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]);
-				if (checkDate(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		
-		// support format 03/09/15
-		if (dateStr.length() == 8) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]) + 2000;
-				if (checkDate(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		
-		// support format 09/03
-		if (dateStr.length() == 5) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate[0];
-				month = Integer.parseInt(parts[0]);
-				day = Integer.parseInt(parts[1]);
-				if (checkDate(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		// support format 03/09
-		if (dateStr.length() == 5) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate[0];
-				month = Integer.parseInt(parts[1]);
-				day = Integer.parseInt(parts[0]);
-				if (checkDate(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		
-		return new TaskDate(0, 0, 0);
-	}
-	
-	public static int checkDate(int year, int month, int day) {
-		int thisDate[] = getCurrentDate();
-		if (year*10000+month*100+day < thisDate[0]*10000+thisDate[1]*100+thisDate[2]) {
-			
-			return -1;
-		}
-		if (month < 1 || month > 12) {
-			return -1;
-		}
-		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-			if (day < 1 || day > 31) {
-				return -1;
-			}
-		} else if (month == 4 || month == 6 || month == 9 || month == 11) {
-			if (day < 1 || day > 30) {
-				return -1;
-			}
-		} else if (month == 2) {
-			if (year % 4 == 0 && year % 100 != 0) {
-				if (day < 1 || day > 29) {
-					return -1;
-				}
-			} else {
-				if (day < 1 || day > 28) {
-					return -1;
-				}
-			}
-		} else {
-			return -1;
-		}
-		return 0;
-	}
 }

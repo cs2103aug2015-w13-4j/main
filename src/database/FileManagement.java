@@ -116,7 +116,6 @@ class FileManager {
 
 	public void setSavingDirectory(String dir) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void setTaskIDCounter(int i) throws IOException {
