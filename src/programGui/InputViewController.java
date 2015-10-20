@@ -1,6 +1,9 @@
 package programGui;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -13,6 +16,17 @@ public class InputViewController {
     private TextField userInput;
     @FXML
     private Label feedBack;
+    
+    public InputViewController () {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Inputview.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
     public void handleKeyPress(KeyEvent event) {
         TaskDisplayController taskDisplay = new TaskDisplayController();

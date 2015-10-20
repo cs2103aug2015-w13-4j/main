@@ -10,9 +10,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 
 
-public class RootController {
+public class RootController extends BorderPane{
 
 	private TextField input;
+
+    private TaskDisplayController taskDisplayController;
+
 	
     //Prompt Text
     private static final String PROMPT_TEXT = "Enter format: taskname ; date ; priority ; task description";
@@ -29,5 +32,10 @@ public class RootController {
         } catch (IOException e){
             throw new RuntimeException(e);
         }
+    }
+    
+    private void initTaskDisplay() {
+        this.taskDisplayController = TaskDisplayController.getInstance();
+        this.setCenter(taskDisplayController);
     }
 }

@@ -11,10 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import logic.Display;
 import programGui.Task;
 
-public class TaskDisplayController {
+public class TaskDisplayController extends VBox{
 
     @FXML
     private ListView<HBox> listView;
@@ -34,7 +35,6 @@ public class TaskDisplayController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
     }
     
     
