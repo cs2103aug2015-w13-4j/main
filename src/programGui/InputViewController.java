@@ -8,14 +8,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import logic.Launch;
 import programGui.TaskDisplayController;
-public class InputViewController {
+public class InputViewController extends VBox {
     
     @FXML
     private TextField userInput;
     @FXML
     private Label feedBack;
+    
+    public static InputViewController inputViewController;
+    
+    public static InputViewController getInstance() {
+        if (inputViewController == null) {
+            inputViewController = new InputViewController();
+        }
+        return inputViewController;
+    }
     
     public InputViewController () {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Inputview.fxml"));

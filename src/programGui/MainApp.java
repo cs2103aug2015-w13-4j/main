@@ -37,7 +37,7 @@ public class MainApp extends Application{
 		initInputView();
 	}
 	
-	private void initRoot() {
+	/*private void initRoot() {
 		try { 
 		        FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(MainApp.class.getResource("Root.fxml"));
@@ -72,8 +72,18 @@ public class MainApp extends Application{
 		} catch (IOException E) {
 			System.out.print("Error initialising input view");
 		}
+	} */
+	private void initRoot() {
+	    rootLayout = new RootController();
 	}
 	
+	private void initTaskView () {
+	    taskDisplay = TaskDisplayController.getInstance();
+	}
+	
+	private void initInputView() {
+	    inputView = InputViewController.getInstance();
+	}
 	//Getters
 	public Stage getPrimaryStage() {
 		return primaryStage;

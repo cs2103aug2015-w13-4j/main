@@ -20,16 +20,22 @@ public class TaskDisplayController extends VBox{
     @FXML
     private ListView<HBox> listView;
     
+    private static TaskDisplayController taskDisplayController;
     
     private static final String MESSAGE_TODAY = "Today";
     private static final String MESSAGE_TOMORROW = "Tomorrow";
     private static final String MESSAGE_THIS_WEEK = "This week";
     
+    public static TaskDisplayController getInstance() {
+        if (taskDisplayController == null) {
+            taskDisplayController = new TaskDisplayController();
+        }
+        return taskDisplayController;
+    }
     
     public TaskDisplayController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/TaskDisplay.fxml"));
         loader.setRoot(this);
-        loader.setController(this);
         try {
             loader.load();
         } catch (IOException e) {

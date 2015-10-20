@@ -15,6 +15,7 @@ public class RootController extends BorderPane{
 	private TextField input;
 
     private TaskDisplayController taskDisplayController;
+    private InputViewController inputViewController;
 
 	
     //Prompt Text
@@ -25,7 +26,6 @@ public class RootController extends BorderPane{
     public RootController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Root.fxml"));
         loader.setRoot(this);
-        loader.setController(this);
         
         try {
             loader.load();
@@ -38,4 +38,11 @@ public class RootController extends BorderPane{
         this.taskDisplayController = TaskDisplayController.getInstance();
         this.setCenter(taskDisplayController);
     }
+    
+    private void initInputView() {
+        this.inputViewController = InputViewController.getInstance();
+        this.setBottom(inputViewController);
+    }
+    
+    
 }
