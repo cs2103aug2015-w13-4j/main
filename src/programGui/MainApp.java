@@ -44,7 +44,7 @@ public class MainApp extends Application{
 				//Parent root = FXMLLoader.load(getClass().getResource("Root.fxml"));						
 				rootLayout = loader.load();
 				primaryStage.setScene(new Scene(rootLayout,850,600));
-				primaryStage.setTitle("PIXEList");
+				primaryStage.setTitle(PROGRAM_TITLE);
 				primaryStage.show();
 		} catch(IOException E) {
 			System.out.print("Error initialising root gui");
