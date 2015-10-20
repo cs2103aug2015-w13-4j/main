@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -18,8 +20,9 @@ public class MainApp extends Application{
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private VBox inputView;
-	private VBox taskView;
-	private FXMLLoader loader;
+	private VBox taskDisplay;
+	private HBox task;
+	
 	
 	
 	public static void main(String[] args) {
@@ -28,15 +31,15 @@ public class MainApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		loader = new FXMLLoader();
 		this.primaryStage = primaryStage;
 		initRoot();
-		//initTaskView();
+		initTaskView();
 		initInputView();
 	}
 	
 	private void initRoot() {
-		try {
+		try { 
+		        FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(MainApp.class.getResource("Root.fxml"));
 				//Parent root = FXMLLoader.load(getClass().getResource("Root.fxml"));						
 				rootLayout = loader.load();
@@ -48,22 +51,23 @@ public class MainApp extends Application{
 		}
 	}
 	
-	/*private void initTaskView() throws IOException {
+	private void initTaskView() throws IOException {
 		try { 
-			loader.setLocation(MainApp.class.getResource("TaskView.fxml"));
-			taskView = (VBox)loader.load();
-			rootLayout.setCenter(taskView);
+		    FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("TaskDisplay.fxml"));
+			taskDisplay = loader.load();
+			rootLayout.setCenter(taskDisplay);
 			
 		} catch (IOException E) {
-			System.out.print("Error initialising task view");
+			System.out.print("Error initialising task display");
 		} 
-	} */
+	} 
 	
 	private void initInputView() {
 		try {
-			FXMLLoader load = new FXMLLoader();
-			load.setLocation(MainApp.class.getResource("InputView.fxml"));
-			inputView = (VBox) load.load();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("InputView.fxml"));
+			inputView = loader.load();
 			rootLayout.setBottom(inputView);
 		} catch (IOException E) {
 			System.out.print("Error initialising input view");
