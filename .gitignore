@@ -11,3 +11,8 @@ hs_err_pid*
 *.swp
 
 *.class
+
+testFileManagement.txt
+
+user_tasks.txt
+

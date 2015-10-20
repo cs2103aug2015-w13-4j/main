@@ -1,7 +1,14 @@
 package database;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+
 
 class FileManager {
 	private static final String SAVE_DIRECTORY = "user_tasks.txt";
@@ -105,7 +112,42 @@ class FileManager {
 	}
 
 	public void deleteTask(int taskID) throws Exception {
-
+		ArrayList<String> temp = new ArrayList<String>();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			if (!br.ready()) {
+				return;
+			} else {
+				String line = br.readLine();
+				while ((line = br.readLine()) != null) {
+					if (!line.startsWith(String.valueOf(taskID))) {
+						temp.add(line);
+					} else { }
+				}
+				try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+					raf.setLength(0);
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+				try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+					for (String str : temp) {
+						out.write(str);
+						out.newLine();
+					}
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
+	public void clearFile() {
+		try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
+			raf.setLength(0);
+		} catch (IOException ioe) {
+			System.out.println("error");
+		}
 	}
 
 	private void writeFirstLine(String str) throws IOException {
