@@ -55,7 +55,6 @@ public class Operation {
 			return isSuccessful;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
-			System.out.println("here");
 			isSuccessful = action.editTask(content.getID(), content.getField().toString(), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
 			return isSuccessful;
