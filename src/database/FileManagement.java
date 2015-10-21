@@ -10,6 +10,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import utilities.Exceptions.TaskIDNotExistException;
+import utilities.TaskEvent;
 
 
 class FileManager {
@@ -86,6 +87,10 @@ class FileManager {
 	public void editTask(int taskID, String field, String newContent) throws Exception {
 		ArrayList<String> temp = new ArrayList<String>();
 		field = field.toLowerCase();
+		if (field.equals("priority")) {
+			newContent = TaskEvent.priorityToIntString(newContent);
+			System.out.println(newContent);
+		}
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			if (!br.ready()) {
 				return;
@@ -100,11 +105,20 @@ class FileManager {
 						temp.add(line);
 					} else {
 						int start = line.indexOf(field);
+						System.out.println("field is:" + field);
 						int end = line.indexOf(Storage.TOKEN, start);
+						System.out.println("end:"+end);
 						String front = line.substring(0, start);
+						System.out.println("front: "+front);
 						String mid = field + ":" + newContent;
-						String tail = line.substring(end, line.length());
-						temp.add(front + mid + tail);
+						System.out.println("mid: "+mid);
+						
+						if (field.equals("priority")) {
+							temp.add(front + mid);
+						} else {
+							String tail = line.substring(end, line.length());
+							temp.add(front + mid + tail);
+						}
 					}
 				}
 				try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {

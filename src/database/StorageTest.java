@@ -40,8 +40,11 @@ public class StorageTest {
 	
 	@Test
 	public void testEditTask() {
-		assertTrue(s.editTask(1,"name", "DOGEDOGE"));
-		assertTrue(s.editTask(13,"name", "CHANGED"));
+		assertTrue(s.editTask(2,"name", "DOGEDOGE"));
+		assertTrue(s.editTask(3,"name", "CHANGED"));
+		assertTrue(s.editTask(3, "startdate", "11/11/2011"));
+		assertTrue(s.editTask(4, "enddate", "11/11/11"));
+		assertTrue(s.editTask(1, "priority", "low"));
 	}
 	
 	//@Test

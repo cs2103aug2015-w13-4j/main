@@ -78,6 +78,7 @@ public class Storage {
 		try {
 			savingFile.editTask(taskID, field, newContent);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return reloadBuffer();
