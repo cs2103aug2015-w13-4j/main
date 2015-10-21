@@ -2,12 +2,16 @@ package logic;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import utilities.Command_Type;
+import utilities.TaskEvent;
 
 public class testingDisplay {
-	Display display = new Display();
+	Launch launch = Launch.getInstance();
+	Display display = launch.getDisplay();
 
 	@Test
 	/**
@@ -28,6 +32,10 @@ public class testingDisplay {
 		String actual = display.error("invalid operation");
 		String expected = "invalid operation could not be performed";
 		assertEquals(expected,actual);
+	}
+	public void testDisplay(){
+		ArrayList<TaskEvent> actual = display.taskView();
+		String ex
 	}
 
 }
