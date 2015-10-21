@@ -27,11 +27,6 @@ public class TaskDate {
 		myMonth = Integer.parseInt(split[1]);
 		myYear = Integer.parseInt(split[2]);
 	}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> origin/master
 	//no date
 	//represent null
 	public TaskDate() {
@@ -39,11 +34,7 @@ public class TaskDate {
 		myMonth = -1;
 		myDay = -1;
 	}	
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> origin/master
 	public void setYear(int year) {
 		myYear = year;
 	}

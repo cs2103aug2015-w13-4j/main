@@ -32,7 +32,7 @@ public class InputViewController extends VBox {
         loader.setRoot(this);
         loader.setController(this);
         try {
-            loader.load();
+            inputViewController = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

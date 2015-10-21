@@ -35,6 +35,8 @@ public class MainApp extends Application{
 		initTaskView();
 		initInputView();
 		initRoot();
+		this.primaryStage.setMinHeight(800.0);
+		this.primaryStage.setMinWidth(650.0);
 		this.primaryStage.setTitle("PIXEList");
 		this.primaryStage.show();
 	}

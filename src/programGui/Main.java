@@ -69,7 +69,7 @@ public class Main extends Application{
     Label feedbackLabel;
     String input;
     
-   /* public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         launch(args);
     } */
    
@@ -81,7 +81,7 @@ public class Main extends Application{
             Scene scene = new Scene(root,850,600);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
-            launch = new Launch();
+            launch = Launch.getInstance();
         
             window.setOnCloseRequest(e->  {
             e.consume();    
@@ -108,7 +108,7 @@ public class Main extends Application{
             
             feedbackLabel = new Label();
             feedbackLabel.setOpacity(20);
-            feedbackLabel.setText("Do CS2010 has been marked as completed. Task shifted to archives.");
+            feedbackLabel.setText("");
             
             
             VBox vbox = new VBox(10);
@@ -124,12 +124,12 @@ public class Main extends Application{
             TableColumn<TaskEvent,String> nameColumn = new TableColumn<>(COLUMN_TASK_NAME);
             nameColumn.setMinWidth(150);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>(TASK_NAME));
-            
+            /*
             //Task Description Column
             TableColumn<TaskEvent,String> descColumn = new TableColumn<>(COLUMN_TASK_DESC);
             descColumn.setMinWidth(250);
             descColumn.setCellValueFactory(new PropertyValueFactory<>(TASK_DESC));
-            
+            */
             //Priority Column
             TableColumn<TaskEvent,Integer> priorityColumn = new TableColumn<>(COLUMN_TASK_PRIORITY);
             priorityColumn.setMinWidth(20);
@@ -143,7 +143,7 @@ public class Main extends Application{
             //Setting up of task view     
             eventTable = new TableView<>();
             eventTable.setItems(getTasks());
-            eventTable.getColumns().addAll(idColumn,nameColumn,descColumn,priorityColumn,dateColumn);
+            eventTable.getColumns().addAll(idColumn,nameColumn,priorityColumn,dateColumn);
             eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             
             //Setting up of Border Pane
@@ -163,17 +163,19 @@ public class Main extends Application{
     }
     
     public ObservableList<TaskEvent> getTasks() {
-        Display display = new Display();
+    	Display display = Launch.getDisplay();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
-       /* ArrayList<TaskEvent> taskList = display.defaultView();
-        
+        ArrayList<TaskEvent> taskList = display.taskView();
+        System.out.print("Hi\n");
+        System.out.print(taskList.size());
         for(TaskEvent t : taskList) {
+        	System.out.print(taskList.size());
         	tasks.add(t);
-        } */
-        tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),1,"Complete progress report"));
-        //tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),1,"Complete problem set 4."));
-        tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),1,"Complete developer guide"));
-        return tasks;
+        } 
+       /* tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),new TaskDate(2015,10,12) ,1));
+        tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),new TaskDate(2015,10,20) , 1));
+        tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),new TaskDate(2015,10,15), 1));
+        */return tasks;
     }
     
     /**
@@ -183,7 +185,7 @@ public class Main extends Application{
      */  
     public void passToLogic(String input) {      
         String output = launch.command(input);
-        //feedbackLabel.setText(launch.command(input));
+        feedbackLabel.setText(launch.command(input));
         //AlertBox.display(TITLE_ALERT, output);
         }    
 }
