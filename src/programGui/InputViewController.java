@@ -28,7 +28,7 @@ public class InputViewController extends VBox {
     }
     
     public InputViewController () {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Inputview.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/InputView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -38,8 +38,9 @@ public class InputViewController extends VBox {
         }
     }
     
+    @FXML
     public void handleKeyPress(KeyEvent event) {
-        TaskDisplayController taskDisplay = new TaskDisplayController();
+        TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
         if(event.getCode() == KeyCode.ENTER) {
            // handleUserInput();
             userInput.setText("");

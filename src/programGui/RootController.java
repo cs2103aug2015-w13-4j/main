@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 
 public class RootController extends BorderPane{
 
+    @FXML
 	private TextField input;
 
     private TaskDisplayController taskDisplayController;
@@ -26,12 +27,15 @@ public class RootController extends BorderPane{
     public RootController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Root.fxml"));
         loader.setRoot(this);
-        
+        loader.setController(this);
         try {
             loader.load();
         } catch (IOException e){
             throw new RuntimeException(e);
         }
+        
+        initTaskDisplay();
+        initInputView();
     }
     
     private void initTaskDisplay() {

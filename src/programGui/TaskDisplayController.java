@@ -33,9 +33,10 @@ public class TaskDisplayController extends VBox{
         return taskDisplayController;
     }
     
-    public TaskDisplayController() {
+    private TaskDisplayController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/TaskDisplay.fxml"));
         loader.setRoot(this);
+        loader.setController(this);
         try {
             loader.load();
         } catch (IOException e) {

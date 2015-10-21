@@ -32,9 +32,11 @@ public class MainApp extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		initRoot();
 		initTaskView();
 		initInputView();
+		initRoot();
+		this.primaryStage.setTitle("PIXEList");
+		this.primaryStage.show();
 	}
 	
 	/*private void initRoot() {
