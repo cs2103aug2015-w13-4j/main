@@ -35,7 +35,7 @@ public class testingOperation {
 	 */
 	@Test
 	public void testEdit(){
-		String input = "edit 2 end_date 9/10/2015";
+		String input = "edit 2 end_date 11/10/2015";
 		String actual = operation.processOperation(input);
 		String expected = "this_is_a_task has been editied sucessfully";
 		assertEquals(expected,actual);
