@@ -71,8 +71,8 @@ public class Main extends Application{
     
     /*public static void main(String[] args) {
         launch(args);
-    } */
-   
+    } 
+   */
     @SuppressWarnings("unchecked")
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -111,7 +111,7 @@ public class Main extends Application{
             feedbackLabel.setText("");
             
             
-            VBox vbox = new VBox(10);
+            VBox vbox = new VBox(20);
             vbox.getChildren().addAll(feedbackLabel,instrInput);
 
                
@@ -166,16 +166,16 @@ public class Main extends Application{
     	Display display = Launch.getDisplay();
         ObservableList<TaskEvent> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> taskList = display.taskView();
-        System.out.print("Hi\n");
-        System.out.print(taskList.size());
-        for(TaskEvent t : taskList) {
+    
+        /*for(TaskEvent t : taskList) {
         	System.out.print(taskList.size());
-        	tasks.add(t);
-        } 
-       /* tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),new TaskDate(2015,10,12) ,1));
-        tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),new TaskDate(2015,10,20) , 1));
-        tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),new TaskDate(2015,10,15), 1));
-        */return tasks;
+        	tasks.add(t); 
+        } */ 
+       /*	tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),new TaskDate(2015,10,12),"high"));
+        tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),new TaskDate(2015,10,20) , "high"));
+        tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),new TaskDate(2015,10,15),"high"));
+        return tasks; */
+    return tasks;
     }
     
     /**
@@ -185,7 +185,7 @@ public class Main extends Application{
      */  
     public void passToLogic(String input) {      
         String output = launch.command(input);
-        feedbackLabel.setText(launch.command(input));
+        //feedbackLabel.setText(launch.command(input));
         //AlertBox.display(TITLE_ALERT, output);
         }    
 }
