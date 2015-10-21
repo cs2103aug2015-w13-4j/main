@@ -23,18 +23,18 @@ public class testingOperation {
 	}
 	/**
 	 * test to check if invalid command 
-	 *//*
-	@Test
+	 */
+	//@Test
 	public void testInvalidInput(){
 		String input = "bye";
 		String actual = operation.processOperation(input);
 		String expected = "bye bye could not be performed";
 		assertEquals(expected,actual);
-	}*/
+	}
 	/**
 	 * edit
 	 */
-	@Test
+	//@Test
 	public void testEdit(){
 		String input = "edit 2 end_date 12/10/2015";
 		String actual = operation.processOperation(input);
@@ -44,13 +44,13 @@ public class testingOperation {
 	
 	/**
 	 * delete
-	 *//*
+	 */
 	@Test
 	public void testDelete(){
-		String input "delete 2";
+		String input =  "delete 1";
 		String actual = operation.processOperation(input);
 		String expected = "this_is_a_task has been deleted sucessfully";
 		assertEquals(expected,actual);
-	}*/
+	}
 
 }
