@@ -115,8 +115,8 @@ public class Operation {
 			TaskDate startDate = content.getStartDate();
 			return startDate.toString();
 		case END_DATE:
-			logger.log(Level.INFO, "edit end date");
 			TaskDate endDate = content.getEndDate();
+			logger.log(Level.INFO, "edit end date to "+endDate.toString());
 			return endDate.toString();
 		case PRIORITY:
 			logger.log(Level.INFO, "edit priority");
