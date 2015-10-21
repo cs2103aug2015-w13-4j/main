@@ -23,7 +23,7 @@ public class Controller {
 	
 	private Controller() {
 		display = new Display();
-		launch = new Launch();
+		launch = Launch.getInstance();
 		allTask = display.taskView();
 	}
 	//Singleton
