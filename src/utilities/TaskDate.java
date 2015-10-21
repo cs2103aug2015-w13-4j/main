@@ -16,7 +16,7 @@ public class TaskDate {
 	}
 
 	public TaskDate(String date) {
-		if (date == "") {
+		if (date.equals("null")) {
 			myYear = 0;
 			myMonth = 0;
 			myDay = 0;
@@ -61,7 +61,7 @@ public class TaskDate {
 	}
 	public String toString(){
 		if(myYear==-1){
-			return "";
+			return "null";
 		}
 		return myDay + "/" + myMonth +"/" + myYear;
 	}
