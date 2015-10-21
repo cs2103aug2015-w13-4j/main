@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,6 +9,7 @@ import utilities.CommandElements;
 import utilities.Command_Priority;
 import utilities.Command_Type;
 import utilities.TaskDate;
+import utilities.TaskEvent;
 import parser.CommandParser;
 import logic.Launch;
 
@@ -36,6 +38,10 @@ public class Operation {
 			return message.error(input);
 		}
 	}
+	private String getTaskName(int id){
+		Display message = Launch.getDisplay();
+		ArrayList<TaskEvent> tasks = message.taskView();
+	}
 
 	/**
 	 * perform the command
@@ -55,7 +61,7 @@ public class Operation {
 			return isSuccessful;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
-			isSuccessful = action.editTask(content.getID(), content.getField().toString(), getEditContent(content));
+			isSuccessful = action.editTask(content.getID(), content.getField().toString().replace("_", ""), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
 			return isSuccessful;
 		case DELETE_TASK:
