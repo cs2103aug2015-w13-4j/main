@@ -115,10 +115,12 @@ public class Storage {
 					justContent[i] = content;
 				}
 				TaskEvent task = new TaskEvent(justContent);
-				System.out.println("task:"+ task.toString());
+				//System.out.println("task:"+ task.toString());
 				taskEventListBuf.add(task);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("e"+e.getMessage());
 			return false;
 		}
 		return true;
