@@ -114,7 +114,7 @@ public class TaskEvent {
 		default:
 			return "";
 		}
-	}
+	} 
 
 	@Override
 	public String toString() {

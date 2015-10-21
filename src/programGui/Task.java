@@ -23,27 +23,27 @@ public class Task extends HBox{
     @FXML
     private Label taskName;
     
-    //@FXML
-    //private Label priority;
+    @FXML
+    private Label priority;
     
     private static final String STRING_EMPTY = "";
     
     
     public Task(TaskEvent task) {
         loadFxml();
-        initFxmlFields(task.getTaskID(),task.getTaskName(),task.getEndDate().toString() );
+        initFxmlFields(task.getTaskID(),task.getTaskName(),task.getEndDate().toString()  , "High");
     }
     
     public Task() {
         loadFxml();
-        initFxmlFields(1,"test","10/10/2015");
+        initFxmlFields(1,"test","10/10/2015" , "High");
     }
     
-    public void initFxmlFields (int idx, String taskName , String date) {
+    public void initFxmlFields (int idx, String taskName , String date, String priority) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.date.setText(date);
-       // this.priority.setText(priority);
+        this.priority.setText(priority);
     }
     
     private void loadFxml() {

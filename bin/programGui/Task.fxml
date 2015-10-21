@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,9 +9,21 @@
 <fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="30.0" prefWidth="11.0" />
-      <Label fx:id="index" text="Index " />
-      <Label fx:id="taskName" text="Task Name " />
-      <Label fx:id="date" text="TimeDate " />
-      <Label fx:id="priority" />
+      <Label fx:id="index" text="Index ">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></Label>
+      <Label fx:id="taskName" text="Task Name ">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></Label>
+      <Label fx:id="date" text="TimeDate ">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></Label>
+      <Label fx:id="priority" text=" Priority">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></Label>
    </children>
 </fx:root>
