@@ -71,8 +71,8 @@ public class Main extends Application{
     
     /*public static void main(String[] args) {
         launch(args);
-    } 
-   */
+    } */
+   
     @SuppressWarnings("unchecked")
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -170,7 +170,7 @@ public class Main extends Application{
         /*for(TaskEvent t : taskList) {
         	System.out.print(taskList.size());
         	tasks.add(t); 
-        } */ 
+        }  */
        /*	tasks.add(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10),new TaskDate(2015,10,12),"high"));
         tasks.add(new TaskEvent(2, "Do CS2010", new TaskDate(2015,10,19),new TaskDate(2015,10,20) , "high"));
         tasks.add(new TaskEvent(2, "Do CS2103", new TaskDate(2015,10,12),new TaskDate(2015,10,15),"high"));

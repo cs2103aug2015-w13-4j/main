@@ -34,7 +34,6 @@ public class MainApp extends Application{
 		initInputView();
 		initRoot();
 		initPrimaryStage(primaryStage);
-
 	}
 	
 	private void initRoot() {
@@ -47,8 +46,7 @@ public class MainApp extends Application{
 		this.primaryStage.setMinWidth(PROGRAM_WIDTH);
 		this.primaryStage.setScene(new Scene(rootLayout));
 		this.primaryStage.setTitle(PROGRAM_TITLE);
-		this.primaryStage.show();
-		
+		this.primaryStage.show();	
 	}
 	
 	private void initTaskView () {
