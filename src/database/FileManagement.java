@@ -10,6 +10,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import utilities.Exceptions.TaskIDNotExistException;
+import utilities.TaskEvent;
 
 
 class FileManager {
@@ -77,7 +78,7 @@ class FileManager {
 	/**
 	 * This methods edits the task info that stores as text on the disk. Note that only
 	 * int and Strings are passed, which means that you have to convert a TaskDate to
-	 * String before calling this method. 
+	 * String before calling this method.
 	 * @param taskID
 	 * @param field use TaskEvent.fieldToString() to convert
 	 * @param newContent convert date before pass
@@ -85,6 +86,11 @@ class FileManager {
 	 */
 	public void editTask(int taskID, String field, String newContent) throws Exception {
 		ArrayList<String> temp = new ArrayList<String>();
+		field = field.toLowerCase();
+		if (field.equals("priority")) {
+			newContent = TaskEvent.priorityToIntString(newContent);
+			System.out.println(newContent);
+		}
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			if (!br.ready()) {
 				return;
@@ -102,8 +108,13 @@ class FileManager {
 						int end = line.indexOf(Storage.TOKEN, start);
 						String front = line.substring(0, start);
 						String mid = field + ":" + newContent;
-						String tail = line.substring(end, line.length());
-						temp.add(front + mid + tail);
+
+						if (field.equals("priority")) {
+							temp.add(front + mid);
+						} else {
+							String tail = line.substring(end, line.length());
+							temp.add(front + mid + tail);
+						}
 					}
 				}
 				try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
@@ -167,7 +178,7 @@ class FileManager {
 			ioe.printStackTrace();
 		}
 	}
-	
+
 	public void clearFile() {
 		try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
 			raf.setLength(0);

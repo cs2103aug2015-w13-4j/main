@@ -53,8 +53,8 @@ public class Storage {
 	public boolean addTask(
 			String name, TaskDate startDate, TaskDate endDate, String prio) {
 
-		String dateStr = "startDate:" + startDate.toString() + TOKEN
-				+ "endDate:" + endDate.toString();
+		String dateStr = "startdate:" + startDate.toString() + TOKEN
+				+ "enddate:" + endDate.toString();
 		//name:n&&startDate:d1&&endDate:d2&&priority:1
 		String taskInfo = "name:" + name + TOKEN
 				+ dateStr + TOKEN
@@ -77,6 +77,7 @@ public class Storage {
 		try {
 			savingFile.editTask(taskID, field, newContent);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 		return reloadBuffer();
@@ -95,7 +96,7 @@ public class Storage {
 	public void setSavingDirectory(String dir) {
 		configFile.setSavingDirectory(dir);
 	}
-	
+
 	public void clearSavingFile() {
 		savingFile.clearFile();
 	}
@@ -114,6 +115,7 @@ public class Storage {
 					justContent[i] = content;
 				}
 				TaskEvent task = new TaskEvent(justContent);
+				System.out.println("task:"+ task.toString());
 				taskEventListBuf.add(task);
 			}
 		} catch (Exception e) {

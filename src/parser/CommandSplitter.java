@@ -1,7 +1,11 @@
 package parser;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import utilities.Command_Priority;
 import utilities.Command_Type;
+import utilities.TaskDate;
 
 public class CommandSplitter {
 	
@@ -46,6 +50,64 @@ public class CommandSplitter {
 		} else {
 			return null;
 		}
+	}
+	
+	private static int[] getCurrentDate() {
+		Date date = new Date(); // your date
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int thisYear = cal.get(Calendar.YEAR);
+	    int thisMonth = cal.get(Calendar.MONTH) + 1;
+	    int thisDay = cal.get(Calendar.DAY_OF_MONTH);
+	    int currentDate[] = {thisYear, thisMonth, thisDay};
+	    return currentDate;
+	}
+	
+	private static boolean isInteger(String c) {
+	    try {
+	        Integer.parseInt(c);
+	        return true;
+	    } catch (NumberFormatException nfe) {}
+	    return false;
+	}
+	
+	private static boolean dateChecker(String date) {
+		int num = 0;
+		int cha = 0;
+		for (int i = 0; i < date.length(); i ++) {
+			if (isInteger(date.charAt(i) + "")) {
+				num ++;
+			} else if (date.charAt(i) == '.' || date.charAt(i) == '/') {
+				cha ++;
+			}
+		}
+		if (cha + num == date.length()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static TaskDate[] findDate(String command) {
+		TaskDate results[] = new TaskDate[2];
+		int dateCount = 2;
+		int today[] = getCurrentDate();
+		if (contain("tomorrow", command)) {
+			results[2-dateCount] = new TaskDate(today[0], today[1], today[2] + 1);
+			dateCount --;
+		} else if (contain("today", command)) {
+			results[2-dateCount] = new TaskDate(today[0], today[1], today[2]);
+			dateCount --;
+		} else if (contain("yesterday", command)) {
+			results[2-dateCount] = new TaskDate(today[0], today[1], today[2] - 1);
+			dateCount --;
+		}
+		String parts[] = command.split(" ");
+		for (int i = 0; i < parts.length; i ++) {
+			if (dateChecker(parts[i])) {
+				results[2 - dateCount] = DateParser.dateDecoder(parts[i]);
+			}
+		}
+		return results;
 	}
 	
 }

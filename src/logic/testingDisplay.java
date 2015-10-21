@@ -35,7 +35,7 @@ public class testingDisplay {
 	}
 	public void testDisplay(){
 		ArrayList<TaskEvent> actual = display.taskView();
-		String ex
+		//String ex
 	}
 
 }

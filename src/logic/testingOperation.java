@@ -9,17 +9,18 @@ public class testingOperation {
 	Launch launch = Launch.getInstance();
 	Operation operation =launch.getOperation();
 	
-	//@Test
 	/**
 	 * DEADLINE
 	 * testing for base case, check if everything is initialize properly
-	 *//*
+	 */
+	//@Test
+	
 	public void testProcessOperation() {
 		String input = "add this_is_a_task 10/10/2015 high";
 		String actual = operation.processOperation(input);
 		String expected ="this_is_a_task has been added sucessfully";
 		assertEquals(expected,actual);
-	}*/
+	}
 	/**
 	 * test to check if invalid command 
 	 *//*
@@ -35,9 +36,9 @@ public class testingOperation {
 	 */
 	@Test
 	public void testEdit(){
-		String input = "edit 2 end_date 9/10/2015";
+		String input = "edit 2 end_date 12/10/2015";
 		String actual = operation.processOperation(input);
-		String expected = "this_is_a_task has been editied sucessfully";
+		String expected = "NEWCHANGE has been edited sucessfully";
 		assertEquals(expected,actual);
 	}
 	
