@@ -78,7 +78,7 @@ class FileManager {
 	/**
 	 * This methods edits the task info that stores as text on the disk. Note that only
 	 * int and Strings are passed, which means that you have to convert a TaskDate to
-	 * String before calling this method. 
+	 * String before calling this method.
 	 * @param taskID
 	 * @param field use TaskEvent.fieldToString() to convert
 	 * @param newContent convert date before pass
@@ -105,14 +105,10 @@ class FileManager {
 						temp.add(line);
 					} else {
 						int start = line.indexOf(field);
-						System.out.println("field is:" + field);
 						int end = line.indexOf(Storage.TOKEN, start);
-						System.out.println("end:"+end);
 						String front = line.substring(0, start);
-						System.out.println("front: "+front);
 						String mid = field + ":" + newContent;
-						System.out.println("mid: "+mid);
-						
+
 						if (field.equals("priority")) {
 							temp.add(front + mid);
 						} else {
@@ -182,7 +178,7 @@ class FileManager {
 			ioe.printStackTrace();
 		}
 	}
-	
+
 	public void clearFile() {
 		try (RandomAccessFile raf = new RandomAccessFile(file, "rw")) {
 			raf.setLength(0);

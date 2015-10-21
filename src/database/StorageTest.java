@@ -29,7 +29,7 @@ public class StorageTest {
 		r.close();
 	}
 	
-	@Test
+	//@Test
 	public void testAddMultipleTasks() throws Exception {
 		r = new BufferedReader(new FileReader(new File("user_tasks.txt")));
 		assertTrue(s.addTask(n,sd,ed,p));
@@ -38,7 +38,7 @@ public class StorageTest {
 		assertTrue(s.addTask(n,sd,ed,p));
 	}
 	
-	@Test
+	//@Test
 	public void testEditTask() {
 		assertTrue(s.editTask(2,"name", "DOGEDOGE"));
 		assertTrue(s.editTask(3,"name", "CHANGED"));
@@ -52,9 +52,10 @@ public class StorageTest {
 		assertTrue(s.delete(1));
 	}
 	
-	//@Test
+	@Test
 	public void testReload() {
 		ArrayList<TaskEvent> arr = s.load();
+		System.out.println(arr.size());
 		for (TaskEvent t: arr) {
 			System.out.println(t.toString());
 		}

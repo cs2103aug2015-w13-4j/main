@@ -67,10 +67,9 @@ public class Storage {
 			return false;
 		}
 		taskEventListBuf.add(new TaskEvent(taskIDCounter, name, startDate, endDate, prio));
-		System.out.println(taskEventListBuf.size());
-		for (TaskEvent task: taskEventListBuf) {
+		/*for (TaskEvent task: taskEventListBuf) {
 			System.out.println("task: " + task.toString());
-		}
+		}*/
 		return true;
 	}
 
@@ -97,7 +96,7 @@ public class Storage {
 	public void setSavingDirectory(String dir) {
 		configFile.setSavingDirectory(dir);
 	}
-	
+
 	public void clearSavingFile() {
 		savingFile.clearFile();
 	}
@@ -116,6 +115,7 @@ public class Storage {
 					justContent[i] = content;
 				}
 				TaskEvent task = new TaskEvent(justContent);
+				System.out.println("task:"+ task.toString());
 				taskEventListBuf.add(task);
 			}
 		} catch (Exception e) {
