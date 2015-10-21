@@ -26,15 +26,15 @@ public class CommandSplitter {
 		} else if (contain("edit", command)) {
 			return Command_Type.EDIT_TASK;
 		} else if (contain("delete", command)) {
-			return Command_Type.EDIT_TASK;
+			return Command_Type.DELETE_TASK;
 		} else if (contain("finish", command)) {
-			return Command_Type.EDIT_TASK;
+			return Command_Type.FINISH_TASK;
 		} else if (contain("search", command)) {
-			return Command_Type.EDIT_TASK;
+			return Command_Type.SEARCH_TASK;
 		} else if (contain("undo", command)) {
-			return Command_Type.EDIT_TASK;
+			return Command_Type.UNDO;
 		} else if (contain("directory", command)) {
-			return Command_Type.EDIT_TASK;
+			return Command_Type.DIRECTORY;
 		} else {
 			return null;
 		}
@@ -71,7 +71,7 @@ public class CommandSplitter {
 	    return false;
 	}
 	
-	private static boolean dateChecker(String date) {
+	public static boolean dateChecker(String date) {
 		int num = 0;
 		int cha = 0;
 		for (int i = 0; i < date.length(); i ++) {
@@ -105,6 +105,7 @@ public class CommandSplitter {
 		for (int i = 0; i < parts.length; i ++) {
 			if (dateChecker(parts[i])) {
 				results[2 - dateCount] = DateParser.dateDecoder(parts[i]);
+				dateCount --;
 			}
 		}
 		return results;
