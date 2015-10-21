@@ -32,7 +32,7 @@ public class Operation {
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		if (performCommand(processed.getType(), processed)) {
 			logger.log(Level.INFO, "performing command" + processed.getType());
-			return message.operation(processed.getType(), processed.getName());
+			return message.operation(processed.getType(), getTaskName(processed.getID()));
 		} else {
 			logger.log(Level.INFO, "invalid input");
 			return message.error(input);
@@ -41,6 +41,9 @@ public class Operation {
 	private String getTaskName(int id){
 		Display message = Launch.getDisplay();
 		ArrayList<TaskEvent> tasks = message.taskView();
+		System.out.println("size" + tasks.size());
+		
+		return "String";
 	}
 
 	/**
