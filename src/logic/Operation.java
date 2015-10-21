@@ -43,6 +43,7 @@ public class Operation {
 		ArrayList<TaskEvent> tasks = message.taskView();
 		System.out.println("size" + tasks.size());
 		for(int i =0;i<tasks.size();i++){
+			System.out.println("id "+ id +"name "+tasks.get(i).getTaskName());
 			if(tasks.get(i).getTaskID() == id){
 				return tasks.get(i).getTaskName();
 			}
@@ -74,7 +75,8 @@ public class Operation {
 			return isSuccessful;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
-
+			isSuccessful = action.delete(content.getID());
+			return isSuccessful;
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
 
