@@ -60,7 +60,9 @@ class FileManager {
 				return null;
 			} else {
 				String line = br.readLine(); // eat the first line
+				System.out.println("firstline: "+line);
 				while ((line = br.readLine()) != null) {
+					System.out.println(line);
 					array.add(line);
 				}
 			}

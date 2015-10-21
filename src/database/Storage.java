@@ -115,7 +115,7 @@ public class Storage {
 					justContent[i] = content;
 				}
 				TaskEvent task = new TaskEvent(justContent);
-				//System.out.println("task:"+ task.toString());
+				System.out.println("task:"+ task.getPriority());
 				taskEventListBuf.add(task);
 			}
 		} catch (Exception e) {

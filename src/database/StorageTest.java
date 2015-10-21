@@ -5,12 +5,9 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import utilities.TaskDate;
-import utilities.TaskEvent;
 
 public class StorageTest {
 	Storage s = new Storage();
@@ -20,16 +17,16 @@ public class StorageTest {
 	String p = "high";
 	private BufferedReader r;
 	
-	//@Test
+	@Test
 	public void testAddOneTask() throws Exception {
-		//s.clearSavingFile();
+		s.clearSavingFile();
 		assertTrue(s.addTask(n, sd, ed, p));
 		r = new BufferedReader(new FileReader(new File("user_tasks.txt")));
 		assertEquals("1", r.readLine());
 		r.close();
 	}
 	
-	//@Test
+	@Test
 	public void testAddMultipleTasks() throws Exception {
 		r = new BufferedReader(new FileReader(new File("user_tasks.txt")));
 		assertTrue(s.addTask(n,sd,ed,p));
@@ -38,7 +35,7 @@ public class StorageTest {
 		assertTrue(s.addTask(n,sd,ed,p));
 	}
 	
-	//@Test
+	@Test
 	public void testEditTask() {
 		assertTrue(s.editTask(2,"name", "DOGEDOGE"));
 		assertTrue(s.editTask(3,"name", "CHANGED"));
@@ -47,18 +44,9 @@ public class StorageTest {
 		assertTrue(s.editTask(1, "priority", "low"));
 	}
 	
-	//@Test
+	@Test
 	public void testDeleteTask() {
 		assertTrue(s.delete(1));
-	}
-	
-	@Test
-	public void testReload() {
-		ArrayList<TaskEvent> arr = s.load();
-		System.out.println(arr.size());
-		for (TaskEvent t: arr) {
-			System.out.println(t.toString());
-		}
 	}
 
 }
