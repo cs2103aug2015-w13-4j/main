@@ -25,7 +25,7 @@ public class testingDisplay {
 		assertEquals(expected, actual);
 	}
 	/**
-	 * testing to see if the feddback is correct when error method is called
+	 * testing to see if the feedback is correct when error method is called
 	 */
 	public void testError(){
 
@@ -36,7 +36,7 @@ public class testingDisplay {
 	public void testDisplay(){
 		ArrayList<TaskEvent> actual = display.taskView();
 		ArrayList<TaskEvent> expected = new ArrayList<TaskEvent>();
-		expected.add(new TaskEvent)
+		//expected.add(new TaskEvent)
 	}
 
 }
