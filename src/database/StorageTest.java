@@ -5,10 +5,12 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
 import utilities.TaskDate;
+import utilities.TaskEvent;
 
 public class StorageTest {
 	Storage s = new Storage();
@@ -42,9 +44,17 @@ public class StorageTest {
 		assertTrue(s.editTask(13,"name", "CHANGED"));
 	}
 	
-	@Test
+	//@Test
 	public void testDeleteTask() {
 		assertTrue(s.delete(1));
+	}
+	
+	//@Test
+	public void testReload() {
+		ArrayList<TaskEvent> arr = s.load();
+		for (TaskEvent t: arr) {
+			System.out.println(t.toString());
+		}
 	}
 
 }

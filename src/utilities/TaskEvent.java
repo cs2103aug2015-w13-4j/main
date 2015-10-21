@@ -78,6 +78,19 @@ public class TaskEvent {
 		}
 	}
 
+	public static String priorityToString(Priority p) {
+		switch (p) {
+		case LOW:
+			return "Low";
+		case MEDIUM:
+			return "Medium";
+		case HIGH:
+			return "High";
+		default:
+			return "";
+		}
+	}
+
 	public int getTaskID() {
 		return taskID;
 	}
@@ -108,7 +121,7 @@ public class TaskEvent {
 		String str = "";
 		str += ":taskID:" + taskID;
 		str += ":taskName:" + taskName;
-		str += ":priority:" + priority;	
+		str += ":priority:" + priorityToString(priority);	
 		if(endDate.getYear()==0 && startDate.getYear()==0){
 			//floating
 			//str += ":date:" + startDate.toString();

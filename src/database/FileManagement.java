@@ -85,6 +85,7 @@ class FileManager {
 	 */
 	public void editTask(int taskID, String field, String newContent) throws Exception {
 		ArrayList<String> temp = new ArrayList<String>();
+		field = field.toLowerCase();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			if (!br.ready()) {
 				return;
