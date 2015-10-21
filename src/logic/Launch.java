@@ -21,7 +21,6 @@ public class Launch {
 		search = new Search();
 		tasks = storage.load();
 		launch = new Launch();
-		
 	}
 
 	/*getting objects*/
