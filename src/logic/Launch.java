@@ -14,6 +14,8 @@ public class Launch {
 	private static ArrayList<TaskEvent> tasks;
 	private static Launch launch;
 	
+	private Launch(){
+	}
 	private static void createObjects(){
 		storage = new Storage();
 		display = new Display();
