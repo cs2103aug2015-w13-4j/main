@@ -23,12 +23,15 @@ public class Task extends HBox{
     @FXML
     private Label taskName;
     
+    //@FXML
+    private Label priority;
+    
     private static final String STRING_EMPTY = "";
     
     
     public Task(TaskEvent task) {
         loadFxml();
-        initFxmlFields(1,task.getTaskName(),task.getStartDate().toString());
+        initFxmlFields(task.getTaskID(),task.getTaskName(),task.getEndDate().toString() , task.getPriority());
     }
     
     public Task() {
@@ -36,10 +39,11 @@ public class Task extends HBox{
         initFxmlFields(1,"h","l");
     }
     
-    public void initFxmlFields (int idx, String taskName , String date ) {
+    public void initFxmlFields (int idx, String taskName , String date , String priority) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.date.setText(date);
+        this.priority(priority);
     }
     
     private void loadFxml() {
