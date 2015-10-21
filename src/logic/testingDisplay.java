@@ -35,7 +35,8 @@ public class testingDisplay {
 	}
 	public void testDisplay(){
 		ArrayList<TaskEvent> actual = display.taskView();
-		//String ex
+		ArrayList<TaskEvent> expected = new ArrayList<TaskEvent>();
+		expected.add(new TaskEvent)
 	}
 
 }
