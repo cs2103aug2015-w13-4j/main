@@ -27,6 +27,10 @@ public class TaskDate {
 		myMonth = Integer.parseInt(split[1]);
 		myYear = Integer.parseInt(split[2]);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	//no date
 	//represent null
 	public TaskDate() {

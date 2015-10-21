@@ -140,6 +140,10 @@ class FileManager {
 				return;
 			} else {
 				String line = br.readLine();
+				if (Integer.parseInt(line) < taskID) {
+					throw new TaskIDNotExistException("You don't have that many tasks!");
+				}
+				temp.add(line);
 				while ((line = br.readLine()) != null) {
 					if (!line.startsWith(String.valueOf(taskID))) {
 						temp.add(line);
