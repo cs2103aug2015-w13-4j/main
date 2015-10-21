@@ -24,7 +24,7 @@ public class Controller {
 	private Controller() {
 		display = new Display();
 		launch = new Launch();
-		allTask = display.defaultView();
+		allTask = display.taskView();
 	}
 	//Singleton
 	public static Controller getInstance() {

@@ -69,9 +69,9 @@ public class Main extends Application{
     Label feedbackLabel;
     String input;
     
-  /*  public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
-    } */
+    } 
    
     @SuppressWarnings("unchecked")
     @Override

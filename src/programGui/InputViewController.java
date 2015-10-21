@@ -18,6 +18,8 @@ public class InputViewController extends VBox {
     @FXML
     private Label feedBack;
     
+    Launch launch;
+    
     public static InputViewController inputViewController;
     
     public static InputViewController getInstance() {
@@ -38,11 +40,10 @@ public class InputViewController extends VBox {
         }
     }
     
-    @FXML
     public void handleKeyPress(KeyEvent event) {
         TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
         if(event.getCode() == KeyCode.ENTER) {
-           // handleUserInput();
+        	handleUserInput();
             userInput.setText("");
             taskDisplay.updateTaskDisplay();
         }
@@ -54,11 +55,10 @@ public class InputViewController extends VBox {
     }
     
     private void labelFeedBack(String input) {
-        feedBack = new Label();
         feedBack.setText(input);
     }
     private void passToLogic(String input) {
-        Launch launch = new Launch();
+        launch = Launch.getInstance();
         String output = launch.command(input);
         labelFeedBack(output);
     }
