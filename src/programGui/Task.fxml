@@ -10,6 +10,7 @@
       <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="30.0" prefWidth="11.0" />
       <Label fx:id="index" text="Index " />
       <Label fx:id="taskName" text="Task Name " />
-      <Label fx:id="date" text="TimeDate" />
+      <Label fx:id="date" text="TimeDate " />
+      <Label fx:id="priority" />
    </children>
 </fx:root>

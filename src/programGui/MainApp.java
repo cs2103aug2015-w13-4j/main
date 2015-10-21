@@ -52,7 +52,9 @@ public class MainApp extends Application{
 	}
 	
 	private void initTaskView () {
-	    TaskDisplayController.getInstance();
+	    taskDisplay = TaskDisplayController.getInstance();
+	    ((TaskDisplayController) taskDisplay).updateTaskDisplay();
+	    
 	}
 	
 	private void initInputView() {
