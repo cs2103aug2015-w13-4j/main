@@ -42,6 +42,11 @@ public class Operation {
 		Display message = Launch.getDisplay();
 		ArrayList<TaskEvent> tasks = message.taskView();
 		System.out.println("size" + tasks.size());
+		for(int i =0;i<tasks.size();i++){
+			if(tasks.get(i).getTaskID() == id){
+				return tasks.get(i).getTaskName();
+			}
+		}
 		
 		return "String";
 	}
