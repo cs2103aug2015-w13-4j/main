@@ -29,21 +29,33 @@ public class Operation {
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = CommandParser.ProcessInput(input);
+		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		if (performCommand(processed.getType(), processed)) {
-			logger.log(Level.INFO, "performing command" + processed.getType());
-			return message.operation(processed.getType(), getTaskName(processed.getID()));
+			logger.log(Level.INFO, "performing command " + processed.getType());
+			return message.operation(processed.getType(), name);
+			
 		} else {
 			logger.log(Level.INFO, "invalid input");
 			return message.error(input);
 		}
 	}
+	private String getName(CommandElements content){
+		String name;
+		if(content.getType().toString().equals(("ADD_TASK"))){
+			name = content.getName();
+		}else{
+			name = getTaskName(content.getID());
+		}
+		return name;
+	}
 	private String getTaskName(int id){
+		System.out.println("finding "+id);
 		Display message = Launch.getDisplay();
 		ArrayList<TaskEvent> tasks = message.taskView();
 		System.out.println("size" + tasks.size());
 		for(int i =0;i<tasks.size();i++){
-			System.out.println("id "+ id +"name "+tasks.get(i).getTaskName());
+			System.out.println("id "+ tasks.get(i).getTaskID() +"name "+tasks.get(i).getTaskName());
 			if(tasks.get(i).getTaskID() == id){
 				return tasks.get(i).getTaskName();
 			}
