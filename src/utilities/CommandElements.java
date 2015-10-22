@@ -7,7 +7,7 @@ public class CommandElements {
 	private TaskDate date2; //end date
 	private Command_Priority priority;
 	private Command_Field field;
-	private int ID;
+	private int ID = -1;
 	/*ADD*/
 	//normal task
 	public CommandElements(Command_Type cmd, String nm, Command_Priority prio){
@@ -71,6 +71,14 @@ public class CommandElements {
 	public CommandElements(Command_Type cmd) {
 		this.type = cmd;
 	}
+	public CommandElements(Command_Type cmd, TaskEvent task,Command_Priority priority){
+		this.type = cmd;
+		this.ID = task.taskID;
+		this.date1 = task.getStartDate();
+		this.date2 = task.getEndDate();
+		this.priority = priority;
+	}
+	
 	
 	/*DIRECTORY*/
 	public CommandElements(Command_Type cmd, String directory) {
