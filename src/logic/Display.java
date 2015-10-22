@@ -8,8 +8,8 @@ import utilities.TaskEvent;
 public class Display {
 	
 	/*Feedback*/
-	private static final String MESSAGE_ADD = "%s has been added sucessfully";
-	private static final String MESSAGE_EDIT ="%s has been edited sucessfully";
+	private static final String MESSAGE_ADD = "%s has been added successfully";
+	private static final String MESSAGE_EDIT ="%s has been edited successfully";
 	private static final String MESSAGE_ERROR = "%s could not be performed";
 	private static final String MESSAGE_DELETE = "%s has been deleted successfully";
 	private static final String MESSAGE_DIRECTORY = "file has been relocated to %s";
