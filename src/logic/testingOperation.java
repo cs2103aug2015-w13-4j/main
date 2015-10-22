@@ -14,17 +14,17 @@ public class testingOperation {
 	 * testing for base case, check if everything is initialize properly
 	 */
 	//@Test
-	
-	public void testProcessOperation() {
-		String input = "add this_is_a_task 10/10/2015 high";
+	public void testAdd() {
+		String input = "add this_a_new_task 10/10/2015 high";
 		String actual = operation.processOperation(input);
-		String expected ="this_is_a_task has been added sucessfully";
+		String expected ="this_a_new_task has been added sucessfully";
 		assertEquals(expected,actual);
 	}
 	/**
 	 * test to check if invalid command 
 	 */
 	//@Test
+	//need to change commandelements
 	public void testInvalidInput(){
 		String input = "bye";
 		String actual = operation.processOperation(input);
@@ -36,9 +36,9 @@ public class testingOperation {
 	 */
 	//@Test
 	public void testEdit(){
-		String input = "edit 2 end_date 12/10/2015";
+		String input = "edit 2 end_date 14/10/2015";
 		String actual = operation.processOperation(input);
-		String expected = "NEWCHANGE has been edited sucessfully";
+		String expected = "this_a_new_task has been edited successfully";
 		assertEquals(expected,actual);
 	}
 	
@@ -47,9 +47,9 @@ public class testingOperation {
 	 */
 	@Test
 	public void testDelete(){
-		String input =  "delete 1";
+		String input =  "delete 2";
 		String actual = operation.processOperation(input);
-		String expected = "this_is_a_task has been deleted sucessfully";
+		String expected = "this_a_new_task has been deleted successfully";
 		assertEquals(expected,actual);
 	}
 
