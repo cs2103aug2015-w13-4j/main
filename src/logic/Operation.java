@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,8 +17,10 @@ import logic.Launch;
 public class Operation {
 
 	private static Logger logger;
-
+	private Stack<CommandElements> list;
+	
 	public Operation() {
+		list = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
 	}
 
@@ -60,8 +63,7 @@ public class Operation {
 				return tasks.get(i).getTaskName();
 			}
 		}
-		
-		return "String";
+		return "does not exist";
 	}
 
 	/**
@@ -79,6 +81,9 @@ public class Operation {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
 			isSuccessful = action.addTask(content.getName(), content.getStartDate(),content.getEndDate(), getPriority(content.getPriority()));
+			if(isSuccessful){
+				undoAdd();
+			}
 			return isSuccessful;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
@@ -87,7 +92,11 @@ public class Operation {
 			return isSuccessful;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
+			undoDelete(content.getID());
 			isSuccessful = action.delete(content.getID());
+			if(!isSuccessful){
+				list.pop();
+			}
 			return isSuccessful;
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
@@ -96,9 +105,10 @@ public class Operation {
 			logger.log(Level.INFO, "command is search");
 
 			isSuccessful = search.searchWord(action.load(), content.getName());
-			return isSuccessful;
+			
 		case UNDO:
 			logger.log(Level.INFO, "command is undo");
+			content = list.pop();
 
 		case DIRECTORY:
 			logger.log(Level.INFO, "command is change directory");
@@ -151,5 +161,35 @@ public class Operation {
 			return content.getPriority().toString();
 		}
 		return "";
+	}
+	private void undoAdd(){
+		Storage store = Launch.getStorage();
+		int id = store.load().size();
+		CommandElements next = new CommandElements(Command_Type.DELETE_TASK,id);
+		list.push(next);
+	}
+	private void undoDelete(int id){
+		Storage store = Launch.getStorage();
+		ArrayList<TaskEvent> all = store.load();
+		TaskEvent task = all.get(0);
+		for(int i =0;i<all.size();i++){
+			if(all.get(i).getTaskID() == id){
+				task = all.get(i);
+			}
+		}
+		CommandElements next = new CommandElements(Command_Type.ADD_TASK,task,getPrior(task.getPriority()));
+		list.push(next);
+	}
+	private Command_Priority getPrior(String priority){
+		switch(priority){
+		case("high"):
+			return Command_Priority.HIGH;
+		case("medium"):
+			return Command_Priority.MEDIUM;
+		case("low"):
+			return Command_Priority.LOW;
+		}
+		return Command_Priority.HIGH;
+		
 	}
 }
