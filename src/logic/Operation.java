@@ -86,6 +86,7 @@ public class Operation {
 			}
 			return isSuccessful;
 		case EDIT_TASK:
+			//
 			logger.log(Level.INFO, "command is edit");
 			isSuccessful = action.editTask(content.getID(), content.getField().toString().replace("_", ""), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
@@ -109,7 +110,7 @@ public class Operation {
 		case UNDO:
 			logger.log(Level.INFO, "command is undo");
 			content = list.pop();
-
+			return performCommand(content.getType(),content);
 		case DIRECTORY:
 			logger.log(Level.INFO, "command is change directory");
 		default:
