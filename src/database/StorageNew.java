@@ -1,9 +1,11 @@
 package database;
 
-import utilities.*;
+import utilities.Command_Field;
+import utilities.Command_Priority;
+import utilities.TaskDate;
+import utilities.TaskEvent;
 
 import java.util.ArrayList;
-import java.util.Deque;
 
 /**
  * Created by zhongwei-z on 23/10/15.
@@ -14,7 +16,6 @@ public class StorageNew implements StorageAPI {
 	public static StorageAPI getInstance() { return ourInstance; }
 
 	private FileState saveState, prefState;
-	private XMLio _saveFile, _prefFile;
 
 	private StorageNew() {
 		saveState = checkFileState();
