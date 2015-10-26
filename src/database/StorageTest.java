@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 /**
  * Created by zhongwei-z on 26/10/15.
  */
-public class StorageNewTest extends TestCase {
+public class StorageTest extends TestCase {
 
 	public void testGetInstance() throws Exception {
 
