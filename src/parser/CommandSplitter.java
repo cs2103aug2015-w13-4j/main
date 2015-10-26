@@ -3,6 +3,7 @@ package parser;
 import java.util.Calendar;
 import java.util.Date;
 
+import utilities.Command_Field;
 import utilities.Command_Priority;
 import utilities.Command_Type;
 import utilities.TaskDate;
@@ -40,6 +41,20 @@ public class CommandSplitter {
 		}
 	}
 	
+	public static Command_Field findField(String command) {
+		if (contain("name", command)) {
+			return Command_Field.NAME;
+		} else if (contain("startdate", command)) {
+			return Command_Field.START_DATE;
+		} else if (contain("enddate", command)) {
+			return Command_Field.END_DATE;
+		} else if (contain("priority", command)) {
+			return Command_Field.PRIORITY;
+		} else {
+			return null;
+		}
+	}
+	
 	public static Command_Priority findPriority(String command) {
 		if (contain("high", command)) {
 			return Command_Priority.HIGH;
@@ -48,8 +63,18 @@ public class CommandSplitter {
 		} else if (contain("low", command)) {
 			return Command_Priority.LOW;
 		} else {
-			return null;
+			return Command_Priority.MEDIUM;
 		}
+	}
+	
+	public static int findObject(String command) {
+		String parts[] = command.split(" ");
+		for (int i = 0; i < parts.length; i ++) {
+			if (isInteger(parts[i])) {
+				return Integer.parseInt(parts[i]);
+			}
+		}
+		return -1;
 	}
 	
 	private static int[] getCurrentDate() {
@@ -108,7 +133,27 @@ public class CommandSplitter {
 				dateCount --;
 			}
 		}
+		if (dateCount == 2) {
+			results[0] = null;
+			results[1] = null;
+		} else if (dateCount == 1) {
+			results[1] = null;
+		} else {
+			if (results[0].compareTo(results[1]) == 1) {
+				TaskDate med = results[1];
+				results[1] = results[0];
+				results[0] = med;
+			}
+		}
 		return results;
 	}
 	
+	public static String findName(String command) {
+		if (command.contains("\"")) {
+			String parts[] = command.split("\"");
+			return parts[1];
+		} else {
+			return null;
+		}
+	}
 }
