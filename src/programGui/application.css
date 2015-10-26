@@ -1,3 +1,5 @@
+
+
 /*
  * ==============
  * Font-Family
@@ -8,7 +10,7 @@
 	font-family: ActionMan;
 	font-weight: 400;
 	font-style: normal;
-	src: url("/fonts/Action_Man.ttf")
+	src: url("/fonts/Action_Man.ttf");
 }
 
 /*
