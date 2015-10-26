@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="250.0" styleClass="task" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <CheckBox fx:id="checkBox" mnemonicParsing="false" prefHeight="30.0" prefWidth="11.0" />
       <Label fx:id="index" text="Index ">
