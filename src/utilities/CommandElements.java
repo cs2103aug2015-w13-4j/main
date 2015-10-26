@@ -3,96 +3,59 @@ package utilities;
 public class CommandElements {
 	private Command_Type type;
 	private String name;
-	private TaskDate date1;	//start date
-	private TaskDate date2; //end date
+	private TaskDate date[] = new TaskDate[2];
 	private Command_Priority priority;
 	private Command_Field field;
-	private int ID = -1;
-	/*ADD*/
-	//normal task
-	public CommandElements(Command_Type cmd, String nm, Command_Priority prio){
+	private int object;
+	
+	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
-		this.date1 = new TaskDate();
-		this.date2 = new TaskDate();
-		this.priority = prio;
-	}
-	//deadline
-	public CommandElements(Command_Type cmd, String nm, TaskDate dt, Command_Priority prio){
-		this.type = cmd;
-		this.name = nm;
-		this.date1 = new TaskDate();
-		this.date2 = dt;
-		this.priority = prio;
-	}
-	//event 
-	public CommandElements(Command_Type cmd, String nm, TaskDate dt1, TaskDate dt2, Command_Priority prio){
-		this.type = cmd;
-		this.name = nm;
-		this.date1 = dt1;
-		this.date2 = dt2;
+		this.date = dt;
 		this.priority = prio;
 	}
 	
-	/*EDIT*/
-	//name
-	public CommandElements(Command_Type cmd, int id, Command_Field fld, String nm){
+	public CommandElements(Command_Type cmd, int o, Command_Field fld, String nm){
 		this.type = cmd;
-		this.ID = id;
+		this.object = o;
 		this.field = fld;
 		this.name = nm;
 	}
-	//date
-	public CommandElements(Command_Type cmd, int id, Command_Field fld, TaskDate dt){
+	
+	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
 		this.type = cmd;
-		this.ID = id;
+		this.object = o;
 		this.field = fld;
-		if (field == Command_Field.START_DATE) {
-			this.date1 = dt;
-		} else {
-			this.date2 = dt;
-		}
+		this.date[0] = dt;
 	}
-	//priority
-	public CommandElements(Command_Type cmd, int id, Command_Field fld, Command_Priority prio){
+	
+	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
 		this.type = cmd;
-		this.ID = id;
+		this.object = o;
 		this.field = fld;
 		this.priority = prio;
 	}
 	
-	/*DELETE*/
-	public CommandElements(Command_Type cmd, int id) {
+	public CommandElements(Command_Type cmd, int o) {
 		this.type = cmd;
-		this.ID = id;
+		this.object = o;
 	}
 	
-	/*UNDO*/
 	public CommandElements(Command_Type cmd) {
 		this.type = cmd;
 	}
-	public CommandElements(Command_Type cmd, TaskEvent task,Command_Priority priority){
-		this.type = cmd;
-		this.ID = task.taskID;
-		this.date1 = task.getStartDate();
-		this.date2 = task.getEndDate();
-		this.priority = priority;
-	}
 	
-	
-	/*DIRECTORY*/
 	public CommandElements(Command_Type cmd, String directory) {
 		this.type = cmd;
 		this.name = directory;
 	}
-	
-	/*GET methods*/
+
 	public Command_Type getType(){
 		return type;
 	}
 	
-	public int getID() {
-		return ID;
+	public int getObject() {
+		return object;
 	}
 	
 	public String getName(){
@@ -100,11 +63,11 @@ public class CommandElements {
 	}
 	
 	public TaskDate getStartDate() {
-		return date1;
+		return date[0];
 	}
 	
 	public TaskDate getEndDate() {
-		return date2;
+		return date[1];
 	}
 	
 	public Command_Priority getPriority() {
