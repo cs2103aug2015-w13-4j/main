@@ -1,5 +1,3 @@
-
-
 /*
  * ==============
  * Font-Family
@@ -50,11 +48,11 @@
 	}
 
 .taskBox #taskName {
-	-fx-padding: 0 0 0 8
+	-fx-padding: 0 0 0 8;
 	-fx-text-fill: blue;
 }
 
 .taskBox #priority {
-	-fx-padding: 0 0 0 8
+	-fx-padding: 0 0 0 8;
 	-fx-text-fill: red;
 }
