@@ -1,1 +1,45 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/*
+ * ==============
+ * Font-Family
+ * ==============
+ */
+
+@font-face {
+	font-family: ActionMan;
+	font-weight: 400;
+	font-style: normal;
+	src: url("/fonts/Action_Man.ttf")
+}
+
+
+
+
+
+
+/*
+ * ==============
+ * Task Fonts
+ * ==============
+ */
+
+.task {
+	-fx-padding: 2 0 2 15;
+	-fx-background-radius 8;
+	-fx-font-family: ActionMan;
+	-fx-font-size: 20px;
+}
+
+.taskBox #index { 
+	-fx-padding: 0 5 0 5;
+	-fx-text-fill: gray;
+	}
+
+.taskBox #taskName {
+	-fx-padding: 0 0 0 8
+	-fx-text-fill: blue;
+}
+
+.taskBox #priority {
+	-fx-padding: 0 0 0 8
+	-fx-text-fill: red;
+}

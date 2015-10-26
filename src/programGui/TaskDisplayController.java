@@ -52,7 +52,7 @@ public class TaskDisplayController extends VBox{
     
     public void updateTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
-        displayTasks = getTask();
+        //displayTasks = getTask();
         if (displayTasks == null ) {
         	System.out.print("ERROR NULL NULL \n");
         }

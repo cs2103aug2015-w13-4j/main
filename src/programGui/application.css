@@ -11,9 +11,22 @@
 	src: url("/fonts/Action_Man.ttf")
 }
 
+/*
+ * ==============
+ * Input View
+ * ==============
+ */
+.taskDisplay #feedBack {
+	-fx-font : 13px ActionMan;
+	-fx-text-fill: Gray;
+	-fx-font-style: bold,italic;
+}
 
-
-
+.taskDisplay #userInput {
+	-fx-font: 16px ActionMan;
+	-fx-focus-color: blue;
+	-fx-accent: blue;
+}
 
 
 /*
