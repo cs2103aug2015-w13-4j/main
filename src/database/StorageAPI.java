@@ -25,7 +25,9 @@ public interface StorageAPI {
 
 	ArrayList<TaskEvent> loadAllTasks();
 
-	FileState checkFileState();
+	FileState checkSaveFileState();
+
+	FileState checkPrefFileState();
 
 	boolean changeDirectory(String dir);
 }
