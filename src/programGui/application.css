@@ -3,7 +3,7 @@
  * Font-Family
  * ==============
  */
-
+/*
 @font-face {
 	font-family: ActionMan;
 	font-weight: 400;
@@ -30,7 +30,7 @@
 	font-weight: 700;
 	font-style: italic;
 	src: url("../../src/fonts/Action_Man_Bold_Italic.ttf");
-}
+} */
 
 /*
  * ==============
@@ -38,12 +38,14 @@
  * ==============
  */
 .inputView #feedBack {
-	-fx-font : 13px ActionMan;
+	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	-fx-font-size:13px;
 	-fx-text-fill: gray;
 } 
 
 .inputView #userInput {
-	-fx-font: 15px ActionMan;
+	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	-fx-font-size:15px;
 	-fx-focus-color: blue;
 	-fx-accent: blue;
 }
@@ -58,7 +60,7 @@
 .task {
 	-fx-padding: 2 0 2 15;
 	-fx-background-radius: 8;
-	-fx-font-family: ActionMan;
+	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size: 20px;
 }
 
@@ -82,6 +84,12 @@
  * ==============
  */
 .root{
-	-fx-background-color: cyan;
-	-fx-padding:4;
+	-fx-background-color: white;
+	-fx-padding:2;
 }
+/*
+ * ==============
+ * Task Display
+ * ==============
+ */
+ 
