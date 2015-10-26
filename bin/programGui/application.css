@@ -8,12 +8,45 @@
 	font-family: ActionMan;
 	font-weight: 400;
 	font-style: normal;
-	src: url("/fonts/Action_Man.ttf")
+	src: url("../../src/fonts/Action-Man.ttf");
 }
 
+@font-face {
+	font-family: ActionMan;
+	font-weight:400;
+	font-style:italic;
+	src: url("../../src/fonts/Action_Man_Italic.ttf");
+}
 
+@font-face {
+	font-family: ActionMan;
+	font-weight:700;
+	font-style:bold;
+	src: url("../../src/fonts/Action_Man_Bold.ttf");
+}
 
+@font-face{
+	font-family: ActionMan;
+	font-weight: 700;
+	font-style: italic;
+	src: url("../../src/fonts/Action_Man_Bold_Italic.ttf");
+}
 
+/*
+ * ==============
+ * Input View
+ * ==============
+ */
+.inputView #feedBack {
+	-fx-font : 13px ActionMan;
+	-fx-text-fill: gray;
+} 
+
+.inputView #userInput {
+	-fx-font: 15px ActionMan;
+	-fx-focus-color: blue;
+	-fx-accent: blue;
+}
 
 
 /*
@@ -24,22 +57,31 @@
 
 .task {
 	-fx-padding: 2 0 2 15;
-	-fx-background-radius 8;
+	-fx-background-radius: 8;
 	-fx-font-family: ActionMan;
 	-fx-font-size: 20px;
 }
 
-.taskBox #index { 
+.task #index { 
 	-fx-padding: 0 5 0 5;
 	-fx-text-fill: gray;
-	}
+}
 
-.taskBox #taskName {
-	-fx-padding: 0 0 0 8
+.task #taskName {
+	-fx-padding: 0 0 0 8;
 	-fx-text-fill: blue;
 }
 
-.taskBox #priority {
-	-fx-padding: 0 0 0 8
+.task #priority {
+	-fx-padding: 0 0 0 8;
 	-fx-text-fill: red;
+}
+/*
+ * ==============
+ * Root
+ * ==============
+ */
+.root{
+	-fx-background-color: cyan;
+	-fx-padding:4;
 }

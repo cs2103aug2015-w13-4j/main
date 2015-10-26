@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="inputBox" prefHeight="20.0" prefWidth="820.0" type="VBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="20.0" prefWidth="820.0" styleClass="inputView" type="VBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="feedBack" alignment="CENTER" contentDisplay="CENTER" prefHeight="10.0" prefWidth="800.0" text="Feedback" VBox.vgrow="ALWAYS">
          <VBox.margin>
