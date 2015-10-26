@@ -3,15 +3,12 @@
  * Font-Family
  * ==============
  */
-/*
+
 @font-face {
-	font-family: ActionMan;
-	font-weight: 400;
-	font-style: normal;
 	src: url("../../src/fonts/Action-Man.ttf");
 }
 
-@font-face {
+/* @font-face {
 	font-family: ActionMan;
 	font-weight:400;
 	font-style:italic;
@@ -30,8 +27,14 @@
 	font-weight: 700;
 	font-style: italic;
 	src: url("../../src/fonts/Action_Man_Bold_Italic.ttf");
-} */
+} 
 
+@font-face {
+	font-weight:400;
+	font-style:normal;
+	src: url("../../src/fonts/fontawesome-webfront.ttf");
+}
+*/
 /*
  * ==============
  * Input View
@@ -44,7 +47,8 @@
 } 
 
 .inputView #userInput {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	/*-fx-font-family: "Comic Sans MS", cursive, sans-serif;*/
+	fx-font-family: "Action Man";
 	-fx-font-size:15px;
 	-fx-focus-color: blue;
 	-fx-accent: blue;
@@ -59,14 +63,15 @@
 
 .task {
 	-fx-padding: 2 0 2 15;
-	-fx-background-radius: 8;
+	-fx-background-radius: 5;
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 20px;
+	-fx-font-size: 14px;
 }
 
 .task #index { 
 	-fx-padding: 0 5 0 5;
 	-fx-text-fill: gray;
+	-fx-font-size: 12px;
 }
 
 .task #taskName {
@@ -76,8 +81,9 @@
 
 .task #priority {
 	-fx-padding: 0 0 0 8;
-	-fx-text-fill: red;
+	-fx-text-fill: tomato;
 }
+
 /*
  * ==============
  * Root

@@ -30,9 +30,9 @@ public class MainApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+	    initRoot();
 		initTaskView();
 		initInputView();
-		initRoot();
 		initPrimaryStage(primaryStage);
 	}
 	
@@ -44,8 +44,8 @@ public class MainApp extends Application{
 		this.primaryStage = primaryStage;
 		this.primaryStage.setMinHeight(PROGRAM_HEIGHT);
 		this.primaryStage.setMinWidth(PROGRAM_WIDTH);
-		this.primaryStage.setScene(new Scene(rootLayout));
 		this.primaryStage.setTitle(PROGRAM_TITLE);
+		this.primaryStage.setScene(new Scene(rootLayout));
 		this.primaryStage.show();	
 	}
 	

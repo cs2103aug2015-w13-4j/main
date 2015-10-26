@@ -9,7 +9,7 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 
 
-public class Task extends HBox{
+public class TaskController extends HBox{
 
     @FXML
     private CheckBox checkBox;
@@ -29,14 +29,14 @@ public class Task extends HBox{
     private static final String STRING_EMPTY = "";
     
     
-    public Task(TaskEvent task) {
+    public TaskController(TaskEvent task) {
         loadFxml();
         initFxmlFields(task.getTaskID(),task.getTaskName(),task.getEndDate().toString()  , "High");
     }
     
-    public Task() {
+    public TaskController() {
         loadFxml();
-        initFxmlFields(1,"test","10/10/2015" , "High");
+        initFxmlFields(1,"test","10/10/2015" , "high");
     }
     
     public void initFxmlFields (int idx, String taskName , String date, String priority) {

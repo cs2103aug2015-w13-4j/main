@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import logic.Display;
-import programGui.Task;
+import programGui.TaskController;
 import logic.Launch;
 
 public class TaskDisplayController extends VBox{
@@ -52,7 +52,7 @@ public class TaskDisplayController extends VBox{
     
     public void updateTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
-        //displayTasks = getTask();
+        displayTasks = getTask();
         if (displayTasks == null ) {
         	System.out.print("ERROR NULL NULL \n");
         }
@@ -63,16 +63,16 @@ public class TaskDisplayController extends VBox{
     }
     
     public ObservableList<HBox> getTask() {
-    	launch = Launch.getInstance();
-    	display = launch.getDisplay();
+    	//launch = Launch.getInstance();
+    	//display = launch.getDisplay();
         
         ObservableList<HBox> tasks = FXCollections.observableArrayList(); 
-        ArrayList<TaskEvent> taskList = display.taskView();
-        for(TaskEvent t : taskList) {
+        //ArrayList<TaskEvent> taskList = display.taskView();
+        /*for(TaskEvent t : taskList) {
            tasks.add(new Task(t));
-        } 
+        } */
         //tasks.add(new Task(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10), new TaskDate(2015,10,15), 1)));
-        //tasks.add(new Task());
+        tasks.add(new TaskController());
         return tasks;
     } 
 }
