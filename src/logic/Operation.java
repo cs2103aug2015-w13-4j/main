@@ -114,6 +114,7 @@ public class Operation {
 			if (isSuccessful) {
 				undoComplete(content.getID());
 			}
+			
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
 			isSuccessful = search.searchWord(action.loadAllTasks(), content.getName());
