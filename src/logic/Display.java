@@ -7,46 +7,51 @@ import utilities.TaskEvent;
 import java.util.ArrayList;
 
 public class Display {
-	
-	/*Feedback*/
+
+	/* Feedback */
 	private static final String MESSAGE_ADD = "%s has been added successfully";
-	private static final String MESSAGE_EDIT ="%s has been edited successfully";
+	private static final String MESSAGE_EDIT = "%s has been edited successfully";
 	private static final String MESSAGE_ERROR = "%s could not be performed";
 	private static final String MESSAGE_DELETE = "%s has been deleted successfully";
 	private static final String MESSAGE_DIRECTORY = "file has been relocated to %s";
 	private static final String MESSAGE_FINISHED = "%s has been completed!";
 	private static final String MESSAGE_SEARCH = "%s tasks has been found with your search";
 	private static final String MESSAGE_UNDO = "previous task has been undone";
-	
+
 	private Command_Type nextCommand = Command_Type.UNDO;
-	
-	public Display(){
+
+	public Display() {
 	}
-	
+
 	/**
 	 * update the view on the screen of tasks
+	 * 
 	 * @return ArrayList of task to show user
 	 */
-	public ArrayList<TaskEvent> taskView(){
+	public ArrayList<TaskEvent> taskView() {
 		Storage store = Launch.getStorage();
 		Search search = Launch.getSearch();
 		ArrayList<TaskEvent> view;
-		if(nextCommand == Command_Type.SEARCH_TASK){
+		if (nextCommand == Command_Type.SEARCH_TASK) {
 			view = search.getResult();
-		} else{
+		} else {
 			view = store.loadAllTasks();
 		}
 		return view;
 	}
+
 	/**
 	 * Provide user with a feedback on the current operation
-	 * @param op user input command
-	 * @param content user input
+	 * 
+	 * @param op
+	 *            user input command
+	 * @param content
+	 *            user input
 	 * @return feedback to user
 	 */
-	public String operation(Command_Type op, String content){
+	public String operation(Command_Type op, String content) {
 		nextCommand = op;
-		switch(op){
+		switch (op) {
 		case ADD_TASK:
 			return String.format(MESSAGE_ADD, content);
 		case EDIT_TASK:
@@ -66,12 +71,15 @@ public class Display {
 		}
 		return "";
 	}
+
 	/**
 	 * Provide warning when input is not valid
-	 * @param input user input content
+	 * 
+	 * @param input
+	 *            user input content
 	 * @return error message
 	 */
-	public String error(String input){
+	public String error(String input) {
 		return String.format(MESSAGE_ERROR, input);
 	}
 }
