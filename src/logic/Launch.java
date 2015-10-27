@@ -13,10 +13,11 @@ public class Launch {
 	private static Search search;
 	private static ArrayList<TaskEvent> tasks;
 	private static Launch launch;
-	
-	private Launch(){
+
+	private Launch() {
 	}
-	private static void createObjects(){
+
+	private static void createObjects() {
 		storage = StorageImp.getInstance();
 		display = new Display();
 		op = new Operation();
@@ -25,34 +26,39 @@ public class Launch {
 		launch = new Launch();
 	}
 
-	/*getting objects*/
-	public static Storage getStorage(){
+	/* getting objects */
+	public static Storage getStorage() {
 		return storage;
 	}
-	public Operation getOperation(){
+
+	public Operation getOperation() {
 		return op;
 	}
-	public static  Display getDisplay(){
+
+	public static Display getDisplay() {
 		return display;
 	}
-	public static Search getSearch(){
+
+	public static Search getSearch() {
 		return search;
 	}
-	public static Launch getInstance(){
-		
-		if(launch == null){
+
+	public static Launch getInstance() {
+
+		if (launch == null) {
 			createObjects();
-		}	
+		}
 		return launch;
 	}
-	
-	/*UI main task view*/
-	public ArrayList<TaskEvent> updateView(){
+
+	/* UI main task view */
+	public ArrayList<TaskEvent> updateView() {
 		tasks = display.taskView();
 		return tasks;
 	}
-	/*main method UI calls*/
-	public String command(String input){
+
+	/* main method UI calls */
+	public String command(String input) {
 		return op.processOperation(input);
 	}
 }
