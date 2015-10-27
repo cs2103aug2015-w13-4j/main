@@ -6,7 +6,7 @@ public class CommandElements {
 	private TaskDate date[] = new TaskDate[2];
 	private Command_Priority priority;
 	private Command_Field field;
-	private int object;
+	private int id;
 	
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio){
 		this.type = cmd;
@@ -17,28 +17,27 @@ public class CommandElements {
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, String nm){
 		this.type = cmd;
-		this.object = o;
+		this.id = o;
 		this.field = fld;
 		this.name = nm;
 	}
-	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
 		this.type = cmd;
-		this.object = o;
+		this.id = o;
 		this.field = fld;
 		this.date[0] = dt;
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
 		this.type = cmd;
-		this.object = o;
+		this.id = o;
 		this.field = fld;
 		this.priority = prio;
 	}
 	
 	public CommandElements(Command_Type cmd, int o) {
 		this.type = cmd;
-		this.object = o;
+		this.id = o;
 	}
 	
 	public CommandElements(Command_Type cmd) {
@@ -54,8 +53,8 @@ public class CommandElements {
 		return type;
 	}
 	
-	public int getObject() {
-		return object;
+	public int getID() {
+		return id;
 	}
 	
 	public String getName(){
