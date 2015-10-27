@@ -1,8 +1,10 @@
 package logic;
 
-import java.util.ArrayList;
-
+import database.Storage;
+import database.StorageImp;
 import utilities.TaskEvent;
+
+import java.util.ArrayList;
 
 public class Launch {
 	private static Storage storage;
@@ -15,11 +17,11 @@ public class Launch {
 	private Launch(){
 	}
 	private static void createObjects(){
-		storage = new Storage();
+		storage = StorageImp.getInstance();
 		display = new Display();
 		op = new Operation();
 		search = new Search();
-		tasks = storage.load();
+		tasks = storage.loadAllTasks();
 		launch = new Launch();
 	}
 

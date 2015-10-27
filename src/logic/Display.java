@@ -1,8 +1,10 @@
 package logic;
-import java.util.ArrayList;
 
+import database.Storage;
 import utilities.Command_Type;
 import utilities.TaskEvent;
+
+import java.util.ArrayList;
 
 public class Display {
 	
@@ -32,7 +34,7 @@ public class Display {
 		if(nextCommand == Command_Type.SEARCH_TASK){
 			view = search.getResult();
 		} else{
-			view = store.load();	
+			view = store.loadAllTasks();
 		}
 		return view;
 	}

@@ -1,12 +1,18 @@
 package utilities;
 
-import com.google.gson.Gson;
-
 public class TaskEvent {
 
 	private static final int LO_PRIO = 3;
 	private static final int MI_PRIO = 2;
 	private static final int HI_PRIO = 1;
+
+	private static String TASK_STR = "id:%1$s&&" +
+			"name:%2$s&&" +
+			"start:%3$s&&" +
+			"end:%4$s&&" +
+			"priority:%5$s&&" +
+			"completed:%6$s&&" +
+			"available:%7$s&&";
 
 	protected int taskID;
 	protected String taskName;
@@ -44,8 +50,8 @@ public class TaskEvent {
 
 	@Override
 	public String toString() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
+		return String.format(TASK_STR, taskID, taskName, startDate.toString(), endDate.toString(),
+				priority.toString(), String.valueOf(completed), String.valueOf(available));
 	}
 
 //	public TaskEvent(int taskID, String name, TaskDate startDate, TaskDate endDate, int prio) {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by zhongwei-z on 23/10/15.
  */
-public interface StorageAPI {
+public interface Storage {
 
 	boolean addTask(String taskName, TaskDate from, TaskDate to, Command_Priority priority) throws Exception;
 
@@ -22,6 +22,8 @@ public interface StorageAPI {
 	boolean markTaskAsUndone(int taskID);
 
 	TaskEvent searchTaskByID(int taskID);
+
+	int getTaskCount();
 
 	ArrayList<TaskEvent> loadAllTasks();
 
