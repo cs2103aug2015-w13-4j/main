@@ -3,6 +3,7 @@ package utilities;
 import java.util.ArrayList;
 
 public class TaskDate implements Comparable<TaskDate>{
+	private static final String DIVIDER = "-";
 	
 	String myDate;
 	//static int myYear;
@@ -20,7 +21,14 @@ public class TaskDate implements Comparable<TaskDate>{
 		myMonth = 0;
 		myDay = 0;
 	}
-	
+
+	public TaskDate(String string) {
+		String[] split = string.split(DIVIDER);
+		myYear = Integer.parseInt(split[0]);
+		myMonth = Integer.parseInt(split[1]);
+		myDay = Integer.parseInt(split[2]);
+	}
+
 	public void setYear(int year) {
 		myYear = year;
 	}
@@ -123,5 +131,10 @@ public class TaskDate implements Comparable<TaskDate>{
 		} else {
 			return 0;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return myYear + "-" + myMonth + "-" + myDay;
 	}
 }
