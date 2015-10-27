@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import database.Storage;
 import utilities.CommandElements;
-import utilities.Command_Priority;
+import utilities.Command_Field;
 import utilities.Command_Type;
 import utilities.TaskDate;
 import utilities.TaskEvent;
@@ -94,7 +94,9 @@ public class Operation {
 			String name = getInitialContent(content.getID(),content.getField());
 			isSuccessful = action.editTask(content.getID(), content.getField(), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
-			
+			if(isSuccessful){
+				undoEdit(content.getID(),content.getField(),name);
+			}
 			return isSuccessful;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
@@ -106,7 +108,10 @@ public class Operation {
 			return isSuccessful;
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
-
+			
+			if(isSuccessful){
+				undoComplete(content.getID());
+			}
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
 
@@ -150,7 +155,39 @@ public class Operation {
 		}
 		return "";
 	}
-	private String getInitialContent(int id, )
+	private String getInitialContent(int id, Command_Field field){
+		Storage store = Launch.getStorage();
+		ArrayList<TaskEvent> tasks = store.loadAllTasks();
+		TaskEvent task = tasks.get(0);
+		for(int i =0;i< tasks.size();i++){
+			if(tasks.get(i).getTaskID() == id){
+				task = tasks.get(i);
+			}
+		}	
+		return getContent(task,field);
+	}
+	private String getContent(TaskEvent task, Command_Field field){
+		logger.log(Level.INFO, "finding old content");
+
+		switch (field) {
+		case NAME:
+			logger.log(Level.INFO, "name");
+			return task.getTaskName();
+		case START_DATE:
+			logger.log(Level.INFO, "start date");
+
+			TaskDate startDate = task.getStartDate();
+			return startDate.toString();
+		case END_DATE:
+			TaskDate endDate = task.getEndDate();
+			logger.log(Level.INFO, "end date"+endDate.toString());
+			return endDate.toString();
+		case PRIORITY:
+			logger.log(Level.INFO, "priority");
+			return task.getPriority().toString();
+		}
+		return "";
+	}
 	private void undoAdd(){
 		Storage store = Launch.getStorage();
 		int id = store.loadAllTasks().size();
@@ -169,11 +206,13 @@ public class Operation {
 		CommandElements next = new CommandElements(Command_Type.ADD_TASK,id);
 		list.push(next);
 	}
-	private void undoEdit(){
-		
+	private void undoEdit(int id, Command_Field field, String content){
+		CommandElements next = new CommandElements(Command_Type.EDIT_TASK, id, field, content);
+		list.push(next);
 	}
-	private void undoComplete(){
-		
+	private void undoComplete(int id){
+		CommandElements next = new CommandElements(Command_Type.FINISH_TASK,id);
+		list.push(next);
 	}
 	private void undoChange(){
 		
