@@ -9,4 +9,8 @@ public class Exceptions {
 	public static class FileCorruptedException extends Exception {
 		public FileCorruptedException(String message) { super(message); }
 	}
+	public static class OperationNotPerformed extends Exception{
+		public OperationNotPerformed(String message){ super(message);}
+		
+	}
 }
