@@ -5,6 +5,7 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import database.Storage;
 import utilities.CommandElements;
 import utilities.Command_Priority;
 import utilities.Command_Type;
@@ -74,25 +75,31 @@ public class Operation {
 	private boolean performCommand(Command_Type command, CommandElements content) {
 		Storage action = Launch.getStorage();
 		Search search = Launch.getSearch();
-		boolean isSuccessful;
+		boolean isSuccessful = false;
 		switch (command) {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
-			isSuccessful = action.addTask(content.getName(), content.getStartDate(),content.getEndDate(), getPriority(content.getPriority()));
+			try{
+				isSuccessful = action.addTask(content.getName(), content.getStartDate(),content.getEndDate(), content.getPriority());
+			} catch(Exception e){
+				logger.log(Level.INFO,"exception caught :"+e.getMessage());
+				return isSuccessful;
+			}
 			if(isSuccessful){
 				undoAdd();
 			}
 			return isSuccessful;
 		case EDIT_TASK:
-			//
 			logger.log(Level.INFO, "command is edit");
-			isSuccessful = action.editTask(content.getID(), content.getField().toString().replace("_", ""), getEditContent(content));
+			String name = getInitialContent(content.getID(),content.getField());
+			isSuccessful = action.editTask(content.getID(), content.getField(), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
+			
 			return isSuccessful;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
 			undoDelete(content.getID());
-			isSuccessful = action.delete(content.getID());
+			isSuccessful = action.deleteTaskByID(content.getID());
 			if(!isSuccessful){
 				list.pop();
 			}
@@ -103,9 +110,10 @@ public class Operation {
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
 
-			isSuccessful = search.searchWord(action.load(), content.getName());
+			isSuccessful = search.searchWord(action.loadAllTasks(), content.getName());
 			
-		case UNDO:
+		case UNDO: 
+			//undo add, delete, edit, complete, directory 
 			logger.log(Level.INFO, "command is undo");
 			content = list.pop();
 			return performCommand(content.getType(),content);
@@ -118,25 +126,6 @@ public class Operation {
 	}
 
 	/**
-	 * Converting Command_Priority to String
-	 * 
-	 * @param priority
-	 *            is the Command_Priority user input
-	 * @return String equality of Command_Priority
-	 */
-	private String getPriority(Command_Priority priority) {
-		switch (priority) {
-		case HIGH:
-			return "high";
-		case MEDIUM:
-			return "medium";
-		case LOW:
-			return "low";
-		}
-		return "";
-	}
-
-	/*
 	 * For the edit command. Get the field which user want to edit
 	 */
 	private String getEditContent(CommandElements content) {
@@ -161,34 +150,32 @@ public class Operation {
 		}
 		return "";
 	}
+	private String getInitialContent(int id, )
 	private void undoAdd(){
 		Storage store = Launch.getStorage();
-		int id = store.load().size();
+		int id = store.loadAllTasks().size();
 		CommandElements next = new CommandElements(Command_Type.DELETE_TASK,id);
 		list.push(next);
 	}
 	private void undoDelete(int id){
-		Storage store = Launch.getStorage();
-		ArrayList<TaskEvent> all = store.load();
+		/*Storage store = Launch.getStorage();
+		ArrayList<TaskEvent> all = store.loadAllTasks();
 		TaskEvent task = all.get(0);
 		for(int i =0;i<all.size();i++){
 			if(all.get(i).getTaskID() == id){
 				task = all.get(i);
 			}
-		}
-		CommandElements next = new CommandElements(Command_Type.ADD_TASK,task,getPrior(task.getPriority()));
+		}*/
+		CommandElements next = new CommandElements(Command_Type.ADD_TASK,id);
 		list.push(next);
 	}
-	private Command_Priority getPrior(String priority){
-		switch(priority){
-		case("high"):
-			return Command_Priority.HIGH;
-		case("medium"):
-			return Command_Priority.MEDIUM;
-		case("low"):
-			return Command_Priority.LOW;
-		}
-		return Command_Priority.HIGH;
+	private void undoEdit(){
+		
+	}
+	private void undoComplete(){
+		
+	}
+	private void undoChange(){
 		
 	}
 }
