@@ -57,6 +57,10 @@ public class CommandElements {
 		return id;
 	}
 	
+	public void setID(int o) {
+		id = o;
+	} 
+	
 	public String getName(){
 		return name;
 	}
@@ -75,5 +79,19 @@ public class CommandElements {
 	
 	public Command_Field getField() {
 		return field;
+	}
+	
+	public void debugPrint() {
+		System.out.println(type.toString());
+		System.out.println(name);
+		System.out.println(id);
+		if (date[0] != null) System.out.println(date[0].printDate());
+		if (date[1] != null) System.out.println(date[1].printDate());
+		if (priority != null) System.out.println(priority.toString());
+		if (field == null) { 
+			System.out.println("no field");
+		} else {
+			System.out.println(field.toString());
+		}
 	}
 }
