@@ -60,9 +60,7 @@ public class TaskDate implements Comparable<TaskDate> {
 		return myDay;
 	}
 	public String toString(){
-		if (this == null) {
-			return "0/0/0";
-		} else if(myYear==-1) {
+		if(myYear==-1) {
 			return "null";
 		}
 		return myDay + "/" + myMonth +"/" + myYear;

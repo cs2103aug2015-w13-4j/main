@@ -71,10 +71,14 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean addTask(String taskName, TaskDate from, TaskDate to, Command_Priority priority) {
-		TaskEvent task = new TaskEvent(taskCounter++, taskName, from, to, priority);
-		writer.write(task.toString());
-		writer.println();
-		writer.flush();
+		try {
+			TaskEvent task = new TaskEvent(taskCounter++, taskName, from, to, priority);
+			writer.write(task.toString());
+			writer.println();
+			writer.flush();
+		} catch (NullPointerException npe) {
+			return false;
+		}
 		return true;
 	}
 
