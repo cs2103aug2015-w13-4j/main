@@ -25,7 +25,12 @@ public class CommandElements {
 		this.type = cmd;
 		this.id = o;
 		this.field = fld;
-		this.date[0] = dt;
+		if (fld == Command_Field.END_DATE) {
+			this.date[1] = dt;
+		} else {
+			this.date[0] = dt;
+		}
+		
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
