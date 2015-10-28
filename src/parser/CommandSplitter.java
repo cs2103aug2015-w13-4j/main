@@ -63,7 +63,7 @@ public class CommandSplitter {
 		} else if (contain("low", command)) {
 			return Command_Priority.LOW;
 		} else {
-			return null;
+			return Command_Priority.MEDIUM;
 		}
 	}
 	
@@ -237,10 +237,10 @@ public class CommandSplitter {
 			}
 		}
 		if (dateCount == 2) {
-			results[0] = null;
-			results[1] = null;
+			results[0] = new TaskDate(0,0,0);
+			results[1] = new TaskDate(0,0,0);
 		} else if (dateCount == 1) {
-			results[1] = null;
+			results[1] = new TaskDate(0,0,0);
 		} else {
 			if (results[0].compareTo(results[1]) == 1) {
 				TaskDate med = results[1];
