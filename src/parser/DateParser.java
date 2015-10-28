@@ -1,5 +1,8 @@
 package parser;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import utilities.TaskDate;
 
 public class DateParser {
@@ -7,6 +10,7 @@ public class DateParser {
 	public static TaskDate dateDecoder(String dateStr) {
 		int year, month, day;
 		int thisDate[] = new int[3];
+		thisDate = getCurrentDate();
 		
 		// support format 03/09/2015
 		if (dateStr.length() == 10) {
@@ -15,6 +19,19 @@ public class DateParser {
 				day = Integer.parseInt(parts[0]);
 				month = Integer.parseInt(parts[1]);
 				year = Integer.parseInt(parts[2]);
+				if (checkDate(year, month, day) == 0) {
+					return new TaskDate(year, month, day);
+				}
+			}
+		}
+		
+		// support format 2015/09/03
+		if (dateStr.length() == 10) {
+			String parts[] = dateStr.split("/");
+			if (parts.length == 3){
+				day = Integer.parseInt(parts[2]);
+				month = Integer.parseInt(parts[1]);
+				year = Integer.parseInt(parts[0]);
 				if (checkDate(year, month, day) == 0) {
 					return new TaskDate(year, month, day);
 				}
@@ -33,7 +50,20 @@ public class DateParser {
 				}
 			}
 		}
-		
+
+		// support format 15/09/03
+		if (dateStr.length() == 8) {
+			String parts[] = dateStr.split("/");
+			if (parts.length == 3){
+				day = Integer.parseInt(parts[2]);
+				month = Integer.parseInt(parts[1]);
+				year = Integer.parseInt(parts[0]) + 2000;
+				if (checkDate(year, month, day) == 0) {
+					return new TaskDate(year, month, day);
+				}
+			}
+		}
+
 		// support format 09/03
 		if (dateStr.length() == 5) {
 			String parts[] = dateStr.split("/");
@@ -89,5 +119,16 @@ public class DateParser {
 			return -1;
 		}
 		return 0;
+	}
+	
+	private static int[] getCurrentDate() {
+		Date date = new Date(); // your date
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int thisYear = cal.get(Calendar.YEAR);
+	    int thisMonth = cal.get(Calendar.MONTH) + 1;
+	    int thisDay = cal.get(Calendar.DAY_OF_MONTH);
+	    int currentDate[] = {thisYear, thisMonth, thisDay};
+	    return currentDate;
 	}
 }
