@@ -39,15 +39,24 @@ public class Task extends HBox{
     
     public Task() {
         loadFxml();
-        initFxmlFields(1,"test","high" , "10/10/2015" , "11/11/2015");
+        initFxmlFields(1,"test","high" , "0" , "11/11/2015");
     }
     
     public void initFxmlFields (int idx, String taskName ,String priority ,  String sDate, String eDate) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.priority.setText(priority);
+        
+        if(sDate.equals("0") ) {
+        	this.sDate.setText("");
+        } else {
         this.sDate.setText(sDate);
+        }
+        if(eDate.equals("0")) {
+        	this.eDate.setText("");
+        } else {
         this.eDate.setText(eDate);
+        }
     }
     
     private void loadFxml() {

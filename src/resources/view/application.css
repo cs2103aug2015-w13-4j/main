@@ -49,7 +49,7 @@
 .inputView #userInput {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	/*fx-font-family: "Action Man"; */
-	-fx-font-size:15px;
+	-fx-font-size:14px;
 	-fx-focus-color: blue;
 	-fx-accent: blue;
 }
@@ -82,6 +82,8 @@
 .task #priority {
 	-fx-padding: 0 0 0 8;
 	-fx-text-fill: tomato;
+	-fx-font-size: 13px;
+	-fx-font-style: italic;
 }
 
 .task #sDate {
