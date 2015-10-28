@@ -40,7 +40,9 @@ public class CommandParser {
 			return new CommandElements(type, object);
 		} else if (type == Command_Type.SEARCH_TASK) {
 			object = CommandSplitter.findObject(command);
-			return new CommandElements(type, name, date, priority);
+			CommandElements thisC = new CommandElements(type, name, date, priority);
+			thisC.setID(object);
+			return thisC;
 		} else if (type == Command_Type.FINISH_TASK) {
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
