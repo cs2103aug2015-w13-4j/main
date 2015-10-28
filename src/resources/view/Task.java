@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import utilities.TaskDate;
+//import utilities.TaskDate;
 import utilities.TaskEvent;
 
 
@@ -32,10 +32,10 @@ public class Task extends HBox{
     private static final String STRING_EMPTY = "";
     
     
-    public Task(TaskEvent task) {
+   /* public Task(TaskEvent task) {
         loadFxml();
         initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate().toString()  , task.getEndDate().toString());
-    }
+    } */
     
     public Task() {
         loadFxml();
