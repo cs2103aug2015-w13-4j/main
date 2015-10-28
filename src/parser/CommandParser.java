@@ -38,6 +38,9 @@ public class CommandParser {
 		} else if (type == Command_Type.DELETE_TASK) {
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
+		} else if (type == Command_Type.SEARCH_TASK) {
+			object = CommandSplitter.findObject(command);
+			return new CommandElements(type, name, date, priority);
 		} else if (type == Command_Type.FINISH_TASK) {
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
