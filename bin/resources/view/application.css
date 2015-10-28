@@ -4,15 +4,15 @@
  * ==============
  */
 
-@font-face {
-	src: url("../../src/fonts/Action-Man.ttf");
-}
+/* @font-face {
+	src: url("../../src/resources/fonts/Action-Man.ttf");
+}*/
 
 /* @font-face {
 	font-family: ActionMan;
 	font-weight:400;
 	font-style:italic;
-	src: url("../../src/fonts/Action_Man_Italic.ttf");
+	src: url("../../src/resources/fonts/Action_Man_Italic.ttf");
 }
 
 @font-face {
@@ -32,7 +32,7 @@
 @font-face {
 	font-weight:400;
 	font-style:normal;
-	src: url("../../src/fonts/fontawesome-webfront.ttf");
+	src: url("../../src//resources/fonts/fontawesome-webfront.ttf");
 }
 */
 /*
@@ -47,8 +47,8 @@
 } 
 
 .inputView #userInput {
-	/*-fx-font-family: "Comic Sans MS", cursive, sans-serif;*/
-	fx-font-family: "Action Man";
+	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	/*fx-font-family: "Action Man"; */
 	-fx-font-size:15px;
 	-fx-focus-color: blue;
 	-fx-accent: blue;
@@ -83,6 +83,20 @@
 	-fx-padding: 0 0 0 8;
 	-fx-text-fill: tomato;
 }
+
+.task #sDate {
+	-fx-padding: 4 0 0 8;
+	-fx-text-fill: gray;
+	-fx-font-size:11px;	
+}
+
+.task #eDate { 
+	-fx-padding: 4 0 0 8;
+	-fx-text-fill: gray;
+	-fx-font-size:11px;
+}
+
+.task #date { }
 
 /*
  * ==============

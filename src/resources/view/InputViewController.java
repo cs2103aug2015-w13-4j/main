@@ -1,4 +1,4 @@
-package programGui;
+package resources.view;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import logic.Launch;
-import programGui.TaskDisplayController;
+import resources.view.TaskDisplayController;
 public class InputViewController extends VBox {
     
     @FXML
@@ -30,7 +30,7 @@ public class InputViewController extends VBox {
     }
     
     public InputViewController () {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/InputView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InputView.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

@@ -1,4 +1,4 @@
-package programGui;
+package resources.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import logic.Display;
-import programGui.TaskController;
+import resources.view.TaskController;
 import logic.Launch;
 
 public class TaskDisplayController extends VBox{
@@ -39,7 +39,7 @@ public class TaskDisplayController extends VBox{
     }
     
     private TaskDisplayController() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/TaskDisplay.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("TaskDisplay.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

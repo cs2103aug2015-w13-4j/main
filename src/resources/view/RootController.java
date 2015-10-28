@@ -1,4 +1,4 @@
-package programGui;
+package resources.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class RootController extends BorderPane{
 
     //Constructors
     public RootController() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/programGui/Root.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

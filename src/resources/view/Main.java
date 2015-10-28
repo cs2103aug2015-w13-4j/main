@@ -1,4 +1,4 @@
-package programGui;
+package resources.view;
 
 import java.util.ArrayList;
 import utilities.TaskDate;
@@ -79,7 +79,7 @@ public class Main extends Application{
             window = primaryStage;
             BorderPane root = new BorderPane();
             Scene scene = new Scene(root,850,600);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             
             launch = Launch.getInstance();
         

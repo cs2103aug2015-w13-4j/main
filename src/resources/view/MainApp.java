@@ -1,4 +1,4 @@
-package programGui;
+package resources.view;
 
 
 import javafx.application.Application;
