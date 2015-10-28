@@ -45,6 +45,7 @@ public class MainApp extends Application{
 		this.primaryStage.setMinHeight(PROGRAM_HEIGHT);
 		this.primaryStage.setMinWidth(PROGRAM_WIDTH);
 		this.primaryStage.setTitle(PROGRAM_TITLE);
+		assert(primaryStage != null);
 		this.primaryStage.setScene(new Scene(rootLayout));
 		this.primaryStage.show();	
 	}

@@ -54,7 +54,7 @@ public class TaskDisplayController extends VBox{
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getTask();
         if (displayTasks == null ) {
-        	System.out.print("ERROR NULL NULL \n");
+        	System.out.print("ERROR in DISPLAYTASK\n");
         }
         if(listView == null){
         	System.out.print("LISTVIEW IS NOT INITIAITED\n");
