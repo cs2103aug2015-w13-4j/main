@@ -63,7 +63,7 @@ public class CommandSplitter {
 		} else if (contain("low", command)) {
 			return Command_Priority.LOW;
 		} else {
-			return Command_Priority.MEDIUM;
+			return null;
 		}
 	}
 	
@@ -77,15 +77,26 @@ public class CommandSplitter {
 		return -1;
 	}
 	
-	private static int[] getCurrentDate() {
+	private static TaskDate getCurrentDate() {
 		Date date = new Date(); // your date
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(date);
 	    int thisYear = cal.get(Calendar.YEAR);
 	    int thisMonth = cal.get(Calendar.MONTH) + 1;
 	    int thisDay = cal.get(Calendar.DAY_OF_MONTH);
-	    int currentDate[] = {thisYear, thisMonth, thisDay};
-	    return currentDate;
+	    return new TaskDate(thisYear, thisMonth, thisDay);
+	}
+	
+	public static int getDayOfWeek() {
+		Date date = new Date(); // your date
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int index = cal.get(Calendar.DAY_OF_WEEK);
+	    if (index == 1) {
+	    	return 7;
+	    } else {
+	    	return index - 1;
+	    }
 	}
 	
 	private static boolean isInteger(String c) {
@@ -97,6 +108,9 @@ public class CommandSplitter {
 	}
 	
 	public static boolean dateChecker(String date) {
+		if (date.length()<3) {
+			return false;
+		}
 		int num = 0;
 		int cha = 0;
 		for (int i = 0; i < date.length(); i ++) {
@@ -114,23 +128,112 @@ public class CommandSplitter {
 	
 	public static TaskDate[] findDate(String command) {
 		TaskDate results[] = new TaskDate[2];
+		TaskDate today = getCurrentDate();
+		int todayOfWeek = getDayOfWeek();
 		int dateCount = 2;
-		int today[] = getCurrentDate();
 		if (contain("tomorrow", command)) {
-			results[2-dateCount] = new TaskDate(today[0], today[1], today[2] + 1);
-			dateCount --;
-		} else if (contain("today", command)) {
-			results[2-dateCount] = new TaskDate(today[0], today[1], today[2]);
-			dateCount --;
-		} else if (contain("yesterday", command)) {
-			results[2-dateCount] = new TaskDate(today[0], today[1], today[2] - 1);
+			results[2-dateCount] = today.dayTrans(1);
 			dateCount --;
 		}
-		String parts[] = command.split(" ");
-		for (int i = 0; i < parts.length; i ++) {
-			if (dateChecker(parts[i])) {
-				results[2 - dateCount] = DateParser.dateDecoder(parts[i]);
-				dateCount --;
+		if (contain("today", command)) {
+			results[2-dateCount] = today.dayTrans(0);
+			dateCount --;
+		}
+		if (contain("yesterday", command)) {
+			results[2-dateCount] = today.dayTrans(-1);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last monday")) {
+			results[2-dateCount] = today.dayTrans(1-todayOfWeek - 7);
+			dateCount --;
+		}
+		if (command.toLowerCase().contains("last tuesday")) {
+			results[2-dateCount] = today.dayTrans(2-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last wednesday")) {
+			results[2-dateCount] = today.dayTrans(3-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last thursday")) {
+			results[2-dateCount] = today.dayTrans(4-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last friday")) {
+			results[2-dateCount] = today.dayTrans(5-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last saturday")) {
+			results[2-dateCount] = today.dayTrans(6-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("last sunday")) {
+			results[2-dateCount] = today.dayTrans(7-todayOfWeek - 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next monday")) {
+			results[2-dateCount] = today.dayTrans(1-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next tuesday")) {
+			results[2-dateCount] = today.dayTrans(2-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next wednesday")) {
+			results[2-dateCount] = today.dayTrans(3-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next thursday")) {
+			results[2-dateCount] = today.dayTrans(4-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next friday")) {
+			results[2-dateCount] = today.dayTrans(5-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (command.toLowerCase().contains("next saturday")) {
+			results[2-dateCount] = today.dayTrans(6-todayOfWeek + 7);
+			dateCount --;
+		}
+		if (command.toLowerCase().contains("next sunday")) {
+			results[2-dateCount] = today.dayTrans(7-todayOfWeek + 7);
+			dateCount --;
+		} 
+		if (contain("monday", command)||command.toLowerCase().contains("this monday")) {
+			results[2-dateCount] = today.dayTrans(1-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("tuesday", command)||command.toLowerCase().contains("this tuesday")) {
+			results[2-dateCount] = today.dayTrans(2-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("wednesday", command)||command.toLowerCase().contains("this wednesday")) {
+			results[2-dateCount] = today.dayTrans(3-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("thursday", command)||command.toLowerCase().contains("this thursday")) {
+			results[2-dateCount] = today.dayTrans(4-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("firday", command)||command.toLowerCase().contains("this friday")) {
+			results[2-dateCount] = today.dayTrans(5-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("saturday", command)||command.toLowerCase().contains("this saturday")) {
+			results[2-dateCount] = today.dayTrans(6-todayOfWeek);
+			dateCount --;
+		} 
+		if (contain("sunday", command)||command.toLowerCase().contains("this sunday")) {
+			results[2-dateCount] = today.dayTrans(7-todayOfWeek);
+			dateCount --;
+		}
+		if (dateCount > 0) {
+			String parts[] = command.split(" ");
+			for (int i = 0; i < parts.length; i ++) {
+				if (dateChecker(parts[i])) {
+					results[2 - dateCount] = DateParser.dateDecoder(parts[i]);
+					dateCount --;
+				}
 			}
 		}
 		if (dateCount == 2) {
@@ -156,4 +259,5 @@ public class CommandSplitter {
 			return null;
 		}
 	}
+	
 }
