@@ -61,6 +61,7 @@ public class Display {
 		case DIRECTORY:
 			return String.format(MESSAGE_DIRECTORY, content);
 		case FINISH_TASK:
+			//if(content)
 			return String.format(MESSAGE_FINISHED, content);
 		case SEARCH_TASK:
 			return String.format(MESSAGE_SEARCH, content);
