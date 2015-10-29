@@ -8,6 +8,10 @@ public class CommandElements {
 	private Command_Field field;
 	private int id;
 	
+	public CommandElements(){
+		type = Command_Type.NOT_FOUND;
+	}
+	
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio){
 		this.type = cmd;
 		this.name = nm;
