@@ -86,7 +86,7 @@ public class ParserTest {
 	}
 	
 	@Test
-	public void testCase1() {
+	public void testCase1() throws Exception {
 		String input = "edit 1 startdate tomorrow";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
@@ -94,63 +94,63 @@ public class ParserTest {
 	
 	
 	@Test
-	public void testCase2() {
+	public void testCase2() throws Exception {
 		String input = "edit 1 enddate tomorrow";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase3() {
+	public void testCase3() throws Exception {
 		String input = "edit 1 name \"test\"";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase4() {
+	public void testCase4() throws Exception {
 		String input = "edit 1 priority high";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase5() {
+	public void testCase5() throws Exception {
 		String input = "undo";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase6() {
+	public void testCase6() throws Exception {
 		String input = "search high";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase7() {
+	public void testCase7() throws Exception {
 		String input = "search tomorrow";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase8() {
+	public void testCase8() throws Exception {
 		String input = "finish 1";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase9() {
+	public void testCase9() throws Exception {
 		String input = "directory \"Users/Felix/Desktop/\"";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
 	
 	@Test
-	public void testCase10() {
+	public void testCase10() throws Exception {
 		String input = "delete 1";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
