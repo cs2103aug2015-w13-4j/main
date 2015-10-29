@@ -32,12 +32,18 @@ public class Operation {
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = CommandParser.ProcessInput(input);
+		System.out.println("processed " + processed.getType().toString());
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		try {
-			performCommand(processed.getType(), processed);
+			if(performCommand(processed.getType(), processed)){
+			
 			logger.log(Level.INFO, "performing command " + processed.getType());
 			return message.operation(processed.getType(), name);
+			}
+			else{
+				return message.error(input);
+			}
 		} catch (OperationNotPerformed e) {
 			logger.log(Level.INFO, "invalid input " + e.getMessage());
 			return message.error(input);
@@ -105,7 +111,9 @@ public class Operation {
 			logger.log(Level.INFO, "command is delete");
 			undoDelete(content.getID());
 			isSuccessful = action.deleteTaskByID(content.getID());
+			System.out.println("isSuccessful "+isSuccessful);
 			if (!isSuccessful) {
+				System.out.println("here");
 				list.pop();
 			}
 			return isSuccessful;
