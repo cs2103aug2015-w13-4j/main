@@ -16,17 +16,17 @@ public class StorageImp implements Storage {
 	protected static final String SAVE_DIR = "tasks.txt";
 	protected static final String TOK = "&&";
 	protected static final String COL = ":";
-	private   static final String AVAILABLE = "available";
-	private   static final String COMPLETED = "completed";
-	private   static final String AVAILABILITY_NO = "false";
-	private   static final String AVAILABILITY_YES = "true";
-	private   static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
-	private   static final String COMPLETION_YES = "true";
-	private   static final String COMPLETION_NO = "false";
-	private   static final short SEARCH_BY_ID = 0;
-	private   static final short SEARCH_BY_STRING = 1;
-	private   static final int STR_START = 0;
-	private   static StorageImp ourInstance;
+	private static final String AVAILABLE = "available";
+	private static final String COMPLETED = "completed";
+	private static final String AVAILABILITY_NO = "false";
+	private static final String AVAILABILITY_YES = "true";
+	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
+	private static final String COMPLETION_YES = "true";
+	private static final String COMPLETION_NO = "false";
+	private static final short SEARCH_BY_ID = 0;
+	private static final short SEARCH_BY_STRING = 1;
+	private static final int STR_START = 0;
+	private static StorageImp ourInstance;
 
 	static {
 		ourInstance = new StorageImp();
@@ -35,6 +35,7 @@ public class StorageImp implements Storage {
 	private FileState saveState, prefState;
 	private PrintWriter writer;
 	private int taskCounter;
+
 	private StorageImp() {
 		try {
 			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(SAVE_DIR), true)));
@@ -52,7 +53,6 @@ public class StorageImp implements Storage {
 	public int getTaskCount() {
 		return getTaskCounter();
 	}
-
 
 	private int getTaskCounter() {
 		int counter = 0;
@@ -179,18 +179,19 @@ public class StorageImp implements Storage {
 				String string = br.readLine();
 				String idStr = string.substring(STR_START, string.indexOf(TOK));
 				switch (scope) {
-					case SEARCH_BY_ID:
-						if (Integer.parseInt(idStr) == Integer.parseInt(content)) {
-							list.add(stringToTask(string));
-						}
-						break;
-					case SEARCH_BY_STRING:
-						if (string.contains(content)) {
-							list.add(stringToTask(string));
-						}
-						break;
-					default:
-						break;
+				case SEARCH_BY_ID:
+					if (Integer.parseInt(idStr) == Integer.parseInt(content)) {
+						list.add(stringToTask(string));
+					}
+					break;
+				case SEARCH_BY_STRING:
+					if (string.contains(content)) {
+						System.out.println("here " + content);
+						list.add(stringToTask(string));
+					}
+					break;
+				default:
+					break;
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -241,12 +242,8 @@ public class StorageImp implements Storage {
 		String[] sigSplit = string.split(TOK);
 		assert(sigSplit.length == TaskEvent.ELEMENTS_COUNT);
 		int taskID = Integer.parseInt(sigSplit[0]);
-		String  name = sigSplit[1].split(COL)[1],
-				from = sigSplit[2].split(COL)[1],
-				to   = sigSplit[3].split(COL)[1],
-				prio = sigSplit[4].split(COL)[1],
-				comp = sigSplit[5].split(COL)[1],
-				avlb = sigSplit[6].split(COL)[1];
+		String name = sigSplit[1].split(COL)[1], from = sigSplit[2].split(COL)[1], to = sigSplit[3].split(COL)[1],
+				prio = sigSplit[4].split(COL)[1], comp = sigSplit[5].split(COL)[1], avlb = sigSplit[6].split(COL)[1];
 		TaskEvent task = new TaskEvent(taskID, name, new TaskDate(from), new TaskDate(to), priorityStrToEnum(prio));
 		task.setCompleted(Boolean.parseBoolean(comp));
 		task.setAvailable(Boolean.parseBoolean(avlb));
@@ -255,14 +252,14 @@ public class StorageImp implements Storage {
 
 	private Command_Priority priorityStrToEnum(String prio) {
 		switch (prio.toUpperCase()) {
-			case "HIGH":
-				return Command_Priority.HIGH;
-			case "MEDIUM":
-				return Command_Priority.MEDIUM;
-			case "LOW":
-				return Command_Priority.LOW;
-			default:
-				return Command_Priority.MEDIUM;
+		case "HIGH":
+			return Command_Priority.HIGH;
+		case "MEDIUM":
+			return Command_Priority.MEDIUM;
+		case "LOW":
+			return Command_Priority.LOW;
+		default:
+			return Command_Priority.MEDIUM;
 		}
 	}
 
