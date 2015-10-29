@@ -31,7 +31,14 @@ public class Operation {
 		logger.log(Level.INFO, "input recieved");
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
-		CommandElements processed = CommandParser.ProcessInput(input);
+		CommandElements processed = new CommandElements();
+		try{
+		processed = CommandParser.ProcessInput(input);
+		}
+		catch(Exception e){
+			logger.log(Level.INFO, "error message");
+			return message.error(input);
+		}
 		System.out.println("processed " + processed.getType().toString());
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
