@@ -10,7 +10,12 @@ public class Exceptions {
 		public FileCorruptedException(String message) { super(message); }
 	}
 	public static class OperationNotPerformed extends Exception{
-		public OperationNotPerformed(String message){ super(message);}
-		
+		public OperationNotPerformed(String message){ super(message);}	
+	}
+	public static class EditFieldNotFound extends Exception{
+		public EditFieldNotFound(String message) { super(message);}
+	}
+	public static class CommandNotFound extends Exception{
+		public CommandNotFound(String message) { super(message);}
 	}
 }
