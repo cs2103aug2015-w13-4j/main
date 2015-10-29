@@ -1,13 +1,12 @@
 package logic;
 
-import database.Storage;
 import database.StorageImp;
 import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
 public class Launch {
-	private static Storage storage;
+	private static StorageImp storage;
 	private static Display display;
 	private static Operation op;
 	private static Search search;
@@ -18,16 +17,20 @@ public class Launch {
 	}
 
 	private static void createObjects() {
-		storage = StorageImp.getInstance();
+		System.out.println("creating");
 		display = new Display();
 		op = new Operation();
 		search = new Search();
-		tasks = storage.loadAllTasks();
 		launch = new Launch();
+		System.out.println("next");
+		storage = StorageImp.getInstance();
+		tasks = storage.loadAllTasks();
+		
+		
 	}
 
 	/* getting objects */
-	public static Storage getStorage() {
+	public static StorageImp getStorage() {
 		return storage;
 	}
 
