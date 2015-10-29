@@ -1,6 +1,6 @@
 package logic;
 
-import database.Storage;
+import database.StorageImp;
 import utilities.Command_Type;
 import utilities.TaskEvent;
 
@@ -29,7 +29,7 @@ public class Display {
 	 * @return ArrayList of task to show user
 	 */
 	public ArrayList<TaskEvent> taskView() {
-		Storage store = Launch.getStorage();
+		StorageImp store = Launch.getStorage();
 		Search search = Launch.getSearch();
 		ArrayList<TaskEvent> view;
 		if (nextCommand == Command_Type.SEARCH_TASK) {
