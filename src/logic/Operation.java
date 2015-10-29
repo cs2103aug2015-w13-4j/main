@@ -18,13 +18,14 @@ public class Operation {
 
 	private static Logger logger;
 	private Stack<CommandElements> list;
+	private static final String DEFAULT_RETURN = "not found";
 
 	public Operation() {
 		list = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
 	}
 
-	/*
+	/**
 	 * Main method to process the user input
 	 */
 	public String processOperation(String input) {
@@ -32,10 +33,9 @@ public class Operation {
 		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = new CommandElements();
-		try{
-		processed = CommandParser.ProcessInput(input);
-		}
-		catch(Exception e){
+		try {
+			processed = CommandParser.ProcessInput(input);
+		} catch (Exception e) {
 			logger.log(Level.INFO, "error message");
 			return message.error(input);
 		}
@@ -43,12 +43,11 @@ public class Operation {
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		try {
-			if(performCommand(processed.getType(), processed)){
-			
-			logger.log(Level.INFO, "performing command " + processed.getType());
-			return message.operation(processed.getType(), name);
-			}
-			else{
+			if (performCommand(processed.getType(), processed)) {
+
+				logger.log(Level.INFO, "performing command " + processed.getType());
+				return message.operation(processed.getType(), name);
+			} else {
 				return message.error(input);
 			}
 		} catch (OperationNotPerformed e) {
@@ -75,7 +74,7 @@ public class Operation {
 				return tasks.get(i).getTaskName();
 			}
 		}
-		return "does not exist";
+		return DEFAULT_RETURN;
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class Operation {
 			logger.log(Level.INFO, "command is delete");
 			undoDelete(content.getID());
 			isSuccessful = action.deleteTaskByID(content.getID());
-			System.out.println("isSuccessful "+isSuccessful);
+			System.out.println("isSuccessful " + isSuccessful);
 			if (!isSuccessful) {
 				System.out.println("here");
 				list.pop();
@@ -129,7 +128,6 @@ public class Operation {
 			if (isSuccessful) {
 				undoComplete(content.getID());
 			}
-			
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
 			isSuccessful = search.searchWord(action.loadAllTasks(), content.getName());
@@ -151,14 +149,12 @@ public class Operation {
 	 */
 	private String getEditContent(CommandElements content) {
 		logger.log(Level.INFO, "finding edit command");
-
 		switch (content.getField()) {
 		case NAME:
 			logger.log(Level.INFO, "edit name");
 			return content.getName();
 		case START_DATE:
 			logger.log(Level.INFO, "edit start date");
-
 			TaskDate startDate = content.getStartDate();
 			return startDate.toString();
 		case END_DATE:
@@ -169,7 +165,7 @@ public class Operation {
 			logger.log(Level.INFO, "edit priority");
 			return content.getPriority().toString();
 		}
-		return "";
+		return DEFAULT_RETURN;
 	}
 
 	private String getInitialContent(int id, Command_Field field) {
@@ -202,11 +198,11 @@ public class Operation {
 			logger.log(Level.INFO, "priority");
 			return task.getPriority().toString();
 		}
-		return "";
+		return DEFAULT_RETURN;
 	}
 
 	private void undoAdd() {
-		logger.log(Level.INFO,"adding add undo");
+		logger.log(Level.INFO, "adding add undo");
 		StorageImp store = Launch.getStorage();
 		int id = store.loadAllTasks().size();
 		CommandElements next = new CommandElements(Command_Type.DELETE_TASK, id);
@@ -220,19 +216,19 @@ public class Operation {
 		 * =0;i<all.size();i++){ if(all.get(i).getTaskID() == id){ task =
 		 * all.get(i); } }
 		 */
-		logger.log(Level.INFO,"adding delete undo");
+		logger.log(Level.INFO, "adding delete undo");
 		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
 		list.push(next);
 	}
 
 	private void undoEdit(int id, Command_Field field, String content) {
-		logger.log(Level.INFO,"adding edit undo");
+		logger.log(Level.INFO, "adding edit undo");
 		CommandElements next = new CommandElements(Command_Type.EDIT_TASK, id, field, content);
 		list.push(next);
 	}
 
 	private void undoComplete(int id) {
-		logger.log(Level.INFO,"adding delete undo");
+		logger.log(Level.INFO, "adding delete undo");
 		CommandElements next = new CommandElements(Command_Type.FINISH_TASK, id);
 		list.push(next);
 	}
