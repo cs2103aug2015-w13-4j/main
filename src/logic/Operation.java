@@ -5,7 +5,7 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import database.Storage;
+import database.StorageImp;
 import utilities.CommandElements;
 import utilities.Command_Field;
 import utilities.Command_Type;
@@ -74,7 +74,7 @@ public class Operation {
 	 * @throws OperationNotPerformed
 	 */
 	private boolean performCommand(Command_Type command, CommandElements content) throws OperationNotPerformed {
-		Storage action = Launch.getStorage();
+		StorageImp action = Launch.getStorage();
 		Search search = Launch.getSearch();
 		OperationNotPerformed exception = new OperationNotPerformed("operation not performed");
 		boolean isSuccessful = false;
@@ -158,7 +158,7 @@ public class Operation {
 	}
 
 	private String getInitialContent(int id, Command_Field field) {
-		Storage store = Launch.getStorage();
+		StorageImp store = Launch.getStorage();
 		ArrayList<TaskEvent> tasks = store.loadAllTasks();
 		TaskEvent task = tasks.get(0);
 		for (int i = 0; i < tasks.size(); i++) {
@@ -192,7 +192,7 @@ public class Operation {
 
 	private void undoAdd() {
 		logger.log(Level.INFO,"adding add undo");
-		Storage store = Launch.getStorage();
+		StorageImp store = Launch.getStorage();
 		int id = store.loadAllTasks().size();
 		CommandElements next = new CommandElements(Command_Type.DELETE_TASK, id);
 		list.push(next);
