@@ -58,6 +58,7 @@ public class StorageImp implements Storage {
 		int counter = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
 			while (br.ready()) {
+				br.readLine();
 				++counter;
 			}
 			return counter + 1;
