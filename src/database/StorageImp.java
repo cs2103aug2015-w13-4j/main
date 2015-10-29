@@ -26,7 +26,7 @@ public class StorageImp implements Storage {
 	private   static final short SEARCH_BY_ID = 0;
 	private   static final short SEARCH_BY_STRING = 1;
 	private   static final int STR_START = 0;
-	private   static Storage ourInstance;
+	private   static StorageImp ourInstance;
 
 	static {
 		ourInstance = new StorageImp();
@@ -44,7 +44,7 @@ public class StorageImp implements Storage {
 		}
 	}
 
-	public static Storage getInstance() {
+	public static StorageImp getInstance() {
 		return ourInstance;
 	}
 
