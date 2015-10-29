@@ -105,6 +105,7 @@ public class StorageImp implements Storage {
 
 	private boolean editTask(int taskID, String field, String content) {
 		ArrayList<String> temp = new ArrayList<String>(taskCounter);
+		boolean success = false;
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
 			while (br.ready()) {
 				String string = br.readLine();
@@ -115,6 +116,7 @@ public class StorageImp implements Storage {
 					newStr += TOK + field + ":" + content;
 					newStr += string.substring(string.indexOf(TOK, pos + 1));
 					temp.add(newStr);
+					success = true;
 				} else {
 					temp.add(string);
 				}
@@ -127,7 +129,7 @@ public class StorageImp implements Storage {
 			e.printStackTrace();
 			return false;
 		}
-		return true;
+		return success;
 	}
 
 	private void rewriteSaveFile(ArrayList<String> temp) throws IOException {
