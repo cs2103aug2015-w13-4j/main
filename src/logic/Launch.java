@@ -12,21 +12,19 @@ public class Launch {
 	private static Search search;
 	private static ArrayList<TaskEvent> tasks;
 	private static Launch launch;
+	private static Undo undo;
 
 	private Launch() {
 	}
 
 	private static void createObjects() {
-		System.out.println("creating");
 		display = new Display();
 		op = new Operation();
 		search = new Search();
 		launch = new Launch();
-		System.out.println("next");
 		storage = StorageImp.getInstance();
 		tasks = storage.loadAllTasks();
-		
-		
+		undo = new Undo();
 	}
 
 	/* getting objects */
@@ -45,7 +43,9 @@ public class Launch {
 	public static Search getSearch() {
 		return search;
 	}
-
+	public static Undo getUndo(){
+		return undo;
+	}
 	public static Launch getInstance() {
 
 		if (launch == null) {
