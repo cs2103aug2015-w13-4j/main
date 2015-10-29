@@ -19,10 +19,12 @@ public class Operation {
 	private static Logger logger;
 	private Stack<CommandElements> list;
 	private static final String DEFAULT_RETURN = "not found";
+	ArrayList<TaskEvent> searchView;
 
 	public Operation() {
 		list = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
+		searchView = new ArrayList<TaskEvent> ();
 	}
 
 	/**
@@ -39,12 +41,10 @@ public class Operation {
 			logger.log(Level.INFO, "error message");
 			return message.error(input);
 		}
-		System.out.println("processed " + processed.getType().toString());
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		try {
 			if (performCommand(processed.getType(), processed)) {
-
 				logger.log(Level.INFO, "performing command " + processed.getType());
 				return message.operation(processed.getType(), name);
 			} else {
@@ -87,7 +87,7 @@ public class Operation {
 	 */
 	private boolean performCommand(Command_Type command, CommandElements content) throws OperationNotPerformed {
 		StorageImp action = Launch.getStorage();
-		Search search = Launch.getSearch();
+		Undo undo = Launch.getUndo();
 		OperationNotPerformed exception = new OperationNotPerformed("operation not performed");
 		boolean isSuccessful = false;
 		switch (command) {
@@ -117,27 +117,35 @@ public class Operation {
 			logger.log(Level.INFO, "command is delete");
 			undoDelete(content.getID());
 			isSuccessful = action.deleteTaskByID(content.getID());
-			System.out.println("isSuccessful " + isSuccessful);
 			if (!isSuccessful) {
-				System.out.println("here");
 				list.pop();
 			}
 			return isSuccessful;
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
+			isSuccessful = action.markTaskAsDone(content.getID());
 			if (isSuccessful) {
 				undoComplete(content.getID());
 			}
+			return isSuccessful;
 		case SEARCH_TASK:
+			//not working!!
 			logger.log(Level.INFO, "command is search");
-			isSuccessful = search.searchWord(action.loadAllTasks(), content.getName());
-
+			searchView = action.searchTaskByString(content.getName());
+			if(searchView.size()==0){
+				return isSuccessful;
+			}
+			else{
+				return isSuccessful = true;
+			}
 		case UNDO:
 			// undo add, delete, edit, complete, directory
 			logger.log(Level.INFO, "command is undo");
 			content = list.pop();
-			return performCommand(content.getType(), content);
+			logger.log(Level.INFO, "undoing "+content.getType().toString());
+			return undo.UndoTask(content);
 		case DIRECTORY:
+			//not implemented!!
 			logger.log(Level.INFO, "command is change directory");
 		default:
 			throw exception;
@@ -205,7 +213,7 @@ public class Operation {
 		logger.log(Level.INFO, "adding add undo");
 		StorageImp store = Launch.getStorage();
 		int id = store.loadAllTasks().size();
-		CommandElements next = new CommandElements(Command_Type.DELETE_TASK, id);
+		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
 		list.push(next);
 	}
 
@@ -217,7 +225,7 @@ public class Operation {
 		 * all.get(i); } }
 		 */
 		logger.log(Level.INFO, "adding delete undo");
-		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
+		CommandElements next = new CommandElements(Command_Type.DELETE_TASK, id);
 		list.push(next);
 	}
 
