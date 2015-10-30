@@ -86,6 +86,13 @@ public class ParserTest {
 	}
 	
 	@Test
+	public void testCase0() throws Exception {
+		String input = "add \"the test\" tomorrow to next friday";
+		CommandParser.ProcessInput(input).debugPrint();
+		System.out.println("\n");
+	}
+	
+	@Test
 	public void testCase1() throws Exception {
 		String input = "edit 1 startdate tomorrow";
 		CommandParser.ProcessInput(input).debugPrint();
@@ -109,7 +116,7 @@ public class ParserTest {
 	
 	@Test
 	public void testCase4() throws Exception {
-		String input = "edit 1 priority high";
+		String input = "edit 1 priority flag";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
@@ -123,7 +130,7 @@ public class ParserTest {
 	
 	@Test
 	public void testCase6() throws Exception {
-		String input = "search high";
+		String input = "search flag";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
@@ -152,6 +159,20 @@ public class ParserTest {
 	@Test
 	public void testCase10() throws Exception {
 		String input = "delete 1";
+		CommandParser.ProcessInput(input).debugPrint();
+		System.out.println("\n");
+	}
+	
+	@Test
+	public void testCase11() throws Exception {
+		String input = "flag 1";
+		CommandParser.ProcessInput(input).debugPrint();
+		System.out.println("\n");
+	}
+	
+	@Test
+	public void testCase12() throws Exception {
+		String input = "unflag 2";
 		CommandParser.ProcessInput(input).debugPrint();
 		System.out.println("\n");
 	}
