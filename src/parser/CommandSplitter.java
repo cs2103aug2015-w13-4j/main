@@ -36,6 +36,12 @@ public class CommandSplitter {
 			return Command_Type.UNDO;
 		} else if (contain("directory", command)) {
 			return Command_Type.DIRECTORY;
+		} else if (contain("flag", command)) {
+			return Command_Type.FLAG_TASK;
+		} else if (contain("unflag", command)) {
+			return Command_Type.UNFLAG_TASK;
+		} else if (command.toLowerCase().contains("view completed")) {
+			return Command_Type.VIEW_COMPLETED;
 		} else {
 			return null;
 		}
@@ -56,14 +62,12 @@ public class CommandSplitter {
 	}
 	
 	public static Command_Priority findPriority(String command) {
-		if (contain("high", command)) {
-			return Command_Priority.HIGH;
-		} else if (contain("medium", command)) {
-			return Command_Priority.MEDIUM;
-		} else if (contain("low", command)) {
-			return Command_Priority.LOW;
+		if (contain("flag", command)) {
+			return Command_Priority.FLAG;
+		} else if (contain("unflag", command)) {
+			return Command_Priority.UNFLAG;
 		} else {
-			return Command_Priority.MEDIUM;
+			return Command_Priority.UNFLAG;
 		}
 	}
 	
