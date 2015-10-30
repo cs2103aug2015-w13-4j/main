@@ -54,6 +54,14 @@ public class CommandParser {
 			return new CommandElements(type);
 		} else if (type == Command_Type.DIRECTORY) {
 			return new CommandElements(type, name);
+		} else if (type == Command_Type.VIEW_COMPLETED) {
+			return new CommandElements(type);
+		} else if (type == Command_Type.FLAG_TASK) {
+			object = CommandSplitter.findObject(command);
+			return new CommandElements(type, object);
+		} else if (type == Command_Type.UNFLAG_TASK) {
+			object = CommandSplitter.findObject(command);
+			return new CommandElements(type, object);
 		} else {
 			throw command_exception;
 		}
