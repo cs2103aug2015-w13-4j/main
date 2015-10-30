@@ -31,8 +31,10 @@ public class CommandElements {
 		this.field = fld;
 		if (fld == Command_Field.END_DATE) {
 			this.date[1] = dt;
+			this.date[0] = new TaskDate(0,0,0);
 		} else {
 			this.date[0] = dt;
+			this.date[1] = new TaskDate(0,0,0);
 		}
 		
 	}
