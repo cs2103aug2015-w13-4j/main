@@ -20,13 +20,15 @@ public class Operation {
 	private Stack<CommandElements> list;
 	private static final String DEFAULT_RETURN = "not found";
 	ArrayList<TaskEvent> searchView;
+	int size;
 
 	public Operation() {
 		list = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
-		searchView = new ArrayList<TaskEvent> ();
+		searchView = new ArrayList<TaskEvent>();
 	}
-	public ArrayList<TaskEvent> getArray(){
+
+	public ArrayList<TaskEvent> getArray() {
 		return searchView;
 	}
 
@@ -132,40 +134,34 @@ public class Operation {
 			}
 			return isSuccessful;
 		case SEARCH_TASK:
-			//not working!!
+			// working for basic names
 			logger.log(Level.INFO, "command is search");
 			searchView = action.searchTaskByString(content.getName());
-			if(searchView.size()==0){
-				return isSuccessful;
-			}
-			else{
-				return isSuccessful = true;
-			}
-		case UNDO:
+			size = searchView.size();
+			return isSuccessful = true;
+		case UNDO: // not working for directory
 			// undo add, delete, edit, complete, directory
 			logger.log(Level.INFO, "command is undo");
 			content = list.pop();
-			logger.log(Level.INFO, "undoing "+content.getType().toString());
+			logger.log(Level.INFO, "undoing " + content.getType().toString());
 			return undo.UndoTask(content);
 		case DIRECTORY:
-			//not implemented!!
+			// not implemented!!
 			logger.log(Level.INFO, "command is change directory");
 		case FLAG_TASK:
-			logger.log(Level.INFO,"command is flag");
+			logger.log(Level.INFO, "command is flag");
 			isSuccessful = action.flagTask(content.getID());
 			undoFlag(content.getID());
-			
-			
 			return isSuccessful;
-			
 		case UNFLAG_TASK:
 			logger.log(Level.INFO, "command is unflag");
 			isSuccessful = action.unflagTask(content.getID());
 			undoUnflag(content.getID());
-				
 			return isSuccessful;
 		case VIEW_COMPLETED:
 			logger.log(Level.INFO, "command is view completed");
+			searchView = action.loadCompletedTasks();
+			return true;
 		default:
 			throw exception;
 		}
@@ -237,12 +233,6 @@ public class Operation {
 	}
 
 	private void undoDelete(int id) {
-		/*
-		 * Storage store = Launch.getStorage(); ArrayList<TaskEvent> all =
-		 * store.loadAllTasks(); TaskEvent task = all.get(0); for(int i
-		 * =0;i<all.size();i++){ if(all.get(i).getTaskID() == id){ task =
-		 * all.get(i); } }
-		 */
 		logger.log(Level.INFO, "adding delete undo");
 		CommandElements next = new CommandElements(Command_Type.DELETE_TASK, id);
 		list.push(next);
@@ -259,14 +249,16 @@ public class Operation {
 		CommandElements next = new CommandElements(Command_Type.FINISH_TASK, id);
 		list.push(next);
 	}
-	private void undoFlag(int id){
+
+	private void undoFlag(int id) {
 		logger.log(Level.INFO, "adding flag undo");
-		CommandElements next = new CommandElements(Command_Type.FLAG_TASK,id);
+		CommandElements next = new CommandElements(Command_Type.FLAG_TASK, id);
 		list.push(next);
 	}
-	private void undoUnflag(int id){
+
+	private void undoUnflag(int id) {
 		logger.log(Level.INFO, "adding unflag undo");
-		CommandElements next = new CommandElements(Command_Type.UNFLAG_TASK,id);
+		CommandElements next = new CommandElements(Command_Type.UNFLAG_TASK, id);
 		list.push(next);
 	}
 
