@@ -26,6 +26,9 @@ public class Operation {
 		logger = Logger.getLogger("Operation");
 		searchView = new ArrayList<TaskEvent> ();
 	}
+	public ArrayList<TaskEvent> getArray(){
+		return searchView;
+	}
 
 	/**
 	 * Main method to process the user input
@@ -147,6 +150,22 @@ public class Operation {
 		case DIRECTORY:
 			//not implemented!!
 			logger.log(Level.INFO, "command is change directory");
+		case FLAG_TASK:
+			logger.log(Level.INFO,"command is flag");
+			isSuccessful = action.flagTask(content.getID());
+			undoFlag(content.getID());
+			
+			
+			return isSuccessful;
+			
+		case UNFLAG_TASK:
+			logger.log(Level.INFO, "command is unflag");
+			isSuccessful = action.unflagTask(content.getID());
+			undoUnflag(content.getID());
+				
+			return isSuccessful;
+		case VIEW_COMPLETED:
+			logger.log(Level.INFO, "command is view completed");
 		default:
 			throw exception;
 		}
@@ -238,6 +257,16 @@ public class Operation {
 	private void undoComplete(int id) {
 		logger.log(Level.INFO, "adding delete undo");
 		CommandElements next = new CommandElements(Command_Type.FINISH_TASK, id);
+		list.push(next);
+	}
+	private void undoFlag(int id){
+		logger.log(Level.INFO, "adding flag undo");
+		CommandElements next = new CommandElements(Command_Type.FLAG_TASK,id);
+		list.push(next);
+	}
+	private void undoUnflag(int id){
+		logger.log(Level.INFO, "adding unflag undo");
+		CommandElements next = new CommandElements(Command_Type.UNFLAG_TASK,id);
 		list.push(next);
 	}
 
