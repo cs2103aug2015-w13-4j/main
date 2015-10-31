@@ -7,6 +7,7 @@ import utilities.TaskEvent;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Created by zhongwei-z on 23/10/15.
@@ -174,6 +175,7 @@ public class StorageImp implements Storage {
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
+		String[] contentSplit = content.split(" ");
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
 			while (br.ready()) {
 				String string = br.readLine();
@@ -185,8 +187,7 @@ public class StorageImp implements Storage {
 					}
 					break;
 				case SEARCH_BY_STRING:
-					if (string.contains(content)) {
-						System.out.println("here " + content);
+					if (patternMatched(string, contentSplit)) {
 						list.add(stringToTask(string));
 					}
 					break;
@@ -200,6 +201,22 @@ public class StorageImp implements Storage {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	private boolean patternMatched(String string, String[] target) {
+		int splitSize = target.length;
+		final Pattern[] PATTERNS = new Pattern[splitSize];
+		for (int i = 0; i < splitSize; i++) {
+			PATTERNS[i] = Pattern.compile(Pattern.quote(target[i]), Pattern.CASE_INSENSITIVE);
+		}
+		boolean found = true;
+		for (int i = 0; i < splitSize; i++) {
+			if (!PATTERNS[i].matcher(string).find()) {
+				found = false;
+				break;
+			}
+		}
+		return found;
 	}
 
 	@Override
