@@ -32,7 +32,7 @@ public class Launch {
 		return storage;
 	}
 
-	public Operation getOperation() {
+	public static Operation getOperation() {
 		return op;
 	}
 
