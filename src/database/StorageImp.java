@@ -252,14 +252,12 @@ public class StorageImp implements Storage {
 
 	private Command_Priority priorityStrToEnum(String prio) {
 		switch (prio.toUpperCase()) {
-		case "HIGH":
-			return Command_Priority.HIGH;
-		case "MEDIUM":
-			return Command_Priority.MEDIUM;
-		case "LOW":
-			return Command_Priority.LOW;
+		case "FLAG":
+			return Command_Priority.FLAG;
+		case "UNFLAG":
+			return Command_Priority.UNFLAG;
 		default:
-			return Command_Priority.MEDIUM;
+			return Command_Priority.UNFLAG;
 		}
 	}
 
@@ -276,6 +274,16 @@ public class StorageImp implements Storage {
 	@Override
 	public boolean changeDirectory(String dir) {
 		return false;
+	}
+
+	@Override
+	public boolean flagTask(int taskId) {
+		return editTask(taskId, Command_Field.PRIORITY, Command_Priority.FLAG);
+	}
+
+	@Override
+	public boolean unflagTask(int taskId) {
+		return editTask(taskId, Command_Field.PRIORITY, Command_Priority.UNFLAG);
 	}
 
 }

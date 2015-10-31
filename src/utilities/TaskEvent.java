@@ -2,9 +2,6 @@ package utilities;
 
 public class TaskEvent {
 
-	private static final int LO_PRIO = 3;
-	private static final int MI_PRIO = 2;
-	private static final int HI_PRIO = 1;
 	public  static final int ELEMENTS_COUNT = 7;
 
 	private static String TASK_STR = "%1$s&&" +
@@ -19,7 +16,7 @@ public class TaskEvent {
 	protected String taskName;
 	protected TaskDate startDate;
 	protected TaskDate endDate;
-	protected Command_Priority priority;
+	protected Command_Priority flag;
 	protected boolean completed; // has the task been completed, default to false
 	protected boolean available; // default to true; false to indicate deleted
 
@@ -27,7 +24,7 @@ public class TaskEvent {
 	public String           getTaskName()  { return taskName; }
 	public TaskDate         getStartDate() { return startDate; }
 	public TaskDate         getEndDate()   { return endDate; }
-	public Command_Priority getPriority()  { return priority; }
+	public Command_Priority getPriority()  { return flag; }
 	public boolean          isCompleted()  { return completed; }
 	public boolean          isAvailable()  { return available; }
 
@@ -35,7 +32,7 @@ public class TaskEvent {
 	public void             setTaskName(String taskName)           { this.taskName = taskName; }
 	public void             setStartDate(TaskDate startDate)       { this.startDate = startDate; }
 	public void             setEndDate(TaskDate endDate)           { this.endDate = endDate; }
-	public void             setPriority(Command_Priority priority) { this.priority = priority; }
+	public void             setPriority(Command_Priority flag) { this.flag = flag; }
 	public void             setCompleted(boolean completed)        { this.completed = completed; }
 	public void             setAvailable(boolean available)        { this.available = available; }
 
@@ -52,7 +49,7 @@ public class TaskEvent {
 	@Override
 	public String toString() {
 		return String.format(TASK_STR, taskID, taskName, startDate.toString(), endDate.toString(),
-				priority.toString(), String.valueOf(completed), String.valueOf(available));
+				flag.toString(), String.valueOf(completed), String.valueOf(available));
 	}
 
 }

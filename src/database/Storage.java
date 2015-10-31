@@ -75,6 +75,10 @@ public interface Storage {
 	 * @return true if the task is marked uncompleted; false if exception is caught
 	 */
 	boolean markTaskAsUndone(int taskID);
+	
+	boolean flagTask(int taskId);
+	
+	boolean unflagTask(int taskId);
 
 	/**
 	 * Tasks with ID 12 and with ID 2 will both be returned if taskID is 2

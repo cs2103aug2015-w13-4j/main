@@ -26,7 +26,7 @@ public class StorageImpTest {
 	@Test
 	public void testAddTask() throws Exception {
 		Storage s = StorageImp.getInstance();
-		s.addTask("three", d1, d2, Command_Priority.HIGH);
+		s.addTask("three", d1, d2, Command_Priority.FLAG);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class StorageImpTest {
 		Storage s = StorageImp.getInstance();
 		//s.editTask(1, Command_Field.END_DATE, d3.toString());
 		s.editTask(4, Command_Field.END_DATE, d3.toString());
-		s.editTask(4, Command_Field.PRIORITY, Command_Priority.LOW.toString());
+		s.editTask(4, Command_Field.PRIORITY, Command_Priority.UNFLAG.toString());
 	}
 
 	@Test
