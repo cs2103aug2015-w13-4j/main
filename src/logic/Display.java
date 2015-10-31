@@ -15,15 +15,21 @@ public class Display {
 	private static final String MESSAGE_DELETE = "%s has been deleted successfully";
 	private static final String MESSAGE_DIRECTORY = "file has been relocated to %s";
 	private static final String MESSAGE_FINISHED = "%s has been completed!";
-	private static final String MESSAGE_SEARCH = "tasks has been found with your search";
+	private static final String MESSAGE_SEARCH = "%d tasks has been found with your search";
+	private static final String MESSAGE_NO_SEARCH_RESULT = "no task has been found with your search";
 	private static final String MESSAGE_UNDO = "previous task has been undone";
 	private static final String MESSAGE_FLAG = "%s has been flagged";
 	private static final String MESSAGE_UNFLAG = "%s has been unflagged";
-	private static final String MESSAGE_VIEW_COMPLETED = "list of completed task";
+	private static final String MESSAGE_VIEW_COMPLETED = "you have %d completed tasks";
+	private static final String MESSAGE_NO_COMPLETED = "you do not have any completed tasks";
+	
 
 	private Command_Type nextCommand = Command_Type.UNDO;
+	private ArrayList<TaskEvent> view;
+	
 
 	public Display() {
+		view = new ArrayList<TaskEvent>();
 	}
 
 	/**
@@ -34,7 +40,6 @@ public class Display {
 	public ArrayList<TaskEvent> taskView() {
 		StorageImp store = Launch.getStorage();
 		Operation op = Launch.getOperation();
-		ArrayList<TaskEvent> view;
 		if (nextCommand == Command_Type.SEARCH_TASK || nextCommand.equals(Command_Type.VIEW_COMPLETED)) {
 			view = op.getArray();
 		} else {
@@ -54,6 +59,7 @@ public class Display {
 	 */
 	public String operation(Command_Type op, String content) {
 		nextCommand = op;
+		Operation operation = Launch.getOperation();
 		switch (op) {
 		case ADD_TASK:
 			return String.format(MESSAGE_ADD, content);
@@ -67,7 +73,12 @@ public class Display {
 			//if(content)
 			return String.format(MESSAGE_FINISHED, content);
 		case SEARCH_TASK:
-			return String.format(MESSAGE_SEARCH);
+			view = operation.getArray();
+			if(view.size()==0){
+				return MESSAGE_NO_SEARCH_RESULT;
+			} else{
+				return String.format(MESSAGE_SEARCH,view.size());
+			}
 		case UNDO:
 			return MESSAGE_UNDO;
 		case FLAG_TASK:
@@ -75,7 +86,11 @@ public class Display {
 		case UNFLAG_TASK:
 			return String.format(MESSAGE_UNFLAG, content);
 		case VIEW_COMPLETED:
-			return MESSAGE_VIEW_COMPLETED;
+			view = operation.getArray();
+			if(view.size()==0){
+				return MESSAGE_NO_COMPLETED;
+			}
+			return String.format(MESSAGE_VIEW_COMPLETED,view.size());
 		default:
 			break;
 		}
