@@ -1,6 +1,7 @@
 package resources.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,9 @@ public class InputViewController extends VBox {
     
     Launch launch;
     
+    ArrayList<String> history;
+    private int historyPointer;
+    
     public static InputViewController inputViewController;
     
     public static InputViewController getInstance() {
@@ -38,19 +42,33 @@ public class InputViewController extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        
+        initHistoryList();
     }
     
     public void handleKeyPress(KeyEvent event) {
         TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
-        if(event.getCode() == KeyCode.ENTER) {
+        if(event.getCode() == KeyCode.ENTER && userInput.getText() == "") {
+            taskDisplay.updateTaskDisplay();
+        } else if(event.getCode() == KeyCode.ENTER) {
         	handleUserInput();
             userInput.setText("");
             taskDisplay.updateTaskDisplay();
+        } else if(event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
+            event.consume();
+            handleHistoryCommands(event);
         }
+        
+    }
+    
+    private void handleHistoryCommands(KeyEvent event) { 
+        String pastCmd = getHistoryCommands(event.getCode());
+        userInput.setText(pastCmd);
     }
     
     private void handleUserInput(){
         String input = userInput.getText();
+        updateHistoryList();
         passToLogic(input);
     }
     
@@ -62,4 +80,39 @@ public class InputViewController extends VBox {
         String output = launch.command(input);
         labelFeedBack(output);
     }
+    
+    private void initHistoryList() {
+        history = new ArrayList<String>();
+        historyPointer = history.size() - 1;
+    }
+    
+    private void updateHistoryList() {
+        historyPointer = history.size();
+        history.add(historyPointer - 1, userInput.getText());
+    }
+    
+    private String getHistoryCommands(KeyCode code) {
+        if(code == KeyCode.DOWN) { 
+            return getNextCommand();
+        } else if ( code == KeyCode.UP) {
+            return getPrevCommand();
+        } else {
+            return "";
+        }
+    }
+    
+    private String getPrevCommand() {
+        if(historyPointer > 0) { 
+            historyPointer --;
+        }
+        return history.get(historyPointer);
+    }
+    
+    private String getNextCommand() {
+        if ( historyPointer < history.size() - 1) {
+            historyPointer++;
+        }
+        return history.get(historyPointer);
+        }
 }
+    
