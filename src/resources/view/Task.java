@@ -46,8 +46,9 @@ public class Task extends HBox{
     
     public Task() {
         loadFxml();
+        initListener();
         initFxmlFields(1,"test","high" , new TaskDate(11,11,2015));
-        initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new TaskDate(12,12,2015));
+        //initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new TaskDate(12,12,2015));
     }
     
     public void initFxmlFields (int idx, String taskName ,String priority , TaskDate sDate, TaskDate eDate) {
@@ -68,6 +69,7 @@ public class Task extends HBox{
         this.taskName.setText(taskName);
         this.priority.setText(priority);
         this.checkBox.selectedProperty().addListener(checkBoxListener);
+        this.sDate.setText("");
         if(eDate.getDay() == 0) {
             this.eDate.setText("");
         } else {

@@ -3,7 +3,8 @@ package resources.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import utilities.TaskDate;
+
+import utilities.TaskDate;
 import utilities.TaskEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,7 +73,7 @@ public class TaskDisplayController extends VBox{
            tasks.add(new Task(t));
         } 
         //tasks.add(new Task(new TaskEvent(1, "Do CS2101", new TaskDate(2015,10,10), new TaskDate(2015,10,15), 1)));
-        //tasks.add(new Task());
+        tasks.add(new Task());
         return tasks;
     } 
     

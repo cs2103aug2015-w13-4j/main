@@ -116,8 +116,8 @@
  * Task Display
  * ==============
  */
- 
- .taskDisplay {
+
+ .taskDisplay #listView {
  	-fx-background-colour: blue;
  }
  
