@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import utilities.TaskDate;
 //import utilities.TaskDate;
 import utilities.TaskEvent;
 
@@ -35,28 +36,37 @@ public class Task extends HBox{
 
    public Task(TaskEvent task) {
         loadFxml();
-        initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate().toString()  , task.getEndDate().toString());
+        initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate()  , task.getEndDate());
     } 
     
     public Task() {
         loadFxml();
-        initFxmlFields(1,"test","high" , "0" , "11/11/2015");
+        initFxmlFields(1,"test","high" , new TaskDate(11,11,2015));
+        initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new TaskDate(12,12,2015));
     }
     
-    public void initFxmlFields (int idx, String taskName ,String priority ,  String sDate, String eDate) {
+    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate sDate, TaskDate eDate) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.priority.setText(priority);
         
-        if(sDate.equals("0") ) {
+        if(sDate.getDay() == 0 || eDate.getDay() == 0) {
         	this.sDate.setText("");
         } else {
-        this.sDate.setText(sDate);
+        this.sDate.setText(sDate.toString());
+        this.eDate.setText(eDate.toString());
         }
-        if(eDate.equals("0")) {
-        	this.eDate.setText("");
+    }
+    
+    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate eDate) {
+        this.index.setText(idx + STRING_EMPTY);
+        this.taskName.setText(taskName);
+        this.priority.setText(priority);
+        
+        if(eDate.getDay() == 0) {
+            this.eDate.setText("");
         } else {
-        this.eDate.setText(eDate);
+        this.eDate.setText(eDate.toString());
         }
     }
     
