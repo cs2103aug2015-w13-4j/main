@@ -19,6 +19,7 @@ public class StorageImp implements Storage {
 	protected static final String COL = ":";
 	private static final String AVAILABLE = "available";
 	private static final String COMPLETED = "completed";
+	private static final String PRIORITY = "priority";
 	private static final String AVAILABILITY_NO = "false";
 	private static final String AVAILABILITY_YES = "true";
 	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
@@ -86,7 +87,7 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean editTask(int taskID, Command_Field field, Command_Priority priority) {
-		String fieldStr = field.toString();
+		String fieldStr = field.toString().toLowerCase();
 		String prioStr = priority.toString();
 		return editTask(taskID, fieldStr, prioStr);
 	}
@@ -105,15 +106,23 @@ public class StorageImp implements Storage {
 	}
 
 	private boolean editTask(int taskID, String field, String content) {
+		System.out.println("field" + field);
+		
 		ArrayList<String> temp = new ArrayList<String>(taskCounter);
 		boolean success = false;
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				String idStr = string.substring(STR_START, string.indexOf(TOK));
+				System.out.println("id" + idStr);
+				
 				if (Integer.parseInt(idStr) == taskID) {
+					System.out.println("found" + field);
 					int pos = string.indexOf(TOK + field);
+					
+					System.out.println("finished" + pos);
 					String newStr = string.substring(STR_START, pos);
+					System.out.println("newStr "+ newStr);
 					newStr += TOK + field + ":" + content;
 					newStr += string.substring(string.indexOf(TOK, pos + 1));
 					temp.add(newStr);
@@ -175,6 +184,7 @@ public class StorageImp implements Storage {
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
+		System.out.println("content" + content);
 		String[] contentSplit = content.split(" ");
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
 			while (br.ready()) {
@@ -295,6 +305,7 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean flagTask(int taskId) {
+		System.out.println("entered" +taskId);
 		return editTask(taskId, Command_Field.PRIORITY, Command_Priority.FLAG);
 	}
 
