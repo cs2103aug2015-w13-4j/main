@@ -30,6 +30,10 @@ public class Undo {
 			return UndoComplete(content);
 		case DIRECTORY:
 			return UndoDirectory(content);
+		case FLAG_TASK:
+			return UndoFlag(content);
+		case UNFLAG_TASK:
+			return UndoUnflag(content);
 		default :
 			return false;
 		}
@@ -53,6 +57,14 @@ public class Undo {
 	private boolean UndoDirectory(CommandElements content){
 		//not implemented
 		return false;
+	}
+	private boolean UndoFlag(CommandElements content){
+		logger.log(Level.INFO, "undo flag");
+		return storage.unflagTask(content.getID());
+	}
+	private boolean UndoUnflag(CommandElements content){
+		logger.log(Level.INFO,"undo unflag");
+		return storage.flagTask(content.getID());
 	}
 	
 }
