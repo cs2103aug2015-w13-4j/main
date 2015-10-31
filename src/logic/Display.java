@@ -15,8 +15,11 @@ public class Display {
 	private static final String MESSAGE_DELETE = "%s has been deleted successfully";
 	private static final String MESSAGE_DIRECTORY = "file has been relocated to %s";
 	private static final String MESSAGE_FINISHED = "%s has been completed!";
-	private static final String MESSAGE_SEARCH = "%s tasks has been found with your search";
+	private static final String MESSAGE_SEARCH = "tasks has been found with your search";
 	private static final String MESSAGE_UNDO = "previous task has been undone";
+	private static final String MESSAGE_FLAG = "%s has been flagged";
+	private static final String MESSAGE_UNFLAG = "%s has been unflagged";
+	private static final String MESSAGE_VIEW_COMPLETED = "list of completed task";
 
 	private Command_Type nextCommand = Command_Type.UNDO;
 
@@ -30,10 +33,10 @@ public class Display {
 	 */
 	public ArrayList<TaskEvent> taskView() {
 		StorageImp store = Launch.getStorage();
-		Search search = Launch.getSearch();
+		Operation op = Launch.getOperation();
 		ArrayList<TaskEvent> view;
-		if (nextCommand == Command_Type.SEARCH_TASK) {
-			view = search.getResult();
+		if (nextCommand == Command_Type.SEARCH_TASK || nextCommand.equals(Command_Type.VIEW_COMPLETED)) {
+			view = op.getArray();
 		} else {
 			view = store.loadAllTasks();
 		}
@@ -64,9 +67,15 @@ public class Display {
 			//if(content)
 			return String.format(MESSAGE_FINISHED, content);
 		case SEARCH_TASK:
-			return String.format(MESSAGE_SEARCH, content);
+			return String.format(MESSAGE_SEARCH);
 		case UNDO:
 			return MESSAGE_UNDO;
+		case FLAG_TASK:
+			return String.format(MESSAGE_FLAG, content);
+		case UNFLAG_TASK:
+			return String.format(MESSAGE_UNFLAG, content);
+		case VIEW_COMPLETED:
+			return MESSAGE_VIEW_COMPLETED;
 		default:
 			break;
 		}
