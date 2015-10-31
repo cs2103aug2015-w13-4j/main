@@ -95,10 +95,11 @@ public interface Storage {
 	int getTaskCount();
 
 	/**
-	 * @return all the tasks, including deleted, and/or completed tasks unless cleanup is done
+	 * @return all the available tasks
 	 */
 	ArrayList<TaskEvent> loadAllTasks();
 
+	ArrayList<TaskEvent> loadCompletedTasks();
 
 	/**
 	 * Hard delete all the tasks that are marked deleted

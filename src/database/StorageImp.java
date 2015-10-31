@@ -24,6 +24,7 @@ public class StorageImp implements Storage {
 	private static final String AVAILABILITY_YES = "true";
 	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
 	private static final String COMPLETION_YES = "true";
+	private static final String COMPLETION_YES_SIG = COMPLETED + COL + COMPLETION_YES;
 	private static final String COMPLETION_NO = "false";
 	private static final short SEARCH_BY_ID = 0;
 	private static final short SEARCH_BY_STRING = 1;
@@ -245,6 +246,25 @@ public class StorageImp implements Storage {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	@Override
+	public ArrayList<TaskEvent> loadCompletedTasks() {
+		ArrayList<TaskEvent> list = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+			while (br.ready()) {
+				String string = br.readLine();
+				if (string.contains(COMPLETION_YES_SIG)) {
+					list.add(stringToTask(string));
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return list;	
 	}
 
 	@Override
