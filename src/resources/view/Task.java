@@ -32,17 +32,11 @@ public class Task extends HBox{
     private static final String STRING_EMPTY = "";
     
     
-<<<<<<< Updated upstream
-    public Task(TaskEvent task) {
-        loadFxml();
-        initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate().toString()  , task.getEndDate().toString());
-    }
-=======
+
    public Task(TaskEvent task) {
         loadFxml();
         initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate().toString()  , task.getEndDate().toString());
     } 
->>>>>>> Stashed changes
     
     public Task() {
         loadFxml();
