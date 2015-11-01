@@ -86,9 +86,7 @@ public class TaskDisplayController extends VBox{
         ObservableList<HBox> tasks = FXCollections.observableArrayList(); 
         ArrayList<TaskEvent> searchTaskList = display.taskView();
          for(TaskEvent t : searchTaskList) {
-             if(t.getEndDate().getDay() == 0) {
             tasks.add(new Task(t));
-             }
          } 
          return tasks;
     }

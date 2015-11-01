@@ -51,7 +51,10 @@ public class InputViewController extends VBox {
     
     public void handleKeyPress(KeyEvent event) {
         TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
-        if(event.getCode() == KeyCode.ENTER && userInput.getText() == "") {
+        if(event.getCode() == KeyCode.F2) {
+        	event.consume();
+        	launch.command("finish 1");
+        	launch.command("undo");
             taskDisplay.updateTaskDisplay();
         } else if(event.getCode() == KeyCode.ENTER) {
         	handleUserInput();
