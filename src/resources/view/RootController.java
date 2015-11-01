@@ -2,6 +2,8 @@ package resources.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
@@ -26,6 +28,7 @@ public class RootController extends BorderPane{
     //Constructors
     public RootController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
+        //loader.setResources(ResourceBundle.getBundle("font.fontawesome"));
         loader.setRoot(this);
         loader.setController(this);
         try {

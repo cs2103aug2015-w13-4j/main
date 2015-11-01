@@ -30,9 +30,8 @@
 } 
 */
 @font-face {
-	font-weight:400;
-	font-style:normal;
-	src: url("../../src//resources/fonts/fontawesome-webfront.ttf");
+	font-family: FontAwesome;
+	src: url('../../../src/resources/fonts/fontawesome-webfront.ttf');
 } 
 
 /*
