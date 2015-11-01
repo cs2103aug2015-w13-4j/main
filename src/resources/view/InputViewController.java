@@ -24,6 +24,7 @@ public class InputViewController extends VBox {
     Launch launch;
     
     ArrayList<String> history;
+    ArrayList<String> preset;
     private int historyPointer;
     
     public static InputViewController inputViewController;
@@ -44,7 +45,7 @@ public class InputViewController extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        
+        initPresetArrayList();
         initHistoryList();
     }
     
@@ -59,8 +60,11 @@ public class InputViewController extends VBox {
         } else if(event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleHistoryCommands(event);
+        } else if( event.getCode() == KeyCode.F1 ) {
+            event.consume();
+            initTesting();
+            taskDisplay.updateTaskDisplay();
         }
-        
     }
     
     private void handleHistoryCommands(KeyEvent event) { 
@@ -70,6 +74,7 @@ public class InputViewController extends VBox {
     
     private void handleUserInput(){
         String input = userInput.getText();
+        System.out.print(input);
         updateHistoryList();
         passToLogic(input);
     }
@@ -81,6 +86,13 @@ public class InputViewController extends VBox {
         launch = Launch.getInstance();
         String output = launch.command(input);
         labelFeedBack(output);
+    }
+    private void initTesting() {
+        launch = Launch.getInstance();
+        for(String in : preset){
+            launch.command(in);
+        }
+        labelFeedBack("Initialized test datas");
     }
     
     private void initHistoryList() {
@@ -117,5 +129,16 @@ public class InputViewController extends VBox {
         }
         return history.get(historyPointer);
         }
+    
+    private void initPresetArrayList() {
+        preset = new ArrayList<String>();
+        preset.add("add \"Oral Presentation for CS2101\" 2/11/2015 FLAG");
+        preset.add("add \"Meeting about budget\" 5/11/2015 FLAG");
+        preset.add("add \"CS2101 Report writing\" 10/11/2015");
+        preset.add("add \"Workshop about Creative Design\" 4/11/2015 6/11/2015");
+        preset.add("add \"CS2103 Milestone 4\" 4/11/2015 "); 
+        preset.add("add \"Meeting with HR\" 9/11/2015 FLAG");
+        
+    }
 }
     
