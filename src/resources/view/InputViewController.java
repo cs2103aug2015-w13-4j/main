@@ -83,6 +83,7 @@ public class InputViewController extends VBox {
     
     private void initHistoryList() {
         history = new ArrayList<String>();
+        history.add("");
         historyPointer = history.size() - 1;
     }
     

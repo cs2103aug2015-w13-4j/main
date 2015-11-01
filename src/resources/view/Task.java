@@ -56,11 +56,16 @@ public class Task extends HBox{
         this.taskName.setText(taskName);
         this.priority.setText(priority);
         this.checkBox.selectedProperty().addListener(checkBoxListener);
-        if(sDate.getDay() == 0 || eDate.getDay() == 0) {
-        	this.sDate.setText("");
-        } else {
         this.sDate.setText(sDate.toString());
         this.eDate.setText(eDate.toString());
+        
+        if(sDate.getDay() == 0 ){
+        	this.sDate.setText("");
+            this.eDate.setText(eDate.toString());
+        }
+        if(eDate.getDay() == 0 ) { 
+            this.eDate.setText("");
+            this.sDate.setText(sDate.toString());
         }
     }
     
