@@ -28,7 +28,6 @@ public class RootController extends BorderPane{
     //Constructors
     public RootController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
-        //loader.setResources(ResourceBundle.getBundle("font.fontawesome"));
         loader.setRoot(this);
         loader.setController(this);
         try {

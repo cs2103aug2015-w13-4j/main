@@ -74,7 +74,9 @@ public class InputViewController extends VBox {
     
     private void handleUserInput(){
         String input = userInput.getText();
-        System.out.print(input);
+        if ( input.equals("exit")){
+            System.exit(0);
+        }
         updateHistoryList();
         passToLogic(input);
     }

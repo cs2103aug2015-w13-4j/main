@@ -1,12 +1,15 @@
 package resources.view;
 
 
-import javafx.application.Application;
+import java.util.ResourceBundle;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainApp extends Application{
