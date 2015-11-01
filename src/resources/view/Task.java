@@ -41,7 +41,7 @@ public class Task extends HBox{
    public Task(TaskEvent task) {
         loadFxml();
         initListener();
-        initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate()  , task.getEndDate());
+        initFxmlFields(task.getTaskID(),task.getTaskName(),"high",task.getStartDate()  , task.getEndDate() , task.isCompleted());
     } 
     
     public Task() {
@@ -51,14 +51,15 @@ public class Task extends HBox{
         //initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new TaskDate(12,12,2015));
     }
     
-    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate sDate, TaskDate eDate) {
+    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate sDate, TaskDate eDate , Boolean isCompleted) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.priority.setText(priority);
-        this.checkBox.selectedProperty().addListener(checkBoxListener);
         this.sDate.setText(sDate.toString());
         this.eDate.setText(eDate.toString());
-        
+        if(isCompleted) {
+            checkBox.setSelected(true);
+        }
         if(sDate.getDay() == 0 ){
         	this.sDate.setText("");
             this.eDate.setText(eDate.toString());
@@ -69,11 +70,13 @@ public class Task extends HBox{
         }
     }
     
-    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate eDate) {
+    public void initFxmlFields (int idx, String taskName ,String priority , TaskDate eDate,Boolean isCompleted) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.priority.setText(priority);
-        this.checkBox.selectedProperty().addListener(checkBoxListener);
+        if(isCompleted) { 
+            checkBox.setSelected(true);
+        }
         this.sDate.setText("");
         if(eDate.getDay() == 0) {
             this.eDate.setText("");
@@ -95,7 +98,7 @@ public class Task extends HBox{
             }
         };
         
-    }
+    } 
     
     private void loadFxml() {
         try {
