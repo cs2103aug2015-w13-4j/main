@@ -37,7 +37,7 @@ public class RootController extends BorderPane{
         }
         
         initTaskDisplay();
-        initInputView();
+       // initInputView();
     }
     
     private void initTaskDisplay() {

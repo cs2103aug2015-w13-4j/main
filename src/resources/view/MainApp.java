@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -17,12 +18,12 @@ public class MainApp extends Application{
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private VBox inputView;
-	private VBox taskDisplay;
+	private StackPane taskDisplay;
 	private HBox task;
 	
 	/* PROGRAM DETAILS */
-	private static final double PROGRAM_HEIGHT = 600.0;
-	private static final double PROGRAM_WIDTH = 550.0;
+	private static final double PROGRAM_HEIGHT = 700.0;
+	private static final double PROGRAM_WIDTH = 980.0;
 	
 	private static final String PROGRAM_TITLE = "PIXEList";
 	
@@ -67,8 +68,7 @@ public class MainApp extends Application{
 	 * Initialising the taskView and update the view should there be any tasks inside.
 	 */
 	private void initTaskView () {
-	    taskDisplay = TaskDisplayController.getInstance();
-	    ((TaskDisplayController) taskDisplay).updateTaskDisplay();   
+	    taskDisplay = TaskDisplayController.getInstance(); 
 	}
 	
 	/**

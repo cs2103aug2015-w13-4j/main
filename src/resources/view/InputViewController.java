@@ -28,6 +28,7 @@ public class InputViewController extends VBox {
     private int historyPointer;
     
     public static InputViewController inputViewController;
+    TaskDisplayController taskDisplay;
     
     public static InputViewController getInstance() {
         if (inputViewController == null) {
@@ -45,29 +46,31 @@ public class InputViewController extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        taskDisplay = TaskDisplayController.getInstance();
         initPresetArrayList();
         initHistoryList();
     }
     
     public void handleKeyPress(KeyEvent event) {
-        TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
         if(event.getCode() == KeyCode.F2) {
         	event.consume();
         	launch.command("finish 1");
         	launch.command("undo");
-            taskDisplay.updateTaskDisplay();
+            taskDisplay.updateViews();
             feedBack.setText("All tasks displayed");
         } else if(event.getCode() == KeyCode.ENTER) {
         	handleUserInput();
             userInput.setText("");
-            taskDisplay.updateTaskDisplay();
+            taskDisplay.updateViews();
         } else if(event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleHistoryCommands(event);
         } else if( event.getCode() == KeyCode.F1 ) {
             event.consume();
             initTesting();
-            taskDisplay.updateTaskDisplay();
+            taskDisplay.updateViews();
+        } else if ( event.getCode() == KeyCode.ESCAPE) {
+            taskDisplay.hideAll();
         }
     }
     
@@ -91,6 +94,9 @@ public class InputViewController extends VBox {
     private void passToLogic(String input) {
         launch = Launch.getInstance();
         String output = launch.command(input);
+        if( input.contains("search")) {
+            taskDisplay.updateSearchTaskDisplay();
+        }
         labelFeedBack(output);
     }
     private void initTesting() {
