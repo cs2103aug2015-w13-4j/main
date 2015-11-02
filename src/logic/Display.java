@@ -26,10 +26,11 @@ public class Display {
 
 	private Command_Type nextCommand = Command_Type.UNDO;
 	private ArrayList<TaskEvent> view;
-	
+	private ArrayList<TaskEvent> search;
 
 	public Display() {
 		view = new ArrayList<TaskEvent>();
+		search = new ArrayList<TaskEvent>();
 	}
 
 	/**
@@ -40,12 +41,19 @@ public class Display {
 	public ArrayList<TaskEvent> taskView() {
 		StorageImp store = Launch.getStorage();
 		Operation op = Launch.getOperation();
-		if (nextCommand == Command_Type.SEARCH_TASK || nextCommand.equals(Command_Type.VIEW_COMPLETED)) {
+		/*if (nextCommand == Command_Type.SEARCH_TASK || nextCommand.equals(Command_Type.VIEW_COMPLETED)) {
 			view = op.getArray();
 		} else {
-			view = store.loadAllTasks();
-		}
+		*/
+		view = store.loadAllTasks();
+		//}
 		return view;
+	}
+	public ArrayList<TaskEvent> searchView(){
+		Operation op = Launch.getOperation();
+		
+		search = op.getArray();
+		return search;
 	}
 
 	/**
