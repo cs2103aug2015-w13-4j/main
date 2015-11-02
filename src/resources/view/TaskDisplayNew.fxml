@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<fx:root fx:id="borderPane" type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="flagView" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="generalView" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <ListView fx:id="floatingView" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </right>
+</fx:root>
