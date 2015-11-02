@@ -46,12 +46,12 @@ public class InputViewController extends VBox {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        taskDisplay = TaskDisplayController.getInstance();
         initPresetArrayList();
         initHistoryList();
     }
     
     public void handleKeyPress(KeyEvent event) {
+        taskDisplay = TaskDisplayController.getInstance();
         if(event.getCode() == KeyCode.F2) {
         	event.consume();
         	launch.command("finish 1");
@@ -60,8 +60,13 @@ public class InputViewController extends VBox {
             feedBack.setText("All tasks displayed");
         } else if(event.getCode() == KeyCode.ENTER) {
         	handleUserInput();
+        	if(userInput.getText().contains("search")) {
+        	    userInput.setText("");
+        	    taskDisplay.updateSearchTaskDisplay();
+        	} else {
             userInput.setText("");
             taskDisplay.updateViews();
+        	}
         } else if(event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleHistoryCommands(event);
@@ -94,9 +99,6 @@ public class InputViewController extends VBox {
     private void passToLogic(String input) {
         launch = Launch.getInstance();
         String output = launch.command(input);
-        if( input.contains("search")) {
-            taskDisplay.updateSearchTaskDisplay();
-        }
         labelFeedBack(output);
     }
     private void initTesting() {

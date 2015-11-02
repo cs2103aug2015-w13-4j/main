@@ -37,6 +37,9 @@ public class TaskDisplayController extends StackPane{
     private ListView<HBox> floatingView;
     
     @FXML
+    private ListView<HBox> searchContent;
+    
+    @FXML
     private BorderPane viewBorderPane;
     
     @FXML
@@ -84,10 +87,10 @@ public class TaskDisplayController extends StackPane{
         }
         viewBorderPane.setBottom(InputViewController.getInstance());
         updateViews();
-        hideAll();
     }
     
     public void updateViews() {
+        hideAll();
         launch.getInstance();
         display = launch.getDisplay();
         updateGeneralTaskDisplay();
@@ -119,7 +122,7 @@ public class TaskDisplayController extends StackPane{
     public void updateSearchTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getSearchedTask();
-        generalView.setItems(displayTasks);
+        searchContent.setItems(displayTasks);
         showSearchView();
     }
     
@@ -164,35 +167,37 @@ public class TaskDisplayController extends StackPane{
     private ObservableList<HBox> getSearchedTask() { 
         
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> searchedTaskList = display.taskView();
+        ArrayList<TaskEvent> searchedTaskList = display.searchView();
         for(TaskEvent t : searchedTaskList) {
+            System.out.print(t);
             tasks.add(new Task(t));
         }
         return tasks;
     }
+    
     public void showHelpView() {
-        hideSearchView();
         helpView.toFront();
-        borderPane.setOpacity(0.5);
+        helpView.setOpacity(1);
+        helpView.setOpacity(0.35);
     }
     public void showSearchView() {
-        hideHelpView();
         searchView.toFront();
-        borderPane.setOpacity(0.5);
+        searchView.setOpacity(1);
+        borderPane.setOpacity(0.35);
     }
     
     private void hideHelpView() {
         helpView.toBack();
-        borderPane.setOpacity(1);
+        helpView.setOpacity(0);
     }
     
     private void hideSearchView() {
-        searchView.toBack();
         searchView.setOpacity(0);
-        borderPane.setOpacity(1);
     }
     
     public void hideAll(){
+        borderPane.toFront();
+        borderPane.setOpacity(1);
         hideHelpView();
         hideSearchView();
     }

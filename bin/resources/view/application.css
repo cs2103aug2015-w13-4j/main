@@ -115,7 +115,27 @@
  * ==============
  */
 
- .taskDisplay #listView {
- 	-fx-background-colour: blue;
- }
+
+.display #generalView .list-cell {
+	-fx-background-color: #99FFFF;
+}
+
+.display #generalView .listView {
+	-fx-background-color: #99FFFF;
+}
+.display #flagView .list-cell {
+	-fx-background-color: #FFCCE5;
+}
+
+.display #flagView .listView {
+	-fx-background-color: #FFCCE5
+}
+
+.display .listView {
+ 	-fx-background-color: #99FFCC;
+}
+ 
+.display .list-cell {
+ 	-fx-background-color:#99FFCC;
+}
  
