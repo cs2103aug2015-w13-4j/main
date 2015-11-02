@@ -60,6 +60,10 @@ public class Launch {
 		return tasks;
 	}
 
+	/* UI search View */
+	public ArrayList<TaskEvent> searchView(){
+		return display.searchView();
+	}
 	/* main method UI calls */
 	public String command(String input) {
 		return op.processOperation(input);
