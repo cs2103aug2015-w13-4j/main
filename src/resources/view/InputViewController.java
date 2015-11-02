@@ -56,6 +56,7 @@ public class InputViewController extends VBox {
         	launch.command("finish 1");
         	launch.command("undo");
             taskDisplay.updateTaskDisplay();
+            feedBack.setText("All tasks displayed");
         } else if(event.getCode() == KeyCode.ENTER) {
         	handleUserInput();
             userInput.setText("");
