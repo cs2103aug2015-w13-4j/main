@@ -13,9 +13,9 @@
          <center>
             <BorderPane fx:id="viewBorderPane" prefHeight="780.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT">
                <top>
-                  <VBox fx:id="flagVBox" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
+                  <VBox fx:id="flagVBox" maxHeight="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
                      <children>
-                        <Label fx:id="flagTaskLabel" focusTraversable="false" minHeight="25.0" prefHeight="20.0" text="Flagged tasks" VBox.vgrow="ALWAYS" />
+                        <Label fx:id="flagTaskLabel" focusTraversable="false" prefHeight="20.0" text="Flagged tasks" VBox.vgrow="ALWAYS" />
                         <ListView fx:id="flagView" focusTraversable="false" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
@@ -23,7 +23,7 @@
                <center>
                   <VBox fx:id="genVBox" prefHeight="580.0" prefWidth="160.0" BorderPane.alignment="TOP_CENTER">
                      <children>
-                        <Label fx:id="generalTaskLabel" focusTraversable="false" maxHeight="15.0" minHeight="25.0" prefHeight="10.0" text="General Tasks" VBox.vgrow="ALWAYS" />
+                        <Label fx:id="generalTaskLabel" focusTraversable="false" maxHeight="15.0" prefHeight="10.0" text="General Tasks" VBox.vgrow="ALWAYS" />
                         <ListView fx:id="generalView" focusTraversable="false" prefHeight="555.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
@@ -34,7 +34,7 @@
             <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="240.0" BorderPane.alignment="TOP_LEFT">
                <children>
                   <Label fx:id="floatingTaskLabel" focusTraversable="false" minHeight="25.0" text="Floating Tasks" VBox.vgrow="ALWAYS" />
-                  <ListView fx:id="floatingView" focusTraversable="false" minHeight="760.0" VBox.vgrow="ALWAYS" />
+                  <ListView fx:id="floatingView" focusTraversable="false" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </right>
