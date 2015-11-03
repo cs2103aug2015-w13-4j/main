@@ -41,7 +41,10 @@ public class CommandSplitter {
 			return Command_Type.FLAG_TASK;
 		} else if (contain("unflag", command)) {
 			return Command_Type.UNFLAG_TASK;
-		} else if (command.toLowerCase().contains("view completed")) {
+		} else  if(contain("help",command)){
+			return Command_Type.HELP;
+		}else if (command.toLowerCase().contains("view completed")) {
+			
 			return Command_Type.VIEW_COMPLETED;
 		} else {
 			return null;
