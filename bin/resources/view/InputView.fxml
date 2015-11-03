@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="20.0" prefWidth="820.0" styleClass="inputView" type="VBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_CENTER" minHeight="40.0" prefHeight="55.0" prefWidth="820.0" styleClass="inputView" type="VBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="feedBack" alignment="CENTER" contentDisplay="CENTER" prefHeight="10.0" prefWidth="800.0" text="Feedback" VBox.vgrow="ALWAYS">
+      <Label fx:id="feedBack" alignment="CENTER" contentDisplay="CENTER" minHeight="20.0" prefHeight="25.0" prefWidth="800.0" text="Feedback" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
          </VBox.margin>
@@ -16,6 +16,6 @@
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </padding>
       </Label>
-      <TextField fx:id="userInput" onKeyPressed="#handleKeyPress" prefHeight="10.0" promptText="Welcome to PIXEList" />
+      <TextField fx:id="userInput" minHeight="25.0" onKeyPressed="#handleKeyPress" prefHeight="30.0" promptText="Welcome to PIXEList" VBox.vgrow="ALWAYS" />
    </children>
 </fx:root>

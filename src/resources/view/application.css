@@ -131,11 +131,11 @@
 	-fx-background-color: #FFCCE5
 }
 
-.display .listView {
- 	-fx-background-color: #99FFCC;
+.display #floatingView .list-cell {
+	-fx-background-color: #99FFCC;
 }
- 
-.display .list-cell {
- 	-fx-background-color:#99FFCC;
+
+.display #floatingView .listView {
+	-fx-background-color: #99FFCC;
 }
- 
+

@@ -9,32 +9,32 @@
 
 <fx:root prefHeight="750.0" prefWidth="420.0" styleClass="display" type="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="borderPane">
+      <BorderPane fx:id="borderPane" minHeight="780.0">
          <center>
-            <BorderPane fx:id="viewBorderPane" prefHeight="700.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane fx:id="viewBorderPane" prefHeight="780.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT">
                <top>
-                  <VBox fx:id="flagVBox" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="flagVBox" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
                      <children>
-                        <Label fx:id="flagTaskLabel" focusTraversable="false" maxHeight="15.0" prefHeight="15.0" text="Flagged tasks" />
-                        <ListView fx:id="flagView" focusTraversable="false" />
+                        <Label fx:id="flagTaskLabel" focusTraversable="false" minHeight="25.0" prefHeight="20.0" text="Flagged tasks" VBox.vgrow="ALWAYS" />
+                        <ListView fx:id="flagView" focusTraversable="false" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </top>
                <center>
-                  <VBox fx:id="genVBox" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="genVBox" prefHeight="580.0" prefWidth="160.0" BorderPane.alignment="TOP_CENTER">
                      <children>
-                        <Label fx:id="generalTaskLabel" focusTraversable="false" maxHeight="15.0" prefHeight="10.0" text="General Tasks" />
-                        <ListView fx:id="generalView" focusTraversable="false" />
+                        <Label fx:id="generalTaskLabel" focusTraversable="false" maxHeight="15.0" minHeight="25.0" prefHeight="10.0" text="General Tasks" VBox.vgrow="ALWAYS" />
+                        <ListView fx:id="generalView" focusTraversable="false" minHeight="500.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </center>
             </BorderPane>
          </center>
          <right>
-            <VBox fx:id="floatVBox" prefHeight="750.0" prefWidth="260.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="260.0" BorderPane.alignment="CENTER_RIGHT">
                <children>
-                  <Label fx:id="floatingTaskLabel" focusTraversable="false" text="Floating Tasks" />
-                  <ListView fx:id="floatingView" focusTraversable="false" prefHeight="750.0" prefWidth="250.0" />
+                  <Label fx:id="floatingTaskLabel" focusTraversable="false" minHeight="25.0" text="Floating Tasks" />
+                  <ListView fx:id="floatingView" focusTraversable="false" minHeight="755.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </right>
@@ -57,4 +57,7 @@
          </children>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+   </padding>
 </fx:root>
