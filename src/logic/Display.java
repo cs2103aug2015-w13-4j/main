@@ -53,7 +53,7 @@ public class Display {
 		//}
 		return view;
 	}
-	public ArrayList<TaskEvent> searchView(){
+	public ArrayList<TaskEvent> resultView(){
 		Operation op = Launch.getOperation();
 		
 		search = op.getArray();

@@ -62,8 +62,8 @@ public class Launch {
 	}
 
 	/* UI search View */
-	public ArrayList<TaskEvent> searchView(){
-		return display.searchView();
+	public ArrayList<TaskEvent> resultView(){
+		return display.resultView();
 	}
 	/* main method UI calls */
 	public String command(String input) {
