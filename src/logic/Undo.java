@@ -56,8 +56,8 @@ public class Undo {
 		return storage.markTaskAsUndone(content.getID());
 	}
 	private boolean UndoDirectory(CommandElements content){
-		//not implemented
-		return false;
+		logger.log(Level.INFO, "undo Change");
+		return storage.changeDirectory(content.getName());
 	}
 	private boolean UndoFlag(CommandElements content){
 		logger.log(Level.INFO, "undo flag");
