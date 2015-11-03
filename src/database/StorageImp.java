@@ -26,8 +26,11 @@ public class StorageImp implements Storage {
 	private static final String COMPLETION_YES = "true";
 	private static final String COMPLETION_YES_SIG = COMPLETED + COL + COMPLETION_YES;
 	private static final String COMPLETION_NO = "false";
+	private static final String FLAG_STR = "FLAG";
+	private static final String UNFLAG_STR = "UNFLAG";
 	private static final short SEARCH_BY_ID = 0;
 	private static final short SEARCH_BY_STRING = 1;
+	private static final short SEARCH_BY_FLAG = 2;
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
 
@@ -35,7 +38,6 @@ public class StorageImp implements Storage {
 		ourInstance = new StorageImp();
 	}
 
-	private FileState saveState, prefState;
 	private PrintWriter writer;
 	private int taskCounter;
 
@@ -116,7 +118,7 @@ public class StorageImp implements Storage {
 				if (Integer.parseInt(idStr) == taskID) {
 					int pos = string.indexOf(TOK + field);
 					String newStr = string.substring(STR_START, pos);
-					newStr += TOK + field + ":" + content;
+					newStr += TOK + field + COL + content;
 					newStr += string.substring(string.indexOf(TOK, pos + 1));
 					temp.add(newStr);
 					success = true;
@@ -172,7 +174,14 @@ public class StorageImp implements Storage {
 
 	@Override
 	public ArrayList<TaskEvent> searchTaskByString(String content) {
-		return searchTask(content, SEARCH_BY_STRING);
+		switch (content.toUpperCase()) {
+			case FLAG_STR:
+				return searchTask(content, SEARCH_BY_FLAG);
+			case UNFLAG_STR:
+				return searchTask(content, SEARCH_BY_FLAG);
+			default:
+				return searchTask(content, SEARCH_BY_STRING);
+		}
 	}
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
@@ -183,18 +192,24 @@ public class StorageImp implements Storage {
 				String string = br.readLine();
 				String idStr = string.substring(STR_START, string.indexOf(TOK));
 				switch (scope) {
-				case SEARCH_BY_ID:
-					if (Integer.parseInt(idStr) == Integer.parseInt(content)) {
-						list.add(stringToTask(string));
-					}
-					break;
-				case SEARCH_BY_STRING:
-					if (patternMatched(string, contentSplit)) {
-						list.add(stringToTask(string));
-					}
-					break;
-				default:
-					break;
+					case SEARCH_BY_ID:
+						if (Integer.parseInt(idStr) == Integer.parseInt(content)) {
+							list.add(stringToTask(string));
+						}
+						break;
+					case SEARCH_BY_STRING:
+						if (patternMatched(string, contentSplit)) {
+							list.add(stringToTask(string));
+						}
+						break;
+					case SEARCH_BY_FLAG:
+						String[] split = (COL + content + TOK).split(" ");
+						if (patternMatched(string, split)) {
+							list.add(stringToTask(string));
+						}
+						break;
+					default:
+						break;
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -296,16 +311,6 @@ public class StorageImp implements Storage {
 		default:
 			return Command_Priority.UNFLAG;
 		}
-	}
-
-	@Override
-	public FileState checkSaveFileState() {
-		return saveState;
-	}
-
-	@Override
-	public FileState checkPrefFileState() {
-		return prefState;
 	}
 
 	@Override

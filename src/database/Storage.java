@@ -107,10 +107,6 @@ public interface Storage {
 	 */
 	boolean cleanup();
 
-	FileState checkSaveFileState();
-
-	FileState checkPrefFileState();
-
 	boolean changeDirectory(String dir);
 
 }
