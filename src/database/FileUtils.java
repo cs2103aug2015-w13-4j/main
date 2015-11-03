@@ -1,7 +1,6 @@
 package database;
 
 import java.io.File;
-import java.io.IOException;
 
 public class FileUtils {
 	public static boolean isFilenameValid(String filename) {
@@ -13,4 +12,5 @@ public class FileUtils {
 		//}
 		return true;
 	}
+
 }

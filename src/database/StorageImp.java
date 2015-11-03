@@ -1,9 +1,6 @@
 package database;
 
-import utilities.Command_Field;
-import utilities.Command_Priority;
-import utilities.TaskDate;
-import utilities.TaskEvent;
+import utilities.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -59,10 +56,8 @@ public class StorageImp implements Storage {
 			if (br.ready()) {
 				return br.readLine();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			// ignore
 		}
 		return DEFAULT_SAVE_DIR;
 	}
