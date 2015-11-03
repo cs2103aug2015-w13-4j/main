@@ -186,6 +186,11 @@ public class StorageImp implements Storage {
 		}
 	}
 
+	@Override
+	public ArrayList<TaskEvent> searchTaskByDate(TaskDate date) {
+		return null;
+	}
+
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
 		String[] contentSplit = content.split(WHITESPACE);
@@ -272,6 +277,11 @@ public class StorageImp implements Storage {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public ArrayList<TaskEvent> loadDeletedTasks() {
+		return null;
 	}
 
 	@Override
