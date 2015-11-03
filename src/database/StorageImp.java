@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class StorageImp implements Storage {
 	protected static final String PREF_DIR = "pref.txt";
-	protected static final String SAVE_DIR = "tasks.txt";
+	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
 	protected static final String TOK = "&&";
 	protected static final String COL = ":";
 	private static final String AVAILABLE = "available";
@@ -33,6 +33,7 @@ public class StorageImp implements Storage {
 	private static final short SEARCH_BY_FLAG = 2;
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
+	private static String saveDir;
 
 	static {
 		ourInstance = new StorageImp();
@@ -43,8 +44,9 @@ public class StorageImp implements Storage {
 
 	private StorageImp() {
 		try {
-			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(SAVE_DIR), true)));
+			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
+			saveDir = DEFAULT_SAVE_DIR;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -61,7 +63,7 @@ public class StorageImp implements Storage {
 
 	private int getTaskCounter() {
 		int counter = 0;
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				br.readLine();
 				++counter;
@@ -90,28 +92,27 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean editTask(int taskID, Command_Field field, Command_Priority priority) {
-		String fieldStr = field.toString().toLowerCase();
-		String prioStr = priority.toString();
-		return editTask(taskID, fieldStr, prioStr);
+		return editTask(taskID, fieldEnumToLowerCaseString(field), priority.toString());
 	}
 
 	@Override
 	public boolean editTask(int taskID, Command_Field field, TaskDate date) {
-		String fieldStr = field.toString();
-		String dateStr = date.toString();
-		return editTask(taskID, fieldStr, dateStr);
+		return editTask(taskID, fieldEnumToLowerCaseString(field), date.toString());
 	}
 
 	@Override
 	public boolean editTask(int taskID, Command_Field field, String content) {
-		String fieldStr = field.toString().toLowerCase();
-		return editTask(taskID, fieldStr, content);
+		return editTask(taskID, fieldEnumToLowerCaseString(field), content);
+	}
+	
+	private String fieldEnumToLowerCaseString(Command_Field field) {
+		return field.toString().toLowerCase();
 	}
 
 	private boolean editTask(int taskID, String field, String content) {
 		ArrayList<String> temp = new ArrayList<String>(taskCounter);
 		boolean success = false;
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				String idStr = string.substring(STR_START, string.indexOf(TOK));
@@ -138,7 +139,7 @@ public class StorageImp implements Storage {
 	}
 
 	private void rewriteSaveFile(ArrayList<String> temp) throws IOException {
-		PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(new File(SAVE_DIR), false)));
+		PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), false)));
 		for (String s : temp) {
 			w.write(s);
 			w.println();
@@ -187,7 +188,7 @@ public class StorageImp implements Storage {
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
 		String[] contentSplit = content.split(" ");
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				String idStr = string.substring(STR_START, string.indexOf(TOK));
@@ -239,7 +240,7 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> loadAllTasks() {
 		ArrayList<TaskEvent> list = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				if (string.contains(AVAILABILITY_YES_SIG)) {
@@ -257,7 +258,7 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> loadCompletedTasks() {
 		ArrayList<TaskEvent> list = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				if (string.contains(COMPLETION_YES_SIG)) {
@@ -275,7 +276,7 @@ public class StorageImp implements Storage {
 	@Override
 	public boolean cleanup() {
 		ArrayList<String> list = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(SAVE_DIR)))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
 				if (string.contains(AVAILABILITY_YES_SIG)) {
@@ -304,9 +305,9 @@ public class StorageImp implements Storage {
 
 	private Command_Priority priorityStrToEnum(String prio) {
 		switch (prio.toUpperCase()) {
-		case "FLAG":
+		case FLAG_STR:
 			return Command_Priority.FLAG;
-		case "UNFLAG":
+		case UNFLAG_STR:
 			return Command_Priority.UNFLAG;
 		default:
 			return Command_Priority.UNFLAG;
