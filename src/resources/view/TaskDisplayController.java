@@ -70,28 +70,32 @@ public class TaskDisplayController extends StackPane{
     private static final String MESSAGE_THIS_WEEK = "This week";
     
     private static final String HELP_DESC_ADD  = "Add a task?";
-    private static final String HELP_DESC_EDIT = "Want to edit a task?";
-    private static final String HELP_DESC_DELETE = "Wish to delete a task?";
-    private static final String HELP_DESC_UNDO = "To undo what you have did";
+    private static final String HELP_DESC_EDIT = "Edit a task?";
+    private static final String HELP_DESC_DELETE = "Delete a task?";
+    private static final String HELP_DESC_UNDO = "To undo";
     private static final String HELP_DESC_REDO = "To redo";
     private static final String HELP_DESC_SEARCH = "To search a task ";
-    private static final String HELP_DESC_FINISH = "To mark a task as finished";
-    private static final String HELP_DESC_FLAG = "To flag a task as important";
-    private static final String HELP_DESC_UNFLAG = "To unflag a task";
+    private static final String HELP_DESC_FINISH = "Mark a task as finished";
+    private static final String HELP_DESC_FLAG = "Flag a task as important";
+    private static final String HELP_DESC_UNFLAG = "Unflag a task";
     private static final String HELP_DESC_VIEW_COMPLETED = "To view completed tasks";
     private static final String HELP_DESC_CHANGE_DIR = "To change the file directory";
+    private static final String HELP_DESC_FIELD = "Fields available";
+    private static final String HELP_DESC_EXIT = "To Exit PIXEList";
     
-    private static final String HELP_COMMAND_ADD = "add \"Task Name\" <Start Date> <End Date> <Flag?>";
-    private static final String HELP_COMMAND_EDIT = "edit <id> <name or date> \"Changes here.if name edit, put \"\"\"  ";
+    private static final String HELP_COMMAND_ADD = "add \"Task Name\" <StartDate> <EndDate> <Flag?>";
+    private static final String HELP_COMMAND_EDIT = "edit <id> <field> \"Name Changes here.\"<Date>";
     private static final String HELP_COMMAND_DELETE = "delete <id>";
     private static final String HELP_COMMAND_UNDO = "undo";
     private static final String HELP_COMMAND_REDO = "redo";
-    private static final String HELP_COMMAND_SEARCH = "search \"Search keyword here\"";
+    private static final String HELP_COMMAND_SEARCH = "search \"Search keyword\"";
     private static final String HELP_COMMAND_FINISH = "finish <id>";
     private static final String HELP_COMMAND_FLAG = "flag <id>";
     private static final String HELP_COMMAND_UNFLAG = "unflag <id>";
     private static final String HELP_COMMAND_VIEW_COMPLETED = "view completed";
     private static final String HELP_COMMAND_CHANGE_DIR = "cd";
+    private static final String HELP_COMMAND_EXIT = "exit";
+    private static final String HELP_COMMAND_FIELD = "startDate , endDate , name";
     
     
     private Launch launch;
@@ -215,7 +219,19 @@ public class TaskDisplayController extends StackPane{
     
     private ObservableList<HBox> initHelpCommands() {
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        tasks.add(new HelpCommands(HELP_COMMAND_ADD, HELP_DESC_ADD));
+        tasks.add(new HelpCommand(HELP_COMMAND_ADD, HELP_DESC_ADD));
+        tasks.add(new HelpCommand(HELP_COMMAND_EDIT, HELP_DESC_EDIT));
+        tasks.add(new HelpCommand(HELP_COMMAND_DELETE, HELP_DESC_DELETE));
+        tasks.add(new HelpCommand(HELP_COMMAND_UNDO, HELP_DESC_UNDO));
+        tasks.add(new HelpCommand(HELP_COMMAND_REDO, HELP_DESC_REDO));
+        tasks.add(new HelpCommand(HELP_COMMAND_SEARCH, HELP_DESC_SEARCH));
+        tasks.add(new HelpCommand(HELP_COMMAND_FINISH, HELP_DESC_FINISH));
+        tasks.add(new HelpCommand(HELP_COMMAND_FLAG, HELP_DESC_FLAG));
+        tasks.add(new HelpCommand(HELP_COMMAND_UNFLAG, HELP_DESC_UNFLAG));
+        tasks.add(new HelpCommand(HELP_COMMAND_VIEW_COMPLETED, HELP_DESC_VIEW_COMPLETED));
+        tasks.add(new HelpCommand(HELP_COMMAND_CHANGE_DIR, HELP_DESC_CHANGE_DIR));
+        tasks.add(new HelpCommand(HELP_COMMAND_FIELD, HELP_DESC_FIELD));
+        tasks.add(new HelpCommand(HELP_COMMAND_EXIT, HELP_DESC_EXIT));
         
         return tasks;
     }

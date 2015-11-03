@@ -56,7 +56,7 @@
 
 /*
  * ==============
- * Task Fonts
+ * Task Styles
  * ==============
  */
 
@@ -102,6 +102,22 @@
 }
 /*
  * ==============
+ * Help Style
+ * ==============
+ */
+
+.helpCommand {
+	-fx-padding: 0;
+	-fx-font-size:13px;
+	-fx-background-color: transparent;
+}
+
+.helpCommand #command {
+	-fx-font-weight: 700;
+}
+
+/*
+ * ==============
  * Root
  * ==============
  */
@@ -131,11 +147,17 @@
 }
 
 .display #helpContent {
-	-fx-background-color: #FF9999;
+	-fx-background-color: #CC99FF;
+	-fx-padding: 13;
+	-fx-background-radius: 20;
+}
+
+.display #helpContent .list-cell{
+	-fx-background-color: transparent;
 }
 .display #generalTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 13px;
+	-fx-font-size: 11px;
 	-fx-text-fill: #606060;
 	-fx-background-color: #99FFFF;
 	-fx-padding: 2 24 2 2;
@@ -203,7 +225,7 @@
 }
 
 .display .list-cell {
-	-fx-padding: 0 0 1 0;
-	-fx-background-color: blue;
+	-fx-padding: 0 0 6 0;
+	-fx-background-color: white;
 }
 
