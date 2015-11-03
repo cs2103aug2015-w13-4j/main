@@ -52,6 +52,8 @@ public class CommandParser {
 			return new CommandElements(type, object);
 		} else if (type == Command_Type.UNDO) {
 			return new CommandElements(type);
+		} else if(type == Command_Type.REDO){
+			return new CommandElements(type);
 		} else if (type == Command_Type.DIRECTORY) {
 			return new CommandElements(type, name);
 		} else if (type == Command_Type.VIEW_COMPLETED) {

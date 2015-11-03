@@ -34,6 +34,8 @@ public class CommandSplitter {
 			return Command_Type.SEARCH_TASK;
 		} else if (contain("undo", command)) {
 			return Command_Type.UNDO;
+		} else if(contain("redo",command)){
+			return Command_Type.REDO;
 		} else if (contain("directory", command)) {
 			return Command_Type.DIRECTORY;
 		} else if (contain("flag", command)) {
