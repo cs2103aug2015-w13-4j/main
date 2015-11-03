@@ -24,17 +24,17 @@
                   <VBox fx:id="genVBox" prefHeight="580.0" prefWidth="160.0" BorderPane.alignment="TOP_CENTER">
                      <children>
                         <Label fx:id="generalTaskLabel" focusTraversable="false" maxHeight="15.0" minHeight="25.0" prefHeight="10.0" text="General Tasks" VBox.vgrow="ALWAYS" />
-                        <ListView fx:id="generalView" focusTraversable="false" minHeight="500.0" VBox.vgrow="ALWAYS" />
+                        <ListView fx:id="generalView" focusTraversable="false" prefHeight="555.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                </center>
             </BorderPane>
          </center>
          <right>
-            <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="260.0" BorderPane.alignment="TOP_LEFT">
+            <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="240.0" BorderPane.alignment="TOP_LEFT">
                <children>
                   <Label fx:id="floatingTaskLabel" focusTraversable="false" minHeight="25.0" text="Floating Tasks" VBox.vgrow="ALWAYS" />
-                  <ListView fx:id="floatingView" focusTraversable="false" VBox.vgrow="ALWAYS" />
+                  <ListView fx:id="floatingView" focusTraversable="false" minHeight="760.0" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </right>

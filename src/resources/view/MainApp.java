@@ -22,8 +22,11 @@ public class MainApp extends Application{
 	private HBox task;
 	
 	/* PROGRAM DETAILS */
-	private static final double PROGRAM_HEIGHT = 760.0;
-	private static final double PROGRAM_WIDTH = 980.0;
+	//private static final double PROGRAM_HEIGHT = 760.0;
+	//private static final double PROGRAM_WIDTH = 980.0;
+	
+	   private static final double PROGRAM_HEIGHT = 660.0;
+	    private static final double PROGRAM_WIDTH = 880.0;
 	
 	private static final String PROGRAM_TITLE = "PIXEList";
 	
