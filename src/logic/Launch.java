@@ -1,4 +1,3 @@
-//@@author Shirlene A0130909H
 package logic;
 
 import database.StorageImp;
@@ -6,11 +5,11 @@ import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
+//@@Shirlene
 public class Launch {
 	private static StorageImp storage;
 	private static Display display;
 	private static Operation op;
-	private static Search search;
 	private static ArrayList<TaskEvent> tasks;
 	private static Launch launch;
 	private static Undo undo;
@@ -22,7 +21,6 @@ public class Launch {
 	private static void createObjects() {
 		display = new Display();
 		op = new Operation();
-		search = new Search();
 		launch = new Launch();
 		storage = StorageImp.getInstance();
 		tasks = storage.loadAllTasks();
@@ -43,9 +41,6 @@ public class Launch {
 		return display;
 	}
 
-	public static Search getSearch() {
-		return search;
-	}
 	public static Undo getUndo(){
 		return undo;
 	}

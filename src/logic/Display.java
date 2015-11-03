@@ -1,4 +1,3 @@
-//@@author Shirlene A0130909H
 package logic;
 
 
@@ -8,6 +7,7 @@ import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
+//@@Shirlene
 public class Display {
 
 	/* Feedback */
