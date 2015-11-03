@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<HBox fx:id="helpCmd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="helpCmd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="300.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="command" text="Label" />
-      <Label fx:id="description" text="Label">
+      <Label fx:id="description" focusTraversable="false" prefWidth="100.0" text="Label" HBox.hgrow="ALWAYS" />
+      <Label fx:id="command" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefWidth="300.0" text="Label">
          <HBox.margin>
-            <Insets left="120.0" />
+            <Insets />
          </HBox.margin>
       </Label>
    </children>
-</HBox>
+</fx:root>

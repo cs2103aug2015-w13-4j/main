@@ -131,7 +131,7 @@
 }
 
 .display #helpContent {
-	-fx-background-color: red;
+	-fx-background-color: #FF9999;
 }
 .display #generalTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;

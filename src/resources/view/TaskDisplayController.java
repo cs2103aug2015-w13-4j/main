@@ -117,6 +117,7 @@ public class TaskDisplayController extends StackPane{
             throw new RuntimeException(e);
         }
         viewBorderPane.setBottom(InputViewController.getInstance());
+        initHelpTaskDisplay();
         updateViews();
     }
     
@@ -228,7 +229,7 @@ public class TaskDisplayController extends StackPane{
     public void showHelpView() {
         helpView.toFront();
         helpView.setOpacity(1);
-        helpView.setOpacity(0.35);
+        borderPane.setOpacity(0.35);
     }
     public void showResultView() {
         resultView.toFront();

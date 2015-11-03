@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 public class HelpCommands extends HBox{
     
     @FXML
-    private Label commmand;
+    private Label command;
     
     @FXML
     private Label description;
@@ -22,13 +22,13 @@ public class HelpCommands extends HBox{
     }
     
     public void initFxmlFields(String command, String description) {
-        this.commmand.setText(command);
+        this.command.setText(command);
         this.description.setText(description);
     }
     
     private void loadFxml() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(TASK_FILE));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HelpCommands.fxml"));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

@@ -39,7 +39,7 @@
             </VBox>
          </right>
       </BorderPane>
-      <VBox fx:id="helpView" alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0">
+      <VBox fx:id="helpView" alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefWidth="300.0" text="Need Help?" VBox.vgrow="ALWAYS">
                <VBox.margin>
@@ -48,9 +48,9 @@
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding></Label>
-            <ListView fx:id="helpContent" focusTraversable="false" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
+            <ListView fx:id="helpContent" focusTraversable="false" prefHeight="400.0" prefWidth="600.0" />
          </children></VBox>
-      <VBox fx:id="resultView" alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0">
+      <VBox fx:id="resultView" alignment="CENTER" prefHeight="400.0" prefWidth="400.0">
          <children>
             <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefWidth="300.0" text="Results" />
             <ListView fx:id="resultContent" focusTraversable="false" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
