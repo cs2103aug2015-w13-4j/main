@@ -249,7 +249,8 @@ public class CommandSplitter {
 			results[0] = new TaskDate(0, 0, 0);
 			results[1] = new TaskDate(0, 0, 0);
 		} else if (dateCount == 1) {
-			results[1] = new TaskDate(0, 0, 0);
+			results[1] = results[0];
+			results[0] = new TaskDate(0, 0, 0);
 		} else {
 			if (results[0].compareTo(results[1]) == 1) {
 				TaskDate med = results[1];
