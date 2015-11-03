@@ -4,6 +4,7 @@ public class CommandElements {
 	private Command_Type type;
 	private String name;
 	private TaskDate date[] = new TaskDate[2];
+	private TaskTime time[] = new TaskTime[2];
 	private Command_Priority priority;
 	private Command_Field field;
 	private int id;
@@ -12,11 +13,12 @@ public class CommandElements {
 		type = Command_Type.NOT_FOUND;
 	}
 	
-	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio){
+	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio, TaskTime tm[]){
 		this.type = cmd;
 		this.name = nm;
 		this.date = dt;
 		this.priority = prio;
+		this.time = tm;
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, String nm){
@@ -25,6 +27,7 @@ public class CommandElements {
 		this.field = fld;
 		this.name = nm;
 	}
+	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskDate dt){
 		this.type = cmd;
 		this.id = o;
@@ -36,7 +39,19 @@ public class CommandElements {
 			this.date[0] = dt;
 			this.date[1] = new TaskDate(0,0,0);
 		}
-		
+	}
+	
+	public CommandElements(Command_Type cmd, int o, Command_Field fld, TaskTime tm){
+		this.type = cmd;
+		this.id = o;
+		this.field = fld;
+		if (fld == Command_Field.END_TIME) {
+			this.time[1] = tm;
+			this.time[0] = new TaskTime(0,0);
+		} else {
+			this.time[0] = tm;
+			this.time[1] = new TaskTime(0,0);
+		}
 	}
 	
 	public CommandElements(Command_Type cmd, int o, Command_Field fld, Command_Priority prio){
@@ -84,6 +99,14 @@ public class CommandElements {
 		return date[1];
 	}
 	
+	public TaskTime getStartTime() {
+		return time[0];
+	}
+	
+	public TaskTime getEndTime() {
+		return time[1];
+	}
+	
 	public Command_Priority getPriority() {
 		return priority;
 	}
@@ -97,7 +120,9 @@ public class CommandElements {
 		System.out.println(name);
 		System.out.println(id);
 		if (date[0] != null) System.out.println(date[0].printDate());
-		if (date[1] != null) System.out.println(date[1].printDate());
+		if (date[1] != null)System.out.println(date[1].printDate());
+		if (time[0] != null)System.out.println(time[0].toString());
+		if (time[1] != null)System.out.println(time[1].toString());
 		if (priority != null) System.out.println(priority.toString());
 		if (field == null) { 
 			System.out.println("no field");
