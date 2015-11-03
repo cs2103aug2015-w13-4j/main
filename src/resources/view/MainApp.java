@@ -1,25 +1,15 @@
 package resources.view;
 
-import java.util.ResourceBundle;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private VBox inputView;
-    private StackPane taskDisplay;
-    private HBox task;
     
     /* PROGRAM DETAILS */
     // private static final double PROGRAM_HEIGHT = 760.0;
@@ -76,7 +66,7 @@ public class MainApp extends Application {
      * inside.
      */
     private void initTaskView() {
-        taskDisplay = TaskDisplayController.getInstance();
+        TaskDisplayController.getInstance();
     }
 
     /**

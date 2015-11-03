@@ -1,14 +1,10 @@
 package resources.view;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 
 public class RootController extends BorderPane {
@@ -17,10 +13,7 @@ public class RootController extends BorderPane {
     private TextField input;
 
     private TaskDisplayController taskDisplayController;
-    private InputViewController inputViewController;
 
-    // Prompt Text
-    private static final String PROMPT_TEXT = "Enter format: taskname ; date ; priority ; task description";
 
     // Constructors
     public RootController() {
@@ -34,7 +27,7 @@ public class RootController extends BorderPane {
         }
 
         initTaskDisplay();
-        // initInputView();
+        initInputView();
     }
 
     private void initTaskDisplay() {
@@ -43,8 +36,7 @@ public class RootController extends BorderPane {
     }
 
     private void initInputView() {
-        this.inputViewController = InputViewController.getInstance();
-        this.setBottom(inputViewController);
+        InputViewController.getInstance();
     }
 
 }

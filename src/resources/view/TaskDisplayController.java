@@ -3,8 +3,6 @@ package resources.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import utilities.Command_Priority;
-import utilities.TaskDate;
 import utilities.TaskEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
