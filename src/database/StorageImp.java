@@ -34,9 +34,6 @@ public class StorageImp implements Storage {
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
 	private static String saveDir;
-	protected enum PathType {
-		INVALID, DIRECTORY, FILE
-	};
 
 	private PrintWriter writer;
 	private int taskCounter;
@@ -392,17 +389,7 @@ public class StorageImp implements Storage {
 	}
 
 	private void moveSaveFile(String dir) throws IOException {
-		File saveFile = new File(saveDir);
-		try (BufferedReader br = new BufferedReader(new FileReader(saveFile));
-		     BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir)))) {
-			while (br.ready()) {
-				String line = br.readLine();
-				bw.write(line);
-				bw.newLine();
-			}
-			bw.flush();
-			saveFile.delete();
-		}
+		FileUtils.moveFile(saveDir, dir);
 	}
 
 	@Override

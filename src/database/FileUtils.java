@@ -23,4 +23,19 @@ public class FileUtils {
 		br.close();
 		return string;
 	}
+
+	public static void moveFile(String src, String dst) throws IOException {
+		File srcFile = new File(src);
+		BufferedReader br = new BufferedReader(new FileReader(srcFile));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dst)));
+		while (br.ready()) {
+			String line = br.readLine();
+			bw.write(line);
+			bw.newLine();
+		}
+		bw.flush();
+		srcFile.delete();
+		br.close();
+		bw.close();
+	}
 }
