@@ -17,10 +17,10 @@ public class StorageImp implements Storage {
 	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
 	protected static final String TOK = "&&";
 	protected static final String COL = ":";
+	protected static final String DIV = "/";
 	private static final String WHITESPACE = " ";
 	private static final String AVAILABLE = "available";
 	private static final String COMPLETED = "completed";
-	private static final String PRIORITY = "priority";
 	private static final String AVAILABILITY_NO = "false";
 	private static final String AVAILABILITY_YES = "true";
 	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
@@ -36,17 +36,16 @@ public class StorageImp implements Storage {
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
 	private static String saveDir;
-
-	static {
-		ourInstance = new StorageImp();
-	}
+	protected enum PathType {
+		INVALID, DIRECTORY, FILE
+	};
 
 	private PrintWriter writer;
 	private int taskCounter;
 
 	private StorageImp() {
 		try {
-			saveDir = DEFAULT_SAVE_DIR;
+			saveDir = getSaveDir();
 			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
 		} catch (IOException e) {
@@ -54,7 +53,23 @@ public class StorageImp implements Storage {
 		}
 	}
 
+	private String getSaveDir() {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(PREF_DIR)))) {
+			if (br.ready()) {
+				return br.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return DEFAULT_SAVE_DIR;
+	}
+
 	public static StorageImp getInstance() {
+		if (ourInstance == null) {
+			ourInstance = new StorageImp();
+		}
 		return ourInstance;
 	}
 
@@ -329,7 +344,54 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean changeDirectory(String dir) {
-		return false;
+		if (dir == null) {
+			return false;
+		} else {
+			File file = new File(dir);
+			if (file.exists() && file.isDirectory()) {
+				dir = addDefFileNameToDir(dir);
+			}
+			file = new File(dir);
+			try {
+				if (file.createNewFile()) {
+					updateSaveDirInPref(dir);
+					moveSaveFile(dir);
+					saveDir = dir;
+				}
+			} catch (IOException e) {
+				return false;
+			}
+			return true;
+		}
+	}
+
+	private String addDefFileNameToDir(String dir) {
+		if (dir.endsWith(DIV)) {
+			return dir + DEFAULT_SAVE_DIR;
+		} else {
+			return dir + DIV + DEFAULT_SAVE_DIR;
+		}
+	}
+
+	private void updateSaveDirInPref(String path) throws IOException {
+		try (PrintWriter pw = new PrintWriter(new FileWriter(new File(PREF_DIR), false))) {
+			pw.write(path);
+			pw.flush();
+		}
+	}
+
+	private void moveSaveFile(String dir) throws IOException {
+		File saveFile = new File(saveDir);
+		try (BufferedReader br = new BufferedReader(new FileReader(saveFile));
+		     BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dir)))) {
+			while (br.ready()) {
+				String line = br.readLine();
+				bw.write(line);
+				bw.newLine();
+			}
+			bw.flush();
+			saveFile.delete();
+		}
 	}
 
 	@Override
