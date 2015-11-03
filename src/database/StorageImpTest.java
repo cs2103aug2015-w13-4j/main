@@ -8,6 +8,7 @@ import utilities.Command_Field;
 import utilities.Command_Priority;
 import utilities.TaskDate;
 import utilities.TaskEvent;
+import utilities.TaskTime;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +22,8 @@ public class StorageImpTest {
 	static TaskDate d1 = new TaskDate(2015, 1, 1);
 	static TaskDate d2 = new TaskDate(2015, 2, 2);
 	static TaskDate d3 = new TaskDate(9999, 9, 9);
+	static TaskTime t1 = new TaskTime(10, 10);
+	static TaskTime t2 = new TaskTime(11, 11);
 	Storage s = StorageImp.getInstance();
 	
 	@Test
@@ -30,7 +33,7 @@ public class StorageImpTest {
 
 	@Test
 	public void testAddTask() throws Exception {
-		s.addTask("three", d1, d2, Command_Priority.FLAG);
+		s.addTask("three", d1, t1, d2, t2, Command_Priority.FLAG);
 	}
 
 	@Test

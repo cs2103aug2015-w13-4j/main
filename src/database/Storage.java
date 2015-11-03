@@ -18,7 +18,8 @@ public interface Storage {
 	 * @param priority an enum
 	 * @return true if task gets successfully appended; false otherwise
 	 */
-	boolean addTask(String taskName, TaskDate from, TaskDate to, Command_Priority priority);
+	boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
+	                TaskDate endDate, TaskTime endTime, Command_Priority priority);
 
 	/**
 	 * Overloading method

@@ -13,7 +13,7 @@ public class StorageImp implements Storage {
 	protected static final String PREF_DIR = "pref.txt";
 	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
 	protected static final String TOK = "&&";
-	protected static final String COL = ":";
+	protected static final String COL = "``";
 	protected static final String DIV = "/";
 	private static final String WHITESPACE = " ";
 	private static final String AVAILABLE = "available";
@@ -85,9 +85,12 @@ public class StorageImp implements Storage {
 	}
 
 	@Override
-	public boolean addTask(String taskName, TaskDate from, TaskDate to, Command_Priority priority) {
+	public boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
+	                TaskDate endDate, TaskTime endTime, Command_Priority priority) {
+		//TODO defense for taskName having special char like COL or TOK
 		try {
-			TaskEvent task = new TaskEvent(taskCounter++, taskName, from, to, priority);
+			TaskEvent task = new TaskEvent(
+					taskCounter++, taskName, startDate, startTime, endDate, endTime, priority);
 			writer.write(task.toString());
 			writer.println();
 			writer.flush();
@@ -326,11 +329,18 @@ public class StorageImp implements Storage {
 		String[] sigSplit = string.split(TOK);
 		assert(sigSplit.length == TaskEvent.ELEMENTS_COUNT);
 		int taskID = Integer.parseInt(sigSplit[0]);
-		String name = sigSplit[1].split(COL)[1], from = sigSplit[2].split(COL)[1], to = sigSplit[3].split(COL)[1],
-				prio = sigSplit[4].split(COL)[1], comp = sigSplit[5].split(COL)[1], avlb = sigSplit[6].split(COL)[1];
-		TaskEvent task = new TaskEvent(taskID, name, new TaskDate(from), new TaskDate(to), priorityStrToEnum(prio));
-		task.setCompleted(Boolean.parseBoolean(comp));
-		task.setAvailable(Boolean.parseBoolean(avlb));
+		String  name      = sigSplit[1].split(COL)[1],
+				startDate = sigSplit[2].split(COL)[1],
+				startTime = sigSplit[3].split(COL)[1],
+				endDate   = sigSplit[4].split(COL)[1],
+				endTime   = sigSplit[5].split(COL)[1],
+				flag      = sigSplit[6].split(COL)[1],
+				completed = sigSplit[7].split(COL)[1],
+				available = sigSplit[8].split(COL)[1];
+		TaskEvent task = new TaskEvent(taskID, name, new TaskDate(startDate), new TaskTime(startTime),
+				new TaskDate(endDate), new TaskTime(endTime), priorityStrToEnum(flag));
+		task.setCompleted(Boolean.parseBoolean(completed));
+		task.setAvailable(Boolean.parseBoolean(available));
 		return task;
 	}
 

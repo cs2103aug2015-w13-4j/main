@@ -1,5 +1,6 @@
 package utilities;
 
-public enum Command_Priority{
-		FLAG, UNFLAG
-	};
+public enum Command_Priority {
+	FLAG,
+	UNFLAG
+};
