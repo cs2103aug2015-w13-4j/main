@@ -96,6 +96,7 @@ public class Operation {
 	private boolean performCommand(Command_Type command, CommandElements content) throws OperationNotPerformed {
 		StorageImp action = Launch.getStorage();
 		Undo undo = Launch.getUndo();
+		Redo redo = Launch.getRedo();
 		OperationNotPerformed exception = new OperationNotPerformed("operation not performed");
 		boolean isSuccessful = false;
 		switch (command) {
@@ -154,7 +155,7 @@ public class Operation {
 			logger.log(Level.INFO, "command is redo");
 			content = redoList.pop();
 			logger.log(Level.INFO, "content type "+ content.getType());
-			return undo.UndoTask(content);
+			return redo.redoTask(content);
 		case DIRECTORY:
 			// not implemented!!
 			logger.log(Level.INFO, "command is change directory");
@@ -277,18 +278,22 @@ public class Operation {
 		Command_Type type = content.getType();
 		switch(type){
 		case ADD_TASK:
-			return undoAdd(content.getID());
-		/*	
+			return new CommandElements(Command_Type.ADD_TASK,content.getID());
 		case DELETE_TASK:
+			return new CommandElements(Command_Type.DELETE_TASK,content.getID());
 		case EDIT_TASK:
+			String name = getInitialContent(content.getID(),content.getField());
+			return new CommandElements(Command_Type.EDIT_TASK,content.getID(),content.getField(),name);
 		case FINISH_TASK:
-		case DIRECTORY:
+			return new CommandElements(Command_Type.FINISH_TASK,content.getID());
+			//case DIRECTORY:
 		case FLAG_TASK:
+			return new CommandElements(Command_Type.FLAG_TASK,content.getID());
 		case UNFLAG_TASK:
-		*/
+			return new CommandElements(Command_Type.UNFLAG_TASK,content.getID());
+		default:
+			break;
 		}
-		return new CommandElements();
-		
-		
+		return new CommandElements();	
 	}
 }
