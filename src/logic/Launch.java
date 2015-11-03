@@ -14,6 +14,7 @@ public class Launch {
 	private static ArrayList<TaskEvent> tasks;
 	private static Launch launch;
 	private static Undo undo;
+	private static Redo redo;
 
 	private Launch() {
 	}
@@ -26,6 +27,7 @@ public class Launch {
 		storage = StorageImp.getInstance();
 		tasks = storage.loadAllTasks();
 		undo = new Undo();
+		redo = new Redo();
 	}
 
 	/* getting objects */
@@ -53,6 +55,9 @@ public class Launch {
 			createObjects();
 		}
 		return launch;
+	}
+	public static Redo getRedo(){
+		return redo;
 	}
 
 	/* UI main task view */
