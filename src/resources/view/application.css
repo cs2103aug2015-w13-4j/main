@@ -31,7 +31,7 @@
 */
 @font-face {
 	font-family: FontAwesome;
-	src: url('resources/fonts/fontawesome-webfront.ttf');
+	src: url("resources/fonts/fontawesome-webfront.ttf");
 } 
 
 /*
@@ -157,7 +157,7 @@
 }
 .display #generalTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 11px;
+	-fx-font-size: 13px;
 	-fx-text-fill: #606060;
 	-fx-background-color: #99FFFF;
 	-fx-padding: 2 24 2 2;
