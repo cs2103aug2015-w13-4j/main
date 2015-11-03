@@ -252,7 +252,8 @@ public class CommandSplitter {
 			results[0] = new TaskDate(0,0,0);
 			results[1] = new TaskDate(0,0,0);
 		} else if (dateCount == 1) {
-			results[1] = new TaskDate(0,0,0);
+			results[1] = results[0];
+			results[0] = new TaskDate(0,0,0);
 		} else {
 			/*if (results[0].compareTo(results[1]) == 1) {
 				TaskDate med = results[1];
@@ -304,7 +305,8 @@ public class CommandSplitter {
 				timeToken[0] = new TaskTime(0,0);
 				timeToken[1] = new TaskTime(0,0);
 			} else if (timeCount == 1) {
-				timeToken[1] = new TaskTime(0,0);
+				timeToken[1] = timeToken[0];
+				timeToken[0] = new TaskTime(0,0);
 			}
 		} else {
 			if (timeCount == 2) {
@@ -313,7 +315,8 @@ public class CommandSplitter {
 			} else if (timeCount == 1) {
 				String newParts[] = command.split(parts[pos]);
 				if (getValidDate(newParts[0]) == 1) {
-					timeToken[1] = new TaskTime(0,0);
+					timeToken[1] = timeToken[0];
+					timeToken[0] = new TaskTime(0,0);
 				} else {
 					timeToken[1] = timeToken[0];
 					timeToken[0] = new TaskTime(0,0);
