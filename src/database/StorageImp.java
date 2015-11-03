@@ -24,6 +24,7 @@ public class StorageImp implements Storage {
 	private static final String AVAILABILITY_NO = "false";
 	private static final String AVAILABILITY_YES = "true";
 	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
+	private static final String AVAILABILITY_NO_SIG = AVAILABLE + COL + AVAILABILITY_NO;
 	private static final String COMPLETION_YES = "true";
 	private static final String COMPLETION_YES_SIG = COMPLETED + COL + COMPLETION_YES;
 	private static final String COMPLETION_NO = "false";
@@ -298,7 +299,20 @@ public class StorageImp implements Storage {
 
 	@Override
 	public ArrayList<TaskEvent> loadDeletedTasks() {
-		return null;
+		ArrayList<TaskEvent> list = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
+			while (br.ready()) {
+				String string = br.readLine();
+				if (string.contains(AVAILABILITY_NO_SIG)) {
+					list.add(stringToTask(string));
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
