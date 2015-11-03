@@ -190,7 +190,7 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> searchTaskByDate(TaskDate date) {
 		String dateSignature = DATE_COMMON_HEADER + COL + date;
-		return ;
+		return searchTaskByString(dateSignature);
 	}
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
