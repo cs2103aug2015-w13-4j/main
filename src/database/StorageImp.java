@@ -17,6 +17,7 @@ public class StorageImp implements Storage {
 	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
 	protected static final String TOK = "&&";
 	protected static final String COL = ":";
+	private static final String WHITESPACE = " ";
 	private static final String AVAILABLE = "available";
 	private static final String COMPLETED = "completed";
 	private static final String PRIORITY = "priority";
@@ -187,7 +188,7 @@ public class StorageImp implements Storage {
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
-		String[] contentSplit = content.split(" ");
+		String[] contentSplit = content.split(WHITESPACE);
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
@@ -204,7 +205,7 @@ public class StorageImp implements Storage {
 						}
 						break;
 					case SEARCH_BY_FLAG:
-						String[] split = (COL + content + TOK).split(" ");
+						String[] split = (COL + content + TOK).split(WHITESPACE);
 						if (patternMatched(string, split)) {
 							list.add(stringToTask(string));
 						}
