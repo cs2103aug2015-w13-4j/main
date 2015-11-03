@@ -8,7 +8,7 @@ import utilities.TaskDate;
 public class DateParser {
 
 	public static TaskDate dateDecoder(String dateStr) {
-		int year, month, day;
+		int year = -1, month=-1, day=-1;
 		int thisDate[] = new int[3];
 		thisDate = getCurrentDate();
 
@@ -262,11 +262,11 @@ public class DateParser {
 				day = Integer.parseInt(parts[0]);
 				if (checkDate(year, month, day) == 0) {
 					return new TaskDate(year, month, day);
-				}
+				} 
 			}
 		}
 
-		return new TaskDate(0, 0, 0);
+		return new TaskDate(-1, -1, -1);
 	}
 
 	public static int checkDate(int year, int month, int day) {
