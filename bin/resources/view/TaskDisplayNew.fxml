@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<fx:root prefHeight="750.0" prefWidth="420.0" styleClass="display" type="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="stackPane" prefHeight="750.0" prefWidth="420.0" styleClass="display" type="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane">
          <center>
@@ -48,12 +48,12 @@
                <padding>
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding></Label>
-            <ListView maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
+            <ListView fx:id="helpContent" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
          </children></VBox>
-      <VBox fx:id="searchView" alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0">
+      <VBox fx:id="resultView" alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" text="Search Results" />
-            <ListView fx:id="searchContent" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
+            <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="300.0" text="Results" />
+            <ListView fx:id="resultContent" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
          </children>
       </VBox>
    </children>

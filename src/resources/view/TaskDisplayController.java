@@ -37,7 +37,7 @@ public class TaskDisplayController extends StackPane{
     private ListView<HBox> floatingView;
     
     @FXML
-    private ListView<HBox> searchContent;
+    private ListView<HBox> resultContent;
     
     @FXML
     private BorderPane viewBorderPane;
@@ -55,7 +55,7 @@ public class TaskDisplayController extends StackPane{
     private VBox helpView;
     
     @FXML
-    private VBox searchView;
+    private VBox resultView;
     
     @FXML
     private BorderPane borderPane;
@@ -68,6 +68,9 @@ public class TaskDisplayController extends StackPane{
       
     private Launch launch;
     private Display display;
+    
+    private boolean enableHelpView;
+    private boolean enableResultView;
     
     public static TaskDisplayController getInstance() {
         if (taskDisplayController == null) {
@@ -89,13 +92,16 @@ public class TaskDisplayController extends StackPane{
         updateViews();
     }
     
+    
+    
     public void updateViews() {
-        hideAll();
+        refreshAllViews();
         launch.getInstance();
         display = launch.getDisplay();
         updateGeneralTaskDisplay();
         updateFlaggedTaskDisplay();
         updateFloatingTaskDisplay();
+        updateResultTaskDisplay();
     }
     
     private void updateGeneralTaskDisplay() {
@@ -119,11 +125,10 @@ public class TaskDisplayController extends StackPane{
         floatingTaskLabel.setText("Floating Tasks - " + displayTasks.size() + " tasks displayed");
     }
 
-    public void updateSearchTaskDisplay() {
+    public void updateResultTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
-        displayTasks = getSearchedTask();
-        searchContent.setItems(displayTasks);
-        showSearchView();
+        displayTasks = getResultedTask();
+        resultContent.setItems(displayTasks);
     }
     
     private ObservableList<HBox> getTask() {
@@ -164,41 +169,81 @@ public class TaskDisplayController extends StackPane{
          return tasks;
     }
     
-    private ObservableList<HBox> getSearchedTask() { 
+    private ObservableList<HBox> getResultedTask() { 
         
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> searchedTaskList = display.searchView();
+        ArrayList<TaskEvent> searchedTaskList = display.resultView();
         for(TaskEvent t : searchedTaskList) {
             System.out.print(t);
             tasks.add(new Task(t));
         }
         return tasks;
     }
+    public void triggerHelpView() {
+        this.enableHelpView = true;
+    }
     
+    public void triggerResultView() {
+        this.enableResultView = true;
+    }
     public void showHelpView() {
         helpView.toFront();
         helpView.setOpacity(1);
         helpView.setOpacity(0.35);
     }
-    public void showSearchView() {
-        searchView.toFront();
-        searchView.setOpacity(1);
+    public void showResultView() {
+        resultView.toFront();
+        resultView.setOpacity(1);
         borderPane.setOpacity(0.35);
     }
     
     private void hideHelpView() {
         helpView.toBack();
         helpView.setOpacity(0);
+        this.enableHelpView = false;
     }
     
-    private void hideSearchView() {
-        searchView.setOpacity(0);
+    private void hideResultView() {
+        helpView.toBack();
+        resultView.setOpacity(0);
+        this.enableResultView = false;
     }
     
-    public void hideAll(){
+    public void hideViews(){
+        if ( enableHelpView == false && enableResultView == false) {
+            hideAllOverlays();
+        }
+    }
+    public void hideAllOverlays() {
         borderPane.toFront();
         borderPane.setOpacity(1);
         hideHelpView();
-        hideSearchView();
+        hideResultView();
+    }
+    public void initOverlaySettings() {
+        enableHelpView = false;
+        enableResultView = false;
+    }
+    
+    public void refreshHelpOverlay() {
+        if ( enableHelpView == true ){
+            showHelpView();
+        } else {
+            hideHelpView();
+        }
+    }
+
+    public void refreshResultOverlay() {
+        if(enableResultView == true) {
+            showResultView();
+        } else {
+            hideResultView();
+        }
+    }
+    
+    public void refreshAllViews() {
+        refreshResultOverlay();
+        refreshHelpOverlay();
+        hideViews();
     }
 }

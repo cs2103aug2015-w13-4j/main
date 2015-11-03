@@ -10,11 +10,8 @@
    <children>
       <Label fx:id="feedBack" alignment="CENTER" contentDisplay="CENTER" minHeight="20.0" prefHeight="25.0" prefWidth="800.0" text="Feedback" VBox.vgrow="ALWAYS">
          <VBox.margin>
-            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+            <Insets />
          </VBox.margin>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
       </Label>
       <TextField fx:id="userInput" minHeight="25.0" onKeyPressed="#handleKeyPress" prefHeight="30.0" promptText="Welcome to PIXEList" VBox.vgrow="ALWAYS" />
    </children>
