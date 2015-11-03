@@ -25,6 +25,7 @@ public class Display {
 	private static final String MESSAGE_UNFLAG = "%s has been unflagged";
 	private static final String MESSAGE_VIEW_COMPLETED = "you have %d completed tasks";
 	private static final String MESSAGE_NO_COMPLETED = "you do not have any completed tasks";
+	private static final String MESSAGE_HELP = "help activated";
 	
 
 	private Command_Type nextCommand = Command_Type.UNDO;
@@ -104,6 +105,8 @@ public class Display {
 				return MESSAGE_NO_COMPLETED;
 			}
 			return String.format(MESSAGE_VIEW_COMPLETED,view.size());
+		case HELP:
+			return MESSAGE_HELP;
 		default:
 			break;
 		}
