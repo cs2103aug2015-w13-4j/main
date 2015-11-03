@@ -20,6 +20,7 @@ public class Display {
 	private static final String MESSAGE_SEARCH = "%d tasks has been found with your search";
 	private static final String MESSAGE_NO_SEARCH_RESULT = "no task has been found with your search";
 	private static final String MESSAGE_UNDO = "previous task has been undone";
+	private static final String MESSAGE_REDO = "previous task has been redone";
 	private static final String MESSAGE_FLAG = "%s has been flagged";
 	private static final String MESSAGE_UNFLAG = "%s has been unflagged";
 	private static final String MESSAGE_VIEW_COMPLETED = "you have %d completed tasks";
@@ -91,6 +92,8 @@ public class Display {
 			}
 		case UNDO:
 			return MESSAGE_UNDO;
+		case REDO:
+			return MESSAGE_REDO;
 		case FLAG_TASK:
 			return String.format(MESSAGE_FLAG, content);
 		case UNFLAG_TASK:
