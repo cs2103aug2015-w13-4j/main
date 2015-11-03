@@ -22,13 +22,14 @@ public class InputViewController extends VBox {
     private Label feedBack;
     
     Launch launch;
+    TaskDisplayController taskDisplay;
     
     ArrayList<String> history;
     ArrayList<String> preset;
     private int historyPointer;
     
+    
     public static InputViewController inputViewController;
-    TaskDisplayController taskDisplay;
     
     public static InputViewController getInstance() {
         if (inputViewController == null) {
@@ -52,25 +53,16 @@ public class InputViewController extends VBox {
     
     public void handleKeyPress(KeyEvent event) {
         taskDisplay = TaskDisplayController.getInstance();
-        if(event.getCode() == KeyCode.F2) {
-        	event.consume();
-        	launch.command("finish 1");
-        	launch.command("undo");
-            taskDisplay.updateViews();
-            feedBack.setText("All tasks displayed");
-        } else if(event.getCode() == KeyCode.ENTER) {
-        	handleUserInput();
-        	/*if(userInput.getText().contains("search") || userInput.getText().contains("view")) {
-        	    userInput.setText("");
-        	    taskDisplay.updateResultTaskDisplay();
-        	} else {*/
+        if(event.getCode() == KeyCode.ENTER) {
+            taskDisplay.hideAllOverlays();
+            handleUserInput();
             userInput.setText("");
             taskDisplay.updateViews();
-        	//}
         } else if(event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
             event.consume();
             handleHistoryCommands(event);
         } else if( event.getCode() == KeyCode.F1 ) {
+            taskDisplay.hideAllOverlays();
             event.consume();
             initTesting();
             taskDisplay.updateViews();
@@ -96,6 +88,7 @@ public class InputViewController extends VBox {
     private void labelFeedBack(String input) {
         feedBack.setText(input);
     }
+    
     private void passToLogic(String input) {
         launch = Launch.getInstance();
         taskDisplay = TaskDisplayController.getInstance();

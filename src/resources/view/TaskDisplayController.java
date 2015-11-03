@@ -40,6 +40,9 @@ public class TaskDisplayController extends StackPane{
     private ListView<HBox> resultContent;
     
     @FXML
+    private ListView<HBox> helpContent;
+    
+    @FXML
     private BorderPane viewBorderPane;
     
     @FXML
@@ -65,7 +68,32 @@ public class TaskDisplayController extends StackPane{
     private static final String MESSAGE_TODAY = "Today";
     private static final String MESSAGE_TOMORROW = "Tomorrow";
     private static final String MESSAGE_THIS_WEEK = "This week";
-      
+    
+    private static final String HELP_DESC_ADD  = "Add a task?";
+    private static final String HELP_DESC_EDIT = "Want to edit a task?";
+    private static final String HELP_DESC_DELETE = "Wish to delete a task?";
+    private static final String HELP_DESC_UNDO = "To undo what you have did";
+    private static final String HELP_DESC_REDO = "To redo";
+    private static final String HELP_DESC_SEARCH = "To search a task ";
+    private static final String HELP_DESC_FINISH = "To mark a task as finished";
+    private static final String HELP_DESC_FLAG = "To flag a task as important";
+    private static final String HELP_DESC_UNFLAG = "To unflag a task";
+    private static final String HELP_DESC_VIEW_COMPLETED = "To view completed tasks";
+    private static final String HELP_DESC_CHANGE_DIR = "To change the file directory";
+    
+    private static final String HELP_COMMAND_ADD = "add \"Task Name\" <Start Date> <End Date> <Flag?>";
+    private static final String HELP_COMMAND_EDIT = "edit <id> <name or date> \"Changes here.if name edit, put \"\"\"  ";
+    private static final String HELP_COMMAND_DELETE = "delete <id>";
+    private static final String HELP_COMMAND_UNDO = "undo";
+    private static final String HELP_COMMAND_REDO = "redo";
+    private static final String HELP_COMMAND_SEARCH = "search \"Search keyword here\"";
+    private static final String HELP_COMMAND_FINISH = "finish <id>";
+    private static final String HELP_COMMAND_FLAG = "flag <id>";
+    private static final String HELP_COMMAND_UNFLAG = "unflag <id>";
+    private static final String HELP_COMMAND_VIEW_COMPLETED = "view completed";
+    private static final String HELP_COMMAND_CHANGE_DIR = "cd";
+    
+    
     private Launch launch;
     private Display display;
     
@@ -131,6 +159,11 @@ public class TaskDisplayController extends StackPane{
         resultContent.setItems(displayTasks);
     }
     
+    private void initHelpTaskDisplay() {
+        ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
+        displayTasks = initHelpCommands();
+        helpContent.setItems(displayTasks);
+    }
     private ObservableList<HBox> getTask() {
         
         ObservableList<HBox> tasks = FXCollections.observableArrayList(); 
@@ -177,6 +210,13 @@ public class TaskDisplayController extends StackPane{
             System.out.print(t);
             tasks.add(new Task(t));
         }
+        return tasks;
+    }
+    
+    private ObservableList<HBox> initHelpCommands() {
+        ObservableList<HBox> tasks = FXCollections.observableArrayList();
+        tasks.add(new HelpCommands(HELP_COMMAND_ADD, HELP_DESC_ADD));
+        
         return tasks;
     }
     public void triggerHelpView() {
