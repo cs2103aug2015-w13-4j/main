@@ -50,6 +50,9 @@ public class Operation {
 			logger.log(Level.INFO, "error message");
 			return message.error(input);
 		}
+		if(!checkInput(processed)){
+			return message.error(input); 
+		}
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		try {
@@ -65,6 +68,12 @@ public class Operation {
 		}
 	}
 
+	private boolean checkInput(CommandElements content){
+		if(content.getEndDate().getDay()==-1|| content.getStartDate().getDay() == -1){
+			return false;
+		}
+		return true;
+	}
 	private String getName(CommandElements content) {
 		String name;
 		if (content.getType().toString().equals(("ADD_TASK"))) {
