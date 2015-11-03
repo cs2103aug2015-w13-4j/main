@@ -173,6 +173,8 @@ public class Operation {
 			logger.log(Level.INFO, "command is view completed");
 			searchView = action.loadCompletedTasks();
 			return true;
+		case HELP:
+			return true;
 		default:
 			throw exception;
 		}
