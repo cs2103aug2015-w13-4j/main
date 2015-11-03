@@ -52,14 +52,11 @@ public class StorageImp implements Storage {
 	}
 
 	private String getSaveDir() {
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(PREF_DIR)))) {
-			if (br.ready()) {
-				return br.readLine();
-			}
-		} catch (Exception e) {
-			// ignore
+		try {
+			return FileUtils.getFirstLine(PREF_DIR);
+		} catch (IOException e) {
+			return DEFAULT_SAVE_DIR;
 		}
-		return DEFAULT_SAVE_DIR;
 	}
 
 	public static StorageImp getInstance() {
