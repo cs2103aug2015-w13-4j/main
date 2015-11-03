@@ -71,6 +71,8 @@ public class CommandParser {
 		} else if (type == Command_Type.UNFLAG_TASK) {
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
+		} else if(type == Command_Type.HELP){
+			return new CommandElements(type);
 		} else {
 			throw command_exception;
 		}
