@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="240.0" styleClass="task" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" styleClass="task" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <CheckBox fx:id="checkBox" focusTraversable="false" mnemonicParsing="false" />
       <Label fx:id="index" focusTraversable="false" text="Index ">
@@ -26,5 +26,7 @@
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </padding></Label>
       <Label fx:id="eDate" focusTraversable="false" text="eDate" />
+      <Label fx:id="startTime" />
+      <Label fx:id="endTime" />
    </children>
 </fx:root>
