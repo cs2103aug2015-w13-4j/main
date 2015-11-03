@@ -27,6 +27,7 @@ public class StorageImp implements Storage {
 	private static final String COMPLETION_YES = "true";
 	private static final String COMPLETION_YES_SIG = COMPLETED + COL + COMPLETION_YES;
 	private static final String COMPLETION_NO = "false";
+	private static final String DATE_COMMON_HEADER = "date";
 	private static final String FLAG_STR = "FLAG";
 	private static final String UNFLAG_STR = "UNFLAG";
 	private static final short SEARCH_BY_ID = 0;
@@ -45,9 +46,9 @@ public class StorageImp implements Storage {
 
 	private StorageImp() {
 		try {
+			saveDir = DEFAULT_SAVE_DIR;
 			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
-			saveDir = DEFAULT_SAVE_DIR;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +189,8 @@ public class StorageImp implements Storage {
 
 	@Override
 	public ArrayList<TaskEvent> searchTaskByDate(TaskDate date) {
-		return null;
+		String dateSignature = DATE_COMMON_HEADER + COL + date;
+		return ;
 	}
 
 	private ArrayList<TaskEvent> searchTask(String content, short scope) {
