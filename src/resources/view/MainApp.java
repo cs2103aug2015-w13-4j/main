@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -19,7 +20,7 @@ public class MainApp extends Application {
     private VBox inputView;
     private StackPane taskDisplay;
     private HBox task;
-
+    
     /* PROGRAM DETAILS */
     // private static final double PROGRAM_HEIGHT = 760.0;
     // private static final double PROGRAM_WIDTH = 980.0;
@@ -28,6 +29,7 @@ public class MainApp extends Application {
     private static final double PROGRAM_WIDTH = 880.0;
 
     private static final String PROGRAM_TITLE = "PIXEList";
+    private static final String IMAGE_ICON = "/imgs/icon.png";
 
     /**
      * Launch PIXEList Program
@@ -61,6 +63,7 @@ public class MainApp extends Application {
      */
     private void initPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        this.primaryStage.getIcons().add(new Image(IMAGE_ICON));
         this.primaryStage.setMinHeight(PROGRAM_HEIGHT);
         this.primaryStage.setMinWidth(PROGRAM_WIDTH);
         this.primaryStage.setTitle(PROGRAM_TITLE);
