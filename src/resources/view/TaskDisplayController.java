@@ -207,7 +207,6 @@ public class TaskDisplayController extends StackPane{
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> searchedTaskList = display.resultView();
         for(TaskEvent t : searchedTaskList) {
-            System.out.print(t);
             tasks.add(new Task(t));
         }
         return tasks;

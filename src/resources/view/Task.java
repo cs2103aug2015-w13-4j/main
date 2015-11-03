@@ -42,13 +42,11 @@ public class Task extends HBox{
 
    public Task(TaskEvent task) {
         loadFxml();
-        initListener();
         initFxmlFields(task.getTaskID(),task.getTaskName(),task.getStartDate()  , task.getEndDate() , task.isCompleted() , task.getPriority() );
     } 
     
     public Task() {
         loadFxml();
-        initListener();
         initFxmlFields(1,"test","high" , new TaskDate(11,11,2015) , false);
         //initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new TaskDate(12,12,2015));
     }
@@ -92,16 +90,6 @@ public class Task extends HBox{
         this.eDate.setText(eDate.toString());
         }
     }
-    
-    public void initListener() {
-        checkBoxListener = new ChangeListener<Boolean>(){
-            @Override
-            public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
-                System.out.print("Hi");
-            }
-        };
-        
-    } 
     
     private void loadFxml() {
         try {

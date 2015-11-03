@@ -91,11 +91,7 @@ public class InputViewController extends VBox {
     
     private void passToLogic(String input) {
         launch = Launch.getInstance();
-        taskDisplay = TaskDisplayController.getInstance();
         String output = launch.command(input);
-        if (output.contains("completed") || output.contains("search")) {
-            taskDisplay.triggerResultView();
-        } 
         labelFeedBack(output);
     }
     private void initTesting() {
