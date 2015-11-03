@@ -172,6 +172,7 @@ public class Operation {
 		case VIEW_COMPLETED:
 			logger.log(Level.INFO, "command is view completed");
 			searchView = action.loadCompletedTasks();
+			size = searchView.size();
 			return true;
 		case HELP:
 			return true;
