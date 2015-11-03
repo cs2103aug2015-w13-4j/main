@@ -113,8 +113,8 @@ public class Operation {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
 			try {
-				isSuccessful = action.addTask(content.getName(), content.getStartDate(), content.getEndDate(),
-						content.getPriority());
+				isSuccessful = action.addTask(content.getName(), content.getStartDate(), content.getStartTime(),content.getEndDate(),
+						content.getEndTime(),content.getPriority());
 			} catch (Exception e) {
 				logger.log(Level.INFO, "exception caught :" + e.getMessage());
 				return isSuccessful;
@@ -151,7 +151,7 @@ public class Operation {
 		case SEARCH_TASK:
 			// working for basic names
 			logger.log(Level.INFO, "command is search");
-			searchView = action.searchTaskByString(content.getName());
+			searchView = action.searchTaskByString(getSearchString(content));
 			size = searchView.size();
 			return isSuccessful = true;
 		case UNDO: // not working for directory
@@ -219,7 +219,18 @@ public class Operation {
 		}
 		return DEFAULT_RETURN;
 	}
-
+	
+	private String getSearchString(CommandElements content){
+		if(content.getName()!=null){
+			return content.getName();
+		}else if(content.getEndDate()!=null){
+			return content.getEndDate().toString();
+		}else if(content.getEndTime() != null){
+			return content.getEndTime().toString();
+		}
+		return DEFAULT_RETURN;
+	}
+	
 	private String getInitialContent(int id, Command_Field field) {
 		StorageImp store = Launch.getStorage();
 		ArrayList<TaskEvent> tasks = store.loadAllTasks();
