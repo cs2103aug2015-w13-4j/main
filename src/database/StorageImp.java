@@ -353,26 +353,31 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean changeDirectory(String dir) {
-		if (dir == null) {
-			return false;
-		} else {
-			File file = new File(dir);
-			if (file.exists() && file.isDirectory()) {
-				dir = addDefFileNameToDir(dir);
-			}
-			file = new File(dir);
-			try {
-				if (file.createNewFile()) {
-					updateSaveDirInPref(dir);
-					moveSaveFile(dir);
-					saveDir = dir;
-				}
-			} catch (IOException e) {
-				return false;
-			}
-			return true;
+		if (dir == null) { return false; }
+
+		File file = new File(dir);
+		if (FileUtils.isValidDirectory(file)) {
+			dir = addDefFileNameToDir(dir);
 		}
+
+		try {
+			file = new File(dir);
+			if (file.createNewFile()) {
+				updateSaveDirInPref(dir);
+				moveSaveFile(dir);
+				saveDir = dir;
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
 	}
+
+	@Override
+	public String getDirectory() {
+		return saveDir;
+	}
+
 
 	private String addDefFileNameToDir(String dir) {
 		if (dir.endsWith(DIV)) {

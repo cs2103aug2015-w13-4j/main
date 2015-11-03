@@ -149,4 +149,9 @@ public interface Storage {
 	 */
 	boolean changeDirectory(String dir);
 
+	/**
+	 * Get the current saving directory.
+	 */
+	String getDirectory();
+
 }
