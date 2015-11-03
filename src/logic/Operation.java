@@ -6,6 +6,7 @@ import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import database.Storage;
 import database.StorageImp;
 import utilities.CommandElements;
 import utilities.Command_Field;
@@ -157,8 +158,13 @@ public class Operation {
 			logger.log(Level.INFO, "content type "+ content.getType());
 			return redo.redoTask(content);
 		case DIRECTORY:
-			// not implemented!!
 			logger.log(Level.INFO, "command is change directory");
+			String directory = action.getDirectory();
+			isSuccessful = action.changeDirectory(content.getName());
+			if(isSuccessful){
+				undoList.push(undoChange(directory));
+			}
+			return isSuccessful;
 		case FLAG_TASK:
 			logger.log(Level.INFO, "command is flag");
 			isSuccessful = action.flagTask(content.getID());
@@ -274,11 +280,14 @@ public class Operation {
 		return next;
 	}
 
-	private void undoChange() {
-
+	private CommandElements undoChange(String old) {
+		logger.log(Level.INFO, "adding undo change directory");
+		CommandElements next = new CommandElements(Command_Type.DIRECTORY,old);
+		return next;
 	}
 	private CommandElements findRedoContent(CommandElements content){
 		Command_Type type = content.getType();
+		Storage action = Launch.getStorage();
 		switch(type){
 		case ADD_TASK:
 			return new CommandElements(Command_Type.ADD_TASK,content.getID());
@@ -289,7 +298,8 @@ public class Operation {
 			return new CommandElements(Command_Type.EDIT_TASK,content.getID(),content.getField(),name);
 		case FINISH_TASK:
 			return new CommandElements(Command_Type.FINISH_TASK,content.getID());
-			//case DIRECTORY:
+		case DIRECTORY:
+			return new CommandElements(Command_Type.DIRECTORY,action.getDirectory());
 		case FLAG_TASK:
 			return new CommandElements(Command_Type.FLAG_TASK,content.getID());
 		case UNFLAG_TASK:
