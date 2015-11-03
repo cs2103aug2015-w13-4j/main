@@ -9,7 +9,7 @@
 
 <fx:root prefHeight="750.0" prefWidth="420.0" styleClass="display" type="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane fx:id="borderPane" minHeight="780.0">
+      <BorderPane fx:id="borderPane">
          <center>
             <BorderPane fx:id="viewBorderPane" prefHeight="780.0" prefWidth="200.0" BorderPane.alignment="CENTER_LEFT">
                <top>
