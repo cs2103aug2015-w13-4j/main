@@ -1,18 +1,12 @@
 package database;
 
-import database.StorageImp;
-//import database.StorageImp.PathType;
-
 import org.junit.Test;
 import utilities.Command_Field;
 import utilities.Command_Priority;
 import utilities.TaskDate;
-import utilities.TaskEvent;
 import utilities.TaskTime;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
 
 /**
  * Created by zhongwei-z on 27/10/15.
@@ -24,8 +18,9 @@ public class StorageImpTest {
 	static TaskDate d3 = new TaskDate(9999, 9, 9);
 	static TaskTime t1 = new TaskTime(10, 10);
 	static TaskTime t2 = new TaskTime(11, 11);
+	static TaskTime t3 = new TaskTime(12, 12);
 	Storage s = StorageImp.getInstance();
-	
+
 	@Test
 	public void testGetTaskCount() throws Exception {
 		System.out.println("taskcount (in test):"+s.getTaskCount());
@@ -38,9 +33,11 @@ public class StorageImpTest {
 
 	@Test
 	public void testEditTask() throws Exception {
-		//s.editTask(1, Command_Field.END_DATE, d3.toString());
+		s.editTask(1, Command_Field.NAME, "new");
+		s.editTask(1, Command_Field.END_DATE, d3.toString());
 		s.editTask(4, Command_Field.END_DATE, d3.toString());
-		s.editTask(4, Command_Field.PRIORITY, Command_Priority.UNFLAG.toString());
+		s.editTask(4, Command_Field.PRIORITY, Command_Priority.FLAG.toString());
+		s.editTask(4, Command_Field.START_TIME, t3.toString());
 	}
 
 	@Test
@@ -65,7 +62,7 @@ public class StorageImpTest {
 
 	@Test
 	public void testLoadAllTasks() throws Exception {
-		
+
 	}
 
 	@Test

@@ -12,10 +12,6 @@ public interface Storage {
 	/**
 	 * Add a task using the necessary info. The developer-defined toString() in TaskEvent Class
 	 * is used and the result string is appended to the user tasks text file.
-	 * @param taskName name of the task
-	 * @param from     start date
-	 * @param to       end date
-	 * @param priority an enum
 	 * @return true if task gets successfully appended; false otherwise
 	 */
 	boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
