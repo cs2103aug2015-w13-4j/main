@@ -55,8 +55,8 @@ public class Redo {
 		return storage.markTaskAsDone(content.getID());
 	}
 	private boolean redoDirectory(CommandElements content){
-		//not implemented
-		return false;
+		logger.log(Level.INFO, "redo change directory");
+		return storage.changeDirectory(content.getName());
 	}
 	private boolean redoFlag(CommandElements content){
 		logger.log(Level.INFO, "redo flag");
