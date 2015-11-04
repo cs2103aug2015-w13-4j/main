@@ -40,7 +40,6 @@ public class CommandParser {
 			} else if (field == Command_Field.PRIORITY) {
 				return new CommandElements(type, object, field, priority);
 			} else if (field == Command_Field.START_TIME) {
-				System.out.println("here " + time[0].toString());
 				return new CommandElements(type, object, field, time[1]);
 			} else if (field == Command_Field.END_TIME) {
 				return new CommandElements(type, object, field, time[1]);
