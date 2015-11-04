@@ -58,9 +58,9 @@ public class CommandSplitter {
 			return Command_Field.START_DATE;
 		} else if (contain("enddate", command)) {
 			return Command_Field.END_DATE;
-		} else if (contain("startdate", command)) {
+		} else if (contain("starttime", command)) {
 			return Command_Field.START_TIME;
-		} else if (contain("enddate", command)) {
+		} else if (contain("endime", command)) {
 			return Command_Field.END_TIME;
 		} else if (contain("priority", command)) {
 			return Command_Field.PRIORITY;
