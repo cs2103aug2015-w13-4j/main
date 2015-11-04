@@ -125,7 +125,7 @@ public class Operation {
 				return isSuccessful;
 			}
 			if (isSuccessful) {
-				int id = Launch.getStorage().loadAllTasks().size();
+				int id = getID(content);
 				undoList.push(undoAdd(id));
 			}
 			return isSuccessful;
@@ -164,7 +164,7 @@ public class Operation {
 			logger.log(Level.INFO, "command is undo");
 			content = undoList.pop();
 			redoList.push(findRedoContent(content));
-			logger.log(Level.INFO, "undoing " + content.getType().toString());
+			logger.log(Level.INFO, "undoing " + content.getType().toString() + " to " + content.getName());
 			return undo.UndoTask(content);
 		case REDO:
 			logger.log(Level.INFO, "command is redo");
@@ -276,9 +276,21 @@ public class Operation {
 		}
 		return DEFAULT_RETURN;
 	}
+	private int getID(CommandElements content){
+		Storage storage = Launch.getStorage();
+		ArrayList<TaskEvent> tasks = storage.loadAllTasks();
+		int id = 0;
+		for(int i =0;i<tasks.size();i++){
+			if(tasks.get(i).getTaskName().equals(content.getName())){
+				id = tasks.get(i).getTaskID();
+				break;
+			}
+		}
+		return id;
+	}
 
 	private CommandElements undoAdd(int id) {
-		logger.log(Level.INFO, "adding add undo");
+		logger.log(Level.INFO, "adding add undo" + id);
 		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
 		return next;
 	}
