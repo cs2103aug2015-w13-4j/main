@@ -96,10 +96,29 @@
 	-fx-text-fill: gray;
 	-fx-font-size:11px;
 }
+.task #startTime {
+	-fx-padding : 1 0 0 5;
+	-fx-text-fill: #3333FF;
+	-fx-font-size:11px;
+}
+
+.task #endTime {
+	-fx-padding: 1 0 0 5;
+	-fx-text-fill: #3333FF;
+	-fx-font-size:11px;
+	
+}
 
 .task #checkBox {
 	-fx-font-size:8px;
 }
+
+.task #jointLabel {
+	-fx-font-size:10px;
+	-fx-padding: 1 1 1 1;
+	-fx-text-fill: red;
+}
+
 /*
  * ==============
  * Help Style
@@ -225,7 +244,7 @@
 }
 
 .display .list-cell {
-	-fx-padding: 0 0 6 0;
+	-fx-padding: 0 0 3 0;
 	-fx-background-color: white;
 }
 

@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import utilities.Command_Priority;
 import utilities.TaskDate;
 import utilities.TaskEvent;
+import utilities.TaskTime;
 
 public class Task extends HBox {
 
@@ -23,6 +24,12 @@ public class Task extends HBox {
 
     @FXML
     private Label eDate;
+    
+    @FXML
+    private Label startTime;
+    
+    @FXML
+    private Label endTime;
 
     @FXML
     private Label taskName;
@@ -31,6 +38,7 @@ public class Task extends HBox {
     private Label priority;
 
     private static final String TASK_FILE = "Task.fxml";
+    private static final String TASK_FLAG = "FLAG";
 
     ChangeListener<Boolean> checkBoxListener;
 
@@ -39,7 +47,7 @@ public class Task extends HBox {
     public Task(TaskEvent task) {
         loadFxml();
         initFxmlFields(task.getTaskID(), task.getTaskName(),
-                task.getStartDate(), task.getEndDate(), task.isCompleted(),
+                task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
                 task.getPriority());
     }
 
@@ -50,13 +58,15 @@ public class Task extends HBox {
         // TaskDate(12,12,2015));
     }
 
-    public void initFxmlFields(int idx, String taskName, TaskDate sDate,
-            TaskDate eDate, Boolean isCompleted, Command_Priority priority) {
+    public void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
+            TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.sDate.setText(sDate.toString());
+        this.startTime.setText(startTime.toString());
         this.eDate.setText(eDate.toString());
-        this.priority.setText(priority.toString().equals("FLAG") ? "FLAG" : "");
+        this.endTime.setText(endTime.toString());
+        this.priority.setText(priority.toString().equals(TASK_FLAG) ? TASK_FLAG : STRING_EMPTY);
         if (isCompleted) {
             checkBox.setSelected(true);
         }

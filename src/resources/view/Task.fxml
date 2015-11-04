@@ -9,24 +9,13 @@
 <fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" styleClass="task" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <CheckBox fx:id="checkBox" focusTraversable="false" mnemonicParsing="false" />
-      <Label fx:id="index" focusTraversable="false" text="Index ">
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding></Label>
-      <Label fx:id="taskName" focusTraversable="false" text="Task Name ">
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding></Label>
-      <Label fx:id="priority" focusTraversable="false" text="Priority">
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding></Label>
-      <Label fx:id="sDate" focusTraversable="false" text="sDate">
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding></Label>
-      <Label fx:id="eDate" focusTraversable="false" text="eDate" />
+      <Label fx:id="index" focusTraversable="false" text="Index " />
+      <Label fx:id="taskName" focusTraversable="false" text="Task Name " />
+      <Label fx:id="priority" focusTraversable="false" text="Priority" />
+      <Label fx:id="sDate" focusTraversable="false" text="sDate" />
       <Label fx:id="startTime" />
+      <Label fx:id="jointLabel" focusTraversable="false" text=" to " />
+      <Label fx:id="eDate" focusTraversable="false" text="eDate" />
       <Label fx:id="endTime" />
    </children>
 </fx:root>
