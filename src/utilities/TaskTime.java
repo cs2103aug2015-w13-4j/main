@@ -1,12 +1,15 @@
 package utilities;
 
+import java.text.DecimalFormat;
+
 public class TaskTime {
 	private static final String DIVIDE = ":";
 	private static final String AM = "AM";
 	private static final String PM = "PM";
 	private static final int INVALID = -1;
 	private static final int NOON = 12;
-
+	private static DecimalFormat df = new DecimalFormat("00");
+	
 	private int hour;
 	private int minute;
 	
@@ -48,5 +51,7 @@ public class TaskTime {
 		}
 	}
 	
-	public String toString() { return hour + DIVIDE + minute; }
+	public String toString() {
+		return hour + DIVIDE + df.format(minute); 
+	}
 }
