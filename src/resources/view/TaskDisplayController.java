@@ -87,7 +87,7 @@ public class TaskDisplayController extends StackPane {
     private static final String HELP_COMMAND_FLAG = "flag <id>";
     private static final String HELP_COMMAND_UNFLAG = "unflag <id>";
     private static final String HELP_COMMAND_VIEW_COMPLETED = "view completed";
-    private static final String HELP_COMMAND_CHANGE_DIR = "cd";
+    private static final String HELP_COMMAND_CHANGE_DIR = "cd \"foldername/filename\"";
     private static final String HELP_COMMAND_EXIT = "exit";
     private static final String HELP_COMMAND_FIELD = "startDate , endDate , name";
     
@@ -108,7 +108,6 @@ public class TaskDisplayController extends StackPane {
     // NON-FXML FIELDS
     // ====================
 
-    private Launch launch;
     private Display display;
 
     private static TaskDisplayController taskDisplayController;
@@ -140,8 +139,8 @@ public class TaskDisplayController extends StackPane {
 
     public void updateViews() {
         refreshAllViews();
-        launch.getInstance();
-        display = launch.getDisplay();
+        Launch.getInstance();
+        display = Launch.getDisplay();
         updateGeneralTaskDisplay();
         updateFlaggedTaskDisplay();
         updateFloatingTaskDisplay();
