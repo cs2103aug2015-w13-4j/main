@@ -50,8 +50,8 @@ public class Operation {
 			logger.log(Level.INFO, "error message");
 			return message.error(input);
 		}
-		if(!checkInput(processed)){
-			return message.error(input); 
+		if (!checkInput(processed)) {
+			return message.error(input);
 		}
 		String name = getName(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
@@ -68,12 +68,17 @@ public class Operation {
 		}
 	}
 
-	private boolean checkInput(CommandElements content){
-		if(content.getEndDate().getDay()==-1|| content.getStartDate().getDay() == -1){
+	private boolean checkInput(CommandElements content) {
+		if(content.getEndDate() == null || content.getStartDate() == null){
+			return true;
+		}
+		
+		if (content.getEndDate().getDay() == -1 || content.getStartDate().getDay() == -1) {
 			return false;
 		}
 		return true;
 	}
+
 	private String getName(CommandElements content) {
 		String name;
 		if (content.getType().toString().equals(("ADD_TASK"))) {
@@ -113,8 +118,8 @@ public class Operation {
 		case ADD_TASK:
 			logger.log(Level.INFO, "command is add");
 			try {
-				isSuccessful = action.addTask(content.getName(), content.getStartDate(), content.getStartTime(),content.getEndDate(),
-						content.getEndTime(),content.getPriority());
+				isSuccessful = action.addTask(content.getName(), content.getStartDate(), content.getStartTime(),
+						content.getEndDate(), content.getEndTime(), content.getPriority());
 			} catch (Exception e) {
 				logger.log(Level.INFO, "exception caught :" + e.getMessage());
 				return isSuccessful;
@@ -164,13 +169,13 @@ public class Operation {
 		case REDO:
 			logger.log(Level.INFO, "command is redo");
 			content = redoList.pop();
-			logger.log(Level.INFO, "content type "+ content.getType());
+			logger.log(Level.INFO, "content type " + content.getType());
 			return redo.redoTask(content);
 		case DIRECTORY:
 			logger.log(Level.INFO, "command is change directory");
 			String directory = action.getDirectory();
 			isSuccessful = action.changeDirectory(content.getName());
-			if(isSuccessful){
+			if (isSuccessful) {
 				undoList.push(undoChange(directory));
 			}
 			return isSuccessful;
@@ -216,21 +221,29 @@ public class Operation {
 		case PRIORITY:
 			logger.log(Level.INFO, "edit priority");
 			return content.getPriority().toString();
+		case END_TIME:
+			logger.log(Level.INFO, "edit endtime");
+			return content.getEndTime().toString();
+		case START_TIME:
+			logger.log(Level.INFO, "edit starttime to "+ content.getEndTime());
+			return content.getStartTime().toString();
+		default:
+			break;
 		}
 		return DEFAULT_RETURN;
 	}
-	
-	private String getSearchString(CommandElements content){
-		if(content.getName()!=null){
+
+	private String getSearchString(CommandElements content) {
+		if (content.getName() != null) {
 			return content.getName();
-		}else if(content.getEndDate()!=null){
+		} else if (content.getEndDate() != null) {
 			return content.getEndDate().toString();
-		}else if(content.getEndTime() != null){
+		} else if (content.getEndTime() != null) {
 			return content.getEndTime().toString();
 		}
 		return DEFAULT_RETURN;
 	}
-	
+
 	private String getInitialContent(int id, Command_Field field) {
 		StorageImp store = Launch.getStorage();
 		ArrayList<TaskEvent> tasks = store.loadAllTasks();
@@ -302,31 +315,32 @@ public class Operation {
 
 	private CommandElements undoChange(String old) {
 		logger.log(Level.INFO, "adding undo change directory");
-		CommandElements next = new CommandElements(Command_Type.DIRECTORY,old);
+		CommandElements next = new CommandElements(Command_Type.DIRECTORY, old);
 		return next;
 	}
-	private CommandElements findRedoContent(CommandElements content){
+
+	private CommandElements findRedoContent(CommandElements content) {
 		Command_Type type = content.getType();
 		Storage action = Launch.getStorage();
-		switch(type){
+		switch (type) {
 		case ADD_TASK:
-			return new CommandElements(Command_Type.ADD_TASK,content.getID());
+			return new CommandElements(Command_Type.ADD_TASK, content.getID());
 		case DELETE_TASK:
-			return new CommandElements(Command_Type.DELETE_TASK,content.getID());
+			return new CommandElements(Command_Type.DELETE_TASK, content.getID());
 		case EDIT_TASK:
-			String name = getInitialContent(content.getID(),content.getField());
-			return new CommandElements(Command_Type.EDIT_TASK,content.getID(),content.getField(),name);
+			String name = getInitialContent(content.getID(), content.getField());
+			return new CommandElements(Command_Type.EDIT_TASK, content.getID(), content.getField(), name);
 		case FINISH_TASK:
-			return new CommandElements(Command_Type.FINISH_TASK,content.getID());
+			return new CommandElements(Command_Type.FINISH_TASK, content.getID());
 		case DIRECTORY:
-			return new CommandElements(Command_Type.DIRECTORY,action.getDirectory());
+			return new CommandElements(Command_Type.DIRECTORY, action.getDirectory());
 		case FLAG_TASK:
-			return new CommandElements(Command_Type.FLAG_TASK,content.getID());
+			return new CommandElements(Command_Type.FLAG_TASK, content.getID());
 		case UNFLAG_TASK:
-			return new CommandElements(Command_Type.UNFLAG_TASK,content.getID());
+			return new CommandElements(Command_Type.UNFLAG_TASK, content.getID());
 		default:
 			break;
 		}
-		return new CommandElements();	
+		return new CommandElements();
 	}
 }
