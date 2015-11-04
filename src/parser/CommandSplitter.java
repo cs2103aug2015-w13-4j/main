@@ -60,7 +60,7 @@ public class CommandSplitter {
 			return Command_Field.END_DATE;
 		} else if (contain("starttime", command)) {
 			return Command_Field.START_TIME;
-		} else if (contain("endime", command)) {
+		} else if (contain("endtime", command)) {
 			return Command_Field.END_TIME;
 		} else if (contain("priority", command)) {
 			return Command_Field.PRIORITY;
@@ -298,8 +298,13 @@ public class CommandSplitter {
 			}
 		}
 		if (validDate == 0) {
-			timeToken[0] = new TaskTime(0,0);
-			timeToken[1] = new TaskTime(0,0);
+			if (timeCount == 2) {
+				timeToken[0] = new TaskTime(0,0);
+				timeToken[1] = new TaskTime(0,0);
+			} else if (timeCount == 1) {
+				timeToken[1] = timeToken[0];
+				timeToken[0] = new TaskTime(0,0);
+			}
 		} else if (validDate == 1) {
 			if (timeCount == 2) {
 				timeToken[0] = new TaskTime(0,0);
