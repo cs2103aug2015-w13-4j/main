@@ -90,6 +90,19 @@ public class TaskDisplayController extends StackPane {
     private static final String HELP_COMMAND_CHANGE_DIR = "cd";
     private static final String HELP_COMMAND_EXIT = "exit";
     private static final String HELP_COMMAND_FIELD = "startDate , endDate , name";
+    
+    private static final String LABEL_TASK_DISPLAYED = " tasks displayed";
+    private static final String LABEL_GENERAL = "General Tasks - ";
+    private static final String LABEL_FLAGGED = "Flagged Tasks - ";
+    private static final String LABEL_FLOATING = "Floating Tasks - ";
+    
+    private static final String TASK_FLAG = "FLAG";
+    
+    private static final String TASK_DISPLAY_LOCATION = "TaskDisplay.fxml";
+    
+    private static final double OVERLAY_VISIBLE_OPACITY = 1.0;
+    private static final double OVERLAY_FADE_OPACITY = 0.35;
+    private static final double OVERLAY_INVISIBLE_OPACITY = 0.0;
 
     // ====================
     // NON-FXML FIELDS
@@ -112,7 +125,7 @@ public class TaskDisplayController extends StackPane {
 
     private TaskDisplayController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "TaskDisplayNew.fxml"));
+                TASK_DISPLAY_LOCATION));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -139,24 +152,24 @@ public class TaskDisplayController extends StackPane {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getTask();
         generalView.setItems(displayTasks);
-        generalTaskLabel.setText("General Tasks - " + displayTasks.size()
-                + " tasks displayed");
+        generalTaskLabel.setText(LABEL_GENERAL + displayTasks.size()
+                + LABEL_TASK_DISPLAYED);
     }
 
     private void updateFlaggedTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getFlaggedTask();
         flagView.setItems(displayTasks);
-        flagTaskLabel.setText("Flagged Tasks - " + displayTasks.size()
-                + " tasks displayed");
+        flagTaskLabel.setText(LABEL_FLAGGED + displayTasks.size()
+                + LABEL_TASK_DISPLAYED);
     }
 
     private void updateFloatingTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getFloatingTask();
         floatingView.setItems(displayTasks);
-        floatingTaskLabel.setText("Floating Tasks - " + displayTasks.size()
-                + " tasks displayed");
+        floatingTaskLabel.setText(LABEL_FLOATING + displayTasks.size()
+                + LABEL_TASK_DISPLAYED);
     }
 
     public void updateResultTaskDisplay() {
@@ -204,7 +217,7 @@ public class TaskDisplayController extends StackPane {
         ArrayList<TaskEvent> flaggedTaskList = display.taskView();
         for (TaskEvent t : flaggedTaskList) {
             if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0)
-                    && (t.getPriority()).toString().equals("FLAG")) {
+                    && (t.getPriority()).toString().equals(TASK_FLAG)) {
                 tasks.add(new Task(t));
             }
         }
@@ -251,25 +264,25 @@ public class TaskDisplayController extends StackPane {
 
     public void showHelpView() {
         helpView.toFront();
-        helpView.setOpacity(1);
-        borderPane.setOpacity(0.35);
+        helpView.setOpacity(OVERLAY_VISIBLE_OPACITY);
+        borderPane.setOpacity(OVERLAY_FADE_OPACITY);
     }
 
     public void showResultView() {
         resultView.toFront();
-        resultView.setOpacity(1);
-        borderPane.setOpacity(0.35);
+        resultView.setOpacity(OVERLAY_VISIBLE_OPACITY);
+        borderPane.setOpacity(OVERLAY_FADE_OPACITY);
     }
 
     private void hideHelpView() {
         helpView.toBack();
-        helpView.setOpacity(0);
+        helpView.setOpacity(OVERLAY_INVISIBLE_OPACITY);
         this.enableHelpView = false;
     }
 
     private void hideResultView() {
         helpView.toBack();
-        resultView.setOpacity(0);
+        resultView.setOpacity(OVERLAY_INVISIBLE_OPACITY);
         this.enableResultView = false;
     }
 

@@ -74,6 +74,13 @@ public class Task extends HBox {
         if (isCompleted) {
             checkBox.setSelected(true);
         }
+        if(startTime.getHour() == 0) {
+        	this.startTime.setText(STRING_EMPTY);
+        }
+        if(endTime.getHour() == 0){
+        	this.endTime.setText(STRING_EMPTY);
+        }
+        
         if (sDate.getDay() == 0 && eDate.getDay() == 0) {
             this.sDate.setText(STRING_EMPTY);
             this.eDate.setText(STRING_EMPTY);
