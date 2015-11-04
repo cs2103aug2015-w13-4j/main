@@ -40,7 +40,7 @@ public class Undo {
 		}
 	}
 	private boolean UndoAdd(CommandElements content){
-		logger.log(Level.INFO, "undo add");
+		logger.log(Level.INFO, "undo add" + content.getID());
 		return storage.deleteTaskByID(content.getID());
 	}
 	private boolean UndoDelete(CommandElements content){
