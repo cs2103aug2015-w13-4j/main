@@ -23,19 +23,19 @@ public class CommandSplitter {
 	}
 	
 	public static Command_Type findType(String command) {
-		if (contain("add", command)) {
+		if (contain("add", command) || contain("a", command)) {
 			return Command_Type.ADD_TASK;
-		} else if (contain("edit", command)) {
+		} else if (contain("edit", command) || contain("e", command)) {
 			return Command_Type.EDIT_TASK;
-		} else if (contain("delete", command)) {
+		} else if (contain("delete", command) || contain("d", command) || contain("remove", command)) {
 			return Command_Type.DELETE_TASK;
-		} else if (contain("finish", command)) {
+		} else if (contain("finish", command) || contain("f", command) || contain("complete", command)) {
 			return Command_Type.FINISH_TASK;
-		} else if (contain("search", command)) {
+		} else if (contain("search", command) || contain("s", command)) {
 			return Command_Type.SEARCH_TASK;
-		} else if (contain("undo", command)) {
+		} else if (contain("undo", command) || contain("u", command)) {
 			return Command_Type.UNDO;
-		} else if (contain("directory", command)) {
+		} else if (contain("directory", command) || contain("cd", command)) {
 			return Command_Type.DIRECTORY;
 		} else if (contain("flag", command)) {
 			return Command_Type.FLAG_TASK;
