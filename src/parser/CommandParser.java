@@ -34,15 +34,16 @@ public class CommandParser {
 			if (field == Command_Field.NAME) {
 				return new CommandElements(type, object, field, name);
 			} else if (field == Command_Field.START_DATE) {
-				return new CommandElements(type, object, field, date[0]);
+				return new CommandElements(type, object, field, date[1]);
 			} else if (field == Command_Field.END_DATE) {
-				return new CommandElements(type, object, field, date[0]);
+				return new CommandElements(type, object, field, date[1]);
 			} else if (field == Command_Field.PRIORITY) {
 				return new CommandElements(type, object, field, priority);
 			} else if (field == Command_Field.START_TIME) {
-				return new CommandElements(type, object, field, priority);
+				System.out.println("here " + time[0].toString());
+				return new CommandElements(type, object, field, time[1]);
 			} else if (field == Command_Field.END_TIME) {
-				return new CommandElements(type, object, field, priority);
+				return new CommandElements(type, object, field, time[1]);
 			} else {
 				throw edit_exception;
 			}
