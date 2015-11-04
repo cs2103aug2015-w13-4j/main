@@ -126,7 +126,7 @@
  */
 
 .helpCommand {
-	-fx-padding: 0;
+	-fx-padding: 2;
 	-fx-font-size:13px;
 	-fx-background-color: transparent;
 }
