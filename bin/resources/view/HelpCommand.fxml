@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<fx:root fx:id="helpCmd" alignment="CENTER_LEFT" fillHeight="false" prefHeight="20.0" prefWidth="400.0" styleClass="helpCommand" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="description" focusTraversable="false" text="Label" HBox.hgrow="ALWAYS">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></Label>
+      <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" HBox.hgrow="ALWAYS">
+         <children>
+            <Label fx:id="command" focusTraversable="false" nodeOrientation="LEFT_TO_RIGHT" text="Label" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</fx:root>

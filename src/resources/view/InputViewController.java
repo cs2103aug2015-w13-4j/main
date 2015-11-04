@@ -103,7 +103,7 @@ public class InputViewController extends VBox {
         feedBack.setText(input);
     }
 
-    private void passToLogic(String input) {
+    public void passToLogic(String input) {
         launch = Launch.getInstance();
         String output = launch.command(input);
         labelFeedBack(output);
