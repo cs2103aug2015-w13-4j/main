@@ -19,7 +19,7 @@ public class MainApp extends Application {
     private static final double PROGRAM_WIDTH = 880.0;
 
     private static final String PROGRAM_TITLE = "PIXEList";
-    private static final String IMAGE_ICON = "resources/imgs/logo.png";
+    private static final String IMAGE_ICON = "resources/imgs/icon.png";
 
     /**
      * Launch PIXEList Program

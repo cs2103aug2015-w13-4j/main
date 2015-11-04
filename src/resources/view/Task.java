@@ -36,6 +36,9 @@ public class Task extends HBox {
 
     @FXML
     private Label priority;
+    
+    @FXML
+    private Label jointLabel;
 
     private static final String TASK_FILE = "Task.fxml";
     private static final String TASK_FLAG = "FLAG";
@@ -43,6 +46,7 @@ public class Task extends HBox {
     ChangeListener<Boolean> checkBoxListener;
 
     private static final String STRING_EMPTY = "";
+    private static final String CONNECTING_WORD = "to";
 
     public Task(TaskEvent task) {
         loadFxml();
@@ -81,6 +85,9 @@ public class Task extends HBox {
             if (eDate.getDay() == 0) {
                 this.eDate.setText(STRING_EMPTY);
                 this.sDate.setText(sDate.toString());
+            }
+            if(eDate.getDay() != 0 && sDate.getDay() != 0) {
+            	this.jointLabel.setText(CONNECTING_WORD);
             }
         }
     }

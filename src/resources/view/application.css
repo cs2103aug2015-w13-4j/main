@@ -70,7 +70,7 @@
 .task #index { 
 	-fx-padding: 0 5 0 5;
 	-fx-text-fill: gray;
-	-fx-font-size: 12px;
+	-fx-font-size: 11px;
 }
 
 .task #taskName {
@@ -115,7 +115,7 @@
 
 .task #jointLabel {
 	-fx-font-size:10px;
-	-fx-padding: 1 1 1 1;
+	-fx-padding: 1 0 0 5;
 	-fx-text-fill: red;
 }
 

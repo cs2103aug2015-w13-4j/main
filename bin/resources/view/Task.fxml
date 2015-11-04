@@ -13,9 +13,9 @@
       <Label fx:id="taskName" focusTraversable="false" text="Task Name " />
       <Label fx:id="priority" focusTraversable="false" text="Priority" />
       <Label fx:id="sDate" focusTraversable="false" text="sDate" />
-      <Label fx:id="startTime" />
-      <Label fx:id="jointLabel" focusTraversable="false" text=" to " />
+      <Label fx:id="startTime" focusTraversable="false" />
+      <Label fx:id="jointLabel" focusTraversable="false" />
       <Label fx:id="eDate" focusTraversable="false" text="eDate" />
-      <Label fx:id="endTime" />
+      <Label fx:id="endTime" focusTraversable="false" />
    </children>
 </fx:root>
