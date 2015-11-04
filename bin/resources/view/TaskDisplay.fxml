@@ -50,10 +50,10 @@
                </padding></Label>
             <ListView fx:id="helpContent" focusTraversable="false" maxHeight="400.0" maxWidth="450.0" prefHeight="400.0" prefWidth="450.0" />
          </children></VBox>
-      <VBox fx:id="resultView" alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="400.0">
+      <VBox fx:id="resultView" alignment="CENTER" fillWidth="false" prefHeight="400.0">
          <children>
             <Label fx:id="resultLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefWidth="300.0" text="Results" />
-            <ListView fx:id="resultContent" focusTraversable="false" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
+            <ListView fx:id="resultContent" focusTraversable="false" maxHeight="400.0" prefHeight="400.0" prefWidth="500.0" />
          </children>
       </VBox>
    </children>

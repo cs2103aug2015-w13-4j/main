@@ -155,6 +155,8 @@
  
 .display #resultContent {
  	-fx-background-color: #FFCCCC;
+ 	-fx-padding: 13;
+ 	-fx-background-radius: 20;
 }
  
 .display #resultContent .list-cell {
