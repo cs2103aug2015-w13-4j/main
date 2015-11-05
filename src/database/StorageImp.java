@@ -259,7 +259,7 @@ public class StorageImp implements Storage {
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
-				if (string.contains(AVAILABILITY_YES_SIG)) {
+				if (string.contains(AVAILABILITY_YES_SIG) &&string.contains(COMPLETION_NO) ) {
 					list.add(stringToTask(string));
 				}
 			}
