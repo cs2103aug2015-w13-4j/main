@@ -192,9 +192,6 @@ public class TaskDisplayController extends StackPane {
                 tasks.add(new Task(t));
             }
         }
-        // tasks.add(new Task(new TaskEvent(1, "Do CS2101", new
-        // TaskDate(2015,10,10), new TaskDate(2015,10,15), 1)));
-        // tasks.add(new Task());
         return tasks;
     }
 
