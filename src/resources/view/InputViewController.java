@@ -117,7 +117,6 @@ public class InputViewController extends VBox {
     private void handleCommandList(int i) {
     	String command = getCommands(i);
     	userInput.setText(command);
-    	userInput.positionCaret(command.length());
     }
     private void handleUserInput() {
         String input = userInput.getText();
@@ -173,6 +172,13 @@ public class InputViewController extends VBox {
     	commandsPointer = 0;
     }
 
+    @SuppressWarnings("serial")
+	private class CircularList<E> extends ArrayList<E> {
+    	@Override
+    	public E get(int index){
+    		return super.get(index % size());
+    	}
+    }
     private void initHistoryList() {
         history = new ArrayList<String>();
         history.add(EMPTY_STRING);
