@@ -12,12 +12,8 @@ hs_err_pid*
 
 *.class
 
-testFileManagement.txt
-
-user_tasks.txt
-
-
 tasks.txt
--.idea
-
 pref.txt
+
+.idea
+
