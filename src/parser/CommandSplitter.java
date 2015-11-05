@@ -307,12 +307,11 @@ public class CommandSplitter {
 				timeToken[1] = new TaskTime(0,0);
 			} else if (timeCount == 1) {
 				String newParts[] = command.split(parts[pos]);
-				if (getValidDate(newParts[0]) == 1) {
+				if (getValidDate(newParts[0]) != 1) {
 					timeToken[1] = timeToken[0];
 					timeToken[0] = new TaskTime(0,0);
 				} else {
-					timeToken[1] = timeToken[0];
-					timeToken[0] = new TaskTime(0,0);
+					timeToken[1] = new TaskTime(0,0);
 				}
 			} 
 		}
