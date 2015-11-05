@@ -24,4 +24,11 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+  	<dependency>
+    <groupId>de.jensd</groupId>
+    <artifactId>fontawesomefx</artifactId>
+    <version>8.5</version>
+</dependency>
+  </dependencies>
 </project>
