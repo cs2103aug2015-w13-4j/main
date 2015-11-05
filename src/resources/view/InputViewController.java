@@ -38,11 +38,30 @@ public class InputViewController extends VBox {
     Launch launch;
     TaskDisplayController taskDisplay;
     ArrayList<String> history;
+    ArrayList<String> commands;
     ArrayList<String> preset;
     private int historyPointer;
-
+    private int commandsPointer;
+    
     public static InputViewController inputViewController;
-
+    
+    private static final String INIT_TEST_DATA = "Test data initialized";
+    private static final String EMPTY_STRING = "";
+    
+    private static final String COMMAND_ADD = "add ";
+    private static final String COMMAND_DELETE = "delete ";
+    private static final String COMMAND_EDIT = "edit ";
+    private static final String COMMAND_SEARCH = "search ";
+    private static final String COMMAND_VIEW_COMPLETED = "view completed";
+    private static final String COMMAND_FLAG = "flag ";
+    private static final String COMMAND_UNFLAG = "unflag ";
+    private static final String COMMAND_REDO = "redo";
+    private static final String COMMAND_UNDO = "undo";
+    private static final String COMMAND_DIRECTORY = "directory";
+    private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_MARK_FINISH = "finish";
+    private static final String COMMAND_EXIT = "exit";
+    
     public static InputViewController getInstance() {
         if (inputViewController == null) {
             inputViewController = new InputViewController();
@@ -62,6 +81,7 @@ public class InputViewController extends VBox {
         }
         initPresetArrayList();
         initHistoryList();
+        initCommandList();
     }
 
     public void handleKeyPress(KeyEvent event) {
@@ -71,6 +91,7 @@ public class InputViewController extends VBox {
             handleUserInput();
             userInput.setText("");
             taskDisplay.updateViews();
+            resetCommandPointer();
         } else if (event.getCode() == KeyCode.UP
                 || event.getCode() == KeyCode.DOWN) {
             event.consume();
@@ -82,6 +103,9 @@ public class InputViewController extends VBox {
             taskDisplay.updateViews();
         } else if (event.getCode() == KeyCode.ESCAPE) {
             taskDisplay.hideAllOverlays();
+        } else if (event.getCode() == KeyCode.TAB) {
+        	event.consume();
+        	handleCommandList(commandsPointer++);
         }
     }
 
@@ -90,9 +114,13 @@ public class InputViewController extends VBox {
         userInput.setText(pastCmd);
     }
 
+    private void handleCommandList(int i) {
+    	String command = getCommands(i);
+    	userInput.setText(command);
+    }
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("exit")) {
+        if (input.equals(COMMAND_EXIT)) {
             System.exit(0);
         }
         updateHistoryList();
@@ -114,12 +142,46 @@ public class InputViewController extends VBox {
         for (String in : preset) {
             launch.command(in);
         }
-        labelFeedBack("Initialized test datas");
+        labelFeedBack(INIT_TEST_DATA);
+    }
+    private void initCommandList() {
+    	commandsPointer = 0;
+    	commands = new ArrayList<String>();
+    	commands.add(COMMAND_ADD);
+    	commands.add(COMMAND_EDIT);
+    	commands.add(COMMAND_DELETE);
+    	commands.add(COMMAND_SEARCH);
+    	commands.add(COMMAND_UNDO);
+    	commands.add(COMMAND_REDO);
+    	commands.add(COMMAND_VIEW_COMPLETED);
+    	commands.add(COMMAND_FLAG);
+    	commands.add(COMMAND_UNFLAG);
+    	commands.add(COMMAND_HELP);
+    	commands.add(COMMAND_EXIT);
+    	commands.add(COMMAND_DIRECTORY);
+    	commands.add(COMMAND_MARK_FINISH);
+  
+    }
+    
+    private String getCommands(int i) {
+    		i = i% commands.size();
+    		return commands.get(i);
+    }
+    
+    private void resetCommandPointer() {
+    	commandsPointer = 0;
     }
 
+    @SuppressWarnings("serial")
+	private class CircularList<E> extends ArrayList<E> {
+    	@Override
+    	public E get(int index){
+    		return super.get(index % size());
+    	}
+    }
     private void initHistoryList() {
         history = new ArrayList<String>();
-        history.add("");
+        history.add(EMPTY_STRING);
         historyPointer = history.size() - 1;
     }
 
@@ -134,7 +196,7 @@ public class InputViewController extends VBox {
         } else if (code == KeyCode.UP) {
             return getPrevCommand();
         } else {
-            return "";
+            return EMPTY_STRING;
         }
     }
 
