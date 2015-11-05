@@ -2,7 +2,7 @@ package utilities;
 
 import java.text.DecimalFormat;
 
-public class TaskTime {
+public class TaskTime implements Comparable<TaskTime>{
 	private static final String DIVIDE = ":";
 	private static final String AM = "AM";
 	private static final String PM = "PM";
@@ -53,5 +53,18 @@ public class TaskTime {
 	
 	public String toString() {
 		return hour + DIVIDE + df.format(minute); 
+	}
+
+	@Override
+	public int compareTo(TaskTime o) {
+		int thisVal = this.hour * 100 + this.minute;
+		int thatVal = o.getHour() * 100 + o.getMinute();
+		if (thisVal > thatVal) {
+			return 1;
+		} else if (thisVal < thatVal){
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 }

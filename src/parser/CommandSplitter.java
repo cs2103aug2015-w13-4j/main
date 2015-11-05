@@ -1,5 +1,6 @@
 package parser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,15 +12,32 @@ import utilities.TaskTime;
 
 public class CommandSplitter {
 	
-	private static boolean contain(String keyword, String domain) {
+	public static boolean contain(String keyword, String domain) {
 		domain = domain.toLowerCase();
+		int numQ = findQuo(domain);
 		String parts[] = domain.split(" ");
 		for (int i = 0; i < parts.length; i ++) {
 			if (parts[i].equals(keyword)) {
+				if (numQ == 2) {
+					String newParts[] = domain.split(keyword);
+					if (findQuo(newParts[0]) == 1) {
+						return false;
+					}
+				} 
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private static int findQuo(String domain) {
+		int num = 0;
+		for (int i = 0; i < domain.length(); i ++) {
+			if (domain.charAt(i) == '\"') {
+				num ++;
+			}
+		}
+		return num;
 	}
 	
 	public static Command_Type findType(String command) {
@@ -142,126 +160,96 @@ public class CommandSplitter {
 		TaskDate results[] = new TaskDate[2];
 		TaskDate today = getCurrentDate();
 		int todayOfWeek = getDayOfWeek();
-		int dateCount = 2;
-		if (contain("tomorrow", command)) {
-			results[2-dateCount] = today.dayTrans(1);
-			dateCount --;
-		}
-		if (contain("today", command)) {
-			results[2-dateCount] = today.dayTrans(0);
-			dateCount --;
-		}
-		if (contain("yesterday", command)) {
-			results[2-dateCount] = today.dayTrans(-1);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last monday")) {
-			results[2-dateCount] = today.dayTrans(1-todayOfWeek - 7);
-			dateCount --;
-		}
-		if (command.toLowerCase().contains("last tuesday")) {
-			results[2-dateCount] = today.dayTrans(2-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last wednesday")) {
-			results[2-dateCount] = today.dayTrans(3-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last thursday")) {
-			results[2-dateCount] = today.dayTrans(4-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last friday")) {
-			results[2-dateCount] = today.dayTrans(5-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last saturday")) {
-			results[2-dateCount] = today.dayTrans(6-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("last sunday")) {
-			results[2-dateCount] = today.dayTrans(7-todayOfWeek - 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next monday")) {
-			results[2-dateCount] = today.dayTrans(1-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next tuesday")) {
-			results[2-dateCount] = today.dayTrans(2-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next wednesday")) {
-			results[2-dateCount] = today.dayTrans(3-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next thursday")) {
-			results[2-dateCount] = today.dayTrans(4-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next friday")) {
-			results[2-dateCount] = today.dayTrans(5-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (command.toLowerCase().contains("next saturday")) {
-			results[2-dateCount] = today.dayTrans(6-todayOfWeek + 7);
-			dateCount --;
-		}
-		if (command.toLowerCase().contains("next sunday")) {
-			results[2-dateCount] = today.dayTrans(7-todayOfWeek + 7);
-			dateCount --;
-		} 
-		if (contain("monday", command)||command.toLowerCase().contains("this monday")) {
-			results[2-dateCount] = today.dayTrans(1-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("tuesday", command)||command.toLowerCase().contains("this tuesday")) {
-			results[2-dateCount] = today.dayTrans(2-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("wednesday", command)||command.toLowerCase().contains("this wednesday")) {
-			results[2-dateCount] = today.dayTrans(3-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("thursday", command)||command.toLowerCase().contains("this thursday")) {
-			results[2-dateCount] = today.dayTrans(4-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("firday", command)||command.toLowerCase().contains("this friday")) {
-			results[2-dateCount] = today.dayTrans(5-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("saturday", command)||command.toLowerCase().contains("this saturday")) {
-			results[2-dateCount] = today.dayTrans(6-todayOfWeek);
-			dateCount --;
-		} 
-		if (contain("sunday", command)||command.toLowerCase().contains("this sunday")) {
-			results[2-dateCount] = today.dayTrans(7-todayOfWeek);
-			dateCount --;
-		}
-		if (dateCount > 0) {
-			String parts[] = command.split(" ");
-			for (int i = 0; i < parts.length; i ++) {
-				if (dateChecker(parts[i])) {
-					results[2 - dateCount] = DateParser.dateDecoder(parts[i]);
-					dateCount --;
+		ArrayList<String> decomposed = decompose(command);
+		for (int i = 0; i < 2; i ++) {
+			try {
+				if (decomposed.get(i).equals("tomorrow")) {
+					results[i] = today.dayTrans(1);
+				} else if (decomposed.get(i).equals("today")) {
+					results[i] = today.dayTrans(0);
+				} else if (decomposed.get(i).equals("yesterday")) {
+					results[i] = today.dayTrans(-1);
+				} else if (decomposed.get(i).equals("last monday"))  {
+					results[i] = today.dayTrans(1-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last tuesday"))  {
+					results[i] = today.dayTrans(2-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last wednesday"))  {
+					results[i] = today.dayTrans(3-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last thursday"))  {
+					results[i] = today.dayTrans(4-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last friday"))  {
+					results[i] = today.dayTrans(5-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last saturday"))  {
+					results[i] = today.dayTrans(6-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("last sunday"))  {
+					results[i] = today.dayTrans(7-todayOfWeek - 7);
+				} else if (decomposed.get(i).equals("next monday"))  {
+					results[i] = today.dayTrans(1-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next tuesday"))  {
+					results[i] = today.dayTrans(2-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next wednesday"))  {
+					results[i] = today.dayTrans(3-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next thursday"))  {
+					results[i] = today.dayTrans(4-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next friday"))  {
+					results[i] = today.dayTrans(5-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next saturday"))  {
+					results[i] = today.dayTrans(6-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("next sunday"))  {
+					results[i] = today.dayTrans(7-todayOfWeek + 7);
+				} else if (decomposed.get(i).equals("monday"))  {
+					results[i] = today.dayTrans(1-todayOfWeek);
+				} else if (decomposed.get(i).equals("tuesday"))  {
+					results[i] = today.dayTrans(2-todayOfWeek);
+				} else if (decomposed.get(i).equals("wednesday"))  {
+					results[i] = today.dayTrans(3-todayOfWeek);
+				} else if (decomposed.get(i).equals("thursday"))  {
+					results[i] = today.dayTrans(4-todayOfWeek);
+				} else if (decomposed.get(i).equals("friday"))  {
+					results[i] = today.dayTrans(5-todayOfWeek);
+				} else if (decomposed.get(i).equals("saturday"))  {
+					results[i] = today.dayTrans(6-todayOfWeek);
+				} else if (decomposed.get(i).equals("sunday"))  {
+					results[i] = today.dayTrans(7-todayOfWeek);
+				} else if (dateChecker(decomposed.get(i))){
+					results[i] = DateParser.dateDecoder(decomposed.get(i));
+				} else {
+					results[i] = new TaskDate(0,0,0);
 				}
+			} catch (Exception e) {
+				results[i] = new TaskDate(0,0,0);
 			}
 		}
-		if (dateCount == 2) {
-			results[0] = new TaskDate(0,0,0);
-			results[1] = new TaskDate(0,0,0);
-		} else if (dateCount == 1) {
-			results[1] = results[0];
-			results[0] = new TaskDate(0,0,0);
-		} else {
-			/*if (results[0].compareTo(results[1]) == 1) {
-				TaskDate med = results[1];
-				results[1] = results[0];
-				results[0] = med;
-			}*/
-		}
 		return results;
+	}
+	
+	public static ArrayList<String> decompose(String command) {
+		ArrayList<String> result = new ArrayList<String>();
+		String parts[] = command.toLowerCase().split(" ");
+		for (int i = 0; i < parts.length; i ++) {
+			if (parts[i].equals("tomorrow") || parts[i].equals("yesterday") ||
+					parts[i].equals("today") || parts[i].equals("sunday") ||
+					parts[i].equals("monday") || parts[i].equals("tuesday") ||
+					parts[i].equals("wednesday") || parts[i].equals("thursday") ||
+					parts[i].equals("friday") || parts[i].equals("saturday")) {
+				result.add(parts[i]);
+			} else if (parts[i].equals("last") || parts[i].equals("next")) {
+				if (i <parts.length - 1) {
+					if (parts[i + 1].equals("monday") || parts[i + 1].equals("tuesday") ||
+							parts[i + 1].equals("wednesday") || parts[i + 1].equals("thursday") ||
+							parts[i + 1].equals("friday") || parts[i + 1].equals("saturday") ||
+							parts[i + 1].equals("sunday")) {
+						result.add(parts[i] + " " + parts[i + 1]);
+						i ++;
+					}
+				}
+			} else {
+				if (dateChecker(parts[i])) {
+					result.add(parts[i]);
+				}
+			}
+		} 
+		return result;
 	}
 	
 	public static TaskDate[] extractDate(String command) {
@@ -319,12 +307,11 @@ public class CommandSplitter {
 				timeToken[1] = new TaskTime(0,0);
 			} else if (timeCount == 1) {
 				String newParts[] = command.split(parts[pos]);
-				if (getValidDate(newParts[0]) == 1) {
+				if (getValidDate(newParts[0]) != 1) {
 					timeToken[1] = timeToken[0];
 					timeToken[0] = new TaskTime(0,0);
 				} else {
-					timeToken[1] = timeToken[0];
-					timeToken[0] = new TaskTime(0,0);
+					timeToken[1] = new TaskTime(0,0);
 				}
 			} 
 		}
@@ -334,6 +321,12 @@ public class CommandSplitter {
 				TaskTime med = timeToken[0];
 				timeToken[0] = timeToken[1];
 				timeToken[1] = med;
+			} else if (myDate[0].compareTo(myDate[1]) == 0) {
+				if (timeToken[0].compareTo(timeToken[1]) == 1) {
+					TaskTime med = timeToken[0];
+					timeToken[0] = timeToken[1];
+					timeToken[1] = med;
+				}
 			}
 		}
 		return timeToken;

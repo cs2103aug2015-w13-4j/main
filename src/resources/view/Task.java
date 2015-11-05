@@ -3,9 +3,11 @@ package resources.view;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import logic.Launch;
 import utilities.Command_Priority;
 import utilities.TaskDate;
 import utilities.TaskEvent;
@@ -43,16 +45,15 @@ public class Task extends HBox {
     private static final String TASK_FILE = "Task.fxml";
     private static final String TASK_FLAG = "FLAG";
 
-    ChangeListener<Boolean> checkBoxListener;
-
     private static final String STRING_EMPTY = "";
     private static final String CONNECTING_WORD = "to";
+    
+    private static final String TASK_COMPLETE = "finish ";
 
     public Task(TaskEvent task) {
         loadFxml();
-        initFxmlFields(task.getTaskID(), task.getTaskName(),
-                task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
-                task.getPriority());
+        checkBox.setSelected(task.isCompleted());
+        initListenerAndFxmlFields(task);
     }
 
     public Task() {
@@ -61,9 +62,30 @@ public class Task extends HBox {
         // initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new
         // TaskDate(12,12,2015));
     }
+    private void initListenerAndFxmlFields (TaskEvent task) {
+        ChangeListener<Boolean> checkboxListener = initCheckBoxListener(task.getTaskID());
+        initFxmlFields(task.getTaskID(), task.getTaskName(),
+                task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
+                task.getPriority() , checkboxListener);
+    }
+       
+    
+    private ChangeListener<Boolean> initCheckBoxListener(int index) {
+        ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) {
+                InputViewController inputView = InputViewController.getInstance();
+                if (newVal) {
+                    inputView.passToLogic(TASK_COMPLETE + index);
+                } 
+            }
+        };           
+        return listener;
+    }
+    
 
     public void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
-            TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority) {
+            TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority, ChangeListener<Boolean> checkboxListener) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
         this.sDate.setText(sDate.toString());
@@ -71,9 +93,7 @@ public class Task extends HBox {
         this.eDate.setText(eDate.toString());
         this.endTime.setText(endTime.toString());
         this.priority.setText(priority.toString().equals(TASK_FLAG) ? TASK_FLAG : STRING_EMPTY);
-        if (isCompleted) {
-            checkBox.setSelected(true);
-        }
+        this.checkBox.selectedProperty().addListener(checkboxListener);
         if(startTime.getHour() == 0) {
         	this.startTime.setText(STRING_EMPTY);
         }
