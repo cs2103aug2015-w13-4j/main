@@ -23,6 +23,8 @@ public class Operation {
 	private Stack<CommandElements> redoList;
 	private static final String DEFAULT_RETURN = "not found";
 	ArrayList<TaskEvent> searchView;
+	
+	ArrayList<Integer> idList;
 	int size;
 
 	public Operation() {
@@ -30,6 +32,7 @@ public class Operation {
 		logger = Logger.getLogger("Operation");
 		searchView = new ArrayList<TaskEvent>();
 		redoList = new Stack<CommandElements>();
+		idList = new ArrayList<Integer>();
 	}
 
 	public ArrayList<TaskEvent> getArray() {
@@ -54,6 +57,7 @@ public class Operation {
 			return message.error(input);
 		}
 		String name = getName(processed);
+		processed = changeId(processed);
 		logger.log(Level.INFO, "input processed" + processed.getType());
 		try {
 			if (performCommand(processed.getType(), processed)) {
@@ -67,7 +71,15 @@ public class Operation {
 			return message.error(input);
 		}
 	}
-
+	private CommandElements changeId(CommandElements processed){
+		if(processed.getID()!= -1){
+			int index = processed.getID()-1;
+			System.out.println("before  " +index + "found "+ idList.get(index));
+			processed.setID(idList.get(index) );
+		}
+		return processed;
+	}
+	
 	private boolean checkInput(CommandElements content) {
 		if(content.getEndDate() == null || content.getStartDate() == null){
 			return true;
@@ -125,7 +137,7 @@ public class Operation {
 				return isSuccessful;
 			}
 			if (isSuccessful) {
-				int id = getID(content);
+				int id = findID(content);
 				undoList.push(undoAdd(id));
 			}
 			return isSuccessful;
@@ -141,7 +153,7 @@ public class Operation {
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
 			undoList.push(undoDelete(content.getID()));
-			isSuccessful = action.deleteTaskByID(content.getID());
+			isSuccessful = action.deleteTaskByID(content.getID() );
 			if (!isSuccessful) {
 				undoList.pop();
 			}
@@ -276,7 +288,7 @@ public class Operation {
 		}
 		return DEFAULT_RETURN;
 	}
-	private int getID(CommandElements content){
+	private int findID(CommandElements content){
 		Storage storage = Launch.getStorage();
 		ArrayList<TaskEvent> tasks = storage.loadAllTasks();
 		int id = 0;
@@ -287,6 +299,9 @@ public class Operation {
 			}
 		}
 		return id;
+	}
+	private int locateID(int input){
+		return idList.get(input-1);
 	}
 
 	private CommandElements undoAdd(int id) {
@@ -330,7 +345,23 @@ public class Operation {
 		CommandElements next = new CommandElements(Command_Type.DIRECTORY, old);
 		return next;
 	}
-
+	public ArrayList<TaskEvent> fullView(){
+		Storage storage = Launch.getStorage();
+		ArrayList<TaskEvent> list =  sortArray(storage.loadAllTasks());
+		idList = new ArrayList<Integer>();
+		for(int i =0;i<list.size();i++){
+			idList.add(list.get(i).getTaskID());
+			list.get(i).setTaskID(i+1);
+		}
+		return list;
+	}
+	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){
+		ArrayList<TaskEvent> sorted = new ArrayList<TaskEvent>();
+		
+		
+		
+		return list;
+	}
 	private CommandElements findRedoContent(CommandElements content) {
 		Command_Type type = content.getType();
 		Storage action = Launch.getStorage();
