@@ -44,14 +44,8 @@ public class Display {
 	 * @return ArrayList of task to show user
 	 */
 	public ArrayList<TaskEvent> taskView() {
-		StorageImp store = Launch.getStorage();
 		Operation op = Launch.getOperation();
-		/*if (nextCommand == Command_Type.SEARCH_TASK || nextCommand.equals(Command_Type.VIEW_COMPLETED)) {
-			view = op.getArray();
-		} else {
-		*/
-		view = store.loadAllTasks();
-		//}
+		view = op.fullView();
 		return view;
 	}
 	public ArrayList<TaskEvent> resultView(){
