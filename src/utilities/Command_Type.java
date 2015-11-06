@@ -5,6 +5,7 @@ public enum Command_Type {
 	EDIT_TASK,
 	DELETE_TASK,
 	FINISH_TASK,
+	UNFINISH_TASK,
 	SEARCH_TASK,
 	UNDO,
 	REDO,

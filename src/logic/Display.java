@@ -18,6 +18,7 @@ public class Display {
 	private static final String MESSAGE_DELETE = "%s has been deleted successfully";
 	private static final String MESSAGE_DIRECTORY = "file has been relocated to %s";
 	private static final String MESSAGE_FINISHED = "%s has been completed!";
+	private static final String MESSAGE_UNFINISH = "%s has been uncompleted";
 	private static final String MESSAGE_SEARCH = "%d tasks has been found with your search";
 	private static final String MESSAGE_NO_SEARCH_RESULT = "no task has been found with your search";
 	private static final String MESSAGE_UNDO = "previous task has been undone";
@@ -80,6 +81,8 @@ public class Display {
 		case FINISH_TASK:
 			//if(content)
 			return String.format(MESSAGE_FINISHED, content);
+		case UNFINISH_TASK:
+			return String.format(MESSAGE_UNFINISH, content);
 		case SEARCH_TASK:
 			view = operation.getArray();
 			taskDisplay.triggerResultView();

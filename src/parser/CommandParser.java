@@ -57,7 +57,10 @@ public class CommandParser {
 		} else if (type == Command_Type.FINISH_TASK) {
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
-		} else if (type == Command_Type.UNDO) {
+		} else if(type == Command_Type.UNFINISH_TASK){
+			object = CommandSplitter.findObject(command);
+			return new CommandElements(type, object);
+		}else if (type == Command_Type.UNDO) {	
 			return new CommandElements(type);
 		} else if (type == Command_Type.REDO) {
 			return new CommandElements(type);
