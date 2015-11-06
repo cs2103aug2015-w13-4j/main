@@ -78,7 +78,13 @@ public class StorageImp implements Storage {
 	}
 
 	private int getTaskCounter() {
-		return FileUtils.getLinesCount(saveDir);
+		int counter = 0;
+		try {
+			counter = FileUtils.getLinesCount(saveDir);
+		} catch (IOException ioe) {
+			LOGGER.log(Level.WARNING, "Unable to count tasks.", ioe);
+		}
+		return counter;
 	}
 
 	@Override
