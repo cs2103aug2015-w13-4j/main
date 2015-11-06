@@ -37,7 +37,7 @@ public class TaskEvent {
 	public boolean          isAvailable()  { return available; }
 
 
-	private void            setTaskID(int taskID)                  { this.taskID = taskID; }
+	public void            setTaskID(int taskID)                  { this.taskID = taskID; }
 	public void             setTaskName(String taskName)           { this.taskName = taskName; }
 	public void             setStartDate(TaskDate startDate)       { this.startDate = startDate; }
 	public void             setEndDate(TaskDate endDate)           { this.endDate = endDate; }
