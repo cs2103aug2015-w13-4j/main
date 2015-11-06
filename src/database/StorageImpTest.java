@@ -8,9 +8,8 @@ import utilities.TaskTime;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by zhongwei-z on 27/10/15.
- */
+// @@author A0130503B
+
 public class StorageImpTest {
 
 	static TaskDate d1 = new TaskDate(2015, 1, 1);

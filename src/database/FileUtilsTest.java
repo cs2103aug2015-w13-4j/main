@@ -1,14 +1,16 @@
 package database;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+// @@author A0130503B
 public class FileUtilsTest {
 
 	@Test

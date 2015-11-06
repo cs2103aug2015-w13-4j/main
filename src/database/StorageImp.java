@@ -4,18 +4,25 @@ import utilities.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-/**
- * Created by zhongwei-z on 23/10/15.
- */
+// @@author A0130503B
+
+
 public class StorageImp implements Storage {
+	private static final Logger LOGGER = Logger.
+			getLogger(StorageImp.class.getName());
+
 	protected static final String PREF_DIR = "pref.txt";
 	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
+
 	protected static final String TOK = "&&";
 	protected static final String COL = "``";
 	protected static final String DIV = "/";
 	private static final String WHITESPACE = " ";
+
 	private static final String AVAILABLE = "available";
 	private static final String COMPLETED = "completed";
 	private static final String AVAILABILITY_NO = "false";
@@ -41,10 +48,11 @@ public class StorageImp implements Storage {
 	private StorageImp() {
 		try {
 			saveDir = getSaveDir();
-			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), true)));
+			writer = new PrintWriter(new BufferedWriter(
+					new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Failed to create StorageImp singleton", e);
 		}
 	}
 
@@ -52,6 +60,7 @@ public class StorageImp implements Storage {
 		try {
 			return FileUtils.getFirstLine(PREF_DIR);
 		} catch (IOException e) {
+			LOGGER.log(Level.INFO, "Saving directory not specified, use default");
 			return DEFAULT_SAVE_DIR;
 		}
 	}
@@ -69,25 +78,14 @@ public class StorageImp implements Storage {
 	}
 
 	private int getTaskCounter() {
-		int counter = 0;
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
-			while (br.ready()) {
-				br.readLine();
-				++counter;
-			}
-			return counter + 1;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return counter;
+		return FileUtils.getLinesCount(saveDir);
 	}
 
 	@Override
 	public boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
 	                TaskDate endDate, TaskTime endTime, Command_Priority priority) {
 		//TODO defense for taskName having special char like COL or TOK
+
 		try {
 			TaskEvent task = new TaskEvent(
 					taskCounter++, taskName, startDate, startTime, endDate, endTime, priority);
