@@ -14,6 +14,7 @@ public class CommandElements {
 	}
 	
 	public CommandElements(Command_Type cmd, String nm, TaskDate dt[], Command_Priority prio, TaskTime tm[]){
+		this.id = -1;
 		this.type = cmd;
 		this.name = nm;
 		this.date = dt;
@@ -67,10 +68,12 @@ public class CommandElements {
 	}
 	
 	public CommandElements(Command_Type cmd) {
+		this.id = -1;
 		this.type = cmd;
 	}
 	
 	public CommandElements(Command_Type cmd, String directory) {
+		this.id = -1;
 		this.type = cmd;
 		this.name = directory;
 	}
