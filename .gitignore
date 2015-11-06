@@ -1,6 +1,5 @@
 # Created by https://www.gitignore.io/api/java
 # Package Files #
-*.jar
 *.war
 *.ear
 
