@@ -13,7 +13,7 @@ public class HelpCommand extends HBox {
     @FXML
     private Label description;
 
-    private static final String TASK_FILE = "HelpCommand.fxml";
+    private static final String FILE_LOC = "HelpCommand.fxml";
 
     public HelpCommand(String command, String description) {
         loadFxml();
@@ -28,7 +28,7 @@ public class HelpCommand extends HBox {
     private void loadFxml() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource(TASK_FILE));
+                    .getResource(FILE_LOC));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

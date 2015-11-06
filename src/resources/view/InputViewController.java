@@ -62,6 +62,28 @@ public class InputViewController extends VBox {
     private static final String COMMAND_MARK_FINISH = "finish";
     private static final String COMMAND_EXIT = "exit";
     
+    private static final String TEST_TASK_ONE = "add \"Oral Presentation for CS2101\" 2/11/2015 FLAG";
+    private static final String TEST_TASK_TWO = "add \"Meeting about budget\" 5/11/2015 FLAG";
+    private static final String TEST_TASK_THREE = "add \"CS2101 Report writing\" 10/11/2015";
+    private static final String TEST_TASK_FOUR = "add \"Workshop about Creative Design\" 4/11/2015 6/11/2015";
+    private static final String TEST_TASK_FIVE = "add \"CS2103 Milestone 4\" 4/11/2015 ";
+    private static final String TEST_TASK_SIX = "add \"Meeting with HR\" 9/11/2015 FLAG";
+    private static final String TEST_TASK_SEVEN = "add \"Watch LOTR\"";
+    private static final String TEST_TASK_EIGHT = "add \"Buy Apples\"";
+    private static final String TEST_TASK_NINE = "add \"Attend roadshow\" 5/11/2015 5pm to 8pm";
+    private static final String TEST_TASK_TEN = "add \"Pay the Bills\" 8/11/2015";
+    private static final String TEST_TASK_ELEVEN = "add \"Collect suit from Tailor \" 10/11/2015 4pm";
+    private static final String TEST_TASK_TWELVE = "add \"Send Laundry for washing \" 11/11/2015 12am to 4pm";
+    private static final String TEST_TASK_THIRTEEN = "add \"Clean the house\"";
+    private static final String TEST_TASK_FOURTEEN = "add \"Buy Groceries\"";
+    private static final String TEST_TASK_FIFTEEN = "add \"Submit powerpoint slides\" 12/11/2015 10am";
+    private static final String TEST_TASK_SIXTEEN = "add \" Buy Stationaries\" ";
+    private static final String TEST_TASK_SEVENTEEN = "add \"Meeting with colleagues about expenditure \" 15/11/2015 9.15am";
+    private static final String TEST_TASK_EIGHTEEN = "add \"Buy Coffee powder \"";
+    private static final String TEST_TASK_NINETEEN = "add \" Inform boss about progress report\" 18/11/2015 11.30am";
+    private static final String TEST_TASK_TWENTY = "add \"Wash the car \"";
+    
+    
     public static InputViewController getInstance() {
         if (inputViewController == null) {
             inputViewController = new InputViewController();
@@ -212,12 +234,26 @@ public class InputViewController extends VBox {
 
     private void initPresetArrayList() {
         preset = new ArrayList<String>();
-        preset.add("add \"Oral Presentation for CS2101\" 2/11/2015 FLAG");
-        preset.add("add \"Meeting about budget\" 5/11/2015 FLAG");
-        preset.add("add \"CS2101 Report writing\" 10/11/2015");
-        preset.add("add \"Workshop about Creative Design\" 4/11/2015 6/11/2015");
-        preset.add("add \"CS2103 Milestone 4\" 4/11/2015 ");
-        preset.add("add \"Meeting with HR\" 9/11/2015 FLAG");
+        preset.add(TEST_TASK_ONE);
+        preset.add(TEST_TASK_TWO);
+        preset.add(TEST_TASK_THREE);
+        preset.add(TEST_TASK_FOUR);
+        preset.add(TEST_TASK_FIVE);
+        preset.add(TEST_TASK_SIX);
+        preset.add(TEST_TASK_SEVEN);
+        preset.add(TEST_TASK_EIGHT);
+        preset.add(TEST_TASK_NINE);
+        preset.add(TEST_TASK_TEN);
+        preset.add(TEST_TASK_ELEVEN);
+        preset.add(TEST_TASK_TWELVE);
+        preset.add(TEST_TASK_THIRTEEN);
+        preset.add(TEST_TASK_FOURTEEN);
+        preset.add(TEST_TASK_FIFTEEN);
+        preset.add(TEST_TASK_SIXTEEN);
+        preset.add(TEST_TASK_SEVENTEEN);
+        preset.add(TEST_TASK_EIGHTEEN);
+        preset.add(TEST_TASK_NINETEEN);
+        preset.add(TEST_TASK_TWENTY);
 
     }
 }

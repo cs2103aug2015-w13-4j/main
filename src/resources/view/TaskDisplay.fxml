@@ -31,7 +31,7 @@
             </BorderPane>
          </center>
          <right>
-            <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="240.0" BorderPane.alignment="TOP_LEFT">
+            <VBox fx:id="floatVBox" alignment="CENTER_LEFT" prefWidth="280.0" BorderPane.alignment="TOP_LEFT">
                <children>
                   <Label fx:id="floatingTaskLabel" focusTraversable="false" text="Floating Tasks" VBox.vgrow="ALWAYS" />
                   <ListView fx:id="floatingView" focusTraversable="false" VBox.vgrow="ALWAYS" />
