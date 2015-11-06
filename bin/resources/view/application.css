@@ -4,34 +4,9 @@
  * ==============
  */
 
-/* @font-face {
-	src: url("../../src/resources/fonts/Action-Man.ttf");
-}*/
-
-/* @font-face {
-	font-family: ActionMan;
-	font-weight:400;
-	font-style:italic;
-	src: url("../../src/resources/fonts/Action_Man_Italic.ttf");
-}
-
 @font-face {
-	font-family: ActionMan;
-	font-weight:700;
-	font-style:bold;
-	src: url("../../src/fonts/Action_Man_Bold.ttf");
-}
-
-@font-face{
-	font-family: ActionMan;
-	font-weight: 700;
-	font-style: italic;
-	src: url("../../src/fonts/Action_Man_Bold_Italic.ttf");
-} 
-*/
-@font-face {
-	font-family: FontAwesome;
-	src: url("resources/fonts/fontawesome-webfront.ttf");
+	font-family: 'FontAwesome';
+	src: url('../../../src/resources/fonts/fontawesome-webfront.ttf');
 } 
 
 /*

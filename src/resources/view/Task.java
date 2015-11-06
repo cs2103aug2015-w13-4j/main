@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import logic.Launch;
 import utilities.Command_Priority;
 import utilities.TaskDate;
 import utilities.TaskEvent;
@@ -56,12 +55,6 @@ public class Task extends HBox {
         initListenerAndFxmlFields(task);
     }
 
-    public Task() {
-        loadFxml();
-        initFxmlFields(1, "test", "high", new TaskDate(11, 11, 2015), false);
-        // initFxmlFields(2,"hi","high" , new TaskDate(11,12,2015) , new
-        // TaskDate(12,12,2015));
-    }
     private void initListenerAndFxmlFields (TaskEvent task) {
         ChangeListener<Boolean> checkboxListener = initCheckBoxListener(task.getTaskID());
         initFxmlFields(task.getTaskID(), task.getTaskName(),

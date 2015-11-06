@@ -133,9 +133,11 @@ public class InputViewController extends VBox {
     }
 
     public void passToLogic(String input) {
+        taskDisplay = TaskDisplayController.getInstance();
         launch = Launch.getInstance();
         String output = launch.command(input);
         labelFeedBack(output);
+        taskDisplay.updateViews();
     }
 
     private void initTesting() {
