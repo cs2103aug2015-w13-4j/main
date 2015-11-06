@@ -185,14 +185,14 @@ public class TaskDisplayController extends StackPane {
 
     private ObservableList<HBox> getTask() {
 
-        ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> taskList = display.taskView();
-        for (TaskEvent t : taskList) {
-            if (t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) {
-                tasks.add(new Task(t));
-            }
-        }
-        return tasks;
+    	ObservableList<HBox> tasks = FXCollections.observableArrayList();
+    	ArrayList<TaskEvent> taskList = display.taskView();
+    	for (TaskEvent t : taskList) {
+    		if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) && !t.getPriority().toString().equals(TASK_FLAG))  {
+    			tasks.add(new Task(t));
+    		}
+    	}
+    	return tasks;
     }
 
     private ObservableList<HBox> getFloatingTask() {
