@@ -60,14 +60,6 @@ public class ParserTest {
 	}
 	
 	@Test
-	public void testDateTrans() {
-		TaskDate origin = new TaskDate(2015,1,1);
-		for (int i = -100; i < 100; i ++) {
-			//System.out.println(i+ ": " + origin.dayTrans(i).printDate());
-		}
-	}
-	
-	@Test
 	public void testCase0() throws Exception {
 		String input = "add \"the test\" tomorrow to next friday";
 		CommandParser.ProcessInput(input).debugPrint();
