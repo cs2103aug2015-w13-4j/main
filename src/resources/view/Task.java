@@ -58,6 +58,7 @@ public class Task extends HBox {
     private static final String CONNECTING_WORD = "to";
 
     private static final String TASK_COMPLETE = "finish ";
+    private static final String TASK_UNCOMPLETE ="unfinish ";
 
     // ================================================================
     // CONSTRUCTOR
@@ -87,7 +88,9 @@ public class Task extends HBox {
                 InputViewController inputView = InputViewController.getInstance();
                 if (newVal) {
                     inputView.passToLogic(TASK_COMPLETE + index);
-                } 
+                } else {
+                    inputView.passToLogic(TASK_UNCOMPLETE + index);
+                }
             }
         };           
         return listener;
