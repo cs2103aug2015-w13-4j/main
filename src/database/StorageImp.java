@@ -52,7 +52,8 @@ public class StorageImp implements Storage {
 					new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
 		} catch (IOException e) {
-			LOGGER.log(Level.WARNING, "Failed to create StorageImp singleton", e);
+			LOGGER.log(Level.WARNING,
+					"Failed to create StorageImp singleton.", e);
 		}
 	}
 
@@ -60,7 +61,7 @@ public class StorageImp implements Storage {
 		try {
 			return FileUtils.getFirstLine(PREF_DIR);
 		} catch (IOException e) {
-			LOGGER.log(Level.INFO, "Saving directory not specified, use default");
+			LOGGER.log(Level.INFO, "Saving directory not specified, use default.");
 			return DEFAULT_SAVE_DIR;
 		}
 	}
@@ -81,6 +82,8 @@ public class StorageImp implements Storage {
 		int counter = 0;
 		try {
 			counter = FileUtils.getLinesCount(saveDir);
+		} catch (FileNotFoundException ffe) {
+			LOGGER.log(Level.WARNING, "Cannot find the tasks file.", ffe);
 		} catch (IOException ioe) {
 			LOGGER.log(Level.WARNING, "Unable to count tasks.", ioe);
 		}
@@ -385,7 +388,6 @@ public class StorageImp implements Storage {
 	public String getDirectory() {
 		return saveDir;
 	}
-
 
 	private String addDefFileNameToDir(String dir) {
 		if (dir.endsWith(DIV)) {

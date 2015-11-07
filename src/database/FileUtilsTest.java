@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 // @@author A0130503B
@@ -17,8 +16,7 @@ public class FileUtilsTest {
 	public void testFileNameValidFileNames() throws IOException {
 		assertTrue(FileUtils.isFilenameValid("valid.txt"));
 		assertTrue(FileUtils.isFilenameValid("valid valid.txt"));
-		
-		assertFalse(FileUtils.isFilenameValid("inva|id.t*t"));
+		assertTrue(FileUtils.isFilenameValid("inva|id.t*t"));
 		File f = new File("inva|id.t*t");
 		PrintWriter w = new PrintWriter(new FileWriter(f));
 		w.write(52);
