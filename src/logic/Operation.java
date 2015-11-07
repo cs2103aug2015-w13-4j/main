@@ -296,6 +296,12 @@ public class Operation {
 		case PRIORITY:
 			logger.log(Level.INFO, "priority");
 			return task.getPriority().toString();
+		case END_TIME:
+			break;
+		case START_TIME:
+			break;
+		default:
+			break;
 		}
 		return DEFAULT_RETURN;
 	}
@@ -366,17 +372,35 @@ public class Operation {
 		ArrayList<TaskEvent> list =  sortArray(storage.loadAllTasks());
 		idList = new ArrayList<Integer>();
 		for(int i =0;i<list.size();i++){
+			System.out.println("i "+i+" name "+list.get(i).getTaskName());
 			idList.add(list.get(i).getTaskID());
 			list.get(i).setTaskID(i+1);
 		}
 		return list;
 	}
 	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){
+		System.out.println("size "+list.size());
 		ArrayList<TaskEvent> sorted = new ArrayList<TaskEvent>();
-		
-		
-		
-		return list;
+		ArrayList<TaskEvent> flag = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> others = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> floating = new ArrayList<TaskEvent>();
+		for(int i =0;i<list.size();i++){
+			if(list.get(i).getPriority().toString().equals("FLAG")){
+				System.out.println("flag "+list.get(i).getTaskName());
+				flag.add(list.get(i));
+			} else if(list.get(i).getEndDate().getDay()==0 && list.get(i).getStartDate().getDay()==0){
+				System.out.println("floating "+list.get(i).getTaskName());
+				floating.add(list.get(i));
+			} else{
+				System.out.println("others " +list.get(i).getTaskName());
+				others.add(list.get(i));
+			}	
+		}
+		System.out.println("done");
+		sorted.addAll(flag);
+		sorted.addAll(others);
+		sorted.addAll(floating);
+		return sorted;
 	}
 	private CommandElements findRedoContent(CommandElements content) {
 		Command_Type type = content.getType();
