@@ -23,18 +23,18 @@ import resources.view.TaskDisplayController;
  */
 public class InputViewController extends VBox {
 
-    // ====================
+    // ================================================================
     // FXML FIELDS
-    // ====================
+    // ================================================================
     @FXML
     private TextField userInput;
 
     @FXML
     private Label feedBack;
 
-    // ====================
+    // ================================================================
     // NON-FXML FIELDS
-    // ====================
+    // ================================================================
     Launch launch;
     TaskDisplayController taskDisplay;
     ArrayList<String> history;
@@ -44,6 +44,10 @@ public class InputViewController extends VBox {
     private int commandsPointer;
     
     public static InputViewController inputViewController;
+    
+    // ================================================================
+    // CONSTANTS
+    // ================================================================
     
     private static final String INIT_TEST_DATA = "Test data initialized";
     private static final String EMPTY_STRING = "";

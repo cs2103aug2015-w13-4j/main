@@ -12,7 +12,12 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import utilities.TaskTime;
 
+//@A0124933H
 public class Task extends HBox {
+
+    // ================================================================
+    // FXML FIELDS
+    // ================================================================
 
     @FXML
     private CheckBox checkBox;
@@ -25,10 +30,10 @@ public class Task extends HBox {
 
     @FXML
     private Label eDate;
-    
+
     @FXML
     private Label startTime;
-    
+
     @FXML
     private Label endTime;
 
@@ -37,17 +42,26 @@ public class Task extends HBox {
 
     @FXML
     private Label priority;
-    
+
     @FXML
     private Label jointLabel;
 
-    private static final String TASK_FILE = "Task.fxml";
+    // ================================================================
+    // CONSTANTS
+    // ================================================================
+
+    private static final String FILE_LOC = "Task.fxml";
     private static final String TASK_FLAG = "FLAG";
 
     private static final String STRING_EMPTY = "";
+
     private static final String CONNECTING_WORD = "to";
-    
+
     private static final String TASK_COMPLETE = "finish ";
+
+    // ================================================================
+    // CONSTRUCTOR
+    // ================================================================
 
     public Task(TaskEvent task) {
         loadFxml();
@@ -55,14 +69,17 @@ public class Task extends HBox {
         initListenerAndFxmlFields(task);
     }
 
+    // ================================================================
+    // INITIALIZATION METHOD
+    // ================================================================
+
     private void initListenerAndFxmlFields (TaskEvent task) {
         ChangeListener<Boolean> checkboxListener = initCheckBoxListener(task.getTaskID());
         initFxmlFields(task.getTaskID(), task.getTaskName(),
                 task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
                 task.getPriority() , checkboxListener);
     }
-       
-    
+
     private ChangeListener<Boolean> initCheckBoxListener(int index) {
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             @Override
@@ -75,9 +92,8 @@ public class Task extends HBox {
         };           
         return listener;
     }
-    
 
-    public void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
+    private void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
             TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority, ChangeListener<Boolean> checkboxListener) {
         this.index.setText(idx + STRING_EMPTY);
         this.taskName.setText(taskName);
@@ -87,13 +103,18 @@ public class Task extends HBox {
         this.endTime.setText(endTime.toString());
         this.priority.setText(priority.toString().equals(TASK_FLAG) ? TASK_FLAG : STRING_EMPTY);
         this.checkBox.selectedProperty().addListener(checkboxListener);
+        dateAndTimeConfig(sDate, startTime, eDate, endTime);
+    }
+
+    private void dateAndTimeConfig(TaskDate sDate, TaskTime startTime,
+            TaskDate eDate, TaskTime endTime) {
         if(startTime.getHour() == 0) {
-        	this.startTime.setText(STRING_EMPTY);
+            this.startTime.setText(STRING_EMPTY);
         }
         if(endTime.getHour() == 0){
-        	this.endTime.setText(STRING_EMPTY);
+            this.endTime.setText(STRING_EMPTY);
         }
-        
+
         if (sDate.getDay() == 0 && eDate.getDay() == 0) {
             this.sDate.setText(STRING_EMPTY);
             this.eDate.setText(STRING_EMPTY);
@@ -107,31 +128,18 @@ public class Task extends HBox {
                 this.sDate.setText(sDate.toString());
             }
             if(eDate.getDay() != 0 && sDate.getDay() != 0) {
-            	this.jointLabel.setText(CONNECTING_WORD);
+                this.jointLabel.setText(CONNECTING_WORD);
             }
-        }
-    }
-
-    public void initFxmlFields(int idx, String taskName, String priority,
-            TaskDate eDate, Boolean isCompleted) {
-        this.index.setText(idx + STRING_EMPTY);
-        this.taskName.setText(taskName);
-        this.priority.setText(priority);
-        if (isCompleted) {
-            checkBox.setSelected(true);
-        }
-        this.sDate.setText(STRING_EMPTY);
-        if (eDate.getDay() == 0) {
-            this.eDate.setText(STRING_EMPTY);
-        } else {
-            this.eDate.setText(eDate.toString());
+            if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
+                this.jointLabel.setText(CONNECTING_WORD);
+            }
         }
     }
 
     private void loadFxml() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource(TASK_FILE));
+                    .getResource(FILE_LOC));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

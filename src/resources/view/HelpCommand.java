@@ -2,10 +2,16 @@ package resources.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+//@author A0124933H
 public class HelpCommand extends HBox {
+
+    // ================================================================
+    // FXML FIELDS
+    // ================================================================
 
     @FXML
     private Label command;
@@ -13,12 +19,24 @@ public class HelpCommand extends HBox {
     @FXML
     private Label description;
 
+    // ================================================================
+    // CONSTANTS
+    // ================================================================
+
     private static final String FILE_LOC = "HelpCommand.fxml";
+
+    // ================================================================
+    // CONSTRUCTOR
+    // ================================================================
 
     public HelpCommand(String command, String description) {
         loadFxml();
         initFxmlFields(command, description);
     }
+
+    // ================================================================
+    // INITIALIZATION METHOD
+    // ================================================================
 
     public void initFxmlFields(String command, String description) {
         this.command.setText(command);
@@ -32,10 +50,8 @@ public class HelpCommand extends HBox {
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
