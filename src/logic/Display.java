@@ -1,14 +1,13 @@
 package logic;
 
-
-import database.StorageImp;
 import resources.view.TaskDisplayController;
+
 import utilities.Command_Type;
 import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
-//@@Shirlene
+//@@ A0130909H Shirlene
 public class Display {
 
 	/* Feedback */
@@ -29,7 +28,6 @@ public class Display {
 	private static final String MESSAGE_NO_COMPLETED = "you do not have any completed tasks";
 	private static final String MESSAGE_HELP = "help activated";
 	
-
 	private ArrayList<TaskEvent> view;
 	private ArrayList<TaskEvent> search;
 
@@ -48,6 +46,11 @@ public class Display {
 		view = op.fullView();
 		return view;
 	}
+	
+	/**
+	 * provides the pop up view content
+	 * @return search or view completed result 
+	 */
 	public ArrayList<TaskEvent> resultView(){
 		Operation op = Launch.getOperation();
 		
@@ -57,11 +60,8 @@ public class Display {
 
 	/**
 	 * Provide user with a feedback on the current operation
-	 * 
-	 * @param op
-	 *            user input command
-	 * @param content
-	 *            user input
+	 * @param op command user specify
+	 * @param content user input 
 	 * @return feedback to user
 	 */
 	public String operation(Command_Type op, String content) {
@@ -115,9 +115,7 @@ public class Display {
 
 	/**
 	 * Provide warning when input is not valid
-	 * 
-	 * @param input
-	 *            user input content
+	 * @param  user input content
 	 * @return error message
 	 */
 	public String error(String input) {

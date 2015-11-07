@@ -84,9 +84,7 @@ public class Operation {
 			if(controller.isResultViewEnabled()){
 				processed.setID(searchView.get(index).getTaskID());
 			}else{
-			System.out.println("size all" + allView.size());
-			//System.out.println("before  " +index + "found "+ idList.get(index));
-			processed.setID(allView.get(index).getTaskID());
+				processed.setID(allView.get(index).getTaskID());
 			}
 		}
 		return processed;
