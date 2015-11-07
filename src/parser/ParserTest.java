@@ -116,9 +116,6 @@ public class ParserTest {
 	
 	@Test
 	public void testCase4() throws Exception {
-		String input = "edit 1 priority flag";
-		CommandParser.ProcessInput(input).debugPrint();
-		System.out.println("\n");
 	}
 	
 	@Test

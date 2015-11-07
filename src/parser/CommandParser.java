@@ -10,10 +10,16 @@ import utilities.Exceptions.CommandNotFound;
 import utilities.Exceptions.EditFieldNotFound;
 
 public class CommandParser {
+	
+	private static final String CMD_NOT_FOUND = "command not found";
+	private static final String EDIT_NOT_FOUND = "edit field not found";
+	private static final Integer FIRST = 0;
+	private static final Integer LATTER = 1;
+	
 
 	public static CommandElements ProcessInput(String command) throws Exception {
-		CommandNotFound command_exception = new CommandNotFound("command not found");
-		EditFieldNotFound edit_exception = new EditFieldNotFound("edit field not found");
+		CommandNotFound command_exception = new CommandNotFound(CMD_NOT_FOUND);
+		EditFieldNotFound edit_exception = new EditFieldNotFound(EDIT_NOT_FOUND);
 		Command_Type type;
 		String name;
 		TaskDate date[] = new TaskDate[2];
@@ -27,56 +33,40 @@ public class CommandParser {
 		time = CommandSplitter.extractTime(command);
 		priority = CommandSplitter.findPriority(command);
 		field = CommandSplitter.findField(command);
-		if (type == Command_Type.ADD_TASK) {
+		switch (type)
+		{
+		case ADD_TASK: 
 			return new CommandElements(type, name, date, priority, time);
-		} else if (type == Command_Type.EDIT_TASK) {
+		case EDIT_TASK: 
 			object = CommandSplitter.findObject(command);
-			if (field == Command_Field.NAME) {
-				return new CommandElements(type, object, field, name);
-			} else if (field == Command_Field.START_DATE) {
-				return new CommandElements(type, object, field, date[1]);
-			} else if (field == Command_Field.END_DATE) {
-				return new CommandElements(type, object, field, date[1]);
-			} else if (field == Command_Field.PRIORITY) {
-				return new CommandElements(type, object, field, priority);
-			} else if (field == Command_Field.START_TIME) {
-				return new CommandElements(type, object, field, time[1]);
-			} else if (field == Command_Field.END_TIME) {
-				return new CommandElements(type, object, field, time[1]);
-			} else {
+			switch (field)
+			{
+			case NAME: return new CommandElements(type, object, field, name);
+			case START_DATE:
+			case END_DATE:return new CommandElements(type, object, field, date[FIRST]);
+			case START_TIME:
+			case END_TIME:return new CommandElements(type, object, field, time[FIRST]);
+			default:
 				throw edit_exception;
 			}
-		} else if (type == Command_Type.DELETE_TASK) {
-			object = CommandSplitter.findObject(command);
-			return new CommandElements(type, object);
-		} else if (type == Command_Type.SEARCH_TASK) {
+		case SEARCH_TASK:
 			object = CommandSplitter.findObject(command);
 			CommandElements thisC = new CommandElements(type, name, date, priority, time);
 			thisC.setID(object);
 			return thisC;
-		} else if (type == Command_Type.FINISH_TASK) {
+		case DELETE_TASK:
+		case FINISH_TASK:
+		case UNFINISH_TASK:
+		case FLAG_TASK:
+		case UNFLAG_TASK:
 			object = CommandSplitter.findObject(command);
 			return new CommandElements(type, object);
-		} else if(type == Command_Type.UNFINISH_TASK){
-			object = CommandSplitter.findObject(command);
-			return new CommandElements(type, object);
-		}else if (type == Command_Type.UNDO) {	
-			return new CommandElements(type);
-		} else if (type == Command_Type.REDO) {
-			return new CommandElements(type);
-		} else if (type == Command_Type.DIRECTORY) {
-			return new CommandElements(type, name);
-		} else if (type == Command_Type.VIEW_COMPLETED) {
-			return new CommandElements(type);
-		} else if (type == Command_Type.FLAG_TASK) {
-			object = CommandSplitter.findObject(command);
-			return new CommandElements(type, object);
-		} else if (type == Command_Type.UNFLAG_TASK) {
-			object = CommandSplitter.findObject(command);
-			return new CommandElements(type, object);
-		} else if(type == Command_Type.HELP){
-			return new CommandElements(type);
-		} else {
+		case UNDO:
+		case REDO:
+		case VIEW_COMPLETED:
+		case HELP: return new CommandElements(type);
+		case DIRECTORY: return new CommandElements(type, name);
+		default:
 			throw command_exception;
 		}
 	}
