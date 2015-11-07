@@ -19,6 +19,14 @@ public class testest {
 
 	@Test
 	public void test() {
+		int haha = 2;
+		switch (haha) {
+		case 1:
+		case 2: 
+			System.out.println("haha");
+			break;
+		}
+		
 		while (true) {
 			String test = sc.nextLine();
 			TaskTime[] result = CommandSplitter.extractTime(test);

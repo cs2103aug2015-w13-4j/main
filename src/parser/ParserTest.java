@@ -9,13 +9,7 @@ import utilities.TaskDate;
 
 public class ParserTest {
 
-	@Test
-	public void testDateChecker() {
-		String test1 = "12/22/12";
-		String test2 = "q12/123";
-		assertEquals(true, CommandSplitter.dateChecker(test1));
-		assertEquals(false, CommandSplitter.dateChecker(test2));
-	}
+	
 	
 	@Test
 	public void testFindDate() {

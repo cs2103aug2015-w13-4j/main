@@ -13,8 +13,7 @@ public class CommandParser {
 	
 	private static final String CMD_NOT_FOUND = "command not found";
 	private static final String EDIT_NOT_FOUND = "edit field not found";
-	private static final Integer FIRST = 0;
-	private static final Integer LATTER = 1;
+	private static final Integer SINGLE = 1;
 	
 
 	public static CommandElements ProcessInput(String command) throws Exception {
@@ -43,9 +42,9 @@ public class CommandParser {
 			{
 			case NAME: return new CommandElements(type, object, field, name);
 			case START_DATE:
-			case END_DATE:return new CommandElements(type, object, field, date[FIRST]);
+			case END_DATE:return new CommandElements(type, object, field, date[SINGLE]);
 			case START_TIME:
-			case END_TIME:return new CommandElements(type, object, field, time[FIRST]);
+			case END_TIME:return new CommandElements(type, object, field, time[SINGLE]);
 			default:
 				throw edit_exception;
 			}
