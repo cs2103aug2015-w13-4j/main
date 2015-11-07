@@ -7,10 +7,8 @@ import org.junit.Test;
 import utilities.Command_Type;
 import utilities.TaskDate;
 
+//@@A0133965X
 public class ParserTest {
-
-	
-	
 	@Test
 	public void testFindDate() {
 		String test = "sunday 2016/01/01";
@@ -37,16 +35,6 @@ public class ParserTest {
 		assertEquals(exDate1.printDate(), results[0].printDate());
 		assertEquals(exDate2.printDate(), results[1].printDate());
 	}
-	
-	@Test
-	public void testFindDate3() {
-		String test = "edit 1 tomorrow";
-		TaskDate results[] = CommandSplitter.findDate(test);
-		//System.out.println(results[0].printDate());
-		//System.out.println(results[1].printDate());
-		
-	}
-	
 	
 	@Test
 	public void testFindType() {
