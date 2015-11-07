@@ -78,7 +78,7 @@ public class Operation {
 	private CommandElements changeId(CommandElements processed){
 		if(processed.getID()!= -1){
 			int index = processed.getID()-1;
-			//System.out.println("size " + idList.size());
+			System.out.println("size " + allView.size());
 			//System.out.println("before  " +index + "found "+ idList.get(index));
 			processed.setID(allView.get(index).getTaskID());
 		}
@@ -369,14 +369,15 @@ public class Operation {
 	}
 	public ArrayList<TaskEvent> fullView(){
 		Storage storage = Launch.getStorage();
-		ArrayList<TaskEvent> list =  sortArray(storage.loadAllTasks());
+		allView =  sortArray(storage.loadAllTasks());
+		
 		/*idList = new ArrayList<Integer>();
 		for(int i =0;i<list.size();i++){
 			System.out.println("i "+i+" name "+list.get(i).getTaskName());
 			idList.add(list.get(i).getTaskID());
 			list.get(i).setTaskID(i+1);
 		}*/
-		return list;
+		return allView;
 	}
 	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){
 		System.out.println("size "+list.size());
