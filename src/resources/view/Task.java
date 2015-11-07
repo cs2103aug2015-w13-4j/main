@@ -119,6 +119,10 @@ public class Task extends HBox {
             this.endTime.setText(STRING_EMPTY);
         }
 
+        if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
+            this.jointLabel.setText(CONNECTING_WORD);
+        }
+        
         if (sDate.getDay() == 0 && eDate.getDay() == 0) {
             this.sDate.setText(STRING_EMPTY);
             this.eDate.setText(STRING_EMPTY);
@@ -132,9 +136,6 @@ public class Task extends HBox {
                 this.sDate.setText(sDate.toString());
             }
             if(eDate.getDay() != 0 && sDate.getDay() != 0) {
-                this.jointLabel.setText(CONNECTING_WORD);
-            }
-            if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
                 this.jointLabel.setText(CONNECTING_WORD);
             }
         }
