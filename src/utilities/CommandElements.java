@@ -122,10 +122,8 @@ public class CommandElements {
 		System.out.println(type.toString());
 		System.out.println(name);
 		System.out.println(id);
-		if (date[0] != null) System.out.println(date[0].printDate());
-		if (date[1] != null)System.out.println(date[1].printDate());
-		if (time[0] != null)System.out.println(time[0].toString());
-		if (time[1] != null)System.out.println(time[1].toString());
+		if (date[0] != null && time[0] != null) System.out.println(date[0].printDate() + " " + time[0].toString());
+		if (date[1] != null && time[1] != null) System.out.println(date[1].printDate() + " " + time[1].toString());
 		if (priority != null) System.out.println(priority.toString());
 		if (field == null) { 
 			System.out.println("no field");

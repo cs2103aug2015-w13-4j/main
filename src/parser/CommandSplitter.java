@@ -36,6 +36,8 @@ public class CommandSplitter {
 	private static final Integer TMR = 1;
 	private static final Integer TDY = 0;
 	private static final Integer YTD = -1;
+	private static final TaskDate NULL_DATE = new TaskDate(0,0,0);
+	private static final TaskTime NULL_TIME = new TaskTime(0,0);
 
 	public static boolean contain(String keyword, String domain) {
 		domain = domain.toLowerCase();
@@ -96,6 +98,17 @@ public class CommandSplitter {
 		return validDate;
 	}
 	
+	private static int getValidTime(String command) {
+		TaskTime myTime[] = findTime(command);
+		int validTime = 0;
+		for (int i = 0; i < 2; i ++) {
+			if (myTime[i].getHour()==0&&myTime[i].getMinute()==0) {
+				validTime ++;
+			}
+		}
+		return validTime;
+	}
+	
 	public static String findName(String command) {
 		if (command.contains("\"")) {
 			String parts[] = command.split("\"");
@@ -131,7 +144,6 @@ public class CommandSplitter {
 		} else  if(contain("help",command)){
 			return Command_Type.HELP;
 		}else if (command.toLowerCase().contains("view completed")) {
-			
 			return Command_Type.VIEW_COMPLETED;
 		} else {
 			return null;
@@ -162,6 +174,9 @@ public class CommandSplitter {
 		} else if (contain("unflag", command)) {
 			return Command_Priority.UNFLAG;
 		} else {
+			if (contain("search", command)) {
+				return Command_Priority.UNDEFINED;
+			}
 			return Command_Priority.UNFLAG;
 		}
 	}
@@ -261,11 +276,11 @@ public class CommandSplitter {
 					if (DateParser.dateChecker(decomposed.get(i))){
 						results[i] = DateParser.dateDecoder(decomposed.get(i));
 					} else {
-						results[i] = new TaskDate(0,0,0);
+						results[i] = NULL_DATE;
 					}
 				}
 			} catch (Exception e) {
-				results[i] = new TaskDate(0,0,0);
+				results[i] = NULL_DATE;
 			}
 		}
 		return results;
@@ -273,6 +288,7 @@ public class CommandSplitter {
 	
 	public static TaskDate[] extractDate(String command) {
 		TaskDate myDate[] = findDate(command);
+		int validTime = getValidTime(command);
 		int validDate = getValidDate(command);
 		if (validDate == 2) {
 			if (myDate[0].compareTo(myDate[1]) == 1) {
@@ -282,7 +298,12 @@ public class CommandSplitter {
 			}
 		} else if (validDate == 1) {
 			myDate[1] = myDate[0];
-			myDate[0] = new TaskDate(0,0,0);
+			myDate[0] = NULL_DATE;
+		} else if (validDate == 0) {
+			if (validTime == 1) {
+				myDate[1] = DateParser.getCurrentDate();
+				myDate[0] = NULL_DATE;
+			}
 		}
 		return myDate;
 	}
@@ -308,31 +329,31 @@ public class CommandSplitter {
 		}
 		if (validDate == 0) {
 			if (timeCount == 2) {
-				timeToken[0] = new TaskTime(0,0);
-				timeToken[1] = new TaskTime(0,0);
+				timeToken[0] = NULL_TIME;
+				timeToken[1] = NULL_TIME;
 			} else if (timeCount == 1) {
 				timeToken[1] = timeToken[0];
-				timeToken[0] = new TaskTime(0,0);
+				timeToken[0] = NULL_TIME;
 			}
 		} else if (validDate == 1) {
 			if (timeCount == 2) {
-				timeToken[0] = new TaskTime(0,0);
-				timeToken[1] = new TaskTime(0,0);
+				timeToken[0] = NULL_TIME;
+				timeToken[1] = NULL_TIME;
 			} else if (timeCount == 1) {
 				timeToken[1] = timeToken[0];
-				timeToken[0] = new TaskTime(0,0);
+				timeToken[0] = NULL_TIME;
 			}
 		} else {
 			if (timeCount == 2) {
-				timeToken[0] = new TaskTime(0,0);
-				timeToken[1] = new TaskTime(0,0);
+				timeToken[0] = NULL_TIME;
+				timeToken[1] = NULL_TIME;
 			} else if (timeCount == 1) {
 				String newParts[] = command.split(parts[pos]);
 				if (getValidDate(newParts[0]) != 1) {
 					timeToken[1] = timeToken[0];
-					timeToken[0] = new TaskTime(0,0);
+					timeToken[0] = NULL_TIME;
 				} else {
-					timeToken[1] = new TaskTime(0,0);
+					timeToken[1] = NULL_TIME;
 				}
 			} 
 		}
