@@ -56,6 +56,11 @@
 	-fx-font-style: italic;
 }
 
+.task #taskFlag {
+	-fx-padding: 0 0 0 12;
+	-fx-fill: red;
+}
+
 .task #sDate {
 	-fx-padding: 1 0 0 5;
 	-fx-text-fill: gray;

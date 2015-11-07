@@ -1,5 +1,6 @@
 package resources.view;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.beans.value.ChangeListener;
@@ -39,9 +40,9 @@ public class Task extends HBox {
 
     @FXML
     private Label taskName;
-
+    
     @FXML
-    private Label priority;
+    private FontAwesomeIconView taskFlag;
 
     @FXML
     private Label jointLabel;
@@ -104,7 +105,7 @@ public class Task extends HBox {
         this.startTime.setText(startTime.toString());
         this.eDate.setText(eDate.toString());
         this.endTime.setText(endTime.toString());
-        this.priority.setText(priority.toString().equals(TASK_FLAG) ? TASK_FLAG : STRING_EMPTY);
+        this.taskFlag.setVisible(priority.toString().equals(TASK_FLAG) ? true : false);
         this.checkBox.selectedProperty().addListener(checkboxListener);
         dateAndTimeConfig(sDate, startTime, eDate, endTime);
     }

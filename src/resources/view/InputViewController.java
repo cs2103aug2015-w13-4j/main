@@ -83,9 +83,9 @@ public class InputViewController extends VBox {
     private static final String TEST_TASK_FIFTEEN = "add \"Submit powerpoint slides\" 12/11/2015 10am";
     private static final String TEST_TASK_SIXTEEN = "add \" Buy Stationaries\" ";
     private static final String TEST_TASK_SEVENTEEN = "add \"Meeting with colleagues about expenditure \" 15/11/2015 9.15am";
-    private static final String TEST_TASK_EIGHTEEN = "add \"Buy Coffee powder \"";
+    private static final String TEST_TASK_EIGHTEEN = "add \"Buy Coffee powder\"";
     private static final String TEST_TASK_NINETEEN = "add \" Inform boss about progress report\" 18/11/2015 11.30am";
-    private static final String TEST_TASK_TWENTY = "add \"Wash the car \"";
+    private static final String TEST_TASK_TWENTY = "add \"Wash the car\"";
     
     
     public static InputViewController getInstance() {
