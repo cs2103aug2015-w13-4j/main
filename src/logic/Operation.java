@@ -23,7 +23,7 @@ public class Operation {
 	private Stack<CommandElements> redoList;
 	private static final String DEFAULT_RETURN = "not found";
 	ArrayList<TaskEvent> searchView;
-	
+	ArrayList<TaskEvent> allView;
 	ArrayList<Integer> idList;
 	int size;
 
@@ -33,10 +33,14 @@ public class Operation {
 		searchView = new ArrayList<TaskEvent>();
 		redoList = new Stack<CommandElements>();
 		idList = new ArrayList<Integer>();
+		allView = new ArrayList<TaskEvent>();
 	}
 
 	public ArrayList<TaskEvent> getArray() {
-		return searchView;
+		ArrayList<TaskEvent >list = searchView;
+		
+		
+		return list;
 	}
 
 	/**
@@ -74,6 +78,7 @@ public class Operation {
 	private CommandElements changeId(CommandElements processed){
 		if(processed.getID()!= -1){
 			int index = processed.getID()-1;
+			System.out.println("size " + idList.size());
 			System.out.println("before  " +index + "found "+ idList.get(index));
 			processed.setID(idList.get(index) );
 		}
@@ -165,19 +170,25 @@ public class Operation {
 				undoList.push(undoComplete(content.getID()));
 			}
 			return isSuccessful;
+		case UNFINISH_TASK:
+			 logger.log(Level.INFO, "command is unfinish");
+			 isSuccessful = action.markTaskAsUndone(content.getID());
+			 if(isSuccessful){
+				 undoList.push(undoUnfinish(content.getID()));
+			 }
+			 return isSuccessful;
 		case SEARCH_TASK:
 			// working for basic names
 			logger.log(Level.INFO, "command is search");
 			searchView = action.searchTaskByString(getSearchString(content));
 			size = searchView.size();
 			return isSuccessful = true;
-		case UNDO: // not working for directory
-			// undo add, delete, edit, complete, directory
+		case UNDO: 
 			logger.log(Level.INFO, "command is undo");
 			content = undoList.pop();
 			redoList.push(findRedoContent(content));
 			logger.log(Level.INFO, "undoing " + content.getType().toString() + " to " + content.getName());
-			return undo.UndoTask(content);
+			return undo.undoTask(content);
 		case REDO:
 			logger.log(Level.INFO, "command is redo");
 			content = redoList.pop();
@@ -285,6 +296,12 @@ public class Operation {
 		case PRIORITY:
 			logger.log(Level.INFO, "priority");
 			return task.getPriority().toString();
+		case END_TIME:
+			break;
+		case START_TIME:
+			break;
+		default:
+			break;
 		}
 		return DEFAULT_RETURN;
 	}
@@ -307,6 +324,11 @@ public class Operation {
 	private CommandElements undoAdd(int id) {
 		logger.log(Level.INFO, "adding add undo" + id);
 		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
+		return next;
+	}
+	private CommandElements undoUnfinish(int id){
+		logger.log(Level.INFO, "adding unfinish");
+		CommandElements next = new CommandElements(Command_Type.UNFINISH_TASK,id);
 		return next;
 	}
 
@@ -350,17 +372,35 @@ public class Operation {
 		ArrayList<TaskEvent> list =  sortArray(storage.loadAllTasks());
 		idList = new ArrayList<Integer>();
 		for(int i =0;i<list.size();i++){
+			System.out.println("i "+i+" name "+list.get(i).getTaskName());
 			idList.add(list.get(i).getTaskID());
 			list.get(i).setTaskID(i+1);
 		}
 		return list;
 	}
 	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){
+		System.out.println("size "+list.size());
 		ArrayList<TaskEvent> sorted = new ArrayList<TaskEvent>();
-		
-		
-		
-		return list;
+		ArrayList<TaskEvent> flag = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> others = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> floating = new ArrayList<TaskEvent>();
+		for(int i =0;i<list.size();i++){
+			if(list.get(i).getPriority().toString().equals("FLAG")){
+				System.out.println("flag "+list.get(i).getTaskName());
+				flag.add(list.get(i));
+			} else if(list.get(i).getEndDate().getDay()==0 && list.get(i).getStartDate().getDay()==0){
+				System.out.println("floating "+list.get(i).getTaskName());
+				floating.add(list.get(i));
+			} else{
+				System.out.println("others " +list.get(i).getTaskName());
+				others.add(list.get(i));
+			}	
+		}
+		System.out.println("done");
+		sorted.addAll(flag);
+		sorted.addAll(others);
+		sorted.addAll(floating);
+		return sorted;
 	}
 	private CommandElements findRedoContent(CommandElements content) {
 		Command_Type type = content.getType();
@@ -375,6 +415,8 @@ public class Operation {
 			return new CommandElements(Command_Type.EDIT_TASK, content.getID(), content.getField(), name);
 		case FINISH_TASK:
 			return new CommandElements(Command_Type.FINISH_TASK, content.getID());
+		case UNFINISH_TASK:
+			return new CommandElements(Command_Type.UNFINISH_TASK,content.getID());
 		case DIRECTORY:
 			return new CommandElements(Command_Type.DIRECTORY, action.getDirectory());
 		case FLAG_TASK:

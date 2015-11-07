@@ -49,11 +49,15 @@ public class CommandSplitter {
 			return Command_Type.DELETE_TASK;
 		} else if (contain("finish", command) || contain("f", command) || contain("complete", command)) {
 			return Command_Type.FINISH_TASK;
+		} else if(contain("unfinish",command)){
+			return Command_Type.UNFINISH_TASK;
 		} else if (contain("search", command) || contain("s", command)) {
 			return Command_Type.SEARCH_TASK;
 		} else if (contain("undo", command) || contain("u", command)) {
 			return Command_Type.UNDO;
-		} else if (contain("directory", command) || contain("cd", command)) {
+		}else if(contain("redo",command)){
+			return Command_Type.REDO;
+		}else if (contain("directory", command) || contain("cd", command)) {
 			return Command_Type.DIRECTORY;
 		} else if (contain("flag", command)) {
 			return Command_Type.FLAG_TASK;

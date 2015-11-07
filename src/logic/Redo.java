@@ -28,6 +28,8 @@ public class Redo {
 			return redoEdit(content);
 		case FINISH_TASK:
 			return redoComplete(content);
+		case UNFINISH_TASK:
+			return redoUnfinish(content);
 		case DIRECTORY:
 			return redoDirectory(content);
 		case FLAG_TASK:
@@ -53,6 +55,10 @@ public class Redo {
 	private boolean redoComplete(CommandElements content){
 		logger.log(Level.INFO, "redo Complete");
 		return storage.markTaskAsDone(content.getID());
+	}
+	private boolean redoUnfinish(CommandElements content){
+		logger.log(Level.INFO, "redo unfinish");
+		return storage.markTaskAsUndone(content.getID());
 	}
 	private boolean redoDirectory(CommandElements content){
 		logger.log(Level.INFO, "redo change directory");

@@ -6,14 +6,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+//@author A0124933H
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
     
-    /* PROGRAM DETAILS */
-    // private static final double PROGRAM_HEIGHT = 760.0;
-    // private static final double PROGRAM_WIDTH = 980.0;
+    // ================================================================
+    // PROGRAM FIELDS
+    // ================================================================
 
     private static final double PROGRAM_HEIGHT = 660.0;
     private static final double PROGRAM_WIDTH = 880.0;
@@ -21,6 +22,10 @@ public class MainApp extends Application {
     private static final String PROGRAM_TITLE = "PIXEList";
     private static final String IMAGE_ICON = "resources/imgs/icon.png";
 
+    // ================================================================
+    // METHODS
+    // ================================================================
+    
     /**
      * Launch PIXEList Program
      * 
@@ -77,7 +82,10 @@ public class MainApp extends Application {
         InputViewController.getInstance();
     }
 
-    // Getters
+    // ================================================================
+    // GETTERS
+    // ================================================================
+    
     public Stage getPrimaryStage() {
         return primaryStage;
     }

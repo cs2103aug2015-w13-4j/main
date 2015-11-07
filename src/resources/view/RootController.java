@@ -7,15 +7,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
+//@A0124933H
 public class RootController extends BorderPane {
+
+    // ================================================================
+    // FXML FIELDS
+    // ================================================================
 
     @FXML
     private TextField input;
 
+    // ================================================================
+    // NON-FXML FIELDS
+    // ================================================================
+
     private TaskDisplayController taskDisplayController;
 
+    // ================================================================
+    // CONSTRUCTORS
+    // ================================================================
 
-    // Constructors
     public RootController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
         loader.setRoot(this);
@@ -30,6 +41,10 @@ public class RootController extends BorderPane {
         initInputView();
     }
 
+    // ================================================================
+    // PRIVATE METHODS
+    // ================================================================
+
     private void initTaskDisplay() {
         this.taskDisplayController = TaskDisplayController.getInstance();
         this.setCenter(taskDisplayController);
@@ -38,5 +53,4 @@ public class RootController extends BorderPane {
     private void initInputView() {
         InputViewController.getInstance();
     }
-
 }
