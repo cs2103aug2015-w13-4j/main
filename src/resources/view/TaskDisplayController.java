@@ -18,11 +18,12 @@ import logic.Display;
 import resources.view.Task;
 import logic.Launch;
 
+//@A0124933H
 public class TaskDisplayController extends StackPane {
 
-    // ====================
+    // ================================================================
     // FXML FIELDS
-    // ====================
+    // ================================================================
 
     @FXML
     private ListView<HBox> generalView;
@@ -60,9 +61,10 @@ public class TaskDisplayController extends StackPane {
     @FXML
     private BorderPane borderPane;
 
-    // ====================
+    // ================================================================
     // CONSTANTS
-    // ====================
+    // ================================================================
+
     private static final String HELP_DESC_ADD = "Add a task?";
     private static final String HELP_DESC_EDIT = "Edit a task?";
     private static final String HELP_DESC_DELETE = "Delete a task?";
@@ -90,23 +92,23 @@ public class TaskDisplayController extends StackPane {
     private static final String HELP_COMMAND_CHANGE_DIR = "cd \"foldername/filename\"";
     private static final String HELP_COMMAND_EXIT = "exit";
     private static final String HELP_COMMAND_FIELD = "startDate , endDate , name";
-    
+
     private static final String LABEL_TASK_DISPLAYED = " tasks displayed";
     private static final String LABEL_GENERAL = "General Tasks - ";
     private static final String LABEL_FLAGGED = "Flagged Tasks - ";
     private static final String LABEL_FLOATING = "Floating Tasks - ";
-    
+
     private static final String TASK_FLAG = "FLAG";
-    
-    private static final String TASK_DISPLAY_LOCATION = "TaskDisplay.fxml";
-    
+
+    private static final String FILE_LOC = "TaskDisplay.fxml";
+
     private static final double OVERLAY_VISIBLE_OPACITY = 1.0;
     private static final double OVERLAY_FADE_OPACITY = 0.35;
     private static final double OVERLAY_INVISIBLE_OPACITY = 0.0;
 
-    // ====================
+    // ================================================================
     // NON-FXML FIELDS
-    // ====================
+    // ================================================================
 
     private Display display;
 
@@ -114,6 +116,10 @@ public class TaskDisplayController extends StackPane {
 
     private boolean enableHelpView;
     private boolean enableResultView;
+
+    // ================================================================
+    // CONSTRUCTORS
+    // ================================================================
 
     public static TaskDisplayController getInstance() {
         if (taskDisplayController == null) {
@@ -124,7 +130,7 @@ public class TaskDisplayController extends StackPane {
 
     private TaskDisplayController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                TASK_DISPLAY_LOCATION));
+                FILE_LOC));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -138,14 +144,18 @@ public class TaskDisplayController extends StackPane {
     }
 
     public void updateViews() {
-        refreshAllViews();
         Launch.getInstance();
         display = Launch.getDisplay();
+        refreshAllViews();
         updateGeneralTaskDisplay();
         updateFlaggedTaskDisplay();
         updateFloatingTaskDisplay();
         updateResultTaskDisplay();
     }
+    
+    // ================================================================
+    // PRIVATE METHODS
+    // ================================================================
 
     private void updateGeneralTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
@@ -171,7 +181,7 @@ public class TaskDisplayController extends StackPane {
                 + LABEL_TASK_DISPLAYED);
     }
 
-    public void updateResultTaskDisplay() {
+    private void updateResultTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getResultedTask();
         resultContent.setItems(displayTasks);
@@ -185,14 +195,14 @@ public class TaskDisplayController extends StackPane {
 
     private ObservableList<HBox> getTask() {
 
-    	ObservableList<HBox> tasks = FXCollections.observableArrayList();
-    	ArrayList<TaskEvent> taskList = display.taskView();
-    	for (TaskEvent t : taskList) {
-    		if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) && !t.getPriority().toString().equals(TASK_FLAG))  {
-    			tasks.add(new Task(t));
-    		}
-    	}
-    	return tasks;
+        ObservableList<HBox> tasks = FXCollections.observableArrayList();
+        ArrayList<TaskEvent> taskList = display.taskView();
+        for (TaskEvent t : taskList) {
+            if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) && !t.getPriority().toString().equals(TASK_FLAG))  {
+                tasks.add(new Task(t));
+            }
+        }
+        return tasks;
     }
 
     private ObservableList<HBox> getFloatingTask() {
@@ -249,6 +259,10 @@ public class TaskDisplayController extends StackPane {
 
         return tasks;
     }
+    
+    // ================================================================
+    // GUI OVERLAY METHODS
+    // ================================================================
 
     public void triggerHelpView() {
         this.enableHelpView = true;
