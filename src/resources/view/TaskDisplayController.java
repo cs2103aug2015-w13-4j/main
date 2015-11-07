@@ -146,7 +146,10 @@ public class TaskDisplayController extends StackPane {
         initHelpTaskDisplay();
         updateViews();
     }
-
+    public int getTaskListSize() {
+        return taskList.size();
+    }
+    
     public void updateViews() {
         Launch.getInstance();
         display = Launch.getDisplay();

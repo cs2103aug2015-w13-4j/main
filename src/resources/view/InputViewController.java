@@ -37,9 +37,9 @@ public class InputViewController extends VBox {
     // ================================================================
     Launch launch;
     TaskDisplayController taskDisplay;
-    ArrayList<String> history;
-    ArrayList<String> commands;
-    ArrayList<String> preset;
+    private ArrayList<String> history;
+    private ArrayList<String> commands;
+    private ArrayList<String> preset;
     private int historyPointer;
     private int commandsPointer;
     
@@ -197,6 +197,10 @@ public class InputViewController extends VBox {
     		return commands.get(i);
     }
     
+    public int getCommandsSize() {
+        return commands.size();
+    }
+    
     private void resetCommandPointer() {
     	commandsPointer = 0;
     }
@@ -258,6 +262,9 @@ public class InputViewController extends VBox {
         preset.add(TEST_TASK_EIGHTEEN);
         preset.add(TEST_TASK_NINETEEN);
         preset.add(TEST_TASK_TWENTY);
-
+    }
+    
+    public int getPresetSize() {
+        return preset.size();
     }
 }
