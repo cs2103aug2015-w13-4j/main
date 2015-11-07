@@ -1,14 +1,8 @@
 package parser;
 
-import static org.junit.Assert.*;
-
 import java.util.Scanner;
-
 import org.junit.Test;
-
 import utilities.CommandElements;
-import utilities.TaskDate;
-import utilities.TaskTime;
 
 public class CompleteParserTester {
 	Scanner sc = new Scanner(System.in);
