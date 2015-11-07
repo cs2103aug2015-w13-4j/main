@@ -14,6 +14,7 @@ import utilities.Command_Type;
 import utilities.TaskDate;
 import utilities.TaskEvent;
 import parser.CommandParser;
+import resources.view.TaskDisplayController;
 import utilities.Exceptions.OperationNotPerformed;
 
 public class Operation {
@@ -76,11 +77,17 @@ public class Operation {
 		}
 	}
 	private CommandElements changeId(CommandElements processed){
+		TaskDisplayController controller = TaskDisplayController.getInstance();
+		
 		if(processed.getID()!= -1){
-			int index = processed.getID()-1;
+			int index = processed.getID();
+			if(controller.isResultViewEnabled()){
+				processed.setID(searchView.get(index).getTaskID());
+			}else{
 			System.out.println("size " + allView.size());
 			//System.out.println("before  " +index + "found "+ idList.get(index));
 			processed.setID(allView.get(index).getTaskID());
+			}
 		}
 		return processed;
 	}
