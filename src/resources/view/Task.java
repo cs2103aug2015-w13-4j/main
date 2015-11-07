@@ -64,19 +64,19 @@ public class Task extends HBox {
     // CONSTRUCTOR
     // ================================================================
 
-    public Task(TaskEvent task) {
+    public Task(TaskEvent task, int index) {
         loadFxml();
         checkBox.setSelected(task.isCompleted());
-        initListenerAndFxmlFields(task);
+        initListenerAndFxmlFields(task,index);
     }
 
     // ================================================================
     // INITIALIZATION METHOD
     // ================================================================
 
-    private void initListenerAndFxmlFields (TaskEvent task) {
-        ChangeListener<Boolean> checkboxListener = initCheckBoxListener(task.getTaskID());
-        initFxmlFields(task.getTaskID(), task.getTaskName(),
+    private void initListenerAndFxmlFields (TaskEvent task,int index) {
+        ChangeListener<Boolean> checkboxListener = initCheckBoxListener(index);
+        initFxmlFields(index, task.getTaskName(),
                 task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
                 task.getPriority() , checkboxListener);
     }

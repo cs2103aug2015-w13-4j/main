@@ -102,6 +102,8 @@ public class TaskDisplayController extends StackPane {
 
     private static final String FILE_LOC = "TaskDisplay.fxml";
 
+    private static final int TASK_NUMBERING_OFFSET = 1;
+    
     private static final double OVERLAY_VISIBLE_OPACITY = 1.0;
     private static final double OVERLAY_FADE_OPACITY = 0.35;
     private static final double OVERLAY_INVISIBLE_OPACITY = 0.0;
@@ -116,6 +118,8 @@ public class TaskDisplayController extends StackPane {
 
     private boolean enableHelpView;
     private boolean enableResultView;
+    
+    private ArrayList<TaskEvent> taskList;
 
     // ================================================================
     // CONSTRUCTORS
@@ -147,19 +151,24 @@ public class TaskDisplayController extends StackPane {
         Launch.getInstance();
         display = Launch.getDisplay();
         refreshAllViews();
-        updateGeneralTaskDisplay();
-        updateFlaggedTaskDisplay();
-        updateFloatingTaskDisplay();
-        updateResultTaskDisplay();
+        updateAllTaskDisplays();
     }
     
     // ================================================================
     // PRIVATE METHODS
     // ================================================================
 
+    private void updateAllTaskDisplays() {
+        getAllTask();
+        updateGeneralTaskDisplay();
+        updateFlaggedTaskDisplay();
+        updateFloatingTaskDisplay();
+        updateResultTaskDisplay();
+    }
+    
     private void updateGeneralTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
-        displayTasks = getTask();
+        displayTasks = getGeneralTask();
         generalView.setItems(displayTasks);
         generalTaskLabel.setText(LABEL_GENERAL + displayTasks.size()
                 + LABEL_TASK_DISPLAYED);
@@ -193,25 +202,30 @@ public class TaskDisplayController extends StackPane {
         helpContent.setItems(displayTasks);
     }
 
-    private ObservableList<HBox> getTask() {
+    private void getAllTask() {
+        taskList = display.taskView();
+        getGeneralTask();
+        getFloatingTask();
+        getFlaggedTask();
+    } 
+    
+    private ObservableList<HBox> getGeneralTask() {
 
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> taskList = display.taskView();
         for (TaskEvent t : taskList) {
             if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) && !t.getPriority().toString().equals(TASK_FLAG))  {
-                tasks.add(new Task(t));
+                tasks.add(new Task(t,taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
     }
 
     private ObservableList<HBox> getFloatingTask() {
-
+        
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> floatingTaskList = display.taskView();
-        for (TaskEvent t : floatingTaskList) {
+        for (TaskEvent t : taskList) {
             if (t.getEndDate().getDay() == 0 && t.getStartDate().getDay() == 0) {
-                tasks.add(new Task(t));
+                tasks.add(new Task(t , taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
@@ -220,11 +234,10 @@ public class TaskDisplayController extends StackPane {
     private ObservableList<HBox> getFlaggedTask() {
 
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
-        ArrayList<TaskEvent> flaggedTaskList = display.taskView();
-        for (TaskEvent t : flaggedTaskList) {
+        for (TaskEvent t : taskList) {
             if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0)
                     && (t.getPriority()).toString().equals(TASK_FLAG)) {
-                tasks.add(new Task(t));
+                tasks.add(new Task(t,taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
@@ -235,7 +248,7 @@ public class TaskDisplayController extends StackPane {
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> searchedTaskList = display.resultView();
         for (TaskEvent t : searchedTaskList) {
-            tasks.add(new Task(t));
+            tasks.add(new Task(t, searchedTaskList.indexOf(t)+TASK_NUMBERING_OFFSET));
         }
         return tasks;
     }
@@ -264,6 +277,10 @@ public class TaskDisplayController extends StackPane {
     // GUI OVERLAY METHODS
     // ================================================================
 
+    public boolean isResultViewEnabled() {
+        return enableResultView;
+    }
+    
     public void triggerHelpView() {
         this.enableHelpView = true;
     }
