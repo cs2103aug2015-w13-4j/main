@@ -30,7 +30,6 @@ public class Display {
 	private static final String MESSAGE_HELP = "help activated";
 	
 
-	private Command_Type nextCommand = Command_Type.UNDO;
 	private ArrayList<TaskEvent> view;
 	private ArrayList<TaskEvent> search;
 
@@ -52,7 +51,7 @@ public class Display {
 	public ArrayList<TaskEvent> resultView(){
 		Operation op = Launch.getOperation();
 		
-		search = op.getArray();
+		search = op.getSearchView();
 		return search;
 	}
 
@@ -66,7 +65,6 @@ public class Display {
 	 * @return feedback to user
 	 */
 	public String operation(Command_Type op, String content) {
-		nextCommand = op;
 		Operation operation = Launch.getOperation();
 		TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
 		switch (op) {
@@ -84,7 +82,7 @@ public class Display {
 		case UNFINISH_TASK:
 			return String.format(MESSAGE_UNFINISH, content);
 		case SEARCH_TASK:
-			view = operation.getArray();
+			view = operation.getSearchView();
 			taskDisplay.triggerResultView();
 			if(view.size()==0){
 				return MESSAGE_NO_SEARCH_RESULT;
@@ -100,7 +98,7 @@ public class Display {
 		case UNFLAG_TASK:
 			return String.format(MESSAGE_UNFLAG, content);
 		case VIEW_COMPLETED:
-			view = operation.getArray();
+			view = operation.getSearchView();
 			taskDisplay.triggerResultView();
 			if(view.size()==0){
 				return MESSAGE_NO_COMPLETED;
