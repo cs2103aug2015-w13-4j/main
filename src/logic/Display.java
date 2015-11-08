@@ -7,10 +7,12 @@ import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
-//@@ A0130909H Shirlene
+//@@author A0130909H Shirlene
 public class Display {
 
-	/* Feedback */
+	// ================================================================
+	// FEEDBACK MESSAGE
+	// ================================================================
 	private static final String MESSAGE_ADD = "%s has been added successfully";
 	private static final String MESSAGE_EDIT = "%s has been edited successfully";
 	private static final String MESSAGE_ERROR = "%s could not be performed";
@@ -27,10 +29,16 @@ public class Display {
 	private static final String MESSAGE_VIEW_COMPLETED = "you have %d completed tasks";
 	private static final String MESSAGE_NO_COMPLETED = "you do not have any completed tasks";
 	private static final String MESSAGE_HELP = "help activated";
-	
+
+	// ================================================================
+	// ATTRIBUTES
+	// ================================================================
 	private ArrayList<TaskEvent> view;
 	private ArrayList<TaskEvent> search;
 
+	// ================================================================
+	// METHOD
+	// ================================================================
 	public Display() {
 		view = new ArrayList<TaskEvent>();
 		search = new ArrayList<TaskEvent>();
@@ -46,22 +54,25 @@ public class Display {
 		view = op.fullView();
 		return view;
 	}
-	
+
 	/**
-	 * provides the pop up view content
-	 * @return search or view completed result 
+	 * Provides the pop up view content
+	 * 
+	 * @return search or view completed result
 	 */
-	public ArrayList<TaskEvent> resultView(){
+	public ArrayList<TaskEvent> resultView() {
 		Operation op = Launch.getOperation();
-		
-		search = op.getSearchView();
+		search = op.getResultView();
 		return search;
 	}
 
 	/**
 	 * Provide user with a feedback on the current operation
-	 * @param op command user specify
-	 * @param content user input 
+	 * 
+	 * @param op
+	 *            command user specify
+	 * @param content
+	 *            user input
 	 * @return feedback to user
 	 */
 	public String operation(Command_Type op, String content) {
@@ -77,17 +88,16 @@ public class Display {
 		case DIRECTORY:
 			return String.format(MESSAGE_DIRECTORY, content);
 		case FINISH_TASK:
-			//if(content)
 			return String.format(MESSAGE_FINISHED, content);
 		case UNFINISH_TASK:
 			return String.format(MESSAGE_UNFINISH, content);
 		case SEARCH_TASK:
-			view = operation.getSearchView();
+			view = operation.getResultView();
 			taskDisplay.triggerResultView();
-			if(view.size()==0){
+			if (view.size() == 0) {
 				return MESSAGE_NO_SEARCH_RESULT;
-			} else{
-				return String.format(MESSAGE_SEARCH,view.size());
+			} else {
+				return String.format(MESSAGE_SEARCH, view.size());
 			}
 		case UNDO:
 			return MESSAGE_UNDO;
@@ -98,24 +108,25 @@ public class Display {
 		case UNFLAG_TASK:
 			return String.format(MESSAGE_UNFLAG, content);
 		case VIEW_COMPLETED:
-			view = operation.getSearchView();
+			view = operation.getResultView();
 			taskDisplay.triggerResultView();
-			if(view.size()==0){
+			if (view.size() == 0) {
 				return MESSAGE_NO_COMPLETED;
 			}
-			return String.format(MESSAGE_VIEW_COMPLETED,view.size());
+			return String.format(MESSAGE_VIEW_COMPLETED, view.size());
 		case HELP:
 			taskDisplay.triggerHelpView();
 			return MESSAGE_HELP;
 		default:
-			break;
+			return String.format(MESSAGE_ERROR, content);
 		}
-		return "";
 	}
 
 	/**
 	 * Provide warning when input is not valid
-	 * @param  user input content
+	 * 
+	 * @param user
+	 *            input content
 	 * @return error message
 	 */
 	public String error(String input) {
