@@ -7,7 +7,7 @@ import org.junit.Test;
 public class testingOperation {
 	
 	Launch launch = Launch.getInstance();
-	Operation operation =launch.getOperation();
+	Operation operation =Launch.getOperation();
 	
 	/**
 	 * DEADLINE

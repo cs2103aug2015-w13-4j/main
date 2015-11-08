@@ -11,8 +11,8 @@ import utilities.TaskEvent;
 
 public class testingDisplay {
 	Launch launch = Launch.getInstance();
-	Display display = launch.getDisplay();
-
+	Display display = Launch.getDisplay();
+	
 	@Test
 	/**
 	 * testing to see if there is a correct output when command exist
@@ -36,7 +36,7 @@ public class testingDisplay {
 	public void testDisplay(){
 		ArrayList<TaskEvent> actual = display.taskView();
 		ArrayList<TaskEvent> expected = new ArrayList<TaskEvent>();
-		//expected.add(new TaskEvent)
+		
 	}
 
 }
