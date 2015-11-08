@@ -65,13 +65,13 @@
 
 .task #sDate {
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #ADADAD;
+	-fx-text-fill: #fdf6e3;
 	-fx-font-size:11px;	
 }
 
 .task #eDate { 
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #C0C0C0;
+	-fx-text-fill: #fdf6e3;
 	-fx-font-size:11px;
 }
 .task #startTime {
@@ -94,7 +94,7 @@
 .task #jointLabel {
 	-fx-font-size:10px;
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: FDC325;
+	-fx-text-fill: #FDC325;
 }
 
 /*
@@ -132,17 +132,17 @@
 }
  
 .display #resultContent {
- 	-fx-background-color: #FFCCCC;
+ 	-fx-background-color: #586e75;
  	-fx-padding: 13;
  	-fx-background-radius: 20;
 }
  
 .display #resultContent .list-cell {
- 	-fx-background-color: #FFCCCC;
+ 	-fx-background-color: #586e75;
 }
 
 .display #resultContent .listView {
-	-fx-background-color: #FFCCCC;
+	-fx-background-color: #586e75;
 }
 
 .display #helpContent {
