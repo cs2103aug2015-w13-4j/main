@@ -16,7 +16,7 @@
 	-fx-text-fill: white;
 	font-weight: 600;
 	-fx-background-color: #202020;
-	-fx-border-color: #268bd2;
+	-fx-border-color: #268BD2;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 2px;
 } 
@@ -28,7 +28,7 @@
 	-fx-focus-color: blue;
 	-fx-background-color:#202020;
 	-fx-accent: blue;
-	-fx-border-color:#268bd2;
+	-fx-border-color:#268BD2;
 	-fx-border-style:solid;
 	-fx-border-width:0px 2px 2px 2px;
 }
@@ -128,21 +128,21 @@
  */
  
 .display #borderPane {
-	-fx-background-color: #1B1C1D; /* #99FF99;*/
+	-fx-background-color: #1B1C1D; 
 }
  
 .display #resultContent {
- 	-fx-background-color: #586e75;
+ 	-fx-background-color: #586E75;
  	-fx-padding: 13;
  	-fx-background-radius: 20;
 }
  
 .display #resultContent .list-cell {
- 	-fx-background-color: #586e75;
+ 	-fx-background-color: #586E75;
 }
 
 .display #resultContent .listView {
-	-fx-background-color: #586e75;
+	-fx-background-color: #586E75;
 }
 
 .display #helpContent {
@@ -158,7 +158,7 @@
 	-fx-font-family: "Arial", cursive, sans-serif;
 	-fx-font-size: 14px;
 	-fx-font-weight: bold;
-	-fx-text-fill: #2aa198;
+	-fx-text-fill: #2AA198;
 	font-weight: 700;
 	-fx-background-color: #1B1C1D;
 	-fx-padding: 2 24 2 2;
@@ -185,7 +185,7 @@
 	-fx-font-family: "Arial", cursive, sans-serif;
 	-fx-font-size: 14px;
 	-fx-font-weight: bold;
-	-fx-text-fill: #dc322f;
+	-fx-text-fill: #DC322F;
 	font-weight : 700;
 	-fx-background-color: #1B1C1D;
 	-fx-border-color:#1B1C1D;
@@ -213,7 +213,7 @@
 	-fx-font-family: "Arial", cursive, sans-serif;
 	-fx-font-size: 14px;
 	-fx-font-weight: bold;
-	-fx-text-fill: #b58900;
+	-fx-text-fill: #B58900;
 	font-weight: 700;
 	-fx-background-color: #1B1C1D;
 	-fx-padding: 2 17 2 2;
