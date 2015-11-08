@@ -70,22 +70,20 @@ public class StorageImpTest {
 
 	@Test
 	public void testMarkTaskAsDone() throws Exception {
+		FileUtils.clearFileContent(s.getDirectory());
+		generateTasks();
 		s.markTaskAsDone(1);
+		ArrayList<TaskEvent> list = s.loadAllTasks();
+		assertEquals(true, list.get(0).isCompleted());
 	}
 
 	@Test
 	public void testMarkTaskAsUndone() throws Exception {
+		FileUtils.clearFileContent(s.getDirectory());
+		generateTasks();
 		s.markTaskAsUndone(1);
-	}
-
-	@Test
-	public void testSearchTaskByID() throws Exception {
-
-	}
-
-	@Test
-	public void testLoadAllTasks() throws Exception {
-
+		ArrayList<TaskEvent> list = s.loadAllTasks();
+		assertEquals(false, list.get(0).isCompleted());
 	}
 
 	@Test
