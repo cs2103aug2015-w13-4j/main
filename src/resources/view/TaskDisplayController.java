@@ -308,13 +308,13 @@ public class TaskDisplayController extends StackPane {
         this.enableResultView = true;
     }
 
-    public void showHelpView() {
+    private void showHelpView() {
         helpView.toFront();
         helpView.setOpacity(OVERLAY_VISIBLE_OPACITY);
         borderPane.setOpacity(OVERLAY_FADE_OPACITY);
     }
 
-    public void showResultView() {
+    private void showResultView() {
         resultView.toFront();
         resultView.setOpacity(OVERLAY_VISIBLE_OPACITY);
         borderPane.setOpacity(OVERLAY_FADE_OPACITY);
@@ -332,7 +332,7 @@ public class TaskDisplayController extends StackPane {
         this.enableResultView = false;
     }
 
-    public void hideViews() {
+    private void hideViews() {
         if (enableHelpView == false && enableResultView == false) {
             hideAllOverlays();
         }
@@ -345,12 +345,7 @@ public class TaskDisplayController extends StackPane {
         hideResultView();
     }
 
-    public void initOverlaySettings() {
-        enableHelpView = false;
-        enableResultView = false;
-    }
-
-    public void refreshHelpOverlay() {
+    private void refreshHelpOverlay() {
         if (enableHelpView == true) {
             showHelpView();
         } else {
@@ -358,7 +353,7 @@ public class TaskDisplayController extends StackPane {
         }
     }
 
-    public void refreshResultOverlay() {
+    private void refreshResultOverlay() {
         if (enableResultView == true) {
             showResultView();
         } else {
@@ -366,7 +361,7 @@ public class TaskDisplayController extends StackPane {
         }
     }
 
-    public void refreshAllViews() {
+    private void refreshAllViews() {
         refreshResultOverlay();
         refreshHelpOverlay();
         hideViews();

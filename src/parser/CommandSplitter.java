@@ -139,7 +139,7 @@ public class CommandSplitter {
 		TaskTime myTime[] = findTime(command);
 		int validTime = 0;
 		for (int i = 0; i < 2; i ++) {
-			if (myTime[i].getHour()==0&&myTime[i].getMinute()==0) {
+			if (myTime[i].getHour()!=0||myTime[i].getMinute()!=0) {
 				validTime ++;
 			}
 		}
@@ -367,6 +367,7 @@ public class CommandSplitter {
 	 */
 	public static TaskDate[] extractDate(String command) {
 		TaskDate myDate[] = findDate(command);
+		TaskDate today = DateParser.getCurrentDate();
 		int validTime = getValidTime(command);
 		int validDate = getValidDate(command);
 		if (validDate == 2) {
@@ -376,12 +377,25 @@ public class CommandSplitter {
 				myDate[0] = med;
 			}
 		} else if (validDate == 1) {
-			myDate[1] = myDate[0];
-			myDate[0] = NULL_DATE;
-		} else if (validDate == 0) {
-			if (validTime == 1) {
-				myDate[1] = DateParser.getCurrentDate();
+			if (validTime == 2) {
+				if (today.compareTo(myDate[0]) != 1) {
+					myDate[1] = myDate[0];
+					myDate[0] = today;
+				} else {
+					myDate[1] = today;
+				}
+			} else {
+				myDate[1] = myDate[0];
 				myDate[0] = NULL_DATE;
+			}
+		} else if (validDate == 0) {
+			System.out.println("no date" + validTime);
+			if (validTime == 1) {
+				myDate[1] = today;
+				myDate[0] = NULL_DATE;
+			} else if (validTime == 2) {
+				myDate[0] = today;
+				myDate[1] = today;
 			}
 		}
 		return myDate;
@@ -453,6 +467,8 @@ public class CommandSplitter {
 	 */
 	public static TaskTime[] extractTime(String command) {
 		int validDate = getValidDate(command);
+		int validTime = getValidTime(command);
+		TaskDate today = DateParser.getCurrentDate();
 		TaskDate myDate[] = findDate(command);
 		TaskTime timeToken[] = findTime(command);
 		if (validDate == 2) {
@@ -467,7 +483,24 @@ public class CommandSplitter {
 					timeToken[1] = med;
 				}
 			}
-		}
+		} else if (validDate == 1) {
+			if (validTime == 2) {
+				if (today.compareTo(myDate[0]) == 1) {
+					TaskTime med = timeToken[0];
+					timeToken[0] = timeToken[1];
+					timeToken[1] = med;
+				}
+			} else {
+				myDate[1] = myDate[0];
+				myDate[0] = NULL_DATE;
+			}
+		} else if (validDate == 0) {
+			if (timeToken[0].compareTo(timeToken[1]) == 1) {
+				TaskTime med = timeToken[0];
+				timeToken[0] = timeToken[1];
+				timeToken[1] = med;
+			}
+		} 
 		return timeToken;
 	}
 }

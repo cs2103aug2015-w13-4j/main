@@ -82,13 +82,4 @@ public class MainApp extends Application {
     private void initInputView() {
         InputViewController.getInstance();
     }
-
-    // ================================================================
-    // GETTERS
-    // ================================================================
-    
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-    
 }

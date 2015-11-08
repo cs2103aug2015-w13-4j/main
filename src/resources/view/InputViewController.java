@@ -41,7 +41,7 @@ public class InputViewController extends VBox {
     TaskDisplayController taskDisplay;
     private ArrayList<String> history;
     private ArrayList<String> commands;
-    private ArrayList<String> preset;
+    private ArrayList<String> presetTaskTestsList;
     private int historyPointer;
     private int commandsPointer;
     
@@ -160,6 +160,7 @@ public class InputViewController extends VBox {
     private void handleHistoryCommands(KeyEvent event) {
         String pastCmd = getHistoryCommands(event.getCode());
         userInput.setText(pastCmd);
+        userInput.positionCaret(pastCmd.length());
     }
 
     private void handleCommandList(int i) {
@@ -182,7 +183,7 @@ public class InputViewController extends VBox {
 
     private void initTesting() {
         launch = Launch.getInstance();
-        for (String in : preset) {
+        for (String in : presetTaskTestsList) {
             launch.command(in);
         }
         labelFeedBack(INIT_TEST_DATA);
@@ -251,27 +252,27 @@ public class InputViewController extends VBox {
     }
 
     private void initPresetArrayList() {
-        preset = new ArrayList<String>();
-        preset.add(TEST_TASK_ONE);
-        preset.add(TEST_TASK_TWO);
-        preset.add(TEST_TASK_THREE);
-        preset.add(TEST_TASK_FOUR);
-        preset.add(TEST_TASK_FIVE);
-        preset.add(TEST_TASK_SIX);
-        preset.add(TEST_TASK_SEVEN);
-        preset.add(TEST_TASK_EIGHT);
-        preset.add(TEST_TASK_NINE);
-        preset.add(TEST_TASK_TEN);
-        preset.add(TEST_TASK_ELEVEN);
-        preset.add(TEST_TASK_TWELVE);
-        preset.add(TEST_TASK_THIRTEEN);
-        preset.add(TEST_TASK_FOURTEEN);
-        preset.add(TEST_TASK_FIFTEEN);
-        preset.add(TEST_TASK_SIXTEEN);
-        preset.add(TEST_TASK_SEVENTEEN);
-        preset.add(TEST_TASK_EIGHTEEN);
-        preset.add(TEST_TASK_NINETEEN);
-        preset.add(TEST_TASK_TWENTY);
+        presetTaskTestsList = new ArrayList<String>();
+        presetTaskTestsList.add(TEST_TASK_ONE);
+        presetTaskTestsList.add(TEST_TASK_TWO);
+        presetTaskTestsList.add(TEST_TASK_THREE);
+        presetTaskTestsList.add(TEST_TASK_FOUR);
+        presetTaskTestsList.add(TEST_TASK_FIVE);
+        presetTaskTestsList.add(TEST_TASK_SIX);
+        presetTaskTestsList.add(TEST_TASK_SEVEN);
+        presetTaskTestsList.add(TEST_TASK_EIGHT);
+        presetTaskTestsList.add(TEST_TASK_NINE);
+        presetTaskTestsList.add(TEST_TASK_TEN);
+        presetTaskTestsList.add(TEST_TASK_ELEVEN);
+        presetTaskTestsList.add(TEST_TASK_TWELVE);
+        presetTaskTestsList.add(TEST_TASK_THIRTEEN);
+        presetTaskTestsList.add(TEST_TASK_FOURTEEN);
+        presetTaskTestsList.add(TEST_TASK_FIFTEEN);
+        presetTaskTestsList.add(TEST_TASK_SIXTEEN);
+        presetTaskTestsList.add(TEST_TASK_SEVENTEEN);
+        presetTaskTestsList.add(TEST_TASK_EIGHTEEN);
+        presetTaskTestsList.add(TEST_TASK_NINETEEN);
+        presetTaskTestsList.add(TEST_TASK_TWENTY);
     }
     
     // ================================================================
@@ -279,7 +280,7 @@ public class InputViewController extends VBox {
     // ================================================================  
     
     public int getPresetSize() {
-        return preset.size();
+        return presetTaskTestsList.size();
     }
     
     public int getCommandsSize() {
