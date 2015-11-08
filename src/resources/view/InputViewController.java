@@ -160,6 +160,7 @@ public class InputViewController extends VBox {
     private void handleHistoryCommands(KeyEvent event) {
         String pastCmd = getHistoryCommands(event.getCode());
         userInput.setText(pastCmd);
+        userInput.positionCaret(pastCmd.length());
     }
 
     private void handleCommandList(int i) {
