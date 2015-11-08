@@ -59,7 +59,8 @@ public class Operation {
 	 * @return ArrayList<TaskEvent> with tasks matching user request
 	 */
 	public ArrayList<TaskEvent> getResultView() {
-		return resultView;
+		ArrayList<TaskEvent> list = resultView;
+		return list;
 	}
 
 	/**
@@ -385,7 +386,7 @@ public class Operation {
 			logger.log(Level.INFO, "edit starttime to " + content.getEndTime());
 			return content.getStartTime().toString();
 		default:
-			break;
+			assert false: content.getField();
 		}
 		return DEFAULT_RETURN;
 	}
