@@ -33,7 +33,6 @@ public class StorageImp implements Storage {
 	private static final String AVAILABILITY_NO_SIG = AVAILABLE + COL + NO;
 	private static final String COMPLETION_YES_SIG = COMPLETED + COL + YES;
 	private static final String FRESHNESS_SIG = COMPLETED + COL + NO + TOK + AVAILABILITY_YES_SIG;
-	private static final String DATE_COMMON_HEADER = "date" + COL;
 	private static final String FLAG_STR = "FLAG";
 	private static final String UNFLAG_STR = "UNFLAG";
 	private static final int STR_START = 0;
