@@ -87,7 +87,7 @@ public class StorageImp implements Storage {
 
 	@Override
 	public int getTaskCount() {
-		return getTaskCounter();
+		return getTaskCounter() - 1;
 	}
 
 	/**

@@ -103,4 +103,12 @@ public class FileUtils {
 			return dir + StorageImp.DIV + StorageImp.DEFAULT_SAVE_DIR;
 		}
 	}
+
+	public static void clearFileContent(String directory) {
+		try(RandomAccessFile raf = new RandomAccessFile(directory, "rw")) {
+			raf.setLength(0);
+		} catch (IOException e) {
+			return;
+		}
+	}
 }
