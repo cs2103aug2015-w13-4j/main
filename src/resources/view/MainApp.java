@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-//@author A0124933H
+//@@author A0124933H Benjamin
 public class MainApp extends Application {
 
     private Stage primaryStage;
