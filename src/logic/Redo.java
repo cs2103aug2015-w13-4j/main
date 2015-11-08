@@ -4,22 +4,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import database.StorageImp;
+
 import utilities.CommandElements;
 import utilities.Command_Type;
-//@@Shirlene 
+
+//@@author A0130909H Shirlene 
 public class Redo {
 	private static Logger logger;
 	StorageImp storage;
 
-	public Redo(){
+	// ================================================================
+	// DEFAULT CONSTRUTOR
+	// ================================================================
+	public Redo() {
 		logger = Logger.getLogger("redo");
 		storage = Launch.getStorage();
 	}
-	public boolean redoTask(CommandElements content){
-		
+
+	// ================================================================
+	// MAIN REDO METHOD
+	// ================================================================
+	/**
+	 * main method to perform redo
+	 * 
+	 * @param content
+	 *            action to be redone
+	 * @return if redo action is successful
+	 */
+	public boolean redoTask(CommandElements content) {
 		logger.log(Level.INFO, "starting to redo");
 		Command_Type type = content.getType();
-		switch(type){
+		switch (type) {
 		case ADD_TASK:
 			return redoAdd(content);
 		case DELETE_TASK:
@@ -36,41 +51,51 @@ public class Redo {
 			return redoFlag(content);
 		case UNFLAG_TASK:
 			return redoUnflag(content);
-		default :
+		default:
 			return false;
 		}
 	}
-	private boolean redoAdd(CommandElements content){
+
+	// ================================================================
+	// HELPER METHOD FOR REDO
+	// ================================================================
+	private boolean redoAdd(CommandElements content) {
 		logger.log(Level.INFO, "redo add");
 		return storage.undoDeleteTaskByID(content.getID());
 	}
-	private boolean redoDelete(CommandElements content){
+
+	private boolean redoDelete(CommandElements content) {
 		logger.log(Level.INFO, "redo delete");
 		return storage.deleteTaskByID(content.getID());
 	}
-	private boolean redoEdit(CommandElements content){
+
+	private boolean redoEdit(CommandElements content) {
 		logger.log(Level.INFO, "redo edit");
 		return storage.editTask(content.getID(), content.getField(), content.getName());
 	}
-	private boolean redoComplete(CommandElements content){
+
+	private boolean redoComplete(CommandElements content) {
 		logger.log(Level.INFO, "redo Complete");
 		return storage.markTaskAsDone(content.getID());
 	}
-	private boolean redoUnfinish(CommandElements content){
+
+	private boolean redoUnfinish(CommandElements content) {
 		logger.log(Level.INFO, "redo unfinish");
 		return storage.markTaskAsUndone(content.getID());
 	}
-	private boolean redoDirectory(CommandElements content){
+
+	private boolean redoDirectory(CommandElements content) {
 		logger.log(Level.INFO, "redo change directory");
 		return storage.changeDirectory(content.getName());
 	}
-	private boolean redoFlag(CommandElements content){
+
+	private boolean redoFlag(CommandElements content) {
 		logger.log(Level.INFO, "redo flag");
 		return storage.flagTask(content.getID());
 	}
-	private boolean redoUnflag(CommandElements content){
-		logger.log(Level.INFO,"undo unflag");
+
+	private boolean redoUnflag(CommandElements content) {
+		logger.log(Level.INFO, "undo unflag");
 		return storage.unflagTask(content.getID());
 	}
-	
 }

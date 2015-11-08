@@ -1,26 +1,33 @@
 package logic;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import database.StorageImp;
 import utilities.CommandElements;
 import utilities.Command_Type;
 
-//@@Shirlene
+import database.StorageImp;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+//@@author A0130909H Shirlene
 public class Undo {
 	private static Logger logger;
 	StorageImp storage;
 
-	public Undo(){
+	// ================================================================
+	// DEFAULT CONSTRUTOR
+	// ================================================================
+	public Undo() {
 		logger = Logger.getLogger("Undo");
 		storage = Launch.getStorage();
 	}
-	public boolean undoTask(CommandElements content){
-		
+
+	// ================================================================
+	// MAIN UNDO METHOD
+	// ================================================================
+	public boolean undoTask(CommandElements content) {
 		logger.log(Level.INFO, "starting to undo");
 		Command_Type type = content.getType();
-		switch(type){
+		switch (type) {
 		case ADD_TASK:
 			return undoAdd(content);
 		case DELETE_TASK:
@@ -37,40 +44,51 @@ public class Undo {
 			return undoFlag(content);
 		case UNFLAG_TASK:
 			return undoUnflag(content);
-		default :
+		default:
 			return false;
 		}
 	}
-	private boolean undoAdd(CommandElements content){
+
+	// ================================================================
+	// HELPER METHOD FOR UNDO
+	// ================================================================
+	private boolean undoAdd(CommandElements content) {
 		logger.log(Level.INFO, "undo add" + content.getID());
 		return storage.deleteTaskByID(content.getID());
 	}
-	private boolean undoDelete(CommandElements content){
+
+	private boolean undoDelete(CommandElements content) {
 		logger.log(Level.INFO, "undo delete");
 		return storage.undoDeleteTaskByID(content.getID());
 	}
-	private boolean undoEdit(CommandElements content){
+
+	private boolean undoEdit(CommandElements content) {
 		logger.log(Level.INFO, "undo edit");
 		return storage.editTask(content.getID(), content.getField(), content.getName());
 	}
-	private boolean undoComplete(CommandElements content){
+
+	private boolean undoComplete(CommandElements content) {
 		logger.log(Level.INFO, "undo Complete");
 		return storage.markTaskAsUndone(content.getID());
 	}
-	private boolean undoUnfinish(CommandElements content){
+
+	private boolean undoUnfinish(CommandElements content) {
 		logger.log(Level.INFO, "undo unfinish");
 		return storage.markTaskAsDone(content.getID());
 	}
-	private boolean undoDirectory(CommandElements content){
+
+	private boolean undoDirectory(CommandElements content) {
 		logger.log(Level.INFO, "undo Change");
 		return storage.changeDirectory(content.getName());
 	}
-	private boolean undoFlag(CommandElements content){
+
+	private boolean undoFlag(CommandElements content) {
 		logger.log(Level.INFO, "undo flag");
 		return storage.unflagTask(content.getID());
 	}
-	private boolean undoUnflag(CommandElements content){
-		logger.log(Level.INFO,"undo unflag");
+
+	private boolean undoUnflag(CommandElements content) {
+		logger.log(Level.INFO, "undo unflag");
 		return storage.flagTask(content.getID());
 	}
 }

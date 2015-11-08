@@ -1,12 +1,15 @@
 package logic;
 
+import parser.CommandParser;
+
+import resources.view.TaskDisplayController;
+
+import database.StorageImp;
+
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import database.Storage;
-import database.StorageImp;
 
 import utilities.CommandElements;
 import utilities.Command_Field;
@@ -15,48 +18,100 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import utilities.Exceptions.OperationNotPerformed;
 
-import parser.CommandParser;
-
-import resources.view.TaskDisplayController;
 
 //@@author A0130909H Shirlene
 public class Operation {
-	 
+
 	// ================================================================
-    // ATTRIBUTES
-    // ================================================================
+	// ATTRIBUTES
+	// ================================================================
 	private static Logger logger;
 	private Stack<CommandElements> undoList;
 	private Stack<CommandElements> redoList;
-	ArrayList<TaskEvent> searchView;
+	ArrayList<TaskEvent> resultView;
 	ArrayList<TaskEvent> allView;
 	ArrayList<Integer> idList;
 	int size;
-	
+
 	// ================================================================
-    // CONSTANT STRING
-    // ================================================================
+	// CONSTANT STRING
+	// ================================================================
 	private static final String DEFAULT_RETURN = "not found";
-	
+
+	// ================================================================
+	// DEFAULT CONSTRUTOR
+	// ================================================================
 	public Operation() {
 		undoList = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
-		searchView = new ArrayList<TaskEvent>();
+		resultView = new ArrayList<TaskEvent>();
 		redoList = new Stack<CommandElements>();
 		idList = new ArrayList<Integer>();
 		allView = new ArrayList<TaskEvent>();
 	}
 
+	// ================================================================
+	// UI DISPLAY
+	// ================================================================
+	/**
+	 * result view matching user request
+	 * 
+	 * @return ArrayList<TaskEvent> with tasks matching user request
+	 */
 	public ArrayList<TaskEvent> getResultView() {
-		return searchView;
+		return resultView;
 	}
 
 	/**
-	 * Main method to process the user input
+	 * getting the full view of all tasks
+	 * 
+	 * @return ArrayList<TaskEvent> with all tasks
+	 */
+	public ArrayList<TaskEvent> fullView() {
+		StorageImp storage = Launch.getStorage();
+		allView = sortArray(storage.loadAllTasks());
+		return allView;
+	}
+
+	/**
+	 * sort the array based on the types, flag, others, float
+	 * 
+	 * @param list
+	 *            generated from the file
+	 * @return sorted ArrayList<TaskEvent>
+	 */
+	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list) {
+		ArrayList<TaskEvent> sorted = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> flag = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> others = new ArrayList<TaskEvent>();
+		ArrayList<TaskEvent> floating = new ArrayList<TaskEvent>();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getPriority().toString().equals("FLAG")) {
+				flag.add(list.get(i));
+			} else if (list.get(i).getEndDate().getDay() == 0 && list.get(i).getStartDate().getDay() == 0) {
+				floating.add(list.get(i));
+			} else {
+				others.add(list.get(i));
+			}
+		}
+		sorted.addAll(flag);
+		sorted.addAll(others);
+		sorted.addAll(floating);
+		return sorted;
+	}
+
+	// ================================================================
+	// METHODS
+	// ================================================================
+	/**
+	 * Main method to control the flow of input
+	 * 
+	 * @param input
+	 *            user specified input
+	 * @return String as a form of feedback
 	 */
 	public String processOperation(String input) {
 		logger.log(Level.INFO, "input recieved");
-		// get the commandElements from parser
 		Display message = Launch.getDisplay();
 		CommandElements processed = new CommandElements();
 		try {
@@ -65,12 +120,27 @@ public class Operation {
 			logger.log(Level.INFO, "error message");
 			return message.error(input);
 		}
-		if (!checkInput(processed)) {
+		if (!isValidInput(processed)) {
 			return message.error(input);
 		}
-		String name = getName(processed);
-		processed = changeId(processed);
-		logger.log(Level.INFO, "input processed" + processed.getType());
+		logger.log(Level.INFO, "input processed successfully");
+		return performOperation(input, message, processed);
+	}
+
+	/**
+	 * perform user input from CommandElements
+	 * 
+	 * @param input
+	 *            user input
+	 * @param message
+	 *            message class
+	 * @param processed
+	 *            input converted to CommandElements
+	 * @return
+	 */
+	private String performOperation(String input, Display message, CommandElements processed) {
+		String name = findTaskName(processed);
+		processed = findId(processed);
 		try {
 			if (performCommand(processed.getType(), processed)) {
 				logger.log(Level.INFO, "performing command " + processed.getType());
@@ -83,42 +153,66 @@ public class Operation {
 			return message.error(input);
 		}
 	}
-	private CommandElements changeId(CommandElements processed){
+
+	/**
+	 * find the task id based on numbering of UI
+	 * 
+	 * @param processed
+	 *            input user specified
+	 * @return CommandElement with the correct id of the task
+	 */
+	private CommandElements findId(CommandElements processed) {
 		TaskDisplayController controller = TaskDisplayController.getInstance();
-		
-		if(processed.getID()!= -1){
-			int index = processed.getID()-1;
-			if(controller.isResultViewEnabled()){
-				processed.setID(searchView.get(index).getTaskID());
-			}else{
+		if (processed.getID() != -1) {
+			int index = processed.getID() - 1;
+			if (controller.isResultViewEnabled()) {
+				processed.setID(resultView.get(index).getTaskID());
+			} else {
 				processed.setID(allView.get(index).getTaskID());
 			}
 		}
 		return processed;
 	}
-	
-	private boolean checkInput(CommandElements content) {
-		if(content.getEndDate() == null || content.getStartDate() == null){
+
+	/**
+	 * check if the input user specified is valid
+	 * 
+	 * @param content
+	 * @return
+	 */
+	private boolean isValidInput(CommandElements content) {
+		if (content.getEndDate() == null || content.getStartDate() == null) {
 			return true;
-		}
-		
-		if (content.getEndDate().getDay() == -1 || content.getStartDate().getDay() == -1) {
+		} else if (content.getEndDate().getDay() == -1 || content.getStartDate().getDay() == -1) {
 			return false;
 		}
 		return true;
 	}
 
-	private String getName(CommandElements content) {
+	/**
+	 * finding the task name for feedback message
+	 * 
+	 * @param content
+	 *            user input stored as CommandElements
+	 * @return name of the task
+	 */
+	private String findTaskName(CommandElements content) {
 		String name;
 		if (content.getType().toString().equals(("ADD_TASK"))) {
 			name = content.getName();
 		} else {
-			name = getTaskName(content.getID());
+			name = findTaskNameById(content.getID());
 		}
 		return name;
 	}
 
-	private String getTaskName(int id) {
+	/**
+	 * find the task name based of its id
+	 * 
+	 * @param id
+	 * @return the task name
+	 */
+	private String findTaskNameById(int id) {
 		Display message = Launch.getDisplay();
 		ArrayList<TaskEvent> tasks = message.taskView();
 		for (int i = 0; i < tasks.size(); i++) {
@@ -151,51 +245,51 @@ public class Operation {
 						content.getEndDate(), content.getEndTime(), content.getPriority());
 			} catch (Exception e) {
 				logger.log(Level.INFO, "exception caught :" + e.getMessage());
-				return isSuccessful;
+				return false;
 			}
 			if (isSuccessful) {
 				int id = findID(content);
 				undoList.push(undoAdd(id));
 			}
-			return isSuccessful;
+			break;
 		case EDIT_TASK:
 			logger.log(Level.INFO, "command is edit");
-			String name = getInitialContent(content.getID(), content.getField());
+			String name = findInitialContent(content.getID(), content.getField());
 			isSuccessful = action.editTask(content.getID(), content.getField(), getEditContent(content));
 			logger.log(Level.INFO, "success is " + isSuccessful);
 			if (isSuccessful) {
 				undoList.push(undoEdit(content.getID(), content.getField(), name));
 			}
-			return isSuccessful;
+			break;
 		case DELETE_TASK:
 			logger.log(Level.INFO, "command is delete");
 			undoList.push(undoDelete(content.getID()));
-			isSuccessful = action.deleteTaskByID(content.getID() );
+			isSuccessful = action.deleteTaskByID(content.getID());
 			if (!isSuccessful) {
 				undoList.pop();
 			}
-			return isSuccessful;
+			break;
 		case FINISH_TASK:
 			logger.log(Level.INFO, "command is completed");
 			isSuccessful = action.markTaskAsDone(content.getID());
 			if (isSuccessful) {
-				undoList.push(undoComplete(content.getID()));
+				undoList.push(undoFinish(content.getID()));
 			}
-			return isSuccessful;
+			break;
 		case UNFINISH_TASK:
-			 logger.log(Level.INFO, "command is unfinish");
-			 isSuccessful = action.markTaskAsUndone(content.getID());
-			 if(isSuccessful){
-				 undoList.push(undoUnfinish(content.getID()));
-			 }
-			 return isSuccessful;
+			logger.log(Level.INFO, "command is unfinish");
+			isSuccessful = action.markTaskAsUndone(content.getID());
+			if (isSuccessful) {
+				undoList.push(undoUnfinish(content.getID()));
+			}
+			break;
 		case SEARCH_TASK:
-			// working for basic names
 			logger.log(Level.INFO, "command is search");
-			searchView = action.searchTaskByString(getSearchString(content));
-			size = searchView.size();
-			return isSuccessful = true;
-		case UNDO: 
+			resultView = action.searchTaskByString(getSearchString(content));
+			size = resultView.size();
+			isSuccessful = true;
+			break;
+		case UNDO:
 			logger.log(Level.INFO, "command is undo");
 			content = undoList.pop();
 			redoList.push(findRedoContent(content));
@@ -213,31 +307,59 @@ public class Operation {
 			if (isSuccessful) {
 				undoList.push(undoChange(directory));
 			}
-			return isSuccessful;
+			break;
 		case FLAG_TASK:
 			logger.log(Level.INFO, "command is flag");
 			isSuccessful = action.flagTask(content.getID());
 			undoList.push(undoFlag(content.getID()));
-			return isSuccessful;
+			break;
 		case UNFLAG_TASK:
 			logger.log(Level.INFO, "command is unflag");
 			isSuccessful = action.unflagTask(content.getID());
 			undoList.push(undoUnflag(content.getID()));
-			return isSuccessful;
+			break;
 		case VIEW_COMPLETED:
 			logger.log(Level.INFO, "command is view completed");
-			searchView = action.loadCompletedTasks();
-			size = searchView.size();
+			resultView = action.loadCompletedTasks();
+			size = resultView.size();
 			return true;
 		case HELP:
 			return true;
 		default:
 			throw exception;
 		}
+		return isSuccessful;
+	}
+
+	// ================================================================
+	// HELPER METHOD FOR DIFFERENT COMMAND
+	// ================================================================
+	/**
+	 * For Add command. getting the id of the task from its content
+	 * 
+	 * @param content
+	 *            processed user input
+	 * @return corresponding task id
+	 */
+	private int findID(CommandElements content) {
+		StorageImp storage = Launch.getStorage();
+		ArrayList<TaskEvent> tasks = storage.loadAllTasks();
+		int id = 0;
+		for (int i = 0; i < tasks.size(); i++) {
+			if (tasks.get(i).getTaskName().equals(content.getName())) {
+				id = tasks.get(i).getTaskID();
+				break;
+			}
+		}
+		return id;
 	}
 
 	/**
 	 * For the edit command. Get the field which user want to edit
+	 * 
+	 * @param content
+	 *            processed content based on user input
+	 * @return corresponding edit content
 	 */
 	private String getEditContent(CommandElements content) {
 		logger.log(Level.INFO, "finding edit command");
@@ -260,7 +382,7 @@ public class Operation {
 			logger.log(Level.INFO, "edit endtime");
 			return content.getEndTime().toString();
 		case START_TIME:
-			logger.log(Level.INFO, "edit starttime to "+ content.getEndTime());
+			logger.log(Level.INFO, "edit starttime to " + content.getEndTime());
 			return content.getStartTime().toString();
 		default:
 			break;
@@ -268,18 +390,17 @@ public class Operation {
 		return DEFAULT_RETURN;
 	}
 
-	private String getSearchString(CommandElements content) {
-		if (content.getName() != null) {
-			return content.getName();
-		} else if (content.getEndDate() != null) {
-			return content.getEndDate().toString();
-		} else if (content.getEndTime() != null) {
-			return content.getEndTime().toString();
-		}
-		return DEFAULT_RETURN;
-	}
-
-	private String getInitialContent(int id, Command_Field field) {
+	/**
+	 * For edit command, looking for initial content from id to facilitate undo
+	 * operation
+	 * 
+	 * @param id
+	 *            task id
+	 * @param field
+	 *            content that is going to be edited
+	 * @return content before edit
+	 */
+	private String findInitialContent(int id, Command_Field field) {
 		StorageImp store = Launch.getStorage();
 		ArrayList<TaskEvent> tasks = store.loadAllTasks();
 		TaskEvent task = tasks.get(0);
@@ -291,6 +412,15 @@ public class Operation {
 		return getContent(task, field);
 	}
 
+	/**
+	 * For edit command, retrieve the content of the initial content
+	 * 
+	 * @param task
+	 *            the task which is going to be edited
+	 * @param field
+	 *            the field which user wants to edit
+	 * @return the content to be edited
+	 */
 	private String getContent(TaskEvent task, Command_Field field) {
 		logger.log(Level.INFO, "finding old content");
 		switch (field) {
@@ -303,44 +433,47 @@ public class Operation {
 			return startDate.toString();
 		case END_DATE:
 			TaskDate endDate = task.getEndDate();
-			logger.log(Level.INFO, "end date" + endDate.toString());
+			logger.log(Level.INFO, "end date");
 			return endDate.toString();
 		case PRIORITY:
 			logger.log(Level.INFO, "priority");
 			return task.getPriority().toString();
 		case END_TIME:
-			break;
+			logger.log(Level.INFO, "end time");
+			return task.getEndTime().toString();
 		case START_TIME:
-			break;
+			logger.log(Level.INFO, "start time");
+			return task.getStartTime().toString();
 		default:
 			break;
 		}
 		return DEFAULT_RETURN;
 	}
-	private int findID(CommandElements content){
-		Storage storage = Launch.getStorage();
-		ArrayList<TaskEvent> tasks = storage.loadAllTasks();
-		int id = 0;
-		for(int i =0;i<tasks.size();i++){
-			if(tasks.get(i).getTaskName().equals(content.getName())){
-				id = tasks.get(i).getTaskID();
-				break;
-			}
+
+	/**
+	 * For search command, get the string to search
+	 * 
+	 * @param content
+	 *            processed user input
+	 * @return search String
+	 */
+	private String getSearchString(CommandElements content) {
+		if (content.getName() != null) {
+			return content.getName();
+		} else if (content.getEndDate() != null) {
+			return content.getEndDate().toString();
+		} else if (content.getEndTime() != null) {
+			return content.getEndTime().toString();
 		}
-		return id;
-	}
-	private int locateID(int input){
-		return idList.get(input-1);
+		return DEFAULT_RETURN;
 	}
 
+	// ================================================================
+	// UNDO : to add corresponding action to be undone
+	// ================================================================
 	private CommandElements undoAdd(int id) {
 		logger.log(Level.INFO, "adding add undo" + id);
 		CommandElements next = new CommandElements(Command_Type.ADD_TASK, id);
-		return next;
-	}
-	private CommandElements undoUnfinish(int id){
-		logger.log(Level.INFO, "adding unfinish");
-		CommandElements next = new CommandElements(Command_Type.UNFINISH_TASK,id);
 		return next;
 	}
 
@@ -356,9 +489,15 @@ public class Operation {
 		return next;
 	}
 
-	private CommandElements undoComplete(int id) {
-		logger.log(Level.INFO, "adding delete undo");
+	private CommandElements undoFinish(int id) {
+		logger.log(Level.INFO, "adding complete undo");
 		CommandElements next = new CommandElements(Command_Type.FINISH_TASK, id);
+		return next;
+	}
+
+	private CommandElements undoUnfinish(int id) {
+		logger.log(Level.INFO, "adding unfinish undo");
+		CommandElements next = new CommandElements(Command_Type.UNFINISH_TASK, id);
 		return next;
 	}
 
@@ -379,51 +518,32 @@ public class Operation {
 		CommandElements next = new CommandElements(Command_Type.DIRECTORY, old);
 		return next;
 	}
-	public ArrayList<TaskEvent> fullView(){
-		Storage storage = Launch.getStorage();
-		allView =  sortArray(storage.loadAllTasks());
-		
-		return allView;
-	}
-	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){
-		System.out.println("size "+list.size());
-		ArrayList<TaskEvent> sorted = new ArrayList<TaskEvent>();
-		ArrayList<TaskEvent> flag = new ArrayList<TaskEvent>();
-		ArrayList<TaskEvent> others = new ArrayList<TaskEvent>();
-		ArrayList<TaskEvent> floating = new ArrayList<TaskEvent>();
-		for(int i =0;i<list.size();i++){
-			if(list.get(i).getPriority().toString().equals("FLAG")){
-				System.out.println("flag "+list.get(i).getTaskName());
-				flag.add(list.get(i));
-			} else if(list.get(i).getEndDate().getDay()==0 && list.get(i).getStartDate().getDay()==0){
-				System.out.println("floating "+list.get(i).getTaskName());
-				floating.add(list.get(i));
-			} else{
-				System.out.println("others " +list.get(i).getTaskName());
-				others.add(list.get(i));
-			}	
-		}
-		System.out.println("done");
-		sorted.addAll(flag);
-		sorted.addAll(others);
-		sorted.addAll(floating);
-		return sorted;
-	}
+
+	// ================================================================
+	// REDO
+	// ================================================================
+	/**
+	 * to locate the content for easy redo action
+	 * 
+	 * @param content
+	 *            to be redone
+	 * @return corresponding content to redo
+	 */
 	private CommandElements findRedoContent(CommandElements content) {
 		Command_Type type = content.getType();
-		Storage action = Launch.getStorage();
+		StorageImp action = Launch.getStorage();
 		switch (type) {
 		case ADD_TASK:
 			return new CommandElements(Command_Type.ADD_TASK, content.getID());
 		case DELETE_TASK:
 			return new CommandElements(Command_Type.DELETE_TASK, content.getID());
 		case EDIT_TASK:
-			String name = getInitialContent(content.getID(), content.getField());
+			String name = findInitialContent(content.getID(), content.getField());
 			return new CommandElements(Command_Type.EDIT_TASK, content.getID(), content.getField(), name);
 		case FINISH_TASK:
 			return new CommandElements(Command_Type.FINISH_TASK, content.getID());
 		case UNFINISH_TASK:
-			return new CommandElements(Command_Type.UNFINISH_TASK,content.getID());
+			return new CommandElements(Command_Type.UNFINISH_TASK, content.getID());
 		case DIRECTORY:
 			return new CommandElements(Command_Type.DIRECTORY, action.getDirectory());
 		case FLAG_TASK:
