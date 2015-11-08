@@ -93,7 +93,6 @@ public class Display {
 			return String.format(MESSAGE_UNFINISH, content);
 		case SEARCH_TASK:
 			view = operation.getResultView();
-			taskDisplay.triggerResultView();
 			if (view.size() == 0) {
 				return MESSAGE_NO_SEARCH_RESULT;
 			} else {
@@ -109,7 +108,6 @@ public class Display {
 			return String.format(MESSAGE_UNFLAG, content);
 		case VIEW_COMPLETED:
 			view = operation.getResultView();
-			taskDisplay.triggerResultView();
 			if (view.size() == 0) {
 				return MESSAGE_NO_COMPLETED;
 			}
