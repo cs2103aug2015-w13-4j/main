@@ -65,13 +65,13 @@
 
 .task #sDate {
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #fdf6e3;
+	-fx-text-fill: #ADADAD;
 	-fx-font-size:11px;	
 }
 
 .task #eDate { 
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #fdf6e3;
+	-fx-text-fill: #C0C0C0;
 	-fx-font-size:11px;
 }
 .task #startTime {
