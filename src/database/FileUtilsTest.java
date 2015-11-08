@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 import static org.junit.Assert.assertTrue;
 
-// @@author A0130503B
+// @@Zhang Zhongwei A0130503B
 public class FileUtilsTest {
 
 	@Test
@@ -20,6 +20,7 @@ public class FileUtilsTest {
 		File f = new File("inva|id.t*t");
 		PrintWriter w = new PrintWriter(new FileWriter(f));
 		w.write(52);
+		w.close();
 	}
 	
 	@Test

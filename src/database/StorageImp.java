@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 
 // @@author A0130503B
 
-
+/**
+ * This class implements {@link Storage Storage} using local File I/O.
+ */
 public class StorageImp implements Storage {
 	private static final Logger LOGGER = Logger.
 			getLogger(StorageImp.class.getName());
@@ -25,19 +27,15 @@ public class StorageImp implements Storage {
 
 	private static final String AVAILABLE = "available";
 	private static final String COMPLETED = "completed";
-	private static final String AVAILABILITY_NO = "false";
-	private static final String AVAILABILITY_YES = "true";
-	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + AVAILABILITY_YES;
-	private static final String AVAILABILITY_NO_SIG = AVAILABLE + COL + AVAILABILITY_NO;
-	private static final String COMPLETION_YES = "true";
-	private static final String COMPLETION_YES_SIG = COMPLETED + COL + COMPLETION_YES;
-	private static final String COMPLETION_NO = "false";
-	private static final String DATE_COMMON_HEADER = "date";
+	private static final String NO = "false";
+	private static final String YES = "true";
+	private static final String AVAILABILITY_YES_SIG = AVAILABLE + COL + YES;
+	private static final String AVAILABILITY_NO_SIG = AVAILABLE + COL + NO;
+	private static final String COMPLETION_YES_SIG = COMPLETED + COL + YES;
+	private static final String FRESHNESS_SIG = COMPLETED + COL + NO + TOK + AVAILABILITY_YES_SIG;
+	private static final String DATE_COMMON_HEADER = "date" + COL;
 	private static final String FLAG_STR = "FLAG";
 	private static final String UNFLAG_STR = "UNFLAG";
-	private static final short SEARCH_BY_ID = 0;
-	private static final short SEARCH_BY_STRING = 1;
-	private static final short SEARCH_BY_FLAG = 2;
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
 	private static String saveDir;
@@ -45,6 +43,9 @@ public class StorageImp implements Storage {
 	private PrintWriter writer;
 	private int taskCounter;
 
+	/**
+	 * Singleton initialisation
+	 */
 	private StorageImp() {
 		try {
 			saveDir = getSaveDir();
@@ -57,6 +58,12 @@ public class StorageImp implements Storage {
 		}
 	}
 
+	/**
+	 * First attempt to load from preference dir. If failed (either means
+	 * the user has not {@link #changeDirectory(String) changeDirectory}
+	 * or there is an IOException.
+	 * @return a string indicating the saving directory
+	 */
 	private String getSaveDir() {
 		try {
 			return FileUtils.getFirstLine(PREF_DIR);
@@ -66,6 +73,12 @@ public class StorageImp implements Storage {
 		}
 	}
 
+	/**
+	 * Singleton get instance method. Returns an instance if it has been
+	 * initiated, or uses {@link #StorageImp() StorageImp()} to initialise
+	 * it if it has not been.
+	 * @return a singleton instance of StorageImp
+	 */
 	public static StorageImp getInstance() {
 		if (ourInstance == null) {
 			ourInstance = new StorageImp();
@@ -78,6 +91,10 @@ public class StorageImp implements Storage {
 		return getTaskCounter();
 	}
 
+	/**
+	 * Get the task count based on the line numbers in the saving file
+	 * @return number of tasks
+	 */
 	private int getTaskCounter() {
 		int counter = 0;
 		try {
@@ -94,6 +111,12 @@ public class StorageImp implements Storage {
 	public boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
 	                TaskDate endDate, TaskTime endTime, Command_Priority priority) {
 		//TODO defense for taskName having special char like COL or TOK
+		assert taskName  != null;
+		assert startDate != null;
+		assert startTime != null;
+		assert endDate   != null;
+		assert endTime   != null;
+		assert priority  != null;
 
 		try {
 			TaskEvent task = new TaskEvent(
@@ -121,14 +144,32 @@ public class StorageImp implements Storage {
 	public boolean editTask(int taskID, Command_Field field, String content) {
 		return editTask(taskID, fieldEnumToLowerCaseString(field), content);
 	}
-	
+
+	/**
+	 * Convert a {@link utilities.Command_Field} to a lower case String
+	 * @param field a {@link utilities.Command_Field}
+	 * @return a lower case String
+	 */
 	private String fieldEnumToLowerCaseString(Command_Field field) {
+		assert field != null;
 		return field.toString().toLowerCase();
 	}
 
+	/**
+	 * Get each line from the task file and edit it if necessary, and rewrite
+	 * to the same task file
+	 * @param taskID  a number associated with a {@link utilities.TaskEvent TaskEvent}
+	 * @param field   header for content to be edited using
+	 *                {@link #fieldEnumToLowerCaseString(Command_Field)}
+	 * @param content String to replace old content under a certain field
+	 * @return true if File is successfully rewritten with the new content
+	 */
 	private boolean editTask(int taskID, String field, String content) {
 		ArrayList<String> temp = new ArrayList<String>(taskCounter);
 		boolean success = false;
+		if (!isTaskIdValid(taskID)) {
+			return false;
+		}
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
@@ -155,6 +196,11 @@ public class StorageImp implements Storage {
 		return success;
 	}
 
+	/**
+	 * Rewrite task file with the content of an ArrayList of {@link utilities.TaskEvent TaskEvent}
+	 * @param temp an ArrayList of TaskEvent
+	 * @throws IOException
+	 */
 	private void rewriteSaveFile(ArrayList<String> temp) throws IOException {
 		PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), false)));
 		for (String s : temp) {
@@ -167,83 +213,50 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean deleteTaskByID(int taskID) {
-		return editTask(taskID, AVAILABLE, AVAILABILITY_NO);
+		return editTask(taskID, AVAILABLE, NO);
 	}
 
 	@Override
 	public boolean undoDeleteTaskByID(int taskID) {
-		return editTask(taskID, AVAILABLE, AVAILABILITY_YES);
+		return editTask(taskID, AVAILABLE, YES);
 	}
 
 	@Override
 	public boolean markTaskAsDone(int taskID) {
-		return editTask(taskID, COMPLETED, COMPLETION_YES);
+		return editTask(taskID, COMPLETED, YES);
 	}
 
 	@Override
 	public boolean markTaskAsUndone(int taskID) {
-		return editTask(taskID, COMPLETED, COMPLETION_NO);
-	}
-
-	@Override
-	public ArrayList<TaskEvent> searchTaskByID(int taskID) {
-		return searchTask(String.valueOf(taskID), SEARCH_BY_ID);
+		return editTask(taskID, COMPLETED, NO);
 	}
 
 	@Override
 	public ArrayList<TaskEvent> searchTaskByString(String content) {
-		switch (content.toUpperCase()) {
-			case FLAG_STR:
-				return searchTask(content, SEARCH_BY_FLAG);
-			case UNFLAG_STR:
-				return searchTask(content, SEARCH_BY_FLAG);
-			default:
-				return searchTask(content, SEARCH_BY_STRING);
-		}
-	}
-
-	@Override
-	public ArrayList<TaskEvent> searchTaskByDate(TaskDate date) {
-		String dateSignature = DATE_COMMON_HEADER + COL + date;
-		return searchTaskByString(dateSignature);
-	}
-
-	private ArrayList<TaskEvent> searchTask(String content, short scope) {
 		ArrayList<TaskEvent> list = new ArrayList<>();
 		String[] contentSplit = content.split(WHITESPACE);
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
-				String idStr = string.substring(STR_START, string.indexOf(TOK));
-				switch (scope) {
-					case SEARCH_BY_ID:
-						if (Integer.parseInt(idStr) == Integer.parseInt(content)) {
-							list.add(stringToTask(string));
-						}
-						break;
-					case SEARCH_BY_STRING:
-						if (patternMatched(string, contentSplit)) {
-							list.add(stringToTask(string));
-						}
-						break;
-					case SEARCH_BY_FLAG:
-						String[] split = (COL + content + TOK).split(WHITESPACE);
-						if (patternMatched(string, split)) {
-							list.add(stringToTask(string));
-						}
-						break;
-					default:
-						break;
+				if (patternMatched(string, contentSplit)) {
+					list.add(stringToTask(string));
 				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			return list;
 		}
-		return list;
 	}
 
+	/**
+	 * Check if every item in an array of String appears in string.
+	 * @param string the string to be matched
+	 * @param target the content to be found
+	 * @return true if every item of target appears in string
+	 */
 	private boolean patternMatched(String string, String[] target) {
 		int splitSize = target.length;
 		final Pattern[] PATTERNS = new Pattern[splitSize];
@@ -263,17 +276,10 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> loadAllTasks() {
 		ArrayList<TaskEvent> list = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
-			while (br.ready()) {
-				String string = br.readLine();
-				if (string.contains(AVAILABILITY_YES_SIG) &&string.contains(COMPLETION_NO) ) {
-					list.add(stringToTask(string));
-				}
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		try {
+			list = loadTasks(SelectScope.FRESH);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Unable to load tasks", e);
 		}
 		return list;
 	}
@@ -281,17 +287,10 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> loadCompletedTasks() {
 		ArrayList<TaskEvent> list = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
-			while (br.ready()) {
-				String string = br.readLine();
-				if (string.contains(COMPLETION_YES_SIG)) {
-					list.add(stringToTask(string));
-				}
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		try {
+			list = loadTasks(SelectScope.COMPLETED);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Unable to load completed tasks", e);
 		}
 		return list;
 	}
@@ -299,19 +298,39 @@ public class StorageImp implements Storage {
 	@Override
 	public ArrayList<TaskEvent> loadDeletedTasks() {
 		ArrayList<TaskEvent> list = new ArrayList<>();
+		try {
+			list = loadTasks(SelectScope.DELETED);
+		} catch (IOException e) {
+			LOGGER.log(Level.WARNING, "Unable to load deleted tasks", e);
+		}
+		return list;
+	}
+
+	private ArrayList<TaskEvent> loadTasks(SelectScope scope) throws IOException {
+		ArrayList<TaskEvent> list = new ArrayList<>();
+		String signature = determineSignature(scope);
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(saveDir)))) {
 			while (br.ready()) {
 				String string = br.readLine();
-				if (string.contains(AVAILABILITY_NO_SIG)) {
+				if (string.contains(signature)) {
 					list.add(stringToTask(string));
 				}
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return list;
+	}
+
+	private String determineSignature(SelectScope scope) {
+		switch (scope) {
+			case DELETED:
+				return AVAILABILITY_NO_SIG;
+			case COMPLETED:
+				return COMPLETION_YES_SIG;
+			case FRESH:
+				return FRESHNESS_SIG;
+			default:
+				return new String();
+		}
 	}
 
 	@Override
@@ -332,6 +351,11 @@ public class StorageImp implements Storage {
 		return true;
 	}
 
+	/**
+	 * Convert the serialised TaskEvent to a TaskEvent object.
+	 * @param string serialised TaskEvent
+	 * @return a TaskEvent object
+	 */
 	private TaskEvent stringToTask(String string) {
 		String[] sigSplit = string.split(TOK);
 		assert(sigSplit.length == TaskEvent.ELEMENTS_COUNT);
@@ -351,6 +375,11 @@ public class StorageImp implements Storage {
 		return task;
 	}
 
+	/**
+	 * Convert a string to a {@link utilities.Command_Priority Command_Priority}
+	 * @param prio a String
+	 * @return a Command_Priority
+	 */
 	private Command_Priority priorityStrToEnum(String prio) {
 		switch (prio.toUpperCase()) {
 		case FLAG_STR:
@@ -368,7 +397,7 @@ public class StorageImp implements Storage {
 
 		File file = new File(dir);
 		if (FileUtils.isValidDirectory(file)) {
-			dir = addDefFileNameToDir(dir);
+			dir = FileUtils.addDefFileNameToDir(dir);
 		}
 
 		try {
@@ -389,14 +418,11 @@ public class StorageImp implements Storage {
 		return saveDir;
 	}
 
-	private String addDefFileNameToDir(String dir) {
-		if (dir.endsWith(DIV)) {
-			return dir + DEFAULT_SAVE_DIR;
-		} else {
-			return dir + DIV + DEFAULT_SAVE_DIR;
-		}
-	}
-
+	/**
+	 * Remember in the pref file the user designated directory to save tasks.
+	 * @param path the designated directory
+	 * @throws IOException see {@link java.io.IOException} in {@link #moveSaveFile(String)}
+	 */
 	private void updateSaveDirInPref(String path) throws IOException {
 		try (PrintWriter pw = new PrintWriter(new FileWriter(new File(PREF_DIR), false))) {
 			pw.write(path);
@@ -404,6 +430,13 @@ public class StorageImp implements Storage {
 		}
 	}
 
+	/**
+	 * Moves task file to a designated location
+	 * @param dir the designated location
+	 * @throws IOException if the directory is invalid or the user has no permission
+	 * to write to the location. Note that there is no perfect way to check this for
+	 * the user as it is dependent on the OS and the administrative level of the user
+	 */
 	private void moveSaveFile(String dir) throws IOException {
 		FileUtils.moveFile(saveDir, dir);
 	}
@@ -416,6 +449,16 @@ public class StorageImp implements Storage {
 	@Override
 	public boolean unflagTask(int taskId) {
 		return editTask(taskId, Command_Field.PRIORITY, Command_Priority.UNFLAG);
+	}
+
+	/**
+	 * Checks if task ID is valid, that is, an int larger than 0 and not larger than
+	 * the total task count
+	 * @param taskId a task ID
+	 * @return true if it is valid and false otherwise
+	 */
+	private boolean isTaskIdValid(int taskId) {
+		return taskId <= taskCounter && taskId > 0;
 	}
 
 }

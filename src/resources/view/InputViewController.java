@@ -21,6 +21,7 @@ import resources.view.TaskDisplayController;
  * @author A0124933H
  *
  */
+//@@A0124933H Benjamin
 public class InputViewController extends VBox {
 
     // ================================================================
@@ -48,7 +49,7 @@ public class InputViewController extends VBox {
     // ================================================================
     // CONSTANTS
     // ================================================================
-    
+    private static final String FILE_LOC = "InputView.fxml";
     private static final String INIT_TEST_DATA = "Test data initialized";
     private static final String EMPTY_STRING = "";
     
@@ -97,7 +98,7 @@ public class InputViewController extends VBox {
 
     public InputViewController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "InputView.fxml"));
+                FILE_LOC));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -115,7 +116,7 @@ public class InputViewController extends VBox {
         if (event.getCode() == KeyCode.ENTER) {
             taskDisplay.hideAllOverlays();
             handleUserInput();
-            userInput.setText("");
+            userInput.setText(EMPTY_STRING);
             taskDisplay.updateViews();
             resetCommandPointer();
         } else if (event.getCode() == KeyCode.UP
@@ -215,7 +216,7 @@ public class InputViewController extends VBox {
         historyPointer = history.size();
         history.add(historyPointer - 1, userInput.getText());
     }
-
+    
     private String getHistoryCommands(KeyCode code) {
         if (code == KeyCode.DOWN) {
             return getNextCommand();

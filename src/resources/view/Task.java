@@ -13,7 +13,7 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import utilities.TaskTime;
 
-//@A0124933H
+//@@A0124933H-reused Benjamin
 public class Task extends HBox {
 
     // ================================================================
@@ -81,7 +81,7 @@ public class Task extends HBox {
                 task.getStartDate(),task.getStartTime(), task.getEndDate(), task.getEndTime(), task.isCompleted(),
                 task.getPriority() , checkboxListener);
     }
-
+    
     private ChangeListener<Boolean> initCheckBoxListener(int index) {
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             @Override

@@ -5,8 +5,9 @@ import utilities.*;
 import java.util.ArrayList;
 
 // @@author A0130503B
+
 /**
- * Created by zhongwei-z on 23/10/15.
+ * A Storage interface facilitating as an API showing all the methods available public
  */
 public interface Storage {
 
@@ -89,12 +90,6 @@ public interface Storage {
 	boolean unflagTask(int taskId);
 
 	/**
-	 * Tasks with ID 12 and with ID 2 will both be returned if taskId is 2
-	 * @return an array of TaskEvent that contains the specified taskId
-	 */
-	ArrayList<TaskEvent> searchTaskByID(int taskId);
-
-	/**
 	 * Search through the list of tasks and find the tasks matching content.
 	 * This method uses whitespace to tokenize content and uses Pattern to
 	 * do a regex match, so substring can be matched and casing will also be ignored.
@@ -103,13 +98,6 @@ public interface Storage {
 	 * @return an ArrayList of TaskEvent that match the content
 	 */
 	ArrayList<TaskEvent> searchTaskByString(String content);
-
-	/**
-	 * Search for tasks with the specified date
-	 * @param date
-	 * @return an ArrayList of TaskEvent having the date as their attributes
-	 */
-	ArrayList<TaskEvent> searchTaskByDate(TaskDate date);
 
 	/**
 	 * Get the total number of tasks. Unless a cleanup is done, this count
