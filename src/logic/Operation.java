@@ -37,7 +37,7 @@ public class Operation {
 		allView = new ArrayList<TaskEvent>();
 	}
 
-	public ArrayList<TaskEvent> getArray() {
+	public ArrayList<TaskEvent> getSearchView() {
 		ArrayList<TaskEvent >list = searchView;
 		
 		
@@ -80,13 +80,11 @@ public class Operation {
 		TaskDisplayController controller = TaskDisplayController.getInstance();
 		
 		if(processed.getID()!= -1){
-			int index = processed.getID();
+			int index = processed.getID()-1;
 			if(controller.isResultViewEnabled()){
 				processed.setID(searchView.get(index).getTaskID());
 			}else{
-			System.out.println("size " + allView.size());
-			//System.out.println("before  " +index + "found "+ idList.get(index));
-			processed.setID(allView.get(index).getTaskID());
+				processed.setID(allView.get(index).getTaskID());
 			}
 		}
 		return processed;
@@ -378,12 +376,6 @@ public class Operation {
 		Storage storage = Launch.getStorage();
 		allView =  sortArray(storage.loadAllTasks());
 		
-		/*idList = new ArrayList<Integer>();
-		for(int i =0;i<list.size();i++){
-			System.out.println("i "+i+" name "+list.get(i).getTaskName());
-			idList.add(list.get(i).getTaskID());
-			list.get(i).setTaskID(i+1);
-		}*/
 		return allView;
 	}
 	private ArrayList<TaskEvent> sortArray(ArrayList<TaskEvent> list){

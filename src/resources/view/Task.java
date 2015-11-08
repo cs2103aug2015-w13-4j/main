@@ -1,5 +1,6 @@
 package resources.view;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.beans.value.ChangeListener;
@@ -39,9 +40,9 @@ public class Task extends HBox {
 
     @FXML
     private Label taskName;
-
+    
     @FXML
-    private Label priority;
+    private FontAwesomeIconView taskFlag;
 
     @FXML
     private Label jointLabel;
@@ -104,7 +105,7 @@ public class Task extends HBox {
         this.startTime.setText(startTime.toString());
         this.eDate.setText(eDate.toString());
         this.endTime.setText(endTime.toString());
-        this.priority.setText(priority.toString().equals(TASK_FLAG) ? TASK_FLAG : STRING_EMPTY);
+        this.taskFlag.setVisible(priority.toString().equals(TASK_FLAG) ? true : false);
         this.checkBox.selectedProperty().addListener(checkboxListener);
         dateAndTimeConfig(sDate, startTime, eDate, endTime);
     }
@@ -118,6 +119,10 @@ public class Task extends HBox {
             this.endTime.setText(STRING_EMPTY);
         }
 
+        if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
+            this.jointLabel.setText(CONNECTING_WORD);
+        }
+        
         if (sDate.getDay() == 0 && eDate.getDay() == 0) {
             this.sDate.setText(STRING_EMPTY);
             this.eDate.setText(STRING_EMPTY);
@@ -131,9 +136,6 @@ public class Task extends HBox {
                 this.sDate.setText(sDate.toString());
             }
             if(eDate.getDay() != 0 && sDate.getDay() != 0) {
-                this.jointLabel.setText(CONNECTING_WORD);
-            }
-            if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
                 this.jointLabel.setText(CONNECTING_WORD);
             }
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -11,7 +12,7 @@
       <CheckBox fx:id="checkBox" focusTraversable="false" mnemonicParsing="false" />
       <Label fx:id="index" focusTraversable="false" text="Index " />
       <Label fx:id="taskName" focusTraversable="false" text="Task Name " />
-      <Label fx:id="priority" focusTraversable="false" text="Priority" />
+      <FontAwesomeIconView fx:id="taskFlag" glyphName="FLAG" HBox.hgrow="ALWAYS" />
       <Label fx:id="sDate" focusTraversable="false" text="sDate" />
       <Label fx:id="startTime" focusTraversable="false" />
       <Label fx:id="jointLabel" focusTraversable="false" />

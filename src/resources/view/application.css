@@ -9,19 +9,28 @@
  * Input View
  * ==============
  */
+
 .inputView #feedBack {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size:13px;
-	-fx-text-fill: gray;
+	-fx-text-fill: white;
 	font-weight: 600;
-	-fx-background-color: #CCFFFF;
+	-fx-background-color: #202020;
+	-fx-border-color:orange;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 0px 2px;
 } 
 
 .inputView #userInput {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size:14px;
+	-fx-text-fill:white;
 	-fx-focus-color: blue;
+	-fx-background-color:#202020;
 	-fx-accent: blue;
+	-fx-border-color:orange;
+	-fx-border-style:solid;
+	-fx-border-width:0px 2px 2px 2px;
 }
 
 
@@ -40,42 +49,40 @@
 
 .task #index { 
 	-fx-padding: 0 5 0 5;
-	-fx-text-fill: gray;
+	-fx-text-fill: #FF8000;
 	-fx-font-size: 11px;
 }
 
 .task #taskName {
 	-fx-padding: 0 0 0 6;
-	-fx-text-fill: black;
+	-fx-text-fill: white;
 }
 
-.task #priority {
-	-fx-padding: 0 0 0 6;
-	-fx-text-fill: tomato;
-	-fx-font-size: 13px;
-	-fx-font-style: italic;
+.task #taskFlag {
+	-fx-padding: 12;
+	-fx-fill: red;
 }
 
 .task #sDate {
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: gray;
+	-fx-text-fill: #C0C0C0;
 	-fx-font-size:11px;	
 }
 
 .task #eDate { 
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: gray;
+	-fx-text-fill: #C0C0C0;
 	-fx-font-size:11px;
 }
 .task #startTime {
 	-fx-padding : 1 0 0 5;
-	-fx-text-fill: #3333FF;
+	-fx-text-fill: #FF8000;
 	-fx-font-size:11px;
 }
 
 .task #endTime {
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #3333FF;
+	-fx-text-fill: #FF8000;
 	-fx-font-size:11px;
 	
 }
@@ -121,7 +128,7 @@
  */
  
 .display #borderPane {
-	-fx-background-color: transparent; /* #99FF99;*/
+	-fx-background-color: #202020; /* #99FF99;*/
 }
  
 .display #resultContent {
@@ -150,63 +157,81 @@
 .display #generalTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size: 13px;
-	-fx-text-fill: #606060;
+	-fx-text-fill: #00FF00;
 	font-weight: 700;
-	-fx-background-color: #99FFFF;
+	-fx-background-color: #202020;
 	-fx-padding: 2 24 2 2;
+	-fx-border-color:blue;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #generalView {
-	-fx-background-color: #99FFFF;
+	-fx-background-color: #202020;
+	-fx-border-color:blue;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #generalView .list-cell {
-	-fx-background-color: #99FFFF;
+	-fx-background-color: #202020;
 }
 
 .display #generalView .listView {
-	-fx-background-color: #99FFFF;
+	-fx-background-color: #202020;
 }
 .display #flagTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size: 13px;
-	-fx-text-fill: #606060;
+	-fx-text-fill: #00FF00;
 	font-weight : 700;
-	-fx-background-color: #FFCCE5;
+	-fx-background-color: #202020;
+	-fx-border-color:red;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 0px 0px;
 	-fx-padding: 2 24 2 2;
 }
 
 .display #flagView {
-	-fx-background-color: #FFCCE5;
+	-fx-background-color: #202020;
+	-fx-border-color:red;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 2px 0px;
 }
 
 .display #flagView .list-cell {
-	-fx-background-color: #FFCCE5;
+	-fx-background-color: #202020;
 }
 
 .display #flagView .listView {
-	-fx-background-color: #FFCCE5
+	-fx-background-color: #202020;
 }
 
 .display #floatingTaskLabel {
 	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
 	-fx-font-size: 13px;
-	-fx-text-fill: #606060;
+	-fx-text-fill: #00FF00;
 	font-weight: 700;
-	-fx-background-color: #99FFCC;
+	-fx-background-color: #202020;
 	-fx-padding: 2 17 2 2;
+	-fx-border-color:#6600CC;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 0px 2px;
 }
 
 .display #floatingView {
-	-fx-background-color: #99FFCC;
+	-fx-background-color: #202020;
+	-fx-border-color:#6600CC;
+	-fx-border-style:solid;
+	-fx-border-width:2px 2px 2px 2px;
 }
 
 .display #floatingView .list-cell {
-	-fx-background-color: #99FFCC;
+	-fx-background-color: #202020;
 }
 
 .display #floatingView .listView {
-	-fx-background-color: #99FFCC;
+	-fx-background-color: #202020;
 }
 
 .display .list-view .scroll-bar:horizontal {

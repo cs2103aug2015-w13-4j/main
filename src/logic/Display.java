@@ -1,14 +1,13 @@
 package logic;
 
-
-import database.StorageImp;
 import resources.view.TaskDisplayController;
+
 import utilities.Command_Type;
 import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
-//@@Shirlene
+//@@ A0130909H Shirlene
 public class Display {
 
 	/* Feedback */
@@ -29,8 +28,6 @@ public class Display {
 	private static final String MESSAGE_NO_COMPLETED = "you do not have any completed tasks";
 	private static final String MESSAGE_HELP = "help activated";
 	
-
-	private Command_Type nextCommand = Command_Type.UNDO;
 	private ArrayList<TaskEvent> view;
 	private ArrayList<TaskEvent> search;
 
@@ -49,24 +46,25 @@ public class Display {
 		view = op.fullView();
 		return view;
 	}
+	
+	/**
+	 * provides the pop up view content
+	 * @return search or view completed result 
+	 */
 	public ArrayList<TaskEvent> resultView(){
 		Operation op = Launch.getOperation();
 		
-		search = op.getArray();
+		search = op.getSearchView();
 		return search;
 	}
 
 	/**
 	 * Provide user with a feedback on the current operation
-	 * 
-	 * @param op
-	 *            user input command
-	 * @param content
-	 *            user input
+	 * @param op command user specify
+	 * @param content user input 
 	 * @return feedback to user
 	 */
 	public String operation(Command_Type op, String content) {
-		nextCommand = op;
 		Operation operation = Launch.getOperation();
 		TaskDisplayController taskDisplay = TaskDisplayController.getInstance();
 		switch (op) {
@@ -84,7 +82,7 @@ public class Display {
 		case UNFINISH_TASK:
 			return String.format(MESSAGE_UNFINISH, content);
 		case SEARCH_TASK:
-			view = operation.getArray();
+			view = operation.getSearchView();
 			taskDisplay.triggerResultView();
 			if(view.size()==0){
 				return MESSAGE_NO_SEARCH_RESULT;
@@ -100,7 +98,7 @@ public class Display {
 		case UNFLAG_TASK:
 			return String.format(MESSAGE_UNFLAG, content);
 		case VIEW_COMPLETED:
-			view = operation.getArray();
+			view = operation.getSearchView();
 			taskDisplay.triggerResultView();
 			if(view.size()==0){
 				return MESSAGE_NO_COMPLETED;
@@ -117,9 +115,7 @@ public class Display {
 
 	/**
 	 * Provide warning when input is not valid
-	 * 
-	 * @param input
-	 *            user input content
+	 * @param  user input content
 	 * @return error message
 	 */
 	public String error(String input) {
