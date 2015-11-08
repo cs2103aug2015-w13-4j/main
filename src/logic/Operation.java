@@ -31,6 +31,7 @@ public class Operation {
 	ArrayList<TaskEvent> resultView;
 	ArrayList<TaskEvent> allView;
 	ArrayList<Integer> idList;
+	boolean flagView;
 	int size;
 
 	// ================================================================
@@ -48,6 +49,7 @@ public class Operation {
 		redoList = new Stack<CommandElements>();
 		idList = new ArrayList<Integer>();
 		allView = new ArrayList<TaskEvent>();
+		flagView = false;
 	}
 
 	// ================================================================
@@ -140,10 +142,12 @@ public class Operation {
 	 * @return
 	 */
 	private String performOperation(String input, Display message, CommandElements processed) {
+		TaskDisplayController controller = TaskDisplayController.getInstance();
 		processed = findId(processed);
 		String name = findTaskName(processed);
 		try {
 			if (performCommand(processed.getType(), processed)) {
+				flagView = controller.isResultViewEnabled();
 				logger.log(Level.INFO, "performing command " + processed.getType());
 				return message.operation(processed.getType(), name);
 			} else {
@@ -163,10 +167,9 @@ public class Operation {
 	 * @return CommandElement with the correct id of the task
 	 */
 	private CommandElements findId(CommandElements processed) {
-		TaskDisplayController controller = TaskDisplayController.getInstance();
 		if (processed.getID() != -1) {
 			int index = processed.getID() - 1;
-			if (controller.isResultViewEnabled()) {
+			if (flagView) {
 				processed.setID(resultView.get(index).getTaskID());
 			} else {
 				processed.setID(allView.get(index).getTaskID());
@@ -214,8 +217,7 @@ public class Operation {
 	 * @return the task name
 	 */
 	private String findTaskNameById(int id) {
-		Display message = Launch.getDisplay();
-		ArrayList<TaskEvent> tasks = message.taskView();
+		ArrayList<TaskEvent> tasks =findViewArray();
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).getTaskID() == id) {
 				return tasks.get(i).getTaskName();
@@ -223,7 +225,19 @@ public class Operation {
 		}
 		return DEFAULT_RETURN;
 	}
-
+	
+	/**
+	 * get the correct tasks view user is viewing
+	 * @return corresponding ArrayList<TaskEvent> that user sees
+	 */
+	private ArrayList<TaskEvent> findViewArray(){
+		if(flagView){
+			return resultView;
+		}else{
+			return allView;
+		}
+	}
+	
 	/**
 	 * perform the command
 	 * 
@@ -233,6 +247,7 @@ public class Operation {
 	 * @throws OperationNotPerformed
 	 */
 	private boolean performCommand(Command_Type command, CommandElements content) throws OperationNotPerformed {
+		TaskDisplayController controller = TaskDisplayController.getInstance();
 		StorageImp action = Launch.getStorage();
 		Undo undo = Launch.getUndo();
 		Redo redo = Launch.getRedo();
@@ -288,6 +303,7 @@ public class Operation {
 			logger.log(Level.INFO, "command is search");
 			resultView = action.searchTaskByString(getSearchString(content));
 			size = resultView.size();
+			controller.triggerResultView();
 			isSuccessful = true;
 			break;
 		case UNDO:
@@ -322,6 +338,7 @@ public class Operation {
 		case VIEW_COMPLETED:
 			logger.log(Level.INFO, "command is view completed");
 			resultView = action.loadCompletedTasks();
+			controller.triggerResultView();
 			size = resultView.size();
 			return true;
 		case HELP:
