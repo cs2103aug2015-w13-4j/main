@@ -1,6 +1,5 @@
 package resources.view;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.beans.value.ChangeListener;
@@ -13,7 +12,9 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import utilities.TaskTime;
 
-//@A0124933H
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
+//@@A0124933H-reused Benjamin
 public class Task extends HBox {
 
     // ================================================================
@@ -40,7 +41,7 @@ public class Task extends HBox {
 
     @FXML
     private Label taskName;
-    
+
     @FXML
     private FontAwesomeIconView taskFlag;
 
@@ -75,6 +76,11 @@ public class Task extends HBox {
     // INITIALIZATION METHOD
     // ================================================================
 
+    /**
+     * Intialize listeners and fxml label fields.
+     * @param task
+     * @param index
+     */
     private void initListenerAndFxmlFields (TaskEvent task,int index) {
         ChangeListener<Boolean> checkboxListener = initCheckBoxListener(index);
         initFxmlFields(index, task.getTaskName(),
@@ -82,6 +88,13 @@ public class Task extends HBox {
                 task.getPriority() , checkboxListener);
     }
 
+    /**
+     * Initialize listeners for the task to record and carry 
+     * out an action when a task is ticked
+     * or unticked.
+     * @param index
+     * @return
+     */
     private ChangeListener<Boolean> initCheckBoxListener(int index) {
         ChangeListener<Boolean> listener = new ChangeListener<Boolean>() {
             @Override
@@ -97,6 +110,18 @@ public class Task extends HBox {
         return listener;
     }
 
+    /**
+     * Initialize fields for fxml label to display.
+     * @param idx
+     * @param taskName
+     * @param sDate
+     * @param startTime
+     * @param eDate
+     * @param endTime
+     * @param isCompleted
+     * @param priority
+     * @param checkboxListener
+     */
     private void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
             TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority, ChangeListener<Boolean> checkboxListener) {
         this.index.setText(idx + STRING_EMPTY);
@@ -110,6 +135,13 @@ public class Task extends HBox {
         dateAndTimeConfig(sDate, startTime, eDate, endTime);
     }
 
+    /**
+     * Checking of the time and date for proper display.
+     * @param sDate
+     * @param startTime
+     * @param eDate
+     * @param endTime
+     */
     private void dateAndTimeConfig(TaskDate sDate, TaskTime startTime,
             TaskDate eDate, TaskTime endTime) {
         if(startTime.getHour() == 0) {
@@ -122,7 +154,7 @@ public class Task extends HBox {
         if(startTime.getHour() != 0 && endTime.getHour()!= 0) {
             this.jointLabel.setText(CONNECTING_WORD);
         }
-        
+
         if (sDate.getDay() == 0 && eDate.getDay() == 0) {
             this.sDate.setText(STRING_EMPTY);
             this.eDate.setText(STRING_EMPTY);

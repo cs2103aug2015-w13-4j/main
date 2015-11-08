@@ -2,11 +2,11 @@ package resources.view;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-//@author A0124933H
+//@@author A0124933H Benjamin
 public class MainApp extends Application {
 
     private Stage primaryStage;
@@ -23,7 +23,7 @@ public class MainApp extends Application {
     private static final String IMAGE_ICON = "resources/imgs/icon.png";
 
     // ================================================================
-    // METHODS
+    // PROGRAM INITIALIZATION METHODS
     // ================================================================
     
     /**

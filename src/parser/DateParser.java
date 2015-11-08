@@ -6,299 +6,289 @@ import java.util.Date;
 
 import utilities.TaskDate;
 
-//@@A0133965X
+// @@author A0133965X
 public class DateParser {
 
+	private static TaskDate NULL_DATE = new TaskDate(-1,-1,-1);
+	private static String SPLITTERS[] = {"-", "/", "_", "\\."};
+	/**
+	 * Translate date Strings in number format
+	 * 
+	 * @param the String containing date information
+	 * @return TaskDate object
+	 */
 	public static TaskDate dateDecoder(String dateStr) {
 		int year = -1, month=-1, day=-1;
 		TaskDate thisDate = getCurrentDate();
 
-		// support format 03/09/2015
+		// support format dd/mm/yyyy
 		if (dateStr.length() == 10) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
-		// support format 03/09/2015
+		// support format d/mm/yyyy or dd/m/yyyy
 		if (dateStr.length() == 9) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 03/09/2015
+		// support format d/m/yyyy
 		if (dateStr.length() == 8) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 2015/09/03
+		// support format yyyy/mm/dd
 		if (dateStr.length() == 10) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 2015/09/03
-		if (dateStr.length() == 10) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		// support format 2015/09/03
+		// support format yyyy/mm/d or yyyy/m/dd
 		if (dateStr.length() == 9) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		// support format 2015/09/03
-		if (dateStr.length() == 8) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-		// support format 03/09/15
-		if (dateStr.length() == 8) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 03/09/15
+		// support format yyyy/m/d
+		if (dateStr.length() == 8) {
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
+				}
+			}
+		}
+
+		// support format dd/mm/yy
+		if (dateStr.length() == 8) {
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
+				}
+			}
+		}
+
+		// support format d/mm/yy or dd/m/yy
 		if (dateStr.length() == 7) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
-		// support format 03/09/15
+		
+		// support format d/m/yy
 		if (dateStr.length() == 6) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[0]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[2]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[0]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[2]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 15/09/03
+		// support format yy/mm/dd
 		if (dateStr.length() == 8) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 15/09/03
+		// support format yy/mm/d or yy/m/dd
 		if (dateStr.length() == 7) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 15/09/03
+		// support format yy/m/d
 		if (dateStr.length() == 6) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 3){
-				day = Integer.parseInt(parts[2]);
-				month = Integer.parseInt(parts[1]);
-				year = Integer.parseInt(parts[0]) + 2000;
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 3){
+					day = Integer.parseInt(parts[2]);
+					month = Integer.parseInt(parts[1]);
+					year = Integer.parseInt(parts[0]) + 2000;
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 09/03
+		// support format mm/dd
 		if (dateStr.length() == 5) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[0]);
-				day = Integer.parseInt(parts[1]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 2){
+					year = thisDate.getYear();
+					month = Integer.parseInt(parts[0]);
+					day = Integer.parseInt(parts[1]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 09/03
+		// support format mm/d or m/dd
 		if (dateStr.length() == 4) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[0]);
-				day = Integer.parseInt(parts[1]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 2){
+					year = thisDate.getYear();
+					month = Integer.parseInt(parts[0]);
+					day = Integer.parseInt(parts[1]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
 
-		// support format 09/03
+		// support format m/d
 		if (dateStr.length() == 3) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[0]);
-				day = Integer.parseInt(parts[1]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
+			for (int i = 0; i < SPLITTERS.length; i ++) {
+				String parts[] = dateStr.split(SPLITTERS[i]);
+				if (parts.length == 2){
+					year = thisDate.getYear();
+					month = Integer.parseInt(parts[0]);
+					day = Integer.parseInt(parts[1]);
+					if (isPossible(year, month, day)) {
+						return new TaskDate(year, month, day);
+					}
 				}
 			}
 		}
-		// support format 03/09
-		if (dateStr.length() == 5) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[1]);
-				day = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-
-		// support format 03/09
-		if (dateStr.length() == 5) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[1]);
-				day = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-
-		// support format 03/09
-		if (dateStr.length() == 4) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[1]);
-				day = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				}
-			}
-		}
-
-		// support format 03/09
-		if (dateStr.length() == 3) {
-			String parts[] = dateStr.split("/");
-			if (parts.length == 2){
-				year = thisDate.getYear();
-				month = Integer.parseInt(parts[1]);
-				day = Integer.parseInt(parts[0]);
-				if (isPossible(year, month, day) == 0) {
-					return new TaskDate(year, month, day);
-				} 
-			}
-		}
-
-		return new TaskDate(-1, -1, -1);
+		return NULL_DATE;
 	}
 
-	public static int isPossible(int year, int month, int day) {
+	/**
+	 * Determine whether a date is valid
+	 * 
+	 * @param numerical value of year
+	 * @param numerical value of month
+	 * @param numerical value of day
+	 * @return boolean value, valid or invalid
+	 */
+	private static boolean isPossible(int year, int month, int day) {
 
 		if (month < 1 || month > 12) {
-			return -1;
+			return false;
 		}
 		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
 			if (day < 1 || day > 31) {
-				return -1;
+				return false;
 			}
 		} else if (month == 4 || month == 6 || month == 9 || month == 11) {
 			if (day < 1 || day > 30) {
-				return -1;
+				return false;
 			}
 		} else if (month == 2) {
 			if (year % 4 == 0 && year % 100 != 0) {
 				if (day < 1 || day > 29) {
-					return -1;
+					return false;
 				}
 			} else {
 				if (day < 1 || day > 28) {
-					return -1;
+					return false;
 				}
 			}
 		} else {
-			return -1;
+			return false;
 		}
-		return 0;
+		return true;
 	}
-
+	
+	/**
+	 * Get today's date
+	 * 
+	 * @return today as TaskDate object
+	 */
 	public static TaskDate getCurrentDate() {
 		Date date = new Date(); // your date
 	    Calendar cal = Calendar.getInstance();
@@ -309,6 +299,12 @@ public class DateParser {
 	    return new TaskDate(thisYear, thisMonth, thisDay);
 	}
 	
+	/**
+	 * Determine whether a String contain date information
+	 * 
+	 * @param the domain String
+	 * @return boolean value, contain or not
+	 */
 	public static boolean dateChecker(String date) {
 		if (date.length()<3) {
 			return false;
@@ -318,7 +314,8 @@ public class DateParser {
 		for (int i = 0; i < date.length(); i ++) {
 			if (CommandSplitter.isInteger(date.charAt(i) + "")) {
 				num ++;
-			} else if (date.charAt(i) == '.' || date.charAt(i) == '/') {
+			} else if (date.charAt(i) == '.' || date.charAt(i) == '/' ||
+					date.charAt(i) == '_' || date.charAt(i) == '-') {
 				cha ++;
 			}
 		}
@@ -328,30 +325,53 @@ public class DateParser {
 		return false;
 	}
 	
+	/**
+	 * Rearrange the user command, omit useless information
+	 * 
+	 * @param the user input String
+	 * @return ArrayList of Strings containing date information
+	 */
 	public static ArrayList<String> decompose(String command) {
 		ArrayList<String> result = new ArrayList<String>();
 		String parts[] = command.toLowerCase().split(" ");
 		for (int i = 0; i < parts.length; i ++) {
-			if (parts[i].equals("tomorrow") || parts[i].equals("yesterday") ||
-					parts[i].equals("today") || parts[i].equals("sunday") ||
-					parts[i].equals("monday") || parts[i].equals("tuesday") ||
-					parts[i].equals("wednesday") || parts[i].equals("thursday") ||
-					parts[i].equals("friday") || parts[i].equals("saturday")) {
+			switch (parts[i]) 
+			{
+			case "tomorrow":
+			case "today": 
+			case "yesterday":
+			case "monday":
+			case "tuesday":
+			case "wednesday":
+			case "thursday":
+			case "friday":
+			case "saturday":
+			case "sunday":
 				result.add(parts[i]);
-			} else if (parts[i].equals("last") || parts[i].equals("next")) {
+				break;
+			case "last":
+			case "next":
 				if (i <parts.length - 1) {
-					if (parts[i + 1].equals("monday") || parts[i + 1].equals("tuesday") ||
-							parts[i + 1].equals("wednesday") || parts[i + 1].equals("thursday") ||
-							parts[i + 1].equals("friday") || parts[i + 1].equals("saturday") ||
-							parts[i + 1].equals("sunday")) {
+					switch (parts[i + 1]) 
+					{
+					case "monday":
+					case "tuesday":
+					case "wednesday":
+					case "thursday":
+					case "friday":
+					case "saturday":
+					case "sunday":
 						result.add(parts[i] + " " + parts[i + 1]);
 						i ++;
+						break;
+					default: break;
 					}
 				}
-			} else {
+			default: 
 				if (dateChecker(parts[i])) {
 					result.add(parts[i]);
 				}
+				break;
 			}
 		} 
 		return result;

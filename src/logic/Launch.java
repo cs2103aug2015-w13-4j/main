@@ -6,7 +6,7 @@ import utilities.TaskEvent;
 
 import java.util.ArrayList;
 
-//@@Shirlene
+//@@author A0130909H Shirlene
 public class Launch {
 	private static StorageImp storage;
 	private static Display display;
@@ -16,6 +16,9 @@ public class Launch {
 	private static Undo undo;
 	private static Redo redo;
 
+	// ================================================================
+	// INITIALIZATION
+	// ================================================================
 	private Launch() {
 	}
 
@@ -29,7 +32,9 @@ public class Launch {
 		redo = new Redo();
 	}
 
-	/* getting objects */
+	// ================================================================
+	// GETTERS
+	// ================================================================
 	public static StorageImp getStorage() {
 		return storage;
 	}
@@ -42,9 +47,10 @@ public class Launch {
 		return display;
 	}
 
-	public static Undo getUndo(){
+	public static Undo getUndo() {
 		return undo;
 	}
+
 	public static Launch getInstance() {
 
 		if (launch == null) {
@@ -52,21 +58,41 @@ public class Launch {
 		}
 		return launch;
 	}
-	public static Redo getRedo(){
+
+	public static Redo getRedo() {
 		return redo;
 	}
 
-	/* UI main task view */
+	// ================================================================
+	// METHODS
+	// ================================================================
+
+	/**
+	 * Provide UI with all the active tasks
+	 * 
+	 * @return ArrayList<TaskEvent> of Tasks
+	 */
 	public ArrayList<TaskEvent> updateView() {
 		tasks = display.taskView();
 		return tasks;
 	}
 
-	/* UI search View */
-	public ArrayList<TaskEvent> resultView(){
+	/**
+	 * Provide UI with a list of tasks matching user's request
+	 * 
+	 * @return ArrayList<TaskEvent> containing tasks that match request
+	 */
+	public ArrayList<TaskEvent> resultView() {
 		return display.resultView();
 	}
-	/* main method UI calls */
+
+	/**
+	 * Main method which UI calls to perform user input
+	 * 
+	 * @param input
+	 *            user's command
+	 * @return String which acts as a form of feedback
+	 */
 	public String command(String input) {
 		return op.processOperation(input);
 	}

@@ -1,4 +1,3 @@
-//@@author Shirlene A0130909H
 package logic;
 
 import java.util.ArrayList;
@@ -8,26 +7,37 @@ import java.util.logging.Logger;
 
 import database.Storage;
 import database.StorageImp;
+
 import utilities.CommandElements;
 import utilities.Command_Field;
 import utilities.Command_Type;
 import utilities.TaskDate;
 import utilities.TaskEvent;
-import parser.CommandParser;
-import resources.view.TaskDisplayController;
 import utilities.Exceptions.OperationNotPerformed;
 
-public class Operation {
+import parser.CommandParser;
 
+import resources.view.TaskDisplayController;
+
+//@@author A0130909H Shirlene
+public class Operation {
+	 
+	// ================================================================
+    // ATTRIBUTES
+    // ================================================================
 	private static Logger logger;
 	private Stack<CommandElements> undoList;
 	private Stack<CommandElements> redoList;
-	private static final String DEFAULT_RETURN = "not found";
 	ArrayList<TaskEvent> searchView;
 	ArrayList<TaskEvent> allView;
 	ArrayList<Integer> idList;
 	int size;
-
+	
+	// ================================================================
+    // CONSTANT STRING
+    // ================================================================
+	private static final String DEFAULT_RETURN = "not found";
+	
 	public Operation() {
 		undoList = new Stack<CommandElements>();
 		logger = Logger.getLogger("Operation");
@@ -37,11 +47,8 @@ public class Operation {
 		allView = new ArrayList<TaskEvent>();
 	}
 
-	public ArrayList<TaskEvent> getSearchView() {
-		ArrayList<TaskEvent >list = searchView;
-		
-		
-		return list;
+	public ArrayList<TaskEvent> getResultView() {
+		return searchView;
 	}
 
 	/**

@@ -1,7 +1,5 @@
 package utilities;
 
-import java.util.ArrayList;
-
 public class TaskDate implements Comparable<TaskDate> {
 
 	String myDate;
@@ -155,16 +153,5 @@ public class TaskDate implements Comparable<TaskDate> {
 		} else {
 			return 0;
 		}
-	}
-
-	private String formatChange(String date) {
-		if (date.length() == 2) {
-			return date;
-		} else if (date.length() == 4) {
-			return date.substring(2, 4);
-		} else if (date.length() == 1) {
-			return "0" + date;
-		} else {
-			return date;}
 	}
 }

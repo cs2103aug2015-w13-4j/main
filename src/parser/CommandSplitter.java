@@ -9,7 +9,7 @@ import utilities.Command_Type;
 import utilities.TaskDate;
 import utilities.TaskTime;
 
-//@@A0133965X
+//@@author A0133965X
 public class CommandSplitter {
 
 	private static final Integer LAST_MONDAY = -6;
@@ -38,7 +38,15 @@ public class CommandSplitter {
 	private static final Integer YTD = -1;
 	private static final TaskDate NULL_DATE = new TaskDate(0,0,0);
 	private static final TaskTime NULL_TIME = new TaskTime(0,0);
+	private static final Integer NULL_OBJECT = -1;
 
+	/**
+	 * determine whether a keyword exists in a String
+	 * 
+	 * @param the keyword to look for
+	 * @param the domain String
+	 * @return boolean value exist or not 
+	 */
 	public static boolean contain(String keyword, String domain) {
 		domain = domain.toLowerCase();
 		int numQ = findQuo(domain);
@@ -57,6 +65,12 @@ public class CommandSplitter {
 		return false;
 	}
 	
+	/**
+	 * Find the number of quotation marks in a String
+	 * 
+	 * @param the domain String
+	 * @return number of quotation marks
+	 */
 	private static int findQuo(String domain) {
 		int num = 0;
 		for (int i = 0; i < domain.length(); i ++) {
@@ -67,6 +81,11 @@ public class CommandSplitter {
 		return num;
 	}
 	
+	/**
+	 * Find out which day today is in a week
+	 * 
+	 * @return numerical value of today in a week
+	 */
 	public static int getDayOfWeek() {
 		Date date = new Date(); // your date
 	    Calendar cal = Calendar.getInstance();
@@ -79,6 +98,12 @@ public class CommandSplitter {
 	    }
 	}
 	
+	/**
+	 * Determine whether a String is in Integer form
+	 * 
+	 * @param the String to check
+	 * @return boolean value yes or no
+	 */
 	public static boolean isInteger(String c) {
 	    try {
 	        Integer.parseInt(c);
@@ -87,6 +112,12 @@ public class CommandSplitter {
 	    return false;
 	}
 	
+	/**
+	 * Find out how many valid dates are specified in a command
+	 * 
+	 * @param the user input command
+	 * @return number of valid dates
+	 */
 	private static int getValidDate(String command) {
 		TaskDate myDate[] = findDate(command);
 		int validDate = 0;
@@ -98,6 +129,12 @@ public class CommandSplitter {
 		return validDate;
 	}
 	
+	/**
+	 * Find out how many valid times are specified in a command
+	 * 
+	 * @param the user input command
+	 * @return number of valid times
+	 */
 	private static int getValidTime(String command) {
 		TaskTime myTime[] = findTime(command);
 		int validTime = 0;
@@ -109,6 +146,12 @@ public class CommandSplitter {
 		return validTime;
 	}
 	
+	/**
+	 * Find the task name in the user input String
+	 * 
+	 * @param the user input command
+	 * @return the task name or null if there isn't any
+	 */
 	public static String findName(String command) {
 		if (command.contains("\"")) {
 			String parts[] = command.split("\"");
@@ -118,6 +161,12 @@ public class CommandSplitter {
 		}
 	}
 	
+	/**
+	 * Determine the type of this command
+	 * 
+	 * @param the user input command
+	 * @return the type of command
+	 */
 	public static Command_Type findType(String command) {
 		if (contain("add", command) || contain("a", command)) {
 			return Command_Type.ADD_TASK;
@@ -150,6 +199,12 @@ public class CommandSplitter {
 		}
 	}
 	
+	/**
+	 * Find the user specified edit field in the command if any
+	 * 
+	 * @param the user input command
+	 * @return the edit field
+	 */
 	public static Command_Field findField(String command) {
 		if (contain("name", command)) {
 			return Command_Field.NAME;
@@ -168,6 +223,12 @@ public class CommandSplitter {
 		}
 	}
 	
+	/**
+	 * Find the priority information in the command if any
+	 * 
+	 * @param the user input command
+	 * @return the priority information
+	 */
 	public static Command_Priority findPriority(String command) {
 		if (contain("flag", command)) {
 			return Command_Priority.FLAG;
@@ -181,6 +242,12 @@ public class CommandSplitter {
 		}
 	}
 	
+	/**
+	 * Find the user specified operation object if any
+	 * 
+	 * @param the user input command
+	 * @return the object or -1 if none
+	 */
 	public static int findObject(String command) {
 		String parts[] = command.split(" ");
 		for (int i = 0; i < parts.length; i ++) {
@@ -188,9 +255,15 @@ public class CommandSplitter {
 				return Integer.parseInt(parts[i]);
 			}
 		}
-		return -1;
+		return NULL_OBJECT;
 	}
 	
+	/**
+	 * Find the dates specified in the command
+	 * 
+	 * @param the user input command
+	 * @return array of TaskDate objects
+	 */
 	public static TaskDate[] findDate(String command) {
 		TaskDate results[] = new TaskDate[2];
 		TaskDate today = DateParser.getCurrentDate();
@@ -286,6 +359,12 @@ public class CommandSplitter {
 		return results;
 	}
 	
+	/**
+	 * Adjust the dates to the correct ordering
+	 * 
+	 * @param the user input command
+	 * @return array of TaskDate objects
+	 */
 	public static TaskDate[] extractDate(String command) {
 		TaskDate myDate[] = findDate(command);
 		int validTime = getValidTime(command);
@@ -308,6 +387,12 @@ public class CommandSplitter {
 		return myDate;
 	}
 	
+	/**
+	 * Find the times specified in the command
+	 * 
+	 * @param the user input command
+	 * @return array of TaskTime objects
+	 */
 	public static TaskTime[] findTime(String command) {
 		int validDate = getValidDate(command);
 		int pos = -1;
@@ -317,7 +402,7 @@ public class CommandSplitter {
 		for (int i = 0; i < parts.length; i ++) {
 			TaskTime temp;
 			try {
-				temp = TimeParser.timeCheck(parts[i]);
+				temp = TimeParser.timeDecoder(parts[i]);
 			} catch (NumberFormatException e) {
 				temp = null;
 			}
@@ -360,6 +445,12 @@ public class CommandSplitter {
 		return timeToken;
 	}
 	
+	/**
+	 * Adjust the times to the correct ordering
+	 * 
+	 * @param the user input command
+	 * @return array of TaskTime objects
+	 */
 	public static TaskTime[] extractTime(String command) {
 		int validDate = getValidDate(command);
 		TaskDate myDate[] = findDate(command);

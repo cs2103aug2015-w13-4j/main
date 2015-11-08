@@ -168,10 +168,14 @@
 }
 
 .display #generalView {
+<<<<<<< HEAD
 	-fx-background-color: #1B1C1D;
 	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 0px;
+=======
+	-fx-background-color: #202020;
+>>>>>>> master
 }
 
 .display #generalView .list-cell {
@@ -195,10 +199,14 @@
 }
 
 .display #flagView {
+<<<<<<< HEAD
 	-fx-background-color: #1B1C1D;
 	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 2px 0px;
+=======
+	-fx-background-color: #202020;
+>>>>>>> master
 }
 
 .display #flagView .list-cell {
@@ -219,14 +227,18 @@
 	-fx-padding: 2 17 2 2;
 	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 2px;
+	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #floatingView {
+<<<<<<< HEAD
 	-fx-background-color: #1B1C1D;
 	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 2px 2px;
+=======
+	-fx-background-color: #202020;
+>>>>>>> master
 }
 
 .display #floatingView .list-cell {

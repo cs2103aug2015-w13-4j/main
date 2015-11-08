@@ -2,11 +2,10 @@ package resources.view;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-//@author A0124933H
+//@@author A0124933H Benjamin
 public class HelpCommand extends HBox {
 
     // ================================================================

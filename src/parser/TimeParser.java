@@ -5,7 +5,13 @@ import utilities.TaskTime;
 //@@A0133965X
 public class TimeParser {
 
-	public static TaskTime timeCheck(String piece) throws NumberFormatException{
+	/**
+	 * Translate time Strings in number format
+	 * 
+	 * @param the String containing time information
+	 * @return TaskTime object
+	 */
+	public static TaskTime timeDecoder(String piece) throws NumberFormatException{
 		if (piece.toLowerCase().contains("am") && !piece.toLowerCase().contains(":")) {
 			if (piece.length() == 3) {
 				int hour = Integer.parseInt(piece.charAt(0) + "");
