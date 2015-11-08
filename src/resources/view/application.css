@@ -11,24 +11,24 @@
  */
 
 .inputView #feedBack {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	-fx-font-family: "Arial", cursive, sans-serif;
 	-fx-font-size:13px;
 	-fx-text-fill: white;
 	font-weight: 600;
 	-fx-background-color: #202020;
-	-fx-border-color:orange;
+	-fx-border-color: #268bd2;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 2px;
 } 
 
 .inputView #userInput {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	-fx-font-family: "Consolas", cursive, sans-serif;
 	-fx-font-size:14px;
 	-fx-text-fill:white;
 	-fx-focus-color: blue;
 	-fx-background-color:#202020;
 	-fx-accent: blue;
-	-fx-border-color:orange;
+	-fx-border-color:#268bd2;
 	-fx-border-style:solid;
 	-fx-border-width:0px 2px 2px 2px;
 }
@@ -43,7 +43,7 @@
 .task {
 	-fx-padding: 2 0 2 5;
 	-fx-background-radius: 5;
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
+	-fx-font-family: "Arial", sans-serif;
 	-fx-font-size: 13px;
 }
 
@@ -60,12 +60,12 @@
 
 .task #taskFlag {
 	-fx-padding: 12;
-	-fx-fill: red;
+	-fx-fill: #F02E4F;
 }
 
 .task #sDate {
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: #C0C0C0;
+	-fx-text-fill: #ADADAD;
 	-fx-font-size:11px;	
 }
 
@@ -94,7 +94,7 @@
 .task #jointLabel {
 	-fx-font-size:10px;
 	-fx-padding: 1 0 0 5;
-	-fx-text-fill: red;
+	-fx-text-fill: FDC325;
 }
 
 /*
@@ -128,7 +128,7 @@
  */
  
 .display #borderPane {
-	-fx-background-color: #202020; /* #99FF99;*/
+	-fx-background-color: #1B1C1D; /* #99FF99;*/
 }
  
 .display #resultContent {
@@ -155,83 +155,86 @@
 	-fx-background-color: transparent;
 }
 .display #generalTaskLabel {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 13px;
-	-fx-text-fill: #00FF00;
+	-fx-font-family: "Arial", cursive, sans-serif;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #2aa198;
 	font-weight: 700;
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 	-fx-padding: 2 24 2 2;
-	-fx-border-color:blue;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #generalView {
-	-fx-background-color: #202020;
-	-fx-border-color:blue;
+	-fx-background-color: #1B1C1D;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #generalView .list-cell {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 
 .display #generalView .listView {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 .display #flagTaskLabel {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 13px;
-	-fx-text-fill: #00FF00;
+	-fx-font-family: "Arial", cursive, sans-serif;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #dc322f;
 	font-weight : 700;
-	-fx-background-color: #202020;
-	-fx-border-color:red;
+	-fx-background-color: #1B1C1D;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 0px;
 	-fx-padding: 2 24 2 2;
 }
 
 .display #flagView {
-	-fx-background-color: #202020;
-	-fx-border-color:red;
+	-fx-background-color: #1B1C1D;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 2px 0px;
 }
 
 .display #flagView .list-cell {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 
 .display #flagView .listView {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 
 .display #floatingTaskLabel {
-	-fx-font-family: "Comic Sans MS", cursive, sans-serif;
-	-fx-font-size: 13px;
-	-fx-text-fill: #00FF00;
+	-fx-font-family: "Arial", cursive, sans-serif;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #b58900;
 	font-weight: 700;
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 	-fx-padding: 2 17 2 2;
-	-fx-border-color:#6600CC;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 0px 2px;
 }
 
 .display #floatingView {
-	-fx-background-color: #202020;
-	-fx-border-color:#6600CC;
+	-fx-background-color: #1B1C1D;
+	-fx-border-color:#1B1C1D;
 	-fx-border-style:solid;
 	-fx-border-width:2px 2px 2px 2px;
 }
 
 .display #floatingView .list-cell {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 
 .display #floatingView .listView {
-	-fx-background-color: #202020;
+	-fx-background-color: #1B1C1D;
 }
 
 .display .list-view .scroll-bar:horizontal {
