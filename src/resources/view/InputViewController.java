@@ -123,8 +123,8 @@ public class InputViewController extends VBox {
     public void handleKeyPress(KeyEvent event) {
         taskDisplay = TaskDisplayController.getInstance();
         if (event.getCode() == KeyCode.ENTER) {
-            handleUserInput();
             taskDisplay.hideAllOverlays();
+            handleUserInput();
             userInput.setText(EMPTY_STRING);
             taskDisplay.updateViews();
             resetCommandPointer();
