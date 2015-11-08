@@ -340,7 +340,7 @@ public class TaskDisplayController extends StackPane {
 
     public void hideAllOverlays() {
         borderPane.toFront();
-        borderPane.setOpacity(1);
+        borderPane.setOpacity(OVERLAY_VISIBLE_OPACITY);
         hideHelpView();
         hideResultView();
     }
