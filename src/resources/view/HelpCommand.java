@@ -37,7 +37,7 @@ public class HelpCommand extends HBox {
     // INITIALIZATION METHOD
     // ================================================================
 
-    public void initFxmlFields(String command, String description) {
+    private void initFxmlFields(String command, String description) {
         this.command.setText(command);
         this.description.setText(description);
     }
