@@ -168,9 +168,6 @@
 
 .display #generalView {
 	-fx-background-color: #202020;
-	-fx-border-color:blue;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #generalView .list-cell {
@@ -194,9 +191,6 @@
 
 .display #flagView {
 	-fx-background-color: #202020;
-	-fx-border-color:red;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 2px 0px;
 }
 
 .display #flagView .list-cell {
@@ -216,14 +210,11 @@
 	-fx-padding: 2 17 2 2;
 	-fx-border-color:#6600CC;
 	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 2px;
+	-fx-border-width:2px 2px 0px 0px;
 }
 
 .display #floatingView {
 	-fx-background-color: #202020;
-	-fx-border-color:#6600CC;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 2px 2px;
 }
 
 .display #floatingView .list-cell {
