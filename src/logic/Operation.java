@@ -139,8 +139,8 @@ public class Operation {
 	 * @return
 	 */
 	private String performOperation(String input, Display message, CommandElements processed) {
-		String name = findTaskName(processed);
 		processed = findId(processed);
+		String name = findTaskName(processed);
 		try {
 			if (performCommand(processed.getType(), processed)) {
 				logger.log(Level.INFO, "performing command " + processed.getType());
