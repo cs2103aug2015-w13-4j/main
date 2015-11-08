@@ -3,7 +3,6 @@ package resources.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import utilities.TaskEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,9 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
 import logic.Display;
-import resources.view.Task;
 import logic.Launch;
+import resources.view.Task;
+import utilities.TaskEvent;
 
 //@@A0124933H Benjamin
 public class TaskDisplayController extends StackPane {
@@ -103,7 +104,7 @@ public class TaskDisplayController extends StackPane {
     private static final String FILE_LOC = "TaskDisplay.fxml";
 
     private static final int TASK_NUMBERING_OFFSET = 1;
-    
+
     private static final double OVERLAY_VISIBLE_OPACITY = 1.0;
     private static final double OVERLAY_FADE_OPACITY = 0.35;
     private static final double OVERLAY_INVISIBLE_OPACITY = 0.0;
@@ -118,7 +119,7 @@ public class TaskDisplayController extends StackPane {
 
     private boolean enableHelpView;
     private boolean enableResultView;
-    
+
     private ArrayList<TaskEvent> taskList;
 
     // ================================================================
@@ -146,21 +147,32 @@ public class TaskDisplayController extends StackPane {
         initHelpTaskDisplay();
         updateViews();
     }
+
+    /**
+     * Method to help with TestFX JUnit Testing
+     * @return size of taskList
+     */
     public int getTaskListSize() {
         return taskList.size();
     }
-    
+
+    /**
+     * Refreshes and updates all display views.
+     */
     public void updateViews() {
         Launch.getInstance();
         display = Launch.getDisplay();
         refreshAllViews();
         updateAllTaskDisplays();
     }
-    
+
     // ================================================================
     // PRIVATE METHODS
     // ================================================================
 
+    /**
+     * Updates all tasks with the latest information
+     */
     private void updateAllTaskDisplays() {
         getAllTask();
         updateGeneralTaskDisplay();
@@ -168,7 +180,7 @@ public class TaskDisplayController extends StackPane {
         updateFloatingTaskDisplay();
         updateResultTaskDisplay();
     }
-    
+
     private void updateGeneralTaskDisplay() {
         ObservableList<HBox> displayTasks = FXCollections.observableArrayList();
         displayTasks = getGeneralTask();
@@ -211,7 +223,7 @@ public class TaskDisplayController extends StackPane {
         getFloatingTask();
         getFlaggedTask();
     } 
-    
+
     private ObservableList<HBox> getGeneralTask() {
 
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
@@ -224,7 +236,7 @@ public class TaskDisplayController extends StackPane {
     }
 
     private ObservableList<HBox> getFloatingTask() {
-        
+
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         for (TaskEvent t : taskList) {
             if (t.getEndDate().getDay() == 0 && t.getStartDate().getDay() == 0) {
@@ -256,6 +268,10 @@ public class TaskDisplayController extends StackPane {
         return tasks;
     }
 
+    /**
+     * Sets up the help information for PIXEList.
+     * @return tasks which contains all the help information.
+     */
     private ObservableList<HBox> getHelpCommands() {
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         tasks.add(new HelpCommand(HELP_COMMAND_ADD, HELP_DESC_ADD));
@@ -275,7 +291,7 @@ public class TaskDisplayController extends StackPane {
 
         return tasks;
     }
-    
+
     // ================================================================
     // GUI OVERLAY METHODS
     // ================================================================
@@ -283,7 +299,7 @@ public class TaskDisplayController extends StackPane {
     public boolean isResultViewEnabled() {
         return enableResultView;
     }
-    
+
     public void triggerHelpView() {
         this.enableHelpView = true;
     }

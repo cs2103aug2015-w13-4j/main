@@ -37,20 +37,15 @@ public class RootController extends BorderPane {
             throw new RuntimeException(e);
         }
 
-        initTaskDisplay();
-        initInputView();
+        initTaskDisplay();;
     }
 
     // ================================================================
-    // PRIVATE METHODS
+    // INITIALIZATION METHODS
     // ================================================================
 
     private void initTaskDisplay() {
         this.taskDisplayController = TaskDisplayController.getInstance();
         this.setCenter(taskDisplayController);
-    }
-
-    private void initInputView() {
-        InputViewController.getInstance();
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+
 import logic.Launch;
 import resources.view.TaskDisplayController;
 
@@ -89,6 +90,10 @@ public class InputViewController extends VBox {
     private static final String TEST_TASK_TWENTY = "add \"Wash the car\"";
     
     
+    // ================================================================
+    // CONSTRUCTORS
+    // ================================================================
+    
     public static InputViewController getInstance() {
         if (inputViewController == null) {
             inputViewController = new InputViewController();
@@ -111,6 +116,10 @@ public class InputViewController extends VBox {
         initCommandList();
     }
 
+    /**
+     * Handles key presses for user input bar.
+     * @param event
+     */
     public void handleKeyPress(KeyEvent event) {
         taskDisplay = TaskDisplayController.getInstance();
         if (event.getCode() == KeyCode.ENTER) {
@@ -136,6 +145,18 @@ public class InputViewController extends VBox {
         }
     }
 
+    public void passToLogic(String input) {
+        taskDisplay = TaskDisplayController.getInstance();
+        launch = Launch.getInstance();
+        String output = launch.command(input);
+        labelFeedBack(output);
+        taskDisplay.updateViews();
+    }
+    
+    // ================================================================
+    // PRIVATE METHODS
+    // ================================================================   
+    
     private void handleHistoryCommands(KeyEvent event) {
         String pastCmd = getHistoryCommands(event.getCode());
         userInput.setText(pastCmd);
@@ -157,14 +178,6 @@ public class InputViewController extends VBox {
 
     private void labelFeedBack(String input) {
         feedBack.setText(input);
-    }
-
-    public void passToLogic(String input) {
-        taskDisplay = TaskDisplayController.getInstance();
-        launch = Launch.getInstance();
-        String output = launch.command(input);
-        labelFeedBack(output);
-        taskDisplay.updateViews();
     }
 
     private void initTesting() {
@@ -196,10 +209,6 @@ public class InputViewController extends VBox {
     private String getCommands(int i) {
     		i = i% commands.size();
     		return commands.get(i);
-    }
-    
-    public int getCommandsSize() {
-        return commands.size();
     }
     
     private void resetCommandPointer() {
@@ -265,7 +274,15 @@ public class InputViewController extends VBox {
         preset.add(TEST_TASK_TWENTY);
     }
     
+    // ================================================================
+    // GETTERS
+    // ================================================================  
+    
     public int getPresetSize() {
         return preset.size();
+    }
+    
+    public int getCommandsSize() {
+        return commands.size();
     }
 }
