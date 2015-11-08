@@ -9,14 +9,19 @@ import utilities.TaskTime;
 import utilities.Exceptions.CommandNotFound;
 import utilities.Exceptions.EditFieldNotFound;
 
-//@@A0133965X
+// @@author A0133965X
 public class CommandParser {
 	
 	private static final String CMD_NOT_FOUND = "command not found";
 	private static final String EDIT_NOT_FOUND = "edit field not found";
 	private static final Integer SINGLE = 1;
 	
-
+	/**
+	 * Translate the user input
+	 * 
+	 * @param the String command user enters
+	 * @return processed information of the user command
+	 */
 	public static CommandElements ProcessInput(String command) throws Exception {
 		CommandNotFound command_exception = new CommandNotFound(CMD_NOT_FOUND);
 		EditFieldNotFound edit_exception = new EditFieldNotFound(EDIT_NOT_FOUND);
