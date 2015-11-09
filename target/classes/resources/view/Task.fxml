@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" styleClass="task" type="HBox" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <CheckBox fx:id="checkBox" focusTraversable="false" mnemonicParsing="false" />
+      <Label fx:id="index" focusTraversable="false" text="Index " />
+      <Label fx:id="taskName" focusTraversable="false" text="Task Name " />
+      <FontAwesomeIconView fx:id="taskFlag" glyphName="FLAG" HBox.hgrow="ALWAYS" />
+      <Label fx:id="sDate" focusTraversable="false" text="sDate" />
+      <Label fx:id="startTime" focusTraversable="false" />
+      <Label fx:id="jointLabel" focusTraversable="false" />
+      <Label fx:id="eDate" focusTraversable="false" text="eDate" />
+      <Label fx:id="endTime" focusTraversable="false" />
+   </children>
+</fx:root>
