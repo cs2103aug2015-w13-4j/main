@@ -104,6 +104,10 @@ public class FileUtils {
 		}
 	}
 
+	/**
+	 * Clears the content of a file using RandomAccessFile to set the length to 0
+	 * @param directory the file to be cleared
+	 */
 	public static void clearFileContent(String directory) {
 		try(RandomAccessFile raf = new RandomAccessFile(directory, "rw")) {
 			raf.setLength(0);
