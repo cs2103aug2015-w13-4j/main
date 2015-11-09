@@ -33,6 +33,8 @@ public class Operation {
 	ArrayList<Integer> idList;
 	boolean flagView;
 	int size;
+	boolean searchFlag;
+	String search;
 
 	// ================================================================
 	// CONSTANT STRING
@@ -50,6 +52,8 @@ public class Operation {
 		idList = new ArrayList<Integer>();
 		allView = new ArrayList<TaskEvent>();
 		flagView = false;
+		search = new String();
+		searchFlag = false;
 	}
 
 	// ================================================================
@@ -62,6 +66,12 @@ public class Operation {
 	 */
 	public ArrayList<TaskEvent> getResultView() {
 		ArrayList<TaskEvent> list = resultView;
+		StorageImp action = Launch.getStorage();
+		if(searchFlag){
+			list = action.searchTaskByString(search);
+		}else{
+			list = action.loadCompletedTasks();
+		}
 		return list;
 	}
 
@@ -301,7 +311,8 @@ public class Operation {
 			break;
 		case SEARCH_TASK:
 			logger.log(Level.INFO, "command is search");
-			resultView = action.searchTaskByString(getSearchString(content));
+			search = getSearchString(content);
+			resultView = action.searchTaskByString(search);
 			size = resultView.size();
 			controller.triggerResultView();
 			isSuccessful = true;
