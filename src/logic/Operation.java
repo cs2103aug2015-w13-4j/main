@@ -212,7 +212,7 @@ public class Operation {
 	 */
 	private String findTaskName(CommandElements content) {
 		String name;
-		if (content.getType().toString().equals(("ADD_TASK"))) {
+		if (content.getType().toString().equals(("ADD_TASK")) || (content.getType().toString().equals(("DIRECTORY")))) {
 			name = content.getName();
 		} else {
 			name = findTaskNameById(content.getID());
