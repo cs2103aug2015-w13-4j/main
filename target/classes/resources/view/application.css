@@ -1,43 +1,37 @@
 /*
- * ==============
- * Font-Family
- * ==============
- */
-
-/*
- * ==============
+ * ================================================================
  * Input View
- * ==============
+ * ================================================================
  */
 
 .inputView #feedBack {
 	-fx-font-family: "Arial", cursive, sans-serif;
-	-fx-font-size:13px;
+	-fx-font-size: 13px;
 	-fx-text-fill: white;
 	font-weight: 600;
 	-fx-background-color: #202020;
 	-fx-border-color: #268BD2;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 2px;
+	-fx-border-style: solid;
+	-fx-border-width: 2px 2px 0px 2px;
 } 
 
 .inputView #userInput {
 	-fx-font-family: "Consolas", cursive, sans-serif;
-	-fx-font-size:14px;
-	-fx-text-fill:white;
+	-fx-font-size: 14px;
+	-fx-text-fill: white;
 	-fx-focus-color: blue;
 	-fx-background-color:#202020;
 	-fx-accent: blue;
-	-fx-border-color:#268BD2;
-	-fx-border-style:solid;
-	-fx-border-width:0px 2px 2px 2px;
+	-fx-border-color: #268BD2;
+	-fx-border-style: solid;
+	-fx-border-width: 0px 2px 2px 2px;
 }
 
 
 /*
- * ==============
+ * ================================================================
  * Task Styles
- * ==============
+ * ================================================================
  */
 
 .task {
@@ -88,19 +82,19 @@
 }
 
 .task #checkBox {
-	-fx-font-size:8px;
+	-fx-font-size: 8px;
 }
 
 .task #jointLabel {
-	-fx-font-size:10px;
+	-fx-font-size: 10px;
 	-fx-padding: 1 0 0 5;
 	-fx-text-fill: #FDC325;
 }
 
 /*
- * ==============
+ * ================================================================
  * Help Style
- * ==============
+ * ================================================================
  */
 
 .helpCommand {
@@ -114,17 +108,17 @@
 }
 
 /*
- * ==============
+ * ================================================================
  * Root
- * ==============
+ * ================================================================
  */
 .root{
 	-fx-background-color: transparent;
 }
 /*
- * ==============
+ * ================================================================
  * Task Display
- * ==============
+ * ================================================================
  */
  
 .display #borderPane {
@@ -146,7 +140,7 @@
 }
 
 .display #helpContent {
-	-fx-background-color: #CC99FF;
+	-fx-background-color: #3399FF;
 	-fx-padding: 13;
 	-fx-background-radius: 20;
 }
@@ -162,9 +156,9 @@
 	font-weight: 700;
 	-fx-background-color: #1B1C1D;
 	-fx-padding: 2 24 2 2;
-	-fx-border-color:#1B1C1D;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 0px;
+	-fx-border-color: #1B1C1D;
+	-fx-border-style: solid;
+	-fx-border-width: 2px 2px 0px 0px;
 }
 
 .display #generalView {
@@ -188,9 +182,9 @@
 	-fx-text-fill: #DC322F;
 	font-weight : 700;
 	-fx-background-color: #1B1C1D;
-	-fx-border-color:#1B1C1D;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 0px 0px;
+	-fx-border-color: #1B1C1D;
+	-fx-border-style: solid;
+	-fx-border-width: 2px 2px 0px 0px;
 	-fx-padding: 2 24 2 2;
 }
 
@@ -224,9 +218,9 @@
 
 .display #floatingView {
 	-fx-background-color: #1B1C1D;
-	-fx-border-color:#1B1C1D;
-	-fx-border-style:solid;
-	-fx-border-width:2px 2px 2px 2px;
+	-fx-border-color: #1B1C1D;
+	-fx-border-style: solid;
+	-fx-border-width: 2px 2px 2px 2px;
 }
 
 .display #floatingView .list-cell {
@@ -249,6 +243,6 @@
 
 .display .list-cell {
 	-fx-padding: 0 0 3 0;
-	-fx-background-color: white;
+	-fx-background-color: #1B1C1D;
 }
 
