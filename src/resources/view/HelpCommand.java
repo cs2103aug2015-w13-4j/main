@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
  *
  */
 
-// @@author A0124933H Benjamin
+//@@author A0124933H Benjamin
 public class HelpCommand extends HBox {
 
     // ================================================================

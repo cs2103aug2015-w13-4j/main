@@ -1,28 +1,6 @@
-package resources.view;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import utilities.Command_Priority;
-import utilities.TaskDate;
-import utilities.TaskEvent;
-import utilities.TaskTime;
-
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-
-/**
- * Task class creates a task HBox object to view the task information on
- * PIXEList's graphical user interface.
- * 
- * @author Benjamin
- *
- */
-
-//@@author A0124933H Benjamin -reused
+# A0124933H Benjamin reused
+###### ./src/resources/view/Task.java
+``` java
 public class Task extends HBox {
 
     // ================================================================
@@ -215,3 +193,4 @@ public class Task extends HBox {
         }
     }
 }
+```

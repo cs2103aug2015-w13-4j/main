@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  */
 
-// @@author A0124933H Benjamin
+//@@author A0124933H Benjamin
 public class MainApp extends Application {
 
     private Stage primaryStage;
