@@ -41,6 +41,11 @@ public class StorageImpTest {
 	static final Command_Priority U = Command_Priority.UNFLAG;
 	StorageImp s = StorageImp.getInstance();
 
+	/**
+	 * Test if the task count is correctly reported.
+	 * First clear the content of the task file and then add
+	 * some tasks.
+	 */
 	@Test
 	public void testGetTaskCount() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -48,6 +53,9 @@ public class StorageImpTest {
 		assertEquals(4, s.getTaskCount());
 	}
 
+	/**
+	 * Test if add task can work
+	 */
 	@Test
 	public void testAddTask() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -55,6 +63,9 @@ public class StorageImpTest {
 		assertEquals(1, s.getTaskCount());
 	}
 
+	/**
+	 * Test if edit can work
+	 */
 	@Test
 	public void testEditTask() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -72,6 +83,9 @@ public class StorageImpTest {
 		assertEquals(t3, list.get(3).getStartTime());
 	}
 
+	/**
+	 * Test if delete can work
+	 */
 	@Test
 	public void testDeleteTaskByID() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -81,6 +95,9 @@ public class StorageImpTest {
 		assertNotSame(1, list.get(0).getTaskID());
 	}
 
+	/**
+	 * Test if task can be marked done
+	 */
 	@Test
 	public void testMarkTaskAsDone() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -90,6 +107,9 @@ public class StorageImpTest {
 		assertEquals(true, list.get(0).isCompleted());
 	}
 
+	/**
+	 * Test if task can be marked undone
+	 */
 	@Test
 	public void testMarkTaskAsUndone() throws Exception {
 		FileUtils.clearFileContent(s.getDirectory());
@@ -99,11 +119,18 @@ public class StorageImpTest {
 		assertEquals(false, list.get(0).isCompleted());
 	}
 
+	/**
+	 * Test if an directory can be changed to an empty string
+	 * expects no
+	 */
 	@Test
 	public void testPathTypeOfAnEmptyString() {
 		assertFalse(s.changeDirectory(""));
 	}
 
+	/**
+	 * Test if change directory can be done with different types of paths
+	 */
 	@Test
 	public void testChangeDirectory() throws Exception {
 		assertTrue(s.changeDirectory("/Users/zhongwei-z/Desktop/new folder"));
@@ -112,6 +139,9 @@ public class StorageImpTest {
 		assertFalse(s.changeDirectory("dgegeae.aegaa.aega.aeg/aeg/ar//rg"));
 	}
 
+	/**
+	 * Helper method to add four tasks
+	 */
 	private void generateTasks() {
 		s.addTask(n1, d1, t1, d2, t2, F);
 		s.addTask(n2, d2, t2, d3, t3, U);
