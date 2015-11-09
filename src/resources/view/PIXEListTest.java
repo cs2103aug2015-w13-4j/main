@@ -23,68 +23,68 @@ import org.loadui.testfx.GuiTest;
  *
  */
 
-//@@A0124933H Benjamin
+// @@A0124933H Benjamin
 public class PIXEListTest extends GuiTest {
 
-    BorderPane sceneRoot;
-    TaskDisplayController taskDisplay;
-    InputViewController inputView;
-    Stage primaryStage;
-    TextField userInput;
-    Label feedBack;
+	BorderPane sceneRoot;
+	TaskDisplayController taskDisplay;
+	InputViewController inputView;
+	Stage primaryStage;
+	TextField userInput;
+	Label feedBack;
 
-    @Test
-    public void testHelp() {
-        userInput.setText("help");
-        push(KeyCode.ENTER);
-        verifyLabel("help activated");
-        sleep(2, TimeUnit.SECONDS);
-        push(KeyCode.ESCAPE);
-    }
+	@Test
+	public void testHelp() {
+		userInput.setText("help");
+		push(KeyCode.ENTER);
+		verifyLabel("help activated");
+		sleep(2, TimeUnit.SECONDS);
+		push(KeyCode.ESCAPE);
+	}
 
-    @Test
-    public void testInitDatas() {
-        push(KeyCode.F1);
-        assertEquals(inputView.getPresetSize(), 20);
-    }
+	@Test
+	public void testInitDatas() {
+		push(KeyCode.F1);
+		assertEquals(inputView.getPresetSize(), 20);
+	}
 
-    @Test
-    public void testAdd() {
-        userInput.setText("add \"CS2010\"");
-        push(KeyCode.ENTER);
-        verifyLabel("CS2010 has been added successfully");
-    }
+	@Test
+	public void testAdd() {
+		userInput.setText("add \"CS2010\"");
+		push(KeyCode.ENTER);
+		verifyLabel("CS2010 has been added successfully");
+	}
 
-    public void verifyLabel(String result) {
-        assertEquals(result, feedBack.getText());
-    }
+	public void verifyLabel(String result) {
+		assertEquals(result, feedBack.getText());
+	}
 
-    @Test
-    public void testUndo() {
-        userInput.setText("undo");
-        push(KeyCode.ENTER);
-    }
+	@Test
+	public void testUndo() {
+		userInput.setText("undo");
+		push(KeyCode.ENTER);
+	}
 
-    @Test
-    public void testRedo() {
-        userInput.setText("redo");
-        push(KeyCode.ENTER);
-    }
+	@Test
+	public void testRedo() {
+		userInput.setText("redo");
+		push(KeyCode.ENTER);
+	}
 
-    @Override
-    protected Parent getRootNode() {
-        return null;
-    }
+	@Override
+	protected Parent getRootNode() {
+		return null;
+	}
 
-    @Override
-    public void setupStage() throws Throwable {
-        File f = new File("tasks.txt");
-        f.delete();
-        new Thread(() -> Application.launch(MainApp.class)).start();
-        sleep(4, TimeUnit.SECONDS);
-        userInput = (TextField) find("#userInput");
-        feedBack = (Label) find("#feedBack");
-        inputView = InputViewController.getInstance();
-        taskDisplay = TaskDisplayController.getInstance();
-    }
+	@Override
+	public void setupStage() throws Throwable {
+		File f = new File("tasks.txt");
+		f.delete();
+		new Thread(() -> Application.launch(MainApp.class)).start();
+		sleep(4, TimeUnit.SECONDS);
+		userInput = (TextField) find("#userInput");
+		feedBack = (Label) find("#feedBack");
+		inputView = InputViewController.getInstance();
+		taskDisplay = TaskDisplayController.getInstance();
+	}
 }

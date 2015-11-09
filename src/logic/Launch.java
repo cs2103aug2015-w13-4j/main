@@ -7,6 +7,12 @@ import utilities.TaskEvent;
 import java.util.ArrayList;
 
 //@@author A0130909H Shirlene
+/**
+ * Launch class for UI to call
+ * 
+ * @author Shirlene
+ *
+ */
 public class Launch {
 	private static StorageImp storage;
 	private static Display display;
