@@ -15,7 +15,10 @@ import static org.junit.Assert.*;
  */
 public class FileUtilsTest {
 
-	@Test
+	/**
+	 * Test if a file name is correctly reported valid or invalid
+	 */
+	 @Test
 	public void testFileNameValidFileNames() throws IOException {
 		assertTrue(FileUtils.isFilenameValid("valid.txt"));
 		assertTrue(FileUtils.isFilenameValid("valid valid.txt"));
@@ -23,6 +26,9 @@ public class FileUtilsTest {
 		assertFalse(FileUtils.isFilenameValid("invalid . invalid"));
 	}
 
+	/**
+	 * Test if a path name is correctly reported valid or invalid
+	 */
 	@Test
 	public void testFileNameValidPathNames() {
 		assertTrue(FileUtils.isFilenameValid("/Users/zhongwei-z/Desktop"));
