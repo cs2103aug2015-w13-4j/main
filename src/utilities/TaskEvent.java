@@ -75,5 +75,4 @@ public class TaskEvent {
 				String.valueOf(available)
 		);
 	}
-
 }
