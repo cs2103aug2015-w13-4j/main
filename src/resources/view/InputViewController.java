@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
 import logic.Launch;
 import resources.view.TaskDisplayController;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This class handles the TextField that users can input commands and also the
  * feedback label which shows the feedback when the command is executed
@@ -45,6 +48,7 @@ public class InputViewController extends VBox {
     private ArrayList<String> presetTaskTestsList;
     private int historyPointer;
     private int commandsPointer;
+    private static Logger logger;
     
     public static InputViewController inputViewController;
     
@@ -53,6 +57,7 @@ public class InputViewController extends VBox {
     // ================================================================
     private static final String FILE_LOC = "InputView.fxml";
     private static final String INIT_TEST_DATA = "Test data initialized";
+    private static final String INPUT_VIEW = "InputView";
     private static final String EMPTY_STRING = "";
     
     private static final String COMMAND_ADD = "add ";
@@ -90,6 +95,9 @@ public class InputViewController extends VBox {
     private static final String TEST_TASK_NINETEEN = "add \" Inform boss about progress report\" 18/11/2015 11.30am";
     private static final String TEST_TASK_TWENTY = "add \"Wash the car\"";
     
+    private static final String LOGGER_INIT_UNSUCCESSFUL = "INPUT VIEW FAILED TO INITIALIZE";
+    private static final String LOGGER_INIT_SUCCESSFUL = "InputView initiated successfully";
+    
     
     // ================================================================
     // CONSTRUCTORS
@@ -103,6 +111,7 @@ public class InputViewController extends VBox {
     }
 
     public InputViewController() {
+        logger = Logger.getLogger(INPUT_VIEW);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 FILE_LOC));
         loader.setRoot(this);
@@ -110,11 +119,12 @@ public class InputViewController extends VBox {
         try {
             inputViewController = loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE,LOGGER_INIT_UNSUCCESSFUL ,new RuntimeException(e));
         }
         initPresetArrayList();
         initHistoryList();
         initCommandList();
+        logger.log(Level.INFO, LOGGER_INIT_SUCCESSFUL);
     }
 
     /**

@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * This is the main class of PIXEList where
  * all the initialization of the program's
@@ -30,6 +33,17 @@ public class MainApp extends Application {
 
     private static final String PROGRAM_TITLE = "PIXEList";
     private static final String IMAGE_ICON = "resources/imgs/icon.png";
+    
+    
+    private static Logger logger;
+    
+    // ================================================================
+    // LOGGER CONSTANTS
+    // ================================================================
+    
+    private static final String MAIN_APP = "MainApp";
+    private static final String LOGGER_MAIN = "Graphical user interface initiated successfully.";
+    private static final String LOGGER_STAGE = "Stage set up successfully.";
 
     // ================================================================
     // PROGRAM INITIALIZATION METHODS
@@ -46,10 +60,12 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        logger = Logger.getLogger(MAIN_APP);
         initRoot();
         initTaskView();
         initInputView();
         initPrimaryStage(primaryStage);
+        logger.log(Level.INFO, LOGGER_MAIN);
     }
 
     /**
@@ -74,6 +90,7 @@ public class MainApp extends Application {
         assert rootLayout != null;
         this.primaryStage.setScene(new Scene(rootLayout));
         this.primaryStage.show();
+        logger.log(Level.INFO, LOGGER_STAGE);
     }
 
     /**

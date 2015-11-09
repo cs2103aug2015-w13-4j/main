@@ -19,7 +19,8 @@ import logic.Launch;
 import resources.view.Task;
 import utilities.TaskEvent;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * This class performs all the necessary actions
  * to update task information and refreshes the views
@@ -114,6 +115,10 @@ public class TaskDisplayController extends StackPane {
     private static final String TASK_FLAG = "FLAG";
 
     private static final String FILE_LOC = "TaskDisplay.fxml";
+    private static final String TASK_DISPLAY_CONTROLLER = "TaskDisplayController";
+    
+    private static final String LOGGER_INIT_UNSUCCESSFUL = "TASK DISPLAY FAILED TO INITIALIZE";
+    private static final String LOGGER_INIT_SUCCESSFUL = "Task Display initiated successfully";
 
     private static final int TASK_NUMBERING_OFFSET = 1;
 
@@ -133,6 +138,7 @@ public class TaskDisplayController extends StackPane {
     private boolean enableResultView;
 
     private ArrayList<TaskEvent> taskList;
+    private static Logger logger;
 
     // ================================================================
     // CONSTRUCTORS
@@ -146,6 +152,7 @@ public class TaskDisplayController extends StackPane {
     }
 
     private TaskDisplayController() {
+        logger = Logger.getLogger(TASK_DISPLAY_CONTROLLER);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 FILE_LOC));
         loader.setRoot(this);
@@ -153,11 +160,12 @@ public class TaskDisplayController extends StackPane {
         try {
             loader.load();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL, new RuntimeException(e));
         }
         viewBorderPane.setBottom(InputViewController.getInstance());
         initHelpTaskDisplay();
         updateViews();
+        logger.log(Level.INFO, LOGGER_INIT_SUCCESSFUL);
     }
 
     /**
