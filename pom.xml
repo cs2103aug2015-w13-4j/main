@@ -54,6 +54,19 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>resources.view.MainApp</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						jar-with-dependencies</descriptorRefs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
