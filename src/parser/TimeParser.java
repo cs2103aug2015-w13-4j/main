@@ -10,7 +10,9 @@ import utilities.TaskTime;
  *
  */
 public class TimeParser {
-
+    // ================================================================
+    // METHOD
+    // ================================================================
 	/**
 	 * Translate time Strings in number format
 	 * 
