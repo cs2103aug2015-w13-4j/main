@@ -12,47 +12,47 @@ import javafx.scene.layout.HBox;
  * @author Benjamin
  *
  */
-//@@author A0124933H Benjamin
+// @@author A0124933H Benjamin
 public class HelpCommand extends HBox {
 
-    // ================================================================
-    // FXML FIELDS
-    // ================================================================
-    @FXML
-    private Label command;
+	// ================================================================
+	// FXML FIELDS
+	// ================================================================
+	@FXML
+	private Label command;
 
-    @FXML
-    private Label description;
+	@FXML
+	private Label description;
 
-    // ================================================================
-    // CONSTANTS
-    // ================================================================
-    private static final String FILE_LOC = "HelpCommand.fxml";
+	// ================================================================
+	// CONSTANTS
+	// ================================================================
+	private static final String FILE_LOC = "HelpCommand.fxml";
 
-    // ================================================================
-    // CONSTRUCTOR
-    // ================================================================
-    public HelpCommand(String command, String description) {
-        loadFxml();
-        initFxmlFields(command, description);
-    }
+	// ================================================================
+	// CONSTRUCTOR
+	// ================================================================
+	public HelpCommand(String command, String description) {
+		loadFxml();
+		initFxmlFields(command, description);
+	}
 
-    // ================================================================
-    // INITIALIZATION METHOD
-    // ================================================================
-    private void initFxmlFields(String command, String description) {
-        this.command.setText(command);
-        this.description.setText(description);
-    }
+	// ================================================================
+	// INITIALIZATION METHOD
+	// ================================================================
+	private void initFxmlFields(String command, String description) {
+		this.command.setText(command);
+		this.description.setText(description);
+	}
 
-    private void loadFxml() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
-            loader.setRoot(this);
-            loader.setController(this);
-            loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	private void loadFxml() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
+			loader.setRoot(this);
+			loader.setController(this);
+			loader.load();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

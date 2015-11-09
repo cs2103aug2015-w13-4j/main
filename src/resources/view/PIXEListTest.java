@@ -23,7 +23,7 @@ import org.loadui.testfx.GuiTest;
  *
  */
 
-// @@A0124933H Benjamin
+// @@author A0124933H Benjamin
 public class PIXEListTest extends GuiTest {
 
 	BorderPane sceneRoot;
