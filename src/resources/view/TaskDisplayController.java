@@ -19,6 +19,18 @@ import logic.Launch;
 import resources.view.Task;
 import utilities.TaskEvent;
 
+
+/**
+ * This class performs all the necessary actions
+ * to update task information and refreshes the views
+ * to keep the view up to date for the user. It also 
+ * controls the behaviour of the appearance of the help
+ * and result overlays.
+ * 
+ * @author Benjamin
+ *
+ */
+
 //@@A0124933H Benjamin
 public class TaskDisplayController extends StackPane {
 

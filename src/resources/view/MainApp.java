@@ -6,6 +6,15 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * This is the main class of PIXEList where
+ * all the initialization of the program's
+ * graphical user interface and the backend
+ * of the program.
+ * @author Benjamin
+ *
+ */
+
 //@@author A0124933H Benjamin
 public class MainApp extends Application {
 

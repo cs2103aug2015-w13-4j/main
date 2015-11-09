@@ -7,6 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * This class initiates the root display of 
+ * PIXEList's graphical user interface.
+ * @author Benjamin
+ *
+ */
+
 //@@A0124933H Benjamin
 public class RootController extends BorderPane {
 

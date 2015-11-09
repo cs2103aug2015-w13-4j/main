@@ -22,6 +22,7 @@ import resources.view.TaskDisplayController;
  * @author A0124933H
  *
  */
+
 //@@A0124933H Benjamin
 public class InputViewController extends VBox {
 

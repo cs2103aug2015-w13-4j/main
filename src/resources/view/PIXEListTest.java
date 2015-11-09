@@ -16,6 +16,13 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
+/**
+ * JUNIT Testing for PIXEList's
+ * graphical user interface.
+ * @author Benjamin
+ *
+ */
+
 //@@A0124933H Benjamin
 public class PIXEListTest extends GuiTest{
     

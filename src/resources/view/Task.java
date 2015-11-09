@@ -14,6 +14,13 @@ import utilities.TaskTime;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
+/**
+ * Task class creates a task HBox object to view the task 
+ * information on PIXEList's graphical user interface.
+ * @author Benjamin
+ *
+ */
+
 //@@A0124933H-reused Benjamin
 public class Task extends HBox {
 
@@ -113,14 +120,23 @@ public class Task extends HBox {
     /**
      * Initialize fields for fxml label to display.
      * @param idx
+     * 			is the id of the task.
      * @param taskName
+     * 			is the name of the task.
      * @param sDate
+     * 			is the starting date of the task.
      * @param startTime
+     * 			is the starting time of the task.
      * @param eDate
+     * 			is the ending date of the task.
      * @param endTime
+     * 			is the ending time of the task.
      * @param isCompleted
+     * 			is whether the task is completed or not.
      * @param priority
+     * 			is whether the task is flagged or not.
      * @param checkboxListener
+     * 			is the listener to check whether the checkbox is ticked or not.
      */
     private void initFxmlFields(int idx, String taskName, TaskDate sDate, TaskTime startTime,
             TaskDate eDate, TaskTime endTime ,  Boolean isCompleted, Command_Priority priority, ChangeListener<Boolean> checkboxListener) {
@@ -138,9 +154,13 @@ public class Task extends HBox {
     /**
      * Checking of the time and date for proper display.
      * @param sDate
+     * 			is the starting date of the task.
      * @param startTime
+     * 			is the starting time of the task.
      * @param eDate
+     * 			is the ending date of the task.
      * @param endTime
+     * 			is the ending time of the task.
      */
     private void dateAndTimeConfig(TaskDate sDate, TaskTime startTime,
             TaskDate eDate, TaskTime endTime) {
