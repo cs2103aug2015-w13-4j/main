@@ -322,6 +322,7 @@ public class Operation {
 			resultView = action.searchTaskByString(search);
 			size = resultView.size();
 			controller.triggerResultView();
+			searchFlag = true;
 			isSuccessful = true;
 			break;
 		case UNDO:
@@ -358,6 +359,7 @@ public class Operation {
 			resultView = action.loadCompletedTasks();
 			controller.triggerResultView();
 			size = resultView.size();
+			searchFlag = false;
 			return true;
 		case HELP:
 			return true;
@@ -481,7 +483,7 @@ public class Operation {
 			logger.log(Level.INFO, "start time");
 			return task.getStartTime().toString();
 		default:
-			break;
+			assert false : field;
 		}
 		return DEFAULT_RETURN;
 	}
