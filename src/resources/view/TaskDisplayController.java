@@ -30,14 +30,12 @@ import java.util.logging.Logger;
  * @author Benjamin
  *
  */
-
 //@@author A0124933H Benjamin
 public class TaskDisplayController extends StackPane {
 
     // ================================================================
     // FXML FIELDS
     // ================================================================
-
     @FXML
     private ListView<HBox> generalView;
 
@@ -77,7 +75,6 @@ public class TaskDisplayController extends StackPane {
     // ================================================================
     // CONSTANTS
     // ================================================================
-
     private static final String HELP_DESC_ADD = "Add a task?";
     private static final String HELP_DESC_EDIT = "Edit a task?";
     private static final String HELP_DESC_DELETE = "Delete a task?";
@@ -128,7 +125,6 @@ public class TaskDisplayController extends StackPane {
     // ================================================================
     // NON-FXML FIELDS
     // ================================================================
-
     private Display display;
 
     private static TaskDisplayController taskDisplayController;
@@ -142,7 +138,6 @@ public class TaskDisplayController extends StackPane {
     // ================================================================
     // CONSTRUCTORS
     // ================================================================
-
     public static TaskDisplayController getInstance() {
         if (taskDisplayController == null) {
             taskDisplayController = new TaskDisplayController();
@@ -189,7 +184,6 @@ public class TaskDisplayController extends StackPane {
     // ================================================================
     // PRIVATE METHODS
     // ================================================================
-
     /**
      * Updates all tasks with the latest information
      */
@@ -321,7 +315,6 @@ public class TaskDisplayController extends StackPane {
     // ================================================================
     // GUI OVERLAY METHODS
     // ================================================================
-
     public boolean isResultViewEnabled() {
         return enableResultView;
     }

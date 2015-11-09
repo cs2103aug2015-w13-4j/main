@@ -16,55 +16,49 @@ import java.util.logging.Logger;
  * @author Benjamin
  *
  */
-
-//@@author A0124933H Benjamin
+// @@author A0124933H Benjamin
 public class RootController extends BorderPane {
 
-    // ================================================================
-    // FXML FIELDS
-    // ================================================================
+	// ================================================================
+	// FXML FIELDS
+	// ================================================================
+	@FXML
+	private TextField input;
 
-    @FXML
-    private TextField input;
+	// ================================================================
+	// NON-FXML FIELDS
+	// ================================================================
+	private TaskDisplayController taskDisplayController;
+	private static Logger logger;
 
-    // ================================================================
-    // NON-FXML FIELDS
-    // ================================================================
+	private static final String ROOT = "Root";
 
-    private TaskDisplayController taskDisplayController;
-    private static Logger logger;
+	private static final String LOGGER_INIT_UNSUCCESSFUL = "ROOT LAYOUT FAILED TO INITIALIZE";
+	private static final String LOGGER_INIT_SUCCESSFUL = "Root layout initiated successfully";
 
-    private static final String ROOT = "Root";
+	// ================================================================
+	// CONSTRUCTORS
+	// ================================================================
+	public RootController() {
+		logger = Logger.getLogger(ROOT);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
+		loader.setRoot(this);
+		loader.setController(this);
+		try {
+			loader.load();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL, new RuntimeException(e));
+		}
+		initTaskDisplay();
+		;
+		logger.log(Level.INFO, LOGGER_INIT_SUCCESSFUL);
+	}
 
-    private static final String LOGGER_INIT_UNSUCCESSFUL = "ROOT LAYOUT FAILED TO INITIALIZE";
-    private static final String LOGGER_INIT_SUCCESSFUL = "Root layout initiated successfully";
-
-    // ================================================================
-    // CONSTRUCTORS
-    // ================================================================
-
-    public RootController() {
-        logger = Logger.getLogger(ROOT);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL,
-                    new RuntimeException(e));
-        }
-        initTaskDisplay();
-        ;
-        logger.log(Level.INFO, LOGGER_INIT_SUCCESSFUL);
-    }
-
-    // ================================================================
-    // INITIALIZATION METHODS
-    // ================================================================
-
-    private void initTaskDisplay() {
-        this.taskDisplayController = TaskDisplayController.getInstance();
-        this.setCenter(taskDisplayController);
-    }
+	// ================================================================
+	// INITIALIZATION METHODS
+	// ================================================================
+	private void initTaskDisplay() {
+		this.taskDisplayController = TaskDisplayController.getInstance();
+		this.setCenter(taskDisplayController);
+	}
 }
