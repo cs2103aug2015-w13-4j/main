@@ -8,6 +8,9 @@ package utilities;
  *
  */
 public class TaskEvent {
+	// ================================================================
+	// CONSTANT
+	// ================================================================
 	public static final int ELEMENTS_COUNT = 9;
 	private static final String TOK = "&&";
 	private static final String DIV = "``";
@@ -16,6 +19,9 @@ public class TaskEvent {
 			+ "start_time" + DIV + "%4$s" + TOK + "end_date" + DIV + "%5$s" + TOK + "end_time" + DIV + "%6$s" + TOK
 			+ "priority" + DIV + "%7$s" + TOK + "completed" + DIV + "%8$s" + TOK + "available" + DIV + "%9$s" + TOK;
 
+	// ================================================================
+	// VARIABLES
+	// ================================================================
 	protected int taskID;
 	protected String taskName;
 	protected TaskDate startDate;
@@ -27,6 +33,25 @@ public class TaskEvent {
 									// false
 	protected boolean available; // default to true; false to indicate deleted
 
+	// ================================================================
+	// CONSTRUCTOR
+	// ================================================================
+	public TaskEvent(int taskID, String name, TaskDate startDate, TaskTime startTime, TaskDate endDate,
+			TaskTime endTime, Command_Priority priority) {
+		setTaskID(taskID);
+		setTaskName(name);
+		setStartDate(startDate);
+		setStartTime(startTime);
+		setEndDate(endDate);
+		setEndTime(endTime);
+		setPriority(priority);
+		setCompleted(false);
+		setAvailable(true);
+	}
+
+	// ================================================================
+	// GETTERS
+	// ================================================================
 	public int getTaskID() {
 		return taskID;
 	}
@@ -63,6 +88,9 @@ public class TaskEvent {
 		return available;
 	}
 
+	// ================================================================
+	// SETTERS
+	// ================================================================
 	public void setTaskID(int taskID) {
 		this.taskID = taskID;
 	}
@@ -99,19 +127,9 @@ public class TaskEvent {
 		this.available = available;
 	}
 
-	public TaskEvent(int taskID, String name, TaskDate startDate, TaskTime startTime, TaskDate endDate,
-			TaskTime endTime, Command_Priority priority) {
-		setTaskID(taskID);
-		setTaskName(name);
-		setStartDate(startDate);
-		setStartTime(startTime);
-		setEndDate(endDate);
-		setEndTime(endTime);
-		setPriority(priority);
-		setCompleted(false);
-		setAvailable(true);
-	}
-
+	// ================================================================
+	// TO STRING
+	// ================================================================
 	@Override
 	public String toString() {
 		return String.format(TASK_STR, taskID, taskName, startDate.toString(), startTime.toString(), endDate.toString(),

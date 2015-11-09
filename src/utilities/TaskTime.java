@@ -2,7 +2,7 @@ package utilities;
 
 import java.text.DecimalFormat;
 
-//@@author A0133965X
+//@@author A0133965X Tianrui
 /**
  * This class is to store the time for each tasks
  * 
@@ -10,6 +10,9 @@ import java.text.DecimalFormat;
  *
  */
 public class TaskTime implements Comparable<TaskTime> {
+	// ================================================================
+	// CONSTANT STRING
+	// ================================================================
 	private static final String DIVIDE = ":";
 	private static final String AM = "AM";
 	private static final String PM = "PM";
@@ -17,9 +20,15 @@ public class TaskTime implements Comparable<TaskTime> {
 	private static final int NOON = 12;
 	private static DecimalFormat df = new DecimalFormat("00");
 
+	// ================================================================
+	// VARIABLES
+	// ================================================================
 	private int hour;
 	private int minute;
 
+	// ================================================================
+	// CONSTRUCTOR
+	// ================================================================
 	public TaskTime(int hr, int min) {
 		hour = hr;
 		minute = min;
@@ -40,6 +49,9 @@ public class TaskTime implements Comparable<TaskTime> {
 		}
 	}
 
+	// ================================================================
+	// GETTERS
+	// ================================================================
 	public int getHour() {
 		return hour;
 	}
@@ -48,6 +60,9 @@ public class TaskTime implements Comparable<TaskTime> {
 		return minute;
 	}
 
+	// ================================================================
+	// PRINTING
+	// ================================================================
 	public String printTime() {
 		if (hour < NOON) {
 			return hour + DIVIDE + minute + AM;
@@ -62,6 +77,9 @@ public class TaskTime implements Comparable<TaskTime> {
 		return hour + DIVIDE + df.format(minute);
 	}
 
+	// ================================================================
+	// COMPARATOR
+	// ================================================================
 	@Override
 	public int compareTo(TaskTime o) {
 		int thisVal = this.hour * 100 + this.minute;
