@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 /**
- * Help Class creates a a help HBOX object to display
- * the available commands and how to use them.
+ * Help Class creates a a help HBOX object to display the available commands and
+ * how to use them.
+ * 
  * @author Benjamin
  *
  */
 
-//@@author A0124933H Benjamin
+// @@author A0124933H Benjamin
 public class HelpCommand extends HBox {
 
     // ================================================================
@@ -51,8 +52,7 @@ public class HelpCommand extends HBox {
 
     private void loadFxml() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource(FILE_LOC));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();

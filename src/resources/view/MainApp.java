@@ -10,20 +10,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This is the main class of PIXEList where
- * all the initialization of the program's
- * graphical user interface and the backend
- * of the program.
+ * This is the main class of PIXEList where all the initialization of the
+ * program's graphical user interface and the backend of the program.
+ * 
  * @author Benjamin
  *
  */
 
-//@@author A0124933H Benjamin
+// @@author A0124933H Benjamin
 public class MainApp extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
-    
+
     // ================================================================
     // PROGRAM FIELDS
     // ================================================================
@@ -33,14 +32,13 @@ public class MainApp extends Application {
 
     private static final String PROGRAM_TITLE = "PIXEList";
     private static final String IMAGE_ICON = "resources/imgs/icon.png";
-    
-    
+
     private static Logger logger;
-    
+
     // ================================================================
     // LOGGER CONSTANTS
     // ================================================================
-    
+
     private static final String MAIN_APP = "MainApp";
     private static final String LOGGER_MAIN = "Graphical user interface initiated successfully.";
     private static final String LOGGER_STAGE = "Stage set up successfully.";
@@ -48,7 +46,7 @@ public class MainApp extends Application {
     // ================================================================
     // PROGRAM INITIALIZATION METHODS
     // ================================================================
-    
+
     /**
      * Launch PIXEList Program
      * 

@@ -17,15 +17,15 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
 /**
- * JUNIT Testing for PIXEList's
- * graphical user interface.
+ * JUNIT Testing for PIXEList's graphical user interface.
+ * 
  * @author Benjamin
  *
  */
 
-//@@A0124933H Benjamin
-public class PIXEListTest extends GuiTest{
-    
+// @@A0124933H Benjamin
+public class PIXEListTest extends GuiTest {
+
     BorderPane sceneRoot;
     TaskDisplayController taskDisplay;
     InputViewController inputView;
@@ -38,33 +38,33 @@ public class PIXEListTest extends GuiTest{
         userInput.setText("help");
         push(KeyCode.ENTER);
         verifyLabel("help activated");
-        sleep(2,TimeUnit.SECONDS);
+        sleep(2, TimeUnit.SECONDS);
         push(KeyCode.ESCAPE);
     }
-    
+
     @Test
     public void testInitDatas() {
         push(KeyCode.F1);
         assertEquals(inputView.getPresetSize(), 20);
     }
-    
+
     @Test
     public void testAdd() {
         userInput.setText("add \"CS2010\"");
         push(KeyCode.ENTER);
         verifyLabel("CS2010 has been added successfully");
     }
-    
+
     public void verifyLabel(String result) {
         assertEquals(result, feedBack.getText());
     }
-    
+
     @Test
     public void testUndo() {
         userInput.setText("undo");
         push(KeyCode.ENTER);
     }
-    
+
     @Test
     public void testRedo() {
         userInput.setText("redo");
@@ -81,9 +81,9 @@ public class PIXEListTest extends GuiTest{
         File f = new File("tasks.txt");
         f.delete();
         new Thread(() -> Application.launch(MainApp.class)).start();
-        sleep(4,TimeUnit.SECONDS);
-        userInput = (TextField)find("#userInput");
-        feedBack = (Label)find("#feedBack");
+        sleep(4, TimeUnit.SECONDS);
+        userInput = (TextField) find("#userInput");
+        feedBack = (Label) find("#feedBack");
         inputView = InputViewController.getInstance();
         taskDisplay = TaskDisplayController.getInstance();
     }

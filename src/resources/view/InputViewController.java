@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  */
 
-//@@A0124933H Benjamin
+// @@A0124933H Benjamin
 public class InputViewController extends VBox {
 
     // ================================================================
@@ -49,9 +49,9 @@ public class InputViewController extends VBox {
     private int historyPointer;
     private int commandsPointer;
     private static Logger logger;
-    
+
     public static InputViewController inputViewController;
-    
+
     // ================================================================
     // CONSTANTS
     // ================================================================
@@ -59,7 +59,7 @@ public class InputViewController extends VBox {
     private static final String INIT_TEST_DATA = "Test data initialized";
     private static final String INPUT_VIEW = "InputView";
     private static final String EMPTY_STRING = "";
-    
+
     private static final String COMMAND_ADD = "add ";
     private static final String COMMAND_DELETE = "delete ";
     private static final String COMMAND_EDIT = "edit ";
@@ -73,7 +73,7 @@ public class InputViewController extends VBox {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_MARK_FINISH = "finish";
     private static final String COMMAND_EXIT = "exit";
-    
+
     private static final String TEST_TASK_ONE = "add \"Oral Presentation for CS2101\" 2/11/2015 FLAG";
     private static final String TEST_TASK_TWO = "add \"Meeting about budget\" 5/11/2015 FLAG";
     private static final String TEST_TASK_THREE = "add \"CS2101 Report writing\" 10/11/2015";
@@ -94,15 +94,14 @@ public class InputViewController extends VBox {
     private static final String TEST_TASK_EIGHTEEN = "add \"Buy Coffee powder\"";
     private static final String TEST_TASK_NINETEEN = "add \" Inform boss about progress report\" 18/11/2015 11.30am";
     private static final String TEST_TASK_TWENTY = "add \"Wash the car\"";
-    
+
     private static final String LOGGER_INIT_UNSUCCESSFUL = "INPUT VIEW FAILED TO INITIALIZE";
     private static final String LOGGER_INIT_SUCCESSFUL = "InputView initiated successfully";
-    
-    
+
     // ================================================================
     // CONSTRUCTORS
     // ================================================================
-    
+
     public static InputViewController getInstance() {
         if (inputViewController == null) {
             inputViewController = new InputViewController();
@@ -112,14 +111,14 @@ public class InputViewController extends VBox {
 
     public InputViewController() {
         logger = Logger.getLogger(INPUT_VIEW);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                FILE_LOC));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
         loader.setRoot(this);
         loader.setController(this);
         try {
             inputViewController = loader.load();
         } catch (IOException e) {
-            logger.log(Level.SEVERE,LOGGER_INIT_UNSUCCESSFUL ,new RuntimeException(e));
+            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL,
+                    new RuntimeException(e));
         }
         initPresetArrayList();
         initHistoryList();
@@ -129,6 +128,7 @@ public class InputViewController extends VBox {
 
     /**
      * Handles key presses for user input bar.
+     * 
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
@@ -151,8 +151,8 @@ public class InputViewController extends VBox {
         } else if (event.getCode() == KeyCode.ESCAPE) {
             taskDisplay.hideAllOverlays();
         } else if (event.getCode() == KeyCode.TAB) {
-        	event.consume();
-        	handleCommandList(commandsPointer++);
+            event.consume();
+            handleCommandList(commandsPointer++);
         }
     }
 
@@ -163,11 +163,11 @@ public class InputViewController extends VBox {
         labelFeedBack(output);
         taskDisplay.updateViews();
     }
-    
+
     // ================================================================
     // PRIVATE METHODS
-    // ================================================================   
-    
+    // ================================================================
+
     private void handleHistoryCommands(KeyEvent event) {
         String pastCmd = getHistoryCommands(event.getCode());
         userInput.setText(pastCmd);
@@ -175,10 +175,11 @@ public class InputViewController extends VBox {
     }
 
     private void handleCommandList(int i) {
-    	String command = getCommands(i);
-    	userInput.setText(command);
-    	userInput.positionCaret(command.length());
+        String command = getCommands(i);
+        userInput.setText(command);
+        userInput.positionCaret(command.length());
     }
+
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals(COMMAND_EXIT)) {
@@ -199,32 +200,33 @@ public class InputViewController extends VBox {
         }
         labelFeedBack(INIT_TEST_DATA);
     }
+
     private void initCommandList() {
-    	commandsPointer = 0;
-    	commands = new ArrayList<String>();
-    	commands.add(COMMAND_ADD);
-    	commands.add(COMMAND_EDIT);
-    	commands.add(COMMAND_DELETE);
-    	commands.add(COMMAND_SEARCH);
-    	commands.add(COMMAND_UNDO);
-    	commands.add(COMMAND_REDO);
-    	commands.add(COMMAND_VIEW_COMPLETED);
-    	commands.add(COMMAND_FLAG);
-    	commands.add(COMMAND_UNFLAG);
-    	commands.add(COMMAND_HELP);
-    	commands.add(COMMAND_EXIT);
-    	commands.add(COMMAND_DIRECTORY);
-    	commands.add(COMMAND_MARK_FINISH);
-  
+        commandsPointer = 0;
+        commands = new ArrayList<String>();
+        commands.add(COMMAND_ADD);
+        commands.add(COMMAND_EDIT);
+        commands.add(COMMAND_DELETE);
+        commands.add(COMMAND_SEARCH);
+        commands.add(COMMAND_UNDO);
+        commands.add(COMMAND_REDO);
+        commands.add(COMMAND_VIEW_COMPLETED);
+        commands.add(COMMAND_FLAG);
+        commands.add(COMMAND_UNFLAG);
+        commands.add(COMMAND_HELP);
+        commands.add(COMMAND_EXIT);
+        commands.add(COMMAND_DIRECTORY);
+        commands.add(COMMAND_MARK_FINISH);
+
     }
-    
+
     private String getCommands(int i) {
-    		i = i% commands.size();
-    		return commands.get(i);
+        i = i % commands.size();
+        return commands.get(i);
     }
-    
+
     private void resetCommandPointer() {
-    	commandsPointer = 0;
+        commandsPointer = 0;
     }
 
     private void initHistoryList() {
@@ -237,7 +239,7 @@ public class InputViewController extends VBox {
         historyPointer = history.size();
         history.add(historyPointer - 1, userInput.getText());
     }
-    
+
     private String getHistoryCommands(KeyCode code) {
         if (code == KeyCode.DOWN) {
             return getNextCommand();
@@ -285,15 +287,15 @@ public class InputViewController extends VBox {
         presetTaskTestsList.add(TEST_TASK_NINETEEN);
         presetTaskTestsList.add(TEST_TASK_TWENTY);
     }
-    
+
     // ================================================================
     // GETTERS
-    // ================================================================  
-    
+    // ================================================================
+
     public int getPresetSize() {
         return presetTaskTestsList.size();
     }
-    
+
     public int getCommandsSize() {
         return commands.size();
     }

@@ -21,18 +21,17 @@ import utilities.TaskEvent;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- * This class performs all the necessary actions
- * to update task information and refreshes the views
- * to keep the view up to date for the user. It also 
- * controls the behaviour of the appearance of the help
- * and result overlays.
+ * This class performs all the necessary actions to update task information and
+ * refreshes the views to keep the view up to date for the user. It also
+ * controls the behaviour of the appearance of the help and result overlays.
  * 
  * @author Benjamin
  *
  */
 
-//@@A0124933H Benjamin
+// @@A0124933H Benjamin
 public class TaskDisplayController extends StackPane {
 
     // ================================================================
@@ -116,7 +115,7 @@ public class TaskDisplayController extends StackPane {
 
     private static final String FILE_LOC = "TaskDisplay.fxml";
     private static final String TASK_DISPLAY_CONTROLLER = "TaskDisplayController";
-    
+
     private static final String LOGGER_INIT_UNSUCCESSFUL = "TASK DISPLAY FAILED TO INITIALIZE";
     private static final String LOGGER_INIT_SUCCESSFUL = "Task Display initiated successfully";
 
@@ -153,14 +152,14 @@ public class TaskDisplayController extends StackPane {
 
     private TaskDisplayController() {
         logger = Logger.getLogger(TASK_DISPLAY_CONTROLLER);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                FILE_LOC));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
         loader.setRoot(this);
         loader.setController(this);
         try {
             loader.load();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL, new RuntimeException(e));
+            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL,
+                    new RuntimeException(e));
         }
         viewBorderPane.setBottom(InputViewController.getInstance());
         initHelpTaskDisplay();
@@ -170,6 +169,7 @@ public class TaskDisplayController extends StackPane {
 
     /**
      * Method to help with TestFX JUnit Testing
+     * 
      * @return size of taskList
      */
     public int getTaskListSize() {
@@ -242,14 +242,16 @@ public class TaskDisplayController extends StackPane {
         getGeneralTask();
         getFloatingTask();
         getFlaggedTask();
-    } 
+    }
 
     private ObservableList<HBox> getGeneralTask() {
 
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         for (TaskEvent t : taskList) {
-            if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0) && !t.getPriority().toString().equals(TASK_FLAG))  {
-                tasks.add(new Task(t,taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
+            if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0)
+                    && !t.getPriority().toString().equals(TASK_FLAG)) {
+                tasks.add(new Task(t, taskList.indexOf(t)
+                        + TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
@@ -260,7 +262,8 @@ public class TaskDisplayController extends StackPane {
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         for (TaskEvent t : taskList) {
             if (t.getEndDate().getDay() == 0 && t.getStartDate().getDay() == 0) {
-                tasks.add(new Task(t , taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
+                tasks.add(new Task(t, taskList.indexOf(t)
+                        + TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
@@ -272,7 +275,8 @@ public class TaskDisplayController extends StackPane {
         for (TaskEvent t : taskList) {
             if ((t.getEndDate().getDay() != 0 || t.getStartDate().getDay() != 0)
                     && (t.getPriority()).toString().equals(TASK_FLAG)) {
-                tasks.add(new Task(t,taskList.indexOf(t)+TASK_NUMBERING_OFFSET));
+                tasks.add(new Task(t, taskList.indexOf(t)
+                        + TASK_NUMBERING_OFFSET));
             }
         }
         return tasks;
@@ -283,13 +287,15 @@ public class TaskDisplayController extends StackPane {
         ObservableList<HBox> tasks = FXCollections.observableArrayList();
         ArrayList<TaskEvent> searchedTaskList = display.resultView();
         for (TaskEvent t : searchedTaskList) {
-            tasks.add(new Task(t, searchedTaskList.indexOf(t)+TASK_NUMBERING_OFFSET));
+            tasks.add(new Task(t, searchedTaskList.indexOf(t)
+                    + TASK_NUMBERING_OFFSET));
         }
         return tasks;
     }
 
     /**
      * Sets up the help information for PIXEList.
+     * 
      * @return tasks which contains all the help information.
      */
     private ObservableList<HBox> getHelpCommands() {

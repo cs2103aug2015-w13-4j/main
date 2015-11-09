@@ -9,14 +9,15 @@ import javafx.scene.layout.BorderPane;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- * This class initiates the root display of 
- * PIXEList's graphical user interface.
+ * This class initiates the root display of PIXEList's graphical user interface.
+ * 
  * @author Benjamin
  *
  */
 
-//@@A0124933H Benjamin
+// @@A0124933H Benjamin
 public class RootController extends BorderPane {
 
     // ================================================================
@@ -34,10 +35,10 @@ public class RootController extends BorderPane {
     private static Logger logger;
 
     private static final String ROOT = "Root";
-    
+
     private static final String LOGGER_INIT_UNSUCCESSFUL = "ROOT LAYOUT FAILED TO INITIALIZE";
     private static final String LOGGER_INIT_SUCCESSFUL = "Root layout initiated successfully";
-    
+
     // ================================================================
     // CONSTRUCTORS
     // ================================================================
@@ -50,9 +51,11 @@ public class RootController extends BorderPane {
         try {
             loader.load();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL , new RuntimeException(e));
+            logger.log(Level.SEVERE, LOGGER_INIT_UNSUCCESSFUL,
+                    new RuntimeException(e));
         }
-        initTaskDisplay();;
+        initTaskDisplay();
+        ;
         logger.log(Level.INFO, LOGGER_INIT_SUCCESSFUL);
     }
 
