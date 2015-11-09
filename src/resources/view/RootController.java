@@ -35,6 +35,7 @@ public class RootController extends BorderPane {
     private static Logger logger;
 
     private static final String ROOT = "Root";
+    private static final String FILE_LOC = "Root.fxml";
 
     private static final String LOGGER_INIT_UNSUCCESSFUL = "ROOT LAYOUT FAILED TO INITIALIZE";
     private static final String LOGGER_INIT_SUCCESSFUL = "Root layout initiated successfully";
@@ -45,7 +46,7 @@ public class RootController extends BorderPane {
 
     public RootController() {
         logger = Logger.getLogger(ROOT);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Root.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FILE_LOC));
         loader.setRoot(this);
         loader.setController(this);
         try {

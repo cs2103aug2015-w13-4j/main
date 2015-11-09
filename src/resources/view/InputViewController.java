@@ -43,6 +43,7 @@ public class InputViewController extends VBox {
     // ================================================================
     Launch launch;
     TaskDisplayController taskDisplay;
+    
     private ArrayList<String> history;
     private ArrayList<String> commands;
     private ArrayList<String> presetTaskTestsList;
