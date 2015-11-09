@@ -18,7 +18,7 @@ public class FileUtilsTest {
 	/**
 	 * Test if a file name is correctly reported valid or invalid
 	 */
-	 @Test
+	@Test
 	public void testFileNameValidFileNames() throws IOException {
 		assertTrue(FileUtils.isFilenameValid("valid.txt"));
 		assertTrue(FileUtils.isFilenameValid("valid valid.txt"));
