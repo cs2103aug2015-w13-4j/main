@@ -8,6 +8,12 @@ import utilities.TaskEvent;
 import java.util.ArrayList;
 
 //@@author A0130909H Shirlene
+/**
+ * This class is to provide UI with correct output
+ * 
+ * @author Shirlene
+ *
+ */
 public class Display {
 
 	// ================================================================

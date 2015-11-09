@@ -9,6 +9,11 @@ import utilities.CommandElements;
 import utilities.Command_Type;
 
 //@@author A0130909H Shirlene 
+/**
+ * This class is to perform redo command
+ * @author Shirlene
+ *
+ */
 public class Redo {
 	private static Logger logger;
 	StorageImp storage;

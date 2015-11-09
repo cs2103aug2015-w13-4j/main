@@ -9,6 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author A0130909H Shirlene
+/**
+ * This class is to perform the undo command
+ * 
+ * @author Shirlene
+ *
+ */
 public class Undo {
 	private static Logger logger;
 	StorageImp storage;

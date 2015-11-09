@@ -18,8 +18,14 @@ import utilities.TaskDate;
 import utilities.TaskEvent;
 import utilities.Exceptions.OperationNotPerformed;
 
-
 //@@author A0130909H Shirlene
+/**
+ * This method is to coordinate the user input with parser component and
+ * database
+ * 
+ * @author Shirlene
+ *
+ */
 public class Operation {
 
 	// ================================================================
@@ -67,9 +73,9 @@ public class Operation {
 	public ArrayList<TaskEvent> getResultView() {
 		ArrayList<TaskEvent> list = resultView;
 		StorageImp action = Launch.getStorage();
-		if(searchFlag){
+		if (searchFlag) {
 			list = action.searchTaskByString(search);
-		}else{
+		} else {
 			list = action.loadCompletedTasks();
 		}
 		return list;
@@ -227,7 +233,7 @@ public class Operation {
 	 * @return the task name
 	 */
 	private String findTaskNameById(int id) {
-		ArrayList<TaskEvent> tasks =findViewArray();
+		ArrayList<TaskEvent> tasks = findViewArray();
 		for (int i = 0; i < tasks.size(); i++) {
 			if (tasks.get(i).getTaskID() == id) {
 				return tasks.get(i).getTaskName();
@@ -235,19 +241,20 @@ public class Operation {
 		}
 		return DEFAULT_RETURN;
 	}
-	
+
 	/**
 	 * get the correct tasks view user is viewing
+	 * 
 	 * @return corresponding ArrayList<TaskEvent> that user sees
 	 */
-	private ArrayList<TaskEvent> findViewArray(){
-		if(flagView){
+	private ArrayList<TaskEvent> findViewArray() {
+		if (flagView) {
 			return resultView;
-		}else{
+		} else {
 			return allView;
 		}
 	}
-	
+
 	/**
 	 * perform the command
 	 * 
@@ -414,7 +421,7 @@ public class Operation {
 			logger.log(Level.INFO, "edit starttime to " + content.getEndTime());
 			return content.getStartTime().toString();
 		default:
-			assert false: content.getField();
+			assert false : content.getField();
 		}
 		return DEFAULT_RETURN;
 	}

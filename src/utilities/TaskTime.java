@@ -2,17 +2,24 @@ package utilities;
 
 import java.text.DecimalFormat;
 
-public class TaskTime implements Comparable<TaskTime>{
+//@@author A0133965X
+/**
+ * This class is to store the time for each tasks
+ * 
+ * @author Tianrui
+ *
+ */
+public class TaskTime implements Comparable<TaskTime> {
 	private static final String DIVIDE = ":";
 	private static final String AM = "AM";
 	private static final String PM = "PM";
 	private static final int INVALID = -1;
 	private static final int NOON = 12;
 	private static DecimalFormat df = new DecimalFormat("00");
-	
+
 	private int hour;
 	private int minute;
-	
+
 	public TaskTime(int hr, int min) {
 		hour = hr;
 		minute = min;
@@ -36,11 +43,11 @@ public class TaskTime implements Comparable<TaskTime>{
 	public int getHour() {
 		return hour;
 	}
-	
+
 	public int getMinute() {
 		return minute;
 	}
-	
+
 	public String printTime() {
 		if (hour < NOON) {
 			return hour + DIVIDE + minute + AM;
@@ -50,9 +57,9 @@ public class TaskTime implements Comparable<TaskTime>{
 			return (hour - NOON) + DIVIDE + minute + PM;
 		}
 	}
-	
+
 	public String toString() {
-		return hour + DIVIDE + df.format(minute); 
+		return hour + DIVIDE + df.format(minute);
 	}
 
 	@Override
@@ -61,7 +68,7 @@ public class TaskTime implements Comparable<TaskTime>{
 		int thatVal = o.getHour() * 100 + o.getMinute();
 		if (thisVal > thatVal) {
 			return 1;
-		} else if (thisVal < thatVal){
+		} else if (thisVal < thatVal) {
 			return -1;
 		} else {
 			return 0;
