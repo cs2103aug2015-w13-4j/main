@@ -1,0 +1,6 @@
+database/StorageImp$1.class
+logic/Operation$1.class
+logic/Redo$1.class
+logic/Display$1.class
+parser/CommandParser$1.class
+logic/Undo$1.class
