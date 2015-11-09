@@ -9,20 +9,33 @@ import utilities.TaskTime;
 import utilities.Exceptions.CommandNotFound;
 import utilities.Exceptions.EditFieldNotFound;
 
-// @@author A0133965X
+// @@author A0133965X Tianrui
+/**
+ * This class is process the users input into CommandElements for easy usage in
+ * other component
+ * 
+ * @author Tianrui
+ *
+ */
 public class CommandParser {
-	
+	// ================================================================
+	// CONSTANT STRING
+	// ================================================================
 	private static final String CMD_NOT_FOUND = "command not found";
 	private static final String EDIT_NOT_FOUND = "edit field not found";
 	private static final Integer SINGLE = 1;
-	
+
+	// ================================================================
+	// METHOD
+	// ================================================================
 	/**
 	 * Translate the user input
 	 * 
-	 * @param the String command user enters
+	 * @param the
+	 *            String command user enters
 	 * @return processed information of the user command
 	 */
-	public static CommandElements ProcessInput(String command) throws Exception {
+	public static CommandElements ProcessInput(String command) throws CommandNotFound, EditFieldNotFound {
 		CommandNotFound command_exception = new CommandNotFound(CMD_NOT_FOUND);
 		EditFieldNotFound edit_exception = new EditFieldNotFound(EDIT_NOT_FOUND);
 		Command_Type type;
@@ -38,19 +51,20 @@ public class CommandParser {
 		time = CommandSplitter.extractTime(command);
 		priority = CommandSplitter.findPriority(command);
 		field = CommandSplitter.findField(command);
-		switch (type)
-		{
-		case ADD_TASK: 
+		switch (type) {
+		case ADD_TASK:
 			return new CommandElements(type, name, date, priority, time);
-		case EDIT_TASK: 
+		case EDIT_TASK:
 			object = CommandSplitter.findObject(command);
-			switch (field)
-			{
-			case NAME: return new CommandElements(type, object, field, name);
+			switch (field) {
+			case NAME:
+				return new CommandElements(type, object, field, name);
 			case START_DATE:
-			case END_DATE:return new CommandElements(type, object, field, date[SINGLE]);
+			case END_DATE:
+				return new CommandElements(type, object, field, date[SINGLE]);
 			case START_TIME:
-			case END_TIME:return new CommandElements(type, object, field, time[SINGLE]);
+			case END_TIME:
+				return new CommandElements(type, object, field, time[SINGLE]);
 			default:
 				throw edit_exception;
 			}
@@ -69,8 +83,10 @@ public class CommandParser {
 		case UNDO:
 		case REDO:
 		case VIEW_COMPLETED:
-		case HELP: return new CommandElements(type);
-		case DIRECTORY: return new CommandElements(type, name);
+		case HELP:
+			return new CommandElements(type);
+		case DIRECTORY:
+			return new CommandElements(type, name);
 		default:
 			throw command_exception;
 		}

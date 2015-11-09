@@ -1,6 +1,6 @@
 package parser;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -9,6 +9,13 @@ import utilities.Command_Type;
 import utilities.TaskDate;
 import utilities.TaskTime;
 
+//@@author A0133965X Tianrui
+/**
+ * Junit testing for each parser method
+ * 
+ * @author Tianrui
+ *
+ */
 public class ParserMethodTest {
 
 	@Test
@@ -18,7 +25,7 @@ public class ParserMethodTest {
 		String actual = CommandSplitter.findName(input);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void FindTypeTest() {
 		String input = "tomorrow add \"study\" until next friday";
@@ -26,7 +33,7 @@ public class ParserMethodTest {
 		Command_Type actual = CommandSplitter.findType(input);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void FindFieldTest() {
 		String input = "2 enddate edit to tomorrow";
@@ -44,12 +51,12 @@ public class ParserMethodTest {
 		assertEquals(expectedStartDate.printDate(), actual[0].printDate());
 		assertEquals(expectedEndDate.printDate(), actual[1].printDate());
 	}
-	
+
 	@Test
 	public void ExtactTimeTest() {
 		String input = "tomorrow 5am today 17:33";
 		TaskTime expectedFirstTime = new TaskTime(17, 33);
-		TaskTime expectedSecondTime = new TaskTime(5,0);
+		TaskTime expectedSecondTime = new TaskTime(5, 0);
 		TaskTime actual[] = CommandSplitter.extractTime(input);
 		assertEquals(expectedFirstTime.toString(), actual[0].toString());
 		assertEquals(expectedSecondTime.toString(), actual[1].toString());

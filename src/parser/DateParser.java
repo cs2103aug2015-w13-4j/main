@@ -6,26 +6,39 @@ import java.util.Date;
 
 import utilities.TaskDate;
 
-// @@author A0133965X
+// @@author A0133965X Tianrui
+/**
+ * This class is to find date from user input
+ * 
+ * @author Tianrui
+ *
+ */
 public class DateParser {
+	// ================================================================
+	// CONSTANTS
+	// ================================================================
+	private static TaskDate NULL_DATE = new TaskDate(-1, -1, -1);
+	private static String SPLITTERS[] = { "-", "/", "_", "\\." };
 
-	private static TaskDate NULL_DATE = new TaskDate(-1,-1,-1);
-	private static String SPLITTERS[] = {"-", "/", "_", "\\."};
+	// ================================================================
+	// METHODS
+	// ================================================================
 	/**
 	 * Translate date Strings in number format
 	 * 
-	 * @param the String containing date information
+	 * @param the
+	 *            String containing date information
 	 * @return TaskDate object
 	 */
 	public static TaskDate dateDecoder(String dateStr) {
-		int year = -1, month=-1, day=-1;
+		int year = -1, month = -1, day = -1;
 		TaskDate thisDate = getCurrentDate();
 
 		// support format dd/mm/yyyy
 		if (dateStr.length() == 10) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]);
@@ -37,9 +50,9 @@ public class DateParser {
 		}
 		// support format d/mm/yyyy or dd/m/yyyy
 		if (dateStr.length() == 9) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]);
@@ -52,9 +65,9 @@ public class DateParser {
 
 		// support format d/m/yyyy
 		if (dateStr.length() == 8) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]);
@@ -67,9 +80,9 @@ public class DateParser {
 
 		// support format yyyy/mm/dd
 		if (dateStr.length() == 10) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]);
@@ -82,9 +95,9 @@ public class DateParser {
 
 		// support format yyyy/mm/d or yyyy/m/dd
 		if (dateStr.length() == 9) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]);
@@ -97,9 +110,9 @@ public class DateParser {
 
 		// support format yyyy/m/d
 		if (dateStr.length() == 8) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]);
@@ -112,9 +125,9 @@ public class DateParser {
 
 		// support format dd/mm/yy
 		if (dateStr.length() == 8) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]) + 2000;
@@ -127,9 +140,9 @@ public class DateParser {
 
 		// support format d/mm/yy or dd/m/yy
 		if (dateStr.length() == 7) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]) + 2000;
@@ -139,12 +152,12 @@ public class DateParser {
 				}
 			}
 		}
-		
+
 		// support format d/m/yy
 		if (dateStr.length() == 6) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[0]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[2]) + 2000;
@@ -157,9 +170,9 @@ public class DateParser {
 
 		// support format yy/mm/dd
 		if (dateStr.length() == 8) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]) + 2000;
@@ -172,9 +185,9 @@ public class DateParser {
 
 		// support format yy/mm/d or yy/m/dd
 		if (dateStr.length() == 7) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]) + 2000;
@@ -187,9 +200,9 @@ public class DateParser {
 
 		// support format yy/m/d
 		if (dateStr.length() == 6) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 3){
+				if (parts.length == 3) {
 					day = Integer.parseInt(parts[2]);
 					month = Integer.parseInt(parts[1]);
 					year = Integer.parseInt(parts[0]) + 2000;
@@ -202,9 +215,9 @@ public class DateParser {
 
 		// support format mm/dd
 		if (dateStr.length() == 5) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 2){
+				if (parts.length == 2) {
 					year = thisDate.getYear();
 					month = Integer.parseInt(parts[0]);
 					day = Integer.parseInt(parts[1]);
@@ -217,9 +230,9 @@ public class DateParser {
 
 		// support format mm/d or m/dd
 		if (dateStr.length() == 4) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 2){
+				if (parts.length == 2) {
 					year = thisDate.getYear();
 					month = Integer.parseInt(parts[0]);
 					day = Integer.parseInt(parts[1]);
@@ -232,9 +245,9 @@ public class DateParser {
 
 		// support format m/d
 		if (dateStr.length() == 3) {
-			for (int i = 0; i < SPLITTERS.length; i ++) {
+			for (int i = 0; i < SPLITTERS.length; i++) {
 				String parts[] = dateStr.split(SPLITTERS[i]);
-				if (parts.length == 2){
+				if (parts.length == 2) {
 					year = thisDate.getYear();
 					month = Integer.parseInt(parts[0]);
 					day = Integer.parseInt(parts[1]);
@@ -250,9 +263,12 @@ public class DateParser {
 	/**
 	 * Determine whether a date is valid
 	 * 
-	 * @param numerical value of year
-	 * @param numerical value of month
-	 * @param numerical value of day
+	 * @param numerical
+	 *            value of year
+	 * @param numerical
+	 *            value of month
+	 * @param numerical
+	 *            value of day
 	 * @return boolean value, valid or invalid
 	 */
 	private static boolean isPossible(int year, int month, int day) {
@@ -283,7 +299,7 @@ public class DateParser {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Get today's date
 	 * 
@@ -291,32 +307,33 @@ public class DateParser {
 	 */
 	public static TaskDate getCurrentDate() {
 		Date date = new Date(); // your date
-	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(date);
-	    int thisYear = cal.get(Calendar.YEAR);
-	    int thisMonth = cal.get(Calendar.MONTH) + 1;
-	    int thisDay = cal.get(Calendar.DAY_OF_MONTH);
-	    return new TaskDate(thisYear, thisMonth, thisDay);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int thisYear = cal.get(Calendar.YEAR);
+		int thisMonth = cal.get(Calendar.MONTH) + 1;
+		int thisDay = cal.get(Calendar.DAY_OF_MONTH);
+		return new TaskDate(thisYear, thisMonth, thisDay);
 	}
-	
+
 	/**
 	 * Determine whether a String contain date information
 	 * 
-	 * @param the domain String
+	 * @param the
+	 *            domain String
 	 * @return boolean value, contain or not
 	 */
 	public static boolean dateChecker(String date) {
-		if (date.length()<3) {
+		if (date.length() < 3) {
 			return false;
 		}
 		int num = 0;
 		int cha = 0;
-		for (int i = 0; i < date.length(); i ++) {
+		for (int i = 0; i < date.length(); i++) {
 			if (CommandSplitter.isInteger(date.charAt(i) + "")) {
-				num ++;
-			} else if (date.charAt(i) == '.' || date.charAt(i) == '/' ||
-					date.charAt(i) == '_' || date.charAt(i) == '-') {
-				cha ++;
+				num++;
+			} else if (date.charAt(i) == '.' || date.charAt(i) == '/' || date.charAt(i) == '_'
+					|| date.charAt(i) == '-') {
+				cha++;
 			}
 		}
 		if (cha + num == date.length()) {
@@ -324,21 +341,21 @@ public class DateParser {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Rearrange the user command, omit useless information
 	 * 
-	 * @param the user input String
+	 * @param the
+	 *            user input String
 	 * @return ArrayList of Strings containing date information
 	 */
 	public static ArrayList<String> decompose(String command) {
 		ArrayList<String> result = new ArrayList<String>();
 		String parts[] = command.toLowerCase().split(" ");
-		for (int i = 0; i < parts.length; i ++) {
-			switch (parts[i]) 
-			{
+		for (int i = 0; i < parts.length; i++) {
+			switch (parts[i]) {
 			case "tomorrow":
-			case "today": 
+			case "today":
 			case "yesterday":
 			case "monday":
 			case "tuesday":
@@ -351,9 +368,8 @@ public class DateParser {
 				break;
 			case "last":
 			case "next":
-				if (i <parts.length - 1) {
-					switch (parts[i + 1]) 
-					{
+				if (i < parts.length - 1) {
+					switch (parts[i + 1]) {
 					case "monday":
 					case "tuesday":
 					case "wednesday":
@@ -362,19 +378,20 @@ public class DateParser {
 					case "saturday":
 					case "sunday":
 						result.add(parts[i] + " " + parts[i + 1]);
-						i ++;
+						i++;
 						break;
-					default: break;
+					default:
+						break;
 					}
 				}
-			default: 
+			default:
 				if (dateChecker(parts[i])) {
 					result.add(parts[i]);
 				}
 				break;
 			}
-		} 
+		}
 		return result;
 	}
-	
+
 }

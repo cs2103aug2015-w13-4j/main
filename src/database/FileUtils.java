@@ -1,16 +1,32 @@
 package database;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
-// @@author A0130503B
+// @@author A0130503B Zhongwei
 
 /**
  * A helper class to do File I/O
+ * 
+ * @author Zhongwei
+ *
  */
 public class FileUtils {
+	// ================================================================
+	// METHODS
+	// ================================================================
 	/**
-	 * Checks if a file name is valid by creating a File and using {@link File#getCanonicalPath()}
-	 * @param filename the file name to be checked
+	 * Checks if a file name is valid by creating a File and using
+	 * {@link File#getCanonicalPath()}
+	 * 
+	 * @param filename
+	 *            the file name to be checked
 	 * @return boolean if there is no IOException
 	 */
 	public static boolean isFilenameValid(String filename) {
@@ -25,7 +41,9 @@ public class FileUtils {
 
 	/**
 	 * Checks if the file exists and is a directory
-	 * @param file the file to be checked
+	 * 
+	 * @param file
+	 *            the file to be checked
 	 * @return true if file exists and is a directory
 	 */
 	public static boolean isValidDirectory(File file) {
@@ -34,12 +52,13 @@ public class FileUtils {
 
 	/**
 	 * Get the first line of a file
-	 * @param filename name of the file
+	 * 
+	 * @param filename
+	 *            name of the file
 	 * @return the first line as a String
 	 * @throws IOException
 	 */
-	public static String getFirstLine(String filename)
-			throws IOException {
+	public static String getFirstLine(String filename) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
 		String string = br.readLine();
 		br.close();
@@ -47,13 +66,16 @@ public class FileUtils {
 	}
 
 	/**
-	 * Move the a file from src location to dst location, and delete the src file after moving
-	 * @param src source path
-	 * @param dst destination path
+	 * Move the a file from src location to dst location, and delete the src
+	 * file after moving
+	 * 
+	 * @param src
+	 *            source path
+	 * @param dst
+	 *            destination path
 	 * @throws IOException
 	 */
-	public static void moveFile(String src, String dst)
-			throws IOException {
+	public static void moveFile(String src, String dst) throws IOException {
 		File srcFile = new File(src);
 		BufferedReader br = new BufferedReader(new FileReader(srcFile));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dst)));
@@ -70,13 +92,15 @@ public class FileUtils {
 
 	/**
 	 * Count the lines in a file
-	 * @param dir the file to be counted
+	 * 
+	 * @param dir
+	 *            the file to be counted
 	 * @return the line count number
-	 * @throws FileNotFoundException if file is not found
+	 * @throws FileNotFoundException
+	 *             if file is not found
 	 * @throws IOException
 	 */
-	public static int getLinesCount(String dir)
-			throws FileNotFoundException, IOException {
+	public static int getLinesCount(String dir) throws FileNotFoundException, IOException {
 		int counter = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(new File(dir)))) {
 			while (br.ready()) {
@@ -93,7 +117,9 @@ public class FileUtils {
 
 	/**
 	 * Append a file name after dir if it is only a directory name.
-	 * @param dir path
+	 * 
+	 * @param dir
+	 *            path
 	 * @return a String of the updated path name
 	 */
 	public static String addDefFileNameToDir(String dir) {
@@ -105,11 +131,14 @@ public class FileUtils {
 	}
 
 	/**
-	 * Clears the content of a file using RandomAccessFile to set the length to 0
-	 * @param directory the file to be cleared
+	 * Clears the content of a file using RandomAccessFile to set the length to
+	 * 0
+	 * 
+	 * @param directory
+	 *            the file to be cleared
 	 */
 	public static void clearFileContent(String directory) {
-		try(RandomAccessFile raf = new RandomAccessFile(directory, "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile(directory, "rw")) {
 			raf.setLength(0);
 		} catch (IOException e) {
 			return;

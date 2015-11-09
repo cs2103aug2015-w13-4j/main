@@ -1,22 +1,37 @@
 package database;
 
-import utilities.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-// @@author A0130503B
+import utilities.Command_Field;
+import utilities.Command_Priority;
+import utilities.TaskDate;
+import utilities.TaskEvent;
+import utilities.TaskTime;
+
+// @@author A0130503B Zhongwei
 
 /**
  * This class implements {@link Storage Storage} using local File I/O.
+ * @author Zhongwei
  */
 public class StorageImp implements Storage {
-	private static final Logger LOGGER = Logger.
-			getLogger(StorageImp.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(StorageImp.class.getName());
 
+	// ================================================================
+	// CONSTANT STRING
+	// ================================================================
 	protected static final String PREF_DIR = "pref.txt";
 	protected static final String DEFAULT_SAVE_DIR = "tasks.txt";
 
@@ -35,32 +50,40 @@ public class StorageImp implements Storage {
 	private static final String FRESHNESS_SIG = COMPLETED + COL + NO + TOK + AVAILABILITY_YES_SIG;
 	private static final String FLAG_STR = "FLAG";
 	private static final String UNFLAG_STR = "UNFLAG";
+
+	// ================================================================
+	// VARIABLES
+	// ================================================================
 	private static final int STR_START = 0;
 	private static StorageImp ourInstance;
 	private static String saveDir;
-
 	private PrintWriter writer;
 	private int taskCounter;
 
+	// ================================================================
+	// DEFAULT CONSTRUCTOR
+	// ================================================================
 	/**
-	 * Singleton initialisation
+	 * Singleton initialization
 	 */
 	private StorageImp() {
 		try {
 			saveDir = getSaveDir();
-			writer = new PrintWriter(new BufferedWriter(
-					new FileWriter(new File(saveDir), true)));
+			writer = new PrintWriter(new BufferedWriter(new FileWriter(new File(saveDir), true)));
 			taskCounter = getTaskCounter();
 		} catch (IOException e) {
-			LOGGER.log(Level.WARNING,
-					"Failed to create StorageImp singleton.", e);
+			LOGGER.log(Level.WARNING, "Failed to create StorageImp singleton.", e);
 		}
 	}
 
+	// ================================================================
+	// METHODS
+	// ================================================================
 	/**
-	 * First attempt to load from preference dir. If failed (either means
-	 * the user has not {@link #changeDirectory(String) changeDirectory}
-	 * or there is an IOException.
+	 * First attempt to load from preference dir. If failed (either means the
+	 * user has not {@link #changeDirectory(String) changeDirectory} or there is
+	 * an IOException.
+	 * 
 	 * @return a string indicating the saving directory
 	 */
 	private String getSaveDir() {
@@ -74,8 +97,9 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Singleton get instance method. Returns an instance if it has been
-	 * initiated, or uses {@link #StorageImp() StorageImp()} to initialise
-	 * it if it has not been.
+	 * initiated, or uses {@link #StorageImp() StorageImp()} to initialise it if
+	 * it has not been.
+	 * 
 	 * @return a singleton instance of StorageImp
 	 */
 	public static StorageImp getInstance() {
@@ -92,6 +116,7 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Get the task count based on the line numbers in the saving file
+	 * 
 	 * @return number of tasks
 	 */
 	private int getTaskCounter() {
@@ -106,20 +131,21 @@ public class StorageImp implements Storage {
 		return counter;
 	}
 
+	// ================================================================
+	// FEATURES EXECUTION METHOD
+	// ================================================================
 	@Override
-	public boolean addTask(String taskName, TaskDate startDate, TaskTime startTime,
-	                TaskDate endDate, TaskTime endTime, Command_Priority priority) {
-		//TODO defense for taskName having special char like COL or TOK
-		assert taskName  != null;
+	public boolean addTask(String taskName, TaskDate startDate, TaskTime startTime, TaskDate endDate, TaskTime endTime,
+			Command_Priority priority) {
+		assert taskName != null;
 		assert startDate != null;
 		assert startTime != null;
-		assert endDate   != null;
-		assert endTime   != null;
-		assert priority  != null;
+		assert endDate != null;
+		assert endTime != null;
+		assert priority != null;
 
 		try {
-			TaskEvent task = new TaskEvent(
-					taskCounter++, taskName, startDate, startTime, endDate, endTime, priority);
+			TaskEvent task = new TaskEvent(taskCounter++, taskName, startDate, startTime, endDate, endTime, priority);
 			writer.write(task.toString());
 			writer.println();
 			writer.flush();
@@ -146,7 +172,9 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Convert a {@link utilities.Command_Field} to a lower case String
-	 * @param field a {@link utilities.Command_Field}
+	 * 
+	 * @param field
+	 *            a {@link utilities.Command_Field}
 	 * @return a lower case String
 	 */
 	private String fieldEnumToLowerCaseString(Command_Field field) {
@@ -155,12 +183,17 @@ public class StorageImp implements Storage {
 	}
 
 	/**
-	 * Get each line from the task file and edit it if necessary, and rewrite
-	 * to the same task file
-	 * @param taskID  a number associated with a {@link utilities.TaskEvent TaskEvent}
-	 * @param field   header for content to be edited using
-	 *                {@link #fieldEnumToLowerCaseString(Command_Field)}
-	 * @param content String to replace old content under a certain field
+	 * Get each line from the task file and edit it if necessary, and rewrite to
+	 * the same task file
+	 * 
+	 * @param taskID
+	 *            a number associated with a {@link utilities.TaskEvent
+	 *            TaskEvent}
+	 * @param field
+	 *            header for content to be edited using
+	 *            {@link #fieldEnumToLowerCaseString(Command_Field)}
+	 * @param content
+	 *            String to replace old content under a certain field
 	 * @return true if File is successfully rewritten with the new content
 	 */
 	private boolean editTask(int taskID, String field, String content) {
@@ -196,8 +229,11 @@ public class StorageImp implements Storage {
 	}
 
 	/**
-	 * Rewrite task file with the content of an ArrayList of {@link utilities.TaskEvent TaskEvent}
-	 * @param temp an ArrayList of TaskEvent
+	 * Rewrite task file with the content of an ArrayList of
+	 * {@link utilities.TaskEvent TaskEvent}
+	 * 
+	 * @param temp
+	 *            an ArrayList of TaskEvent
 	 * @throws IOException
 	 */
 	private void rewriteSaveFile(ArrayList<String> temp) throws IOException {
@@ -245,15 +281,18 @@ public class StorageImp implements Storage {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			return list;
 		}
+		return list;
+
 	}
 
 	/**
 	 * Check if every item in an array of String appears in string.
-	 * @param string the string to be matched
-	 * @param target the content to be found
+	 * 
+	 * @param string
+	 *            the string to be matched
+	 * @param target
+	 *            the content to be found
 	 * @return true if every item of target appears in string
 	 */
 	private boolean patternMatched(String string, String[] target) {
@@ -321,14 +360,14 @@ public class StorageImp implements Storage {
 
 	private String determineSignature(SelectScope scope) {
 		switch (scope) {
-			case DELETED:
-				return AVAILABILITY_NO_SIG;
-			case COMPLETED:
-				return COMPLETION_YES_SIG;
-			case FRESH:
-				return FRESHNESS_SIG;
-			default:
-				return new String();
+		case DELETED:
+			return AVAILABILITY_NO_SIG;
+		case COMPLETED:
+			return COMPLETION_YES_SIG;
+		case FRESH:
+			return FRESHNESS_SIG;
+		default:
+			return new String();
 		}
 	}
 
@@ -352,21 +391,19 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Convert the serialised TaskEvent to a TaskEvent object.
-	 * @param string serialised TaskEvent
+	 * 
+	 * @param string
+	 *            serialised TaskEvent
 	 * @return a TaskEvent object
 	 */
 	private TaskEvent stringToTask(String string) {
 		String[] sigSplit = string.split(TOK);
-		assert(sigSplit.length == TaskEvent.ELEMENTS_COUNT);
+		assert (sigSplit.length == TaskEvent.ELEMENTS_COUNT);
 		int taskID = Integer.parseInt(sigSplit[0]);
-		String  name      = sigSplit[1].split(COL)[1],
-				startDate = sigSplit[2].split(COL)[1],
-				startTime = sigSplit[3].split(COL)[1],
-				endDate   = sigSplit[4].split(COL)[1],
-				endTime   = sigSplit[5].split(COL)[1],
-				flag      = sigSplit[6].split(COL)[1],
-				completed = sigSplit[7].split(COL)[1],
-				available = sigSplit[8].split(COL)[1];
+		String name = sigSplit[1].split(COL)[1], startDate = sigSplit[2].split(COL)[1],
+				startTime = sigSplit[3].split(COL)[1], endDate = sigSplit[4].split(COL)[1],
+				endTime = sigSplit[5].split(COL)[1], flag = sigSplit[6].split(COL)[1],
+				completed = sigSplit[7].split(COL)[1], available = sigSplit[8].split(COL)[1];
 		TaskEvent task = new TaskEvent(taskID, name, new TaskDate(startDate), new TaskTime(startTime),
 				new TaskDate(endDate), new TaskTime(endTime), priorityStrToEnum(flag));
 		task.setCompleted(Boolean.parseBoolean(completed));
@@ -376,7 +413,9 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Convert a string to a {@link utilities.Command_Priority Command_Priority}
-	 * @param prio a String
+	 * 
+	 * @param prio
+	 *            a String
 	 * @return a Command_Priority
 	 */
 	private Command_Priority priorityStrToEnum(String prio) {
@@ -392,7 +431,9 @@ public class StorageImp implements Storage {
 
 	@Override
 	public boolean changeDirectory(String dir) {
-		if (dir == null) { return false; }
+		if (dir == null) {
+			return false;
+		}
 
 		File file = new File(dir);
 		if (FileUtils.isValidDirectory(file)) {
@@ -419,8 +460,12 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Remember in the pref file the user designated directory to save tasks.
-	 * @param path the designated directory
-	 * @throws IOException see {@link java.io.IOException} in {@link #moveSaveFile(String)}
+	 * 
+	 * @param path
+	 *            the designated directory
+	 * @throws IOException
+	 *             see {@link java.io.IOException} in
+	 *             {@link #moveSaveFile(String)}
 	 */
 	private void updateSaveDirInPref(String path) throws IOException {
 		try (PrintWriter pw = new PrintWriter(new FileWriter(new File(PREF_DIR), false))) {
@@ -431,10 +476,14 @@ public class StorageImp implements Storage {
 
 	/**
 	 * Moves task file to a designated location
-	 * @param dir the designated location
-	 * @throws IOException if the directory is invalid or the user has no permission
-	 * to write to the location. Note that there is no perfect way to check this for
-	 * the user as it is dependent on the OS and the administrative level of the user
+	 * 
+	 * @param dir
+	 *            the designated location
+	 * @throws IOException
+	 *             if the directory is invalid or the user has no permission to
+	 *             write to the location. Note that there is no perfect way to
+	 *             check this for the user as it is dependent on the OS and the
+	 *             administrative level of the user
 	 */
 	private void moveSaveFile(String dir) throws IOException {
 		FileUtils.moveFile(saveDir, dir);
@@ -451,9 +500,11 @@ public class StorageImp implements Storage {
 	}
 
 	/**
-	 * Checks if task ID is valid, that is, an int larger than 0 and not larger than
-	 * the total task count
-	 * @param taskId a task ID
+	 * Checks if task ID is valid, that is, an int larger than 0 and not larger
+	 * than the total task count
+	 * 
+	 * @param taskId
+	 *            a task ID
 	 * @return true if it is valid and false otherwise
 	 */
 	private boolean isTaskIdValid(int taskId) {

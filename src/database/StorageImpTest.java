@@ -1,14 +1,27 @@
 package database;
 
 import org.junit.Test;
-import utilities.*;
+
+import utilities.Command_Field;
+import utilities.Command_Priority;
+import utilities.TaskDate;
+import utilities.TaskEvent;
+import utilities.TaskTime;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
-// @@author A0130503B
-
+// @@author A0130503B Zhongwei
+/**
+ * Junit testing of StorageImp
+ * 
+ * @author Zhongwei
+ *
+ */
 public class StorageImpTest {
 
 	static TaskDate d1 = new TaskDate(2015, 1, 1);

@@ -1,6 +1,6 @@
 package parser;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -9,9 +9,15 @@ import utilities.Command_Field;
 import utilities.Command_Priority;
 import utilities.Command_Type;
 
-// @@author A0133965X
+// @@author A0133965X Tianrui
+/**
+ * Junit testing for parser
+ * 
+ * @author Tianrui
+ *
+ */
 public class ParserGeneralTest {
-	
+
 	@Test
 	public void testCase0() throws Exception {
 		String input = "add \"the test\" 11/12/2015 to 1/2/2016";
@@ -27,7 +33,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedPriority, actual.getPriority());
 		assertEquals(expectedType, actual.getType());
 	}
-	
+
 	@Test
 	public void testCase1() throws Exception {
 		String input = "edit 1 startdate 1/2/2016";
@@ -41,8 +47,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedField, actual.getField());
 		assertEquals(expectedType, actual.getType());
 	}
-	
-	
+
 	@Test
 	public void testCase2() throws Exception {
 		String input = "delete 2";
@@ -52,7 +57,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedObject, actual.getID());
 		assertEquals(expectedType, actual.getType());
 	}
-	
+
 	@Test
 	public void testCase3() throws Exception {
 		String input = "search 1/2/16";
@@ -62,7 +67,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedEndDate, actual.getEndDate().printDate());
 		assertEquals(expectedType, actual.getType());
 	}
-	
+
 	@Test
 	public void testCase4() throws Exception {
 		String input = "flag 1";
@@ -72,7 +77,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedType, actual.getType());
 		assertEquals(expectedObject, actual.getID());
 	}
-	
+
 	@Test
 	public void testCase5() throws Exception {
 		String input = "undo";
@@ -80,7 +85,7 @@ public class ParserGeneralTest {
 		CommandElements actual = CommandParser.ProcessInput(input);
 		assertEquals(expectedType, actual.getType());
 	}
-	
+
 	@Test
 	public void testCase6() throws Exception {
 		String input = "unflag 1";
@@ -90,7 +95,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedType, actual.getType());
 		assertEquals(expectedObject, actual.getID());
 	}
-	
+
 	@Test
 	public void testCase7() throws Exception {
 		String input = "redo";
@@ -98,7 +103,7 @@ public class ParserGeneralTest {
 		CommandElements actual = CommandParser.ProcessInput(input);
 		assertEquals(expectedType, actual.getType());
 	}
-	
+
 	@Test
 	public void testCase8() throws Exception {
 		String input = "finish 1";
@@ -108,7 +113,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedType, actual.getType());
 		assertEquals(expectedObject, actual.getID());
 	}
-	
+
 	@Test
 	public void testCase9() throws Exception {
 		String input = "unfinish 1";
@@ -118,7 +123,7 @@ public class ParserGeneralTest {
 		assertEquals(expectedType, actual.getType());
 		assertEquals(expectedObject, actual.getID());
 	}
-	
+
 	@Test
 	public void testCase10() throws Exception {
 		String input = "cd \"User/xxx/Downloads\"";
@@ -128,27 +133,5 @@ public class ParserGeneralTest {
 		assertEquals(expectedDir, actual.getName());
 		assertEquals(expectedType, actual.getType());
 	}
-	
-	/*
-	@Test
-	public void testCase() throws Exception {
-		String input = "add \"the test\" 11/12/2015 to 1/2/2016";
-		String expectedName = "the test";
-		String expectedStartDate = "11/12/2015";
-		String expectedEndDate = "01/02/2016";
-		int expectedObject = 1;
-		Command_Priority expectedPriority = Command_Priority.UNFLAG;
-		Command_Type expectedType = Command_Type.ADD_TASK;
-		Command_Field expectedField = Command_Field.END_DATE;
-		CommandElements actual = CommandParser.ProcessInput(input);
-		assertEquals(expectedName, actual.getName());
-		assertEquals(expectedStartDate, actual.getStartDate().printDate());
-		assertEquals(expectedEndDate, actual.getEndDate().printDate());
-		assertEquals(expectedField, actual.getField());
-		assertEquals(expectedPriority, actual.getPriority());
-		assertEquals(expectedType, actual.getType());
-		assertEquals(expectedObject, actual.getID());
-	}
-	*/
 
 }

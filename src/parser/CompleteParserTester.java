@@ -1,10 +1,18 @@
 package parser;
 
 import java.util.Scanner;
+
 import org.junit.Test;
+
 import utilities.CommandElements;
 
-//@@A0133965X
+//@@author A0133965X Tianrui
+/**
+ * Junit testing for parser class
+ * 
+ * @author Tianrui
+ *
+ */
 public class CompleteParserTester {
 	Scanner sc = new Scanner(System.in);
 
@@ -17,7 +25,6 @@ public class CompleteParserTester {
 				result = CommandParser.ProcessInput(test);
 				result.debugPrint();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
