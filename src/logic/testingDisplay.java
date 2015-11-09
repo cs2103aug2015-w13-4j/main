@@ -2,18 +2,19 @@ package logic;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import utilities.Command_Type;
-import utilities.TaskEvent;
 
 public class testingDisplay {
 	Launch launch = Launch.getInstance();
 	Display display = Launch.getDisplay();
 	
 	@Test
+	public void fullTesting(){
+		testOperation();
+		testError();
+	}
 	/**
 	 * testing to see if there is a correct output when command exist
 	 */
@@ -33,10 +34,4 @@ public class testingDisplay {
 		String expected = "invalid operation could not be performed";
 		assertEquals(expected,actual);
 	}
-	public void testDisplay(){
-		ArrayList<TaskEvent> actual = display.taskView();
-		ArrayList<TaskEvent> expected = new ArrayList<TaskEvent>();
-		
-	}
-
 }
