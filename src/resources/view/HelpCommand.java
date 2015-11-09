@@ -12,14 +12,12 @@ import javafx.scene.layout.HBox;
  * @author Benjamin
  *
  */
-
 //@@author A0124933H Benjamin
 public class HelpCommand extends HBox {
 
     // ================================================================
     // FXML FIELDS
     // ================================================================
-
     @FXML
     private Label command;
 
@@ -29,13 +27,11 @@ public class HelpCommand extends HBox {
     // ================================================================
     // CONSTANTS
     // ================================================================
-
     private static final String FILE_LOC = "HelpCommand.fxml";
 
     // ================================================================
     // CONSTRUCTOR
     // ================================================================
-
     public HelpCommand(String command, String description) {
         loadFxml();
         initFxmlFields(command, description);
@@ -44,7 +40,6 @@ public class HelpCommand extends HBox {
     // ================================================================
     // INITIALIZATION METHOD
     // ================================================================
-
     private void initFxmlFields(String command, String description) {
         this.command.setText(command);
         this.description.setText(description);
