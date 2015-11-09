@@ -1,5 +1,8 @@
 Manifest-Version: 1.0
 Built-By: BenC
+Class-Path: lib/fontawesomefx-8.5.jar lib/testFx-3.1.2.jar lib/guava-1
+ 4.0.1.jar lib/hamcrest-all-1.3.jar lib/junit-4.10.jar
 Build-Jdk: 1.8.0_65
 Created-By: Maven Integration for Eclipse
+Main-Class: com.resources.view.MainApp
 
